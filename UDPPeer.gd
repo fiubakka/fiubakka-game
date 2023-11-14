@@ -30,4 +30,3 @@ func _process(delta):
 			"POS":
 				var position = Vector2(float(msg[1]), float(msg[2]))
 				new_pos.emit(position)
-		
