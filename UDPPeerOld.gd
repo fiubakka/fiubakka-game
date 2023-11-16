@@ -9,9 +9,8 @@ const port = 8000
 var socket = PacketPeerUDP.new()
 var connected = false
 var pkt_number = 0
+
 # Called when the node enters the scene tree for the first time.
-
-
 func _ready():
 	socket.connect_to_host(host, port)
 

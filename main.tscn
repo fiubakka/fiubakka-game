@@ -1,8 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0fenwkq40k15"]
+[gd_scene load_steps=4 format=3 uid="uid://d0fenwkq40k15"]
 
+[ext_resource type="Script" path="res://main.gd" id="1_7rrps"]
 [ext_resource type="PackedScene" uid="uid://rns0k2q76gqf" path="res://player.tscn" id="1_mswmh"]
+[ext_resource type="PackedScene" uid="uid://vsxw7oso1o2b" path="res://udp_peer.tscn" id="3_jmwtp"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_7rrps")
 
 [node name="Player" parent="." instance=ExtResource("1_mswmh")]
 position = Vector2(482, 308)
+
+[node name="UDPPeer" parent="." instance=ExtResource("3_jmwtp")]
+
+[connection signal="change_velocity" from="." to="UDPPeer" method="_on_main_change_velocity"]
+[connection signal="set_player_id" from="." to="Player" method="_on_main_set_player_id"]
+[connection signal="update_player_pos" from="." to="Player" method="_on_main_update_player_pos"]
+[connection signal="change_velocity" from="Player" to="." method="_on_player_change_velocity"]
+[connection signal="set_player_id" from="UDPPeer" to="." method="_on_udp_peer_set_player_id"]
+[connection signal="update_player_pos" from="UDPPeer" to="." method="_on_udp_peer_update_player_pos"]

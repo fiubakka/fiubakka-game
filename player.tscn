@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://rns0k2q76gqf"]
+[gd_scene load_steps=8 format=3 uid="uid://rns0k2q76gqf"]
 
 [ext_resource type="Texture2D" uid="uid://ceehk0ol1pnhq" path="res://art/playerGrey_up1.png" id="1_w26a5"]
 [ext_resource type="Script" path="res://player.gd" id="1_yoyrb"]
 [ext_resource type="Texture2D" uid="uid://vm3064lfht6f" path="res://art/playerGrey_up2.png" id="2_5c11h"]
 [ext_resource type="Texture2D" uid="uid://c13i08p0rr7ou" path="res://art/playerGrey_walk1.png" id="3_uct6s"]
 [ext_resource type="Texture2D" uid="uid://bweoqd3bma2gp" path="res://art/playerGrey_walk2.png" id="4_ohbup"]
-[ext_resource type="Script" path="res://UDPPeerOld.gd" id="6_7uycu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_55rxs"]
 animations = [{
@@ -47,9 +46,3 @@ animation = &"up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_0hbs8")
-
-[node name="UDPPeer" type="Node" parent="."]
-script = ExtResource("6_7uycu")
-
-[connection signal="new_pos" from="UDPPeer" to="." method="_on_udp_peer_new_pos"]
-[connection signal="set_player_id" from="UDPPeer" to="." method="_on_udp_peer_set_player_id"]
