@@ -2,6 +2,7 @@ class_name UDPPeer
 extends Node
 
 signal new_pos
+signal set_player_id
 
 const host = "127.0.0.1"
 const port = 8000
@@ -29,4 +30,9 @@ func _process(delta):
 		match msg[0]:
 			"POS":
 				var position = Vector2(float(msg[1]), float(msg[2]))
+				print(position)
 				new_pos.emit(position)
+			
+			"ID":
+				var id = int(msg[1])
+				set_player_id.emit(id)

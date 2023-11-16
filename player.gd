@@ -5,6 +5,8 @@ var screen_size # Size of the game window.
 
 var velocity = Vector2.ZERO # The player's movement vector.
 
+var id = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -45,4 +47,7 @@ func _process(delta):
 
 func _on_udp_peer_new_pos(new_position):
 	position = new_position
-	
+
+
+func _on_udp_peer_set_player_id(new_id):
+	id = new_id
