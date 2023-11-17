@@ -30,7 +30,11 @@ func _process(delta):
 				set_player_id.emit(id)
 			
 			"NEW_PLAYER":
-				create_other_player.emit()
+				var id = int(msg[1])
+				var position = Vector2(float(msg[2]), float(msg[3]))
+				print(id)
+				print(position)
+				create_other_player.emit(id, position)
 
 
 func init_pos(position, screen_size):

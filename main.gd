@@ -31,6 +31,8 @@ func _on_player_change_velocity(velocity):
 	change_velocity.emit(velocity)
 
 
-func _on_udp_peer_create_other_player():
+func _on_udp_peer_create_other_player(id, position):
 	var other_player = other_placer_scene.instantiate()
+	other_player.id = id
+	other_player.position = position
 	add_child(other_player)
