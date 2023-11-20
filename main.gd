@@ -36,3 +36,9 @@ func _on_udp_peer_create_other_player(id, position):
 	other_player.id = id
 	other_player.position = position
 	add_child(other_player)
+	
+	
+func _on_udp_peer_update_other_player(id, position):
+	for other_player in get_children():
+		if other_player.id == id:
+			other_player.position = position
