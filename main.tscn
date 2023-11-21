@@ -20,4 +20,5 @@ position = Vector2(482, 308)
 [connection signal="change_velocity" from="Player" to="." method="_on_player_change_velocity"]
 [connection signal="create_other_player" from="UDPPeer" to="." method="_on_udp_peer_create_other_player"]
 [connection signal="set_player_id" from="UDPPeer" to="." method="_on_udp_peer_set_player_id"]
+[connection signal="update_other_player_pos" from="UDPPeer" to="." method="_on_udp_peer_update_other_player_pos"]
 [connection signal="update_player_pos" from="UDPPeer" to="." method="_on_udp_peer_update_player_pos"]

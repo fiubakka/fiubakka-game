@@ -6,7 +6,9 @@ signal change_velocity
 
 @export var other_placer_scene: PackedScene
 
+var other_players = {}
 var screen_size
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,4 +37,10 @@ func _on_udp_peer_create_other_player(id, position):
 	var other_player = other_placer_scene.instantiate()
 	other_player.id = id
 	other_player.position = position
+	other_players[id] = other_player
 	add_child(other_player)
+
+
+func _on_udp_peer_update_other_player_pos(id, position):
+	var other_player = other_players[id]
+	other_player.position = position
