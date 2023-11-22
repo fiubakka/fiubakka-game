@@ -7,7 +7,6 @@ signal update_other_player_pos
 
 const host = "127.0.0.1"
 const port = 8000
-#var socket = PacketPeerUDP.new()
 var socket = StreamPeerTCP.new()
 var connected = false
 
@@ -56,8 +55,8 @@ func init_pos(position, screen_size):
 	socket.put_data(str("INIT ", position.x, " ", position.y, " ", screen_size.x, " ", screen_size.y, "\n").to_ascii_buffer())
 
 
-func change_velocity(vel):
-	socket.put_data(str("VEL ", vel.x, " ", vel.y, "\n").to_ascii_buffer())
+#func change_velocity(vel):
+#	socket.put_data(str("VEL ", vel.x, " ", vel.y, "\n").to_ascii_buffer())
 
 
 func _on_main_change_velocity(vel):
