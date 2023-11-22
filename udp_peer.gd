@@ -3,7 +3,7 @@ extends Node
 signal update_player_pos
 signal set_player_id
 signal create_other_player
-signal update_other_player
+signal update_other_player_pos
 
 const host = "127.0.0.1"
 const port = 8000
@@ -43,14 +43,13 @@ func _process(delta):
 			"NEW_PLAYER":
 				var id = int(msg[1])
 				var position = Vector2(float(msg[2]), float(msg[3]))
-				#print(id)
-				#print(position)
 				create_other_player.emit(id, position)
-				
+			
 			"OTHER_PLAYER_POS":
 				var id = int(msg[1])
 				var position = Vector2(float(msg[2]), float(msg[3]))
-				update_other_player.emit(id, position)
+				print(id, position)
+				update_other_player_pos.emit(id, position)
 
 
 func init_pos(position, screen_size):
