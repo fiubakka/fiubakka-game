@@ -7,20 +7,29 @@ signal update_other_player_pos
 
 const host = "127.0.0.1"
 const port = 8000
-var socket = PacketPeerUDP.new()
+var socket = StreamPeerTCP.new()
 var connected = false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	socket.connect_to_host(host, port)
+	var error = socket.connect_to_host(host, port)
+	if error:
+		print("fail")
+	socket.poll()
+	print(socket.get_status())
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if socket.get_available_packet_count() > 0:
-		var server_pkt = socket.get_packet().get_string_from_utf8()
+	if socket.get_available_bytes() > 0:
+		var res = socket.get_partial_data(1024)
+		var error = res[0]
+		var read_bytes: PackedByteArray = res[1]
 		
-		var msg = server_pkt.split(" ")
+		var server_str = read_bytes.get_string_from_ascii()
+		
+		var msg = server_str.split(" ")
 		match msg[0]:
 			"POS":
 				var position = Vector2(float(msg[1]), float(msg[2]))
@@ -43,14 +52,12 @@ func _process(delta):
 
 
 func init_pos(position, screen_size):
-	print("mandando la pos")
-	socket.put_packet(str("INIT ", position.x, " ", position.y, " ", screen_size.x, " ", screen_size.y).to_utf8_buffer())
+	socket.put_data(str("INIT ", position.x, " ", position.y, " ", screen_size.x, " ", screen_size.y, "\n").to_ascii_buffer())
 
 
-func change_velocity(vel):
-	socket.put_packet(str("VEL ", vel.x, " ", vel.y).to_utf8_buffer())
+#func change_velocity(vel):
+#	socket.put_data(str("VEL ", vel.x, " ", vel.y, "\n").to_ascii_buffer())
 
 
 func _on_main_change_velocity(vel):
-	socket.put_packet(str("VEL ", vel.x, " ", vel.y).to_utf8_buffer())
-
+	socket.put_data(str("VEL ", vel.x, " ", vel.y, "\n").to_ascii_buffer())
