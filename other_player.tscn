@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://d11b7734y2pbu"]
+
+[ext_resource type="Script" path="res://other_player.gd" id="1_bnkx2"]
+[ext_resource type="Texture2D" uid="uid://0u0t1l747fae" path="res://art/enemyWalking_1.png" id="2_he8iw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ruyji"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_he8iw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xdu57"]
+radius = 46.0
+height = 98.0
+
+[node name="OtherPlayer" type="Area2D"]
+script = ExtResource("1_bnkx2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, 0)
+sprite_frames = SubResource("SpriteFrames_ruyji")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_xdu57")
