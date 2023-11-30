@@ -1,8 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0fenwkq40k15"]
+[gd_scene load_steps=4 format=3 uid="uid://d0fenwkq40k15"]
 
+[ext_resource type="Script" path="res://main.gd" id="1_7rrps"]
 [ext_resource type="PackedScene" uid="uid://rns0k2q76gqf" path="res://player.tscn" id="1_mswmh"]
+[ext_resource type="PackedScene" uid="uid://d330jnl0y80vu" path="res://chatbox.tscn" id="2_pxx44"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_7rrps")
 
 [node name="Player" parent="." instance=ExtResource("1_mswmh")]
 position = Vector2(482, 308)
+
+[node name="Chatbox" parent="." instance=ExtResource("2_pxx44")]
+offset_left = 442.0
+offset_top = 177.0
+offset_right = 723.0
+offset_bottom = 177.0

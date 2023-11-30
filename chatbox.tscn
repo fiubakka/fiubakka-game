@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://d330jnl0y80vu"]
+
+[ext_resource type="Script" path="res://LineEdit.gd" id="1_3bd8l"]
+[ext_resource type="Script" path="res://RichTextLabel.gd" id="2_ypy1e"]
+
+[node name="Chatbox" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+metadata/_edit_group_ = true
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_left = 1.0
+offset_top = 216.0
+offset_right = 374.0
+offset_bottom = 271.0
+placeholder_text = "(Say something...)"
+script = ExtResource("1_3bd8l")
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 438.0
+offset_bottom = 217.0
+fit_content = true
+script = ExtResource("2_ypy1e")
+
+[node name="Polygon2D" type="Polygon2D" parent="RichTextLabel"]
+position = Vector2(0.283336, -0.00471699)
+scale = Vector2(1.14167, 0.995283)
+color = Color(0, 0, 0, 0.352941)
+polygon = PackedVector2Array(-2, -2.00474, 378, -1, 378.504, 104.533, 379.022, 213.009, -1, 211)
+
+[node name="Button" type="Button" parent="."]
+offset_left = 377.0
+offset_top = 219.0
+offset_right = 441.0
+offset_bottom = 270.0
+text = "Send"
+
+[connection signal="gui_input" from="LineEdit" to="LineEdit" method="_on_gui_input"]
+[connection signal="send_message" from="LineEdit" to="RichTextLabel" method="_on_text_edit_send_message"]
+[connection signal="pressed" from="Button" to="LineEdit" method="_on_button_pressed"]
