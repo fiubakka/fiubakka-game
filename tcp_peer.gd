@@ -6,7 +6,7 @@ signal create_other_player
 signal update_other_player_pos
 
 const host = "127.0.0.1"
-const port = 8000
+const port = 9090
 var socket = StreamPeerTCP.new()
 var connected = false
 
