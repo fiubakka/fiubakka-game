@@ -21,6 +21,10 @@ window/size/viewport_width=885
 window/size/viewport_height=450
 window/stretch/mode="canvas_items"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/protobuf/plugin.cfg")
+
 [input]
 
 move_right={
