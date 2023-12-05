@@ -5,6 +5,8 @@ signal set_player_id
 signal create_other_player
 signal update_other_player_pos
 
+const PlayerInit = preload("res://player_init.gd")
+
 const host = "127.0.0.1"
 const port = 9090
 var socket = StreamPeerTCP.new()
@@ -52,7 +54,10 @@ func _process(delta):
 
 
 func init_pos(position, screen_size):
-	socket.put_data(str("INIT ", position.x, " ", position.y, " ", screen_size.x, " ", screen_size.y, "\n").to_ascii_buffer())
+	# TODO: esto anda! cambiarlo para todos los demas mensajes
+	var player_init = PlayerInit.PlayerInit.new()
+	player_init.set_username("Flu")
+	socket.put_data(player_init.to_bytes())
 
 
 #func change_velocity(vel):

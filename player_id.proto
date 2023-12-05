@@ -1,0 +1,7 @@
+syntax = "proto2";
+
+package fiubakka;
+
+message PlayerId {
+    required int32 id = 1;
+}
