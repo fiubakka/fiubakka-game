@@ -55,25 +55,24 @@ func _process(delta):
 
 
 func init_pos(position, screen_size):
-	# TODO: esto anda! cambiarlo para todos los demas mensajes
-	
-	
 	var player_init = PBPlayerInit.PBPlayerInit.new()
 	player_init.set_username("Flu")
 	var player_init_bytes = player_init.to_bytes()
 	
+	send_protocol_buffer(player_init_bytes, PBMetadata.PBMessageType.PBPlayerInit)
+	
+
+
+func send_protocol_buffer(msg_bytes, type):
 	var metadata = PBMetadata.PBMetadata.new()
-	metadata.set_type(PBMetadata.PBMessageType.PBPlayerInit)
-	metadata.set_length(player_init_bytes.size())
+	metadata.set_type(type)
+	metadata.set_length(msg_bytes.size())
 	
 	var metadata_bytes = metadata.to_bytes()
 	var metadata_size_bytes = int_to_big_endian_bytes(metadata_bytes.size())
 	
-	socket.put_data(metadata_size_bytes + metadata_bytes + player_init_bytes)
-
-
-#func change_velocity(vel):
-#	socket.put_data(str("VEL ", vel.x, " ", vel.y, "\n").to_ascii_buffer())
+	socket.put_data(metadata_size_bytes + metadata_bytes + msg_bytes)
+	
 
 func _on_main_change_velocity(vel):
 	socket.put_data(str("VEL ", vel.x, " ", vel.y, "\n").to_ascii_buffer())
