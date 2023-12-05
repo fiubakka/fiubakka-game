@@ -5,7 +5,8 @@ signal set_player_id
 signal create_other_player
 signal update_other_player_pos
 
-const PlayerInit = preload("res://player_init.gd")
+const PBPlayerInit = preload("res://compiled/init/player_init.gd")
+const PBMetadata = preload("res://compiled/common/metadata.gd")
 
 const host = "127.0.0.1"
 const port = 9090
@@ -55,14 +56,38 @@ func _process(delta):
 
 func init_pos(position, screen_size):
 	# TODO: esto anda! cambiarlo para todos los demas mensajes
-	var player_init = PlayerInit.PlayerInit.new()
+	
+	
+	var player_init = PBPlayerInit.PBPlayerInit.new()
 	player_init.set_username("Flu")
-	socket.put_data(player_init.to_bytes())
+	var player_init_bytes = player_init.to_bytes()
+	
+	var metadata = PBMetadata.PBMetadata.new()
+	metadata.set_type(PBMetadata.PBMessageType.PBPlayerInit)
+	metadata.set_length(player_init_bytes.size())
+	
+	var metadata_bytes = metadata.to_bytes()
+	var metadata_size_bytes = int_to_big_endian_bytes(metadata_bytes.size())
+	
+	socket.put_data(metadata_size_bytes + metadata_bytes + player_init_bytes)
 
 
 #func change_velocity(vel):
 #	socket.put_data(str("VEL ", vel.x, " ", vel.y, "\n").to_ascii_buffer())
 
-
 func _on_main_change_velocity(vel):
 	socket.put_data(str("VEL ", vel.x, " ", vel.y, "\n").to_ascii_buffer())
+	
+	
+	
+func int_to_big_endian_bytes(value: int) -> PackedByteArray:
+	var buffer = PackedByteArray()
+
+	# Pack the integer into a buffer using big-endian format
+	buffer.resize(4)
+	buffer[0] = (value >> 24) & 0xFF
+	buffer[1] = (value >> 16) & 0xFF
+	buffer[2] = (value >> 8) & 0xFF
+	buffer[3] = value & 0xFF
+
+	return buffer
