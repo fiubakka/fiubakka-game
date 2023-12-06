@@ -5,9 +5,9 @@ signal set_player_id
 signal create_other_player
 signal update_other_player_pos
 
-const PBPlayerInit = preload("res://compiled/init/player_init.gd")
-const PBPlayerVelocity = preload("res://compiled/velocity/player_velocity.gd")
-const PBMetadata = preload("res://compiled/common/metadata.gd")
+const PBPlayerInit = preload("res://compiled/client/init/player_init.gd")
+const PBPlayerVelocity = preload("res://compiled/client/movement/player_velocity.gd")
+const PBMetadata = preload("res://compiled/client/metadata.gd")
 
 const host = "127.0.0.1"
 const port = 9090
@@ -60,28 +60,29 @@ func init_pos(position, screen_size):
 	player_init.set_username("Flu")
 	var player_init_bytes = player_init.to_bytes()
 	
-	send_protocol_buffer(player_init_bytes, PBMetadata.PBMessageType.PBPlayerInit)
+	send_protocol_buffer(player_init_bytes, PBMetadata.PBClientMessageType.PBPlayerInit)
 	
 	
 func _on_main_change_velocity(vel):
 	var player_velocity = PBPlayerVelocity.PBPlayerVelocity.new()
-	player_velocity.set_username("Flu")
 	player_velocity.set_x(vel.x)
 	player_velocity.set_y(vel.y)
 	var player_velocity_bytes = player_velocity.to_bytes()
+	print("sending velocity")
 	
-	send_protocol_buffer(player_velocity_bytes, PBMetadata.PBMessageType.PBPlayerVelocity)
+	send_protocol_buffer(player_velocity_bytes, PBMetadata.PBClientMessageType.PBPlayerVelocity)
 	
 	
 func send_protocol_buffer(msg_bytes, type):
-	var metadata = PBMetadata.PBMetadata.new()
+	var metadata = PBMetadata.PBClientMetadata.new()
 	metadata.set_type(type)
 	metadata.set_length(msg_bytes.size())
 	
 	var metadata_bytes = metadata.to_bytes()
 	var metadata_size_bytes = int_to_big_endian_bytes(metadata_bytes.size())
+	var frame_size_bytes = int_to_big_endian_bytes(msg_bytes.size() + metadata_bytes.size() + 4)
 	
-	socket.put_data(metadata_size_bytes + metadata_bytes + msg_bytes)	
+	socket.put_data(frame_size_bytes + metadata_size_bytes + metadata_bytes + msg_bytes)	
 	
 	
 func int_to_big_endian_bytes(value: int) -> PackedByteArray:
