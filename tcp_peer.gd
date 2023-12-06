@@ -6,6 +6,7 @@ signal create_other_player
 signal update_other_player_pos
 
 const PBPlayerInit = preload("res://compiled/init/player_init.gd")
+const PBPlayerVelocity = preload("res://compiled/velocity/player_velocity.gd")
 const PBMetadata = preload("res://compiled/common/metadata.gd")
 
 const host = "127.0.0.1"
@@ -61,8 +62,17 @@ func init_pos(position, screen_size):
 	
 	send_protocol_buffer(player_init_bytes, PBMetadata.PBMessageType.PBPlayerInit)
 	
-
-
+	
+func _on_main_change_velocity(vel):
+	var player_velocity = PBPlayerVelocity.PBPlayerVelocity.new()
+	player_velocity.set_username("Flu")
+	player_velocity.set_x(vel.x)
+	player_velocity.set_y(vel.y)
+	var player_velocity_bytes = player_velocity.to_bytes()
+	
+	send_protocol_buffer(player_velocity_bytes, PBMetadata.PBMessageType.PBPlayerVelocity)
+	
+	
 func send_protocol_buffer(msg_bytes, type):
 	var metadata = PBMetadata.PBMetadata.new()
 	metadata.set_type(type)
@@ -71,12 +81,7 @@ func send_protocol_buffer(msg_bytes, type):
 	var metadata_bytes = metadata.to_bytes()
 	var metadata_size_bytes = int_to_big_endian_bytes(metadata_bytes.size())
 	
-	socket.put_data(metadata_size_bytes + metadata_bytes + msg_bytes)
-	
-
-func _on_main_change_velocity(vel):
-	socket.put_data(str("VEL ", vel.x, " ", vel.y, "\n").to_ascii_buffer())
-	
+	socket.put_data(metadata_size_bytes + metadata_bytes + msg_bytes)	
 	
 	
 func int_to_big_endian_bytes(value: int) -> PackedByteArray:
