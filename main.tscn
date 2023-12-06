@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://main.gd" id="1_7rrps"]
 [ext_resource type="PackedScene" uid="uid://rns0k2q76gqf" path="res://player.tscn" id="1_mswmh"]
-[ext_resource type="PackedScene" path="res://other_player.tscn" id="2_t3u8s"]
-[ext_resource type="PackedScene" path="res://tcp_peer.tscn" id="3_jmwtp"]
+[ext_resource type="PackedScene" uid="uid://d11b7734y2pbu" path="res://other_player.tscn" id="2_t3u8s"]
+[ext_resource type="PackedScene" uid="uid://vsxw7oso1o2b" path="res://tcp_peer.tscn" id="3_jmwtp"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_7rrps")
