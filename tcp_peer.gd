@@ -68,7 +68,8 @@ func _process(delta):
 				print("ENTITY ID: ", entity_state.get_entityId())
 				print("ENTITY POS X : ", entity_state.get_position().get_x())
 				print("ENTITY POS Y : ", entity_state.get_position().get_y())
-				update_player_pos.emit(Vector2(entity_state.get_position().get_x(), entity_state.get_position().get_y()))
+				var entity_position = entity_state.get_position()
+				update_other_player_pos.emit(entity_state.get_entityId(), Vector2(entity_position.get_x(), entity_position.get_y()))
 			
 			#"ID":
 			#	var id = int(msg[1])
@@ -88,7 +89,7 @@ func _process(delta):
 
 func init_pos(position, screen_size):
 	var player_init = PBPlayerInit.PBPlayerInit.new()
-	player_init.set_username("Flu")
+	player_init.set_username("Pepe")
 	var player_init_bytes = player_init.to_bytes()
 	
 	send_protocol_buffer(player_init_bytes, PBClientMetadata.PBClientMessageType.PBPlayerInit)
