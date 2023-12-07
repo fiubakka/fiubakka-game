@@ -661,39 +661,41 @@ class PBPacker:
 ############### USER DATA BEGIN ################
 
 
-class PBServerMetadata:
+class PBGameEntityState:
 	func _init():
 		var service
 		
-		_length = PBField.new("length", PB_DATA_TYPE.UINT32, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.UINT32])
+		_entityId = PBField.new("entityId", PB_DATA_TYPE.STRING, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.STRING])
 		service = PBServiceField.new()
-		service.field = _length
-		data[_length.tag] = service
+		service.field = _entityId
+		data[_entityId.tag] = service
 		
-		_type = PBField.new("type", PB_DATA_TYPE.ENUM, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
+		_position = PBField.new("position", PB_DATA_TYPE.MESSAGE, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
 		service = PBServiceField.new()
-		service.field = _type
-		data[_type.tag] = service
+		service.field = _position
+		service.func_ref = Callable(self, "new_position")
+		data[_position.tag] = service
 		
 	var data = {}
 	
-	var _length: PBField
-	func get_length() -> int:
-		return _length.value
-	func clear_length() -> void:
+	var _entityId: PBField
+	func get_entityId() -> String:
+		return _entityId.value
+	func clear_entityId() -> void:
 		data[1].state = PB_SERVICE_STATE.UNFILLED
-		_length.value = DEFAULT_VALUES_2[PB_DATA_TYPE.UINT32]
-	func set_length(value : int) -> void:
-		_length.value = value
+		_entityId.value = DEFAULT_VALUES_2[PB_DATA_TYPE.STRING]
+	func set_entityId(value : String) -> void:
+		_entityId.value = value
 	
-	var _type: PBField
-	func get_type():
-		return _type.value
-	func clear_type() -> void:
+	var _position: PBField
+	func get_position() -> PBGameEntityPosition:
+		return _position.value
+	func clear_position() -> void:
 		data[2].state = PB_SERVICE_STATE.UNFILLED
-		_type.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
-	func set_type(value) -> void:
-		_type.value = value
+		_position.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
+	func new_position() -> PBGameEntityPosition:
+		_position.value = PBGameEntityPosition.new()
+		return _position.value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)
@@ -716,9 +718,59 @@ class PBServerMetadata:
 			return PB_ERR.PARSE_INCOMPLETE
 		return result
 	
-enum PBServerMessageType {
-	PBPlayerPosition = 0,
-	PBGameEntityState = 1
-}
-
+class PBGameEntityPosition:
+	func _init():
+		var service
+		
+		_x = PBField.new("x", PB_DATA_TYPE.FLOAT, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT])
+		service = PBServiceField.new()
+		service.field = _x
+		data[_x.tag] = service
+		
+		_y = PBField.new("y", PB_DATA_TYPE.FLOAT, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT])
+		service = PBServiceField.new()
+		service.field = _y
+		data[_y.tag] = service
+		
+	var data = {}
+	
+	var _x: PBField
+	func get_x() -> float:
+		return _x.value
+	func clear_x() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		_x.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
+	func set_x(value : float) -> void:
+		_x.value = value
+	
+	var _y: PBField
+	func get_y() -> float:
+		return _y.value
+	func clear_y() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		_y.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
+	func set_y(value : float) -> void:
+		_y.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
 ################ USER DATA END #################

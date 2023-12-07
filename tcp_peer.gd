@@ -12,6 +12,8 @@ const PBClientMetadata = preload("res://compiled/client/metadata.gd")
 const PBServerMetadata = preload("res://compiled/server/metadata.gd")
 const PBPlayerPosition = preload("res://compiled/server/position/player_position.gd")
 
+const PBGameEntityState = preload("res://compiled/server/state/game_entity_state.gd")
+
 const host = "127.0.0.1"
 const port = 9090
 var socket = StreamPeerTCP.new()
@@ -57,6 +59,16 @@ func _process(delta):
 				var result = player_position.from_bytes(msg_bytes) # TODO: check for errors
 				print(result)
 				update_player_pos.emit(Vector2(player_position.get_x(), player_position.get_y()))
+				
+			PBServerMetadata.PBServerMessageType.PBGameEntityState:
+				print("will update entity state")
+				var entity_state = PBGameEntityState.PBGameEntityState.new()
+				var result = entity_state.from_bytes(msg_bytes) # TODO: check for errors
+				#TODO: debug prints, delete when message is working correctly
+				print("ENTITY ID: ", entity_state.get_entityId())
+				print("ENTITY POS X : ", entity_state.get_position().get_x())
+				print("ENTITY POS Y : ", entity_state.get_position().get_y())
+				update_player_pos.emit(Vector2(entity_state.get_position().get_x(), entity_state.get_position().get_y()))
 			
 			#"ID":
 			#	var id = int(msg[1])
