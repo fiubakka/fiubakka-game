@@ -17,31 +17,38 @@ func _process(delta):
 		velocity.x = 1
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
+		$AnimatedSprite2D.play("walk_right")
 	if (Input.is_action_just_pressed("move_left")):
 		velocity.x = -1
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
+		$AnimatedSprite2D.play("walk_left")
 	if (Input.is_action_just_pressed("move_up")):
 		velocity.y = -1
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
+		$AnimatedSprite2D.play("walk_up")
 	if (Input.is_action_just_pressed("move_down")):
 		velocity.y = 1
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
-		
-		
-	if (Input.is_action_just_released("move_right") or 
-		Input.is_action_just_released("move_left")):
-		velocity.x = 0
-		velocity = velocity.normalized()
-		change_velocity.emit(velocity)
-	if (Input.is_action_just_released("move_up") or 
-		Input.is_action_just_released("move_down")):
+		$AnimatedSprite2D.play("walk_down")
+	if (Input.is_action_just_released("move_down") or Input.is_action_just_released("move_up")):
 		velocity.y = 0
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
-
+		if (Input.is_action_just_released("move_down")):
+			$AnimatedSprite2D.play("idle_front")
+		elif (Input.is_action_just_released("move_up")):
+			$AnimatedSprite2D.play("idle_back")
+	if (Input.is_action_just_released("move_right") or Input.is_action_just_released("move_left")):
+		velocity.x = 0
+		velocity = velocity.normalized()
+		change_velocity.emit(velocity)
+		if (Input.is_action_just_released("move_right")):
+			$AnimatedSprite2D.play("idle_right")
+		elif (Input.is_action_just_released("move_left")):
+			$AnimatedSprite2D.play("idle_left")
 
 func _on_main_set_player_id(id):
 	self.id = id
