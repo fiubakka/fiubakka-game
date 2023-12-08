@@ -32,24 +32,21 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if socket.get_available_bytes() > 0:
-		var res = socket.get_partial_data(1024)
+		var len = socket.get_data(4)
+		len = big_endian_bytes_to_int(len[1])
+		var res = socket.get_partial_data(len)
 		var error = res[0]
 		var read_bytes: PackedByteArray = res[1]
 		
-		# full_len is not really necessary...
-		var full_len = big_endian_bytes_to_int(read_bytes.slice(0, 4))
-		var meta_len = big_endian_bytes_to_int(read_bytes.slice(4, 8))
+		var meta_len = big_endian_bytes_to_int(read_bytes.slice(0, 4))
 		
-		var meta_bytes = read_bytes.slice(8, 8 + meta_len)
+		var meta_bytes = read_bytes.slice(4, 4 + meta_len)
 		
 		var metadata = PBServerMetadata.PBServerMetadata.new()
 		# TODO: check for errors
 		metadata.from_bytes(meta_bytes)
 		
-		var msg_bytes = read_bytes.slice(8 + meta_len)
-		
-		#var server_str = read_bytes.get_string_from_ascii()		
-		#var msg = server_str.split(" ")
+		var msg_bytes = read_bytes.slice(4 + meta_len)
 		
 		print(metadata.get_type())
 		match metadata.get_type():
@@ -89,7 +86,7 @@ func _process(delta):
 
 func init_pos(position, screen_size):
 	var player_init = PBPlayerInit.PBPlayerInit.new()
-	player_init.set_username("Paulo")
+	player_init.set_username("Geralt")
 	var player_init_bytes = player_init.to_bytes()
 	
 	send_protocol_buffer(player_init_bytes, PBClientMetadata.PBClientMessageType.PBPlayerInit)
