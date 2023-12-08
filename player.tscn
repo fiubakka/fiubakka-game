@@ -123,7 +123,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle_back",
-"speed": 1.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -248,16 +248,14 @@ height = 120.0
 
 [node name="Player" type="Area2D"]
 z_index = 1000
-position = Vector2(262, 204)
 script = ExtResource("1_yoyrb")
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(29, -41)
-scale = Vector2(3.91709, 3.48482)
+scale = Vector2(3.917, 3.485)
 sprite_frames = SubResource("SpriteFrames_55rxs")
-animation = &"idle_right"
+animation = &"idle_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(28, -48)
 shape = SubResource("CapsuleShape2D_0hbs8")
