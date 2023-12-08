@@ -7,8 +7,12 @@ var screen_size # Size of the game window.
 var velocity = Vector2.ZERO # The player's movement vector.
 var id = null
 
+func isWorking():
+	print("player working")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#$TCPPeer.update_player_pos.connect(_on_tcp_peer_update_player_pos)
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,9 +1,0 @@
-syntax = "proto2";
-
-package fiubakka;
-
-message OtherPlayerPosition {
-    required string username = 1;
-    required int32 x = 2;
-    required int32 y = 3;
-}

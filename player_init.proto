@@ -1,7 +1,0 @@
-syntax = "proto2";
-
-package fiubakka;
-
-message PlayerInit {
-  required string username = 1;
-}

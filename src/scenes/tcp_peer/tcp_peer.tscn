@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://vsxw7oso1o2b"]
+
+[ext_resource type="Script" path="res://src/scenes/tcp_peer/tcp_peer.gd" id="1_hl0yo"]
+
+[node name="TCPPeer" type="Node"]
+script = ExtResource("1_hl0yo")

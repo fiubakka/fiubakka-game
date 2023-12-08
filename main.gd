@@ -5,6 +5,7 @@ signal update_player_pos
 signal change_velocity
 
 @export var other_placer_scene: PackedScene
+@export var zone_scene: PackedScene
 
 var other_players = {}
 var screen_size
@@ -12,17 +13,12 @@ var screen_size
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	screen_size = $Player.get_viewport_rect().size
-	$TCPPeer.init_pos($Player.position, screen_size)
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
-
-func _on_tcp_peer_set_player_id(id):
-	set_player_id.emit(id)
 
 
 func _on_tcp_peer_update_player_pos(new_position):
@@ -51,3 +47,15 @@ func _on_tcp_peer_update_other_player_pos(id, position):
 		other_player.position = position
 		other_players[id] = other_player
 		add_child(other_player)
+
+
+func _on_login_change_to_zone_scene():
+	var zone = zone_scene.instantiate()
+	print("main will add zone scene")
+	add_child(zone)
+	print(get_children())
+	print(zone.change_scene)
+	zone.change_scene.connect(_mi_metodo_handler)
+	
+func _mi_metodo_handler(mensaje):
+	print(mensaje)
