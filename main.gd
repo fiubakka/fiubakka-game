@@ -45,5 +45,12 @@ func _on_tcp_peer_create_other_player(id, position):
 
 
 func _on_tcp_peer_update_other_player_pos(id, position):
-	var other_player = other_players[id]
-	other_player.position = position
+	if (other_players.has(id)):
+		var other_player = other_players[id]
+		other_player.position = position
+	else:
+		var other_player = other_placer_scene.instantiate()
+		other_player.id = id
+		other_player.position = position
+		other_players[id] = other_player
+		add_child(other_player)
