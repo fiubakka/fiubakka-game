@@ -5,7 +5,6 @@
 [ext_resource type="Script" path="res://RichTextLabel.gd" id="2_ypy1e"]
 
 [node name="Chatbox" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_rru4p")
@@ -27,7 +26,6 @@ offset_left = 4.0
 offset_top = 3.0
 offset_right = 438.0
 offset_bottom = 217.0
-fit_content = true
 script = ExtResource("2_ypy1e")
 
 [node name="Polygon2D" type="Polygon2D" parent="RichTextLabel"]

@@ -16,6 +16,7 @@ position = Vector2(162, 183)
 [node name="TCPPeer" parent="." instance=ExtResource("3_jmwtp")]
 
 [node name="Chatbox" parent="." instance=ExtResource("2_pxx44")]
+visible = false
 offset_left = 158.0
 offset_top = 323.0
 offset_right = 439.0
