@@ -20,6 +20,7 @@ func _ready():
 func _process(delta):
 	if (Input.is_action_pressed("open_chat") and !$Chatbox.visible):
 		$Chatbox.visible = true
+		$Chatbox.focus_chat()
 	if (Input.is_action_pressed("close_chat") and $Chatbox.visible):
 		$Chatbox.visible = false
 

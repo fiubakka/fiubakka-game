@@ -44,7 +44,7 @@ offset_right = 441.0
 offset_bottom = 270.0
 text = "Send"
 
-[connection signal="gui_input" from="LineEdit" to="LineEdit" method="_on_gui_input"]
 [connection signal="send_message" from="LineEdit" to="." method="_on_line_edit_send_message"]
 [connection signal="send_message" from="LineEdit" to="RichTextLabel" method="_on_text_edit_send_message"]
+[connection signal="text_submitted" from="LineEdit" to="LineEdit" method="_on_text_submitted"]
 [connection signal="pressed" from="Button" to="LineEdit" method="_on_button_pressed"]

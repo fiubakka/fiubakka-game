@@ -2,10 +2,12 @@ extends Area2D
 
 signal change_velocity
 
+@export var idle: bool = false
 @export var speed = 400 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 var velocity = Vector2.ZERO # The player's movement vector.
 var id = null
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,6 +15,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if (Input.is_action_just_pressed("open_chat")):
+		idle = true
+	if (Input.is_action_just_pressed("close_chat")):
+		idle = false
+	if (idle): return
+	
 	if (Input.is_action_just_pressed("move_right")):
 		velocity.x = 1
 		velocity = velocity.normalized()
