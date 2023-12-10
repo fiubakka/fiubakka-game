@@ -15,4 +15,8 @@ func _on_text_edit_send_message(new_message):
 	
 func add_new_message(username, new_message):
 	# TODO: format other player messages with other colors
-	text += "[" + username + "] : " + new_message + "\n"
+	var user = "[" + username + "]"
+	if (username != "You"):
+		user = "[color=#ffaaaa]" + user + "[/color]"
+	var line = user + ": " + new_message + "\n"
+	append_text(line)
