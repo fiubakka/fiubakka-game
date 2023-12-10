@@ -3,13 +3,16 @@ extends Node
 signal update_player_pos
 signal create_other_player
 signal update_other_player_pos
+signal update_content
 
 const PBPlayerInit = preload("res://compiled/client/init/player_init.gd")
 const PBPlayerVelocity = preload("res://compiled/client/movement/player_velocity.gd")
 const PBClientMetadata = preload("res://compiled/client/metadata.gd")
+const PBClientPlayerMessage = preload("res://compiled/client/chat/message.gd")
 
 const PBServerMetadata = preload("res://compiled/server/metadata.gd")
 const PBPlayerPosition = preload("res://compiled/server/position/player_position.gd")
+const PBServerPlayerMessage = preload("res://compiled/server/chat/message.gd")
 
 const PBGameEntityState = preload("res://compiled/server/state/game_entity_state.gd")
 
@@ -33,7 +36,7 @@ func _process(delta):
 	if socket.get_available_bytes() > 0:
 		var len = socket.get_data(4)
 		len = big_endian_bytes_to_int(len[1])
-		var res = socket.get_partial_data(len)
+		var res = socket.get_data(len)
 		var error = res[0]
 		var read_bytes: PackedByteArray = res[1]
 		
@@ -66,6 +69,13 @@ func _process(delta):
 				print("ENTITY POS Y : ", entity_state.get_position().get_y())
 				var entity_position = entity_state.get_position()
 				update_other_player_pos.emit(entity_state.get_entityId(), Vector2(entity_position.get_x(), entity_position.get_y()))
+
+			PBServerMetadata.PBServerMessageType.PBPlayerMessage:
+				var player_message = PBServerPlayerMessage.PBPlayerMessage.new()
+				var result = player_message.from_bytes(msg_bytes) # TODO: check for errors
+				var username = player_message.get_entityId()
+				var content = player_message.get_content()
+				update_content.emit(username, content)
 			
 			#"NEW_PLAYER":
 			#	var id = int(msg[1])
@@ -96,6 +106,11 @@ func _on_main_change_velocity(vel):
 	
 	send_protocol_buffer(player_velocity_bytes, PBClientMetadata.PBClientMessageType.PBPlayerVelocity)
 	
+func _on_chatbox_send_message(message):
+	var player_message = PBClientPlayerMessage.PBPlayerMessage.new()
+	player_message.set_content(message)
+	var player_message_bytes = player_message.to_bytes()
+	send_protocol_buffer(player_message_bytes, PBClientMetadata.PBClientMessageType.PBPlayerMessage)
 	
 func send_protocol_buffer(msg_bytes, type):
 	var metadata = PBClientMetadata.PBClientMetadata.new()
@@ -124,7 +139,6 @@ func int_to_big_endian_bytes(value: int) -> PackedByteArray:
 func big_endian_bytes_to_int(bytes: PackedByteArray) -> int:
 	var integer_value : int = (bytes[0] << 24) + (bytes[1] << 16) + (bytes[2] << 8) + bytes[3]
 	return integer_value
-
 
 
 func _on_login_init_tcp_peer(username):

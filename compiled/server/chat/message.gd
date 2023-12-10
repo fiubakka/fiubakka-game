@@ -661,53 +661,39 @@ class PBPacker:
 ############### USER DATA BEGIN ################
 
 
-class PBPlayerVelocity:
+class PBPlayerMessage:
 	func _init():
 		var service
 		
-		_username = PBField.new("username", PB_DATA_TYPE.STRING, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.STRING])
+		_entityId = PBField.new("entityId", PB_DATA_TYPE.STRING, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.STRING])
 		service = PBServiceField.new()
-		service.field = _username
-		data[_username.tag] = service
+		service.field = _entityId
+		data[_entityId.tag] = service
 		
-		_x = PBField.new("x", PB_DATA_TYPE.FLOAT, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT])
+		_content = PBField.new("content", PB_DATA_TYPE.STRING, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.STRING])
 		service = PBServiceField.new()
-		service.field = _x
-		data[_x.tag] = service
-		
-		_y = PBField.new("y", PB_DATA_TYPE.FLOAT, PB_RULE.REQUIRED, 3, false, DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT])
-		service = PBServiceField.new()
-		service.field = _y
-		data[_y.tag] = service
+		service.field = _content
+		data[_content.tag] = service
 		
 	var data = {}
 	
-	var _username: PBField
-	func get_username() -> String:
-		return _username.value
-	func clear_username() -> void:
+	var _entityId: PBField
+	func get_entityId() -> String:
+		return _entityId.value
+	func clear_entityId() -> void:
 		data[1].state = PB_SERVICE_STATE.UNFILLED
-		_username.value = DEFAULT_VALUES_2[PB_DATA_TYPE.STRING]
-	func set_username(value : String) -> void:
-		_username.value = value
+		_entityId.value = DEFAULT_VALUES_2[PB_DATA_TYPE.STRING]
+	func set_entityId(value : String) -> void:
+		_entityId.value = value
 	
-	var _x: PBField
-	func get_x() -> float:
-		return _x.value
-	func clear_x() -> void:
+	var _content: PBField
+	func get_content() -> String:
+		return _content.value
+	func clear_content() -> void:
 		data[2].state = PB_SERVICE_STATE.UNFILLED
-		_x.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
-	func set_x(value : float) -> void:
-		_x.value = value
-	
-	var _y: PBField
-	func get_y() -> float:
-		return _y.value
-	func clear_y() -> void:
-		data[3].state = PB_SERVICE_STATE.UNFILLED
-		_y.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
-	func set_y(value : float) -> void:
-		_y.value = value
+		_content.value = DEFAULT_VALUES_2[PB_DATA_TYPE.STRING]
+	func set_content(value : String) -> void:
+		_content.value = value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)

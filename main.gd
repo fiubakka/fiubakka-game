@@ -18,7 +18,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if (Input.is_action_pressed("open_chat") and !$Chatbox.visible):
+		$Chatbox.visible = true
+		$Chatbox.focus_chat()
+	if (Input.is_action_pressed("close_chat") and $Chatbox.visible):
+		$Chatbox.visible = false
 
 
 func _on_tcp_peer_update_player_pos(new_position):
