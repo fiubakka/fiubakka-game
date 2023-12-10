@@ -11,5 +11,8 @@ func _process(delta):
 
 
 func _on_text_edit_send_message(new_message):
+	add_new_message("You", new_message)
+	
+func add_new_message(username, new_message):
 	# TODO: format other player messages with other colors
-	text += "\n[You]: " + new_message
+	text += "[" + str(username) + "] :" + new_message + "\n"

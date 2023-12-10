@@ -14,10 +14,12 @@ func _process(delta):
 
 func _on_gui_input(event: InputEventKey):
 	if event is InputEventKey and event.as_text_keycode() == "Enter" and event.pressed:
-		send_message.emit(text)
-		clear()
+		send_text_message()
 
 
 func _on_button_pressed():
+	send_text_message()
+	
+func send_text_message():
 	send_message.emit(text)
 	clear()

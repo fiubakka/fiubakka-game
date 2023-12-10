@@ -718,7 +718,8 @@ class PBClientMetadata:
 	
 enum PBClientMessageType {
 	PBPlayerInit = 0,
-	PBPlayerVelocity = 1
+	PBPlayerVelocity = 1,
+	PBPlayerMessage = 2
 }
 
 ################ USER DATA END #################
