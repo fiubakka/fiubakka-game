@@ -26,6 +26,7 @@ offset_left = 4.0
 offset_top = 3.0
 offset_right = 438.0
 offset_bottom = 217.0
+scroll_following = true
 script = ExtResource("2_ypy1e")
 
 [node name="Polygon2D" type="Polygon2D" parent="RichTextLabel"]
