@@ -57,7 +57,10 @@ func _process(delta):
 				print("will update position")
 				var player_position = PBPlayerPosition.PBPlayerPosition.new()
 				var result = player_position.from_bytes(msg_bytes) # TODO: check for errors
-				print(result)
+				print("PLAYER POS X : ", player_position.get_x())
+				print("PLAYER POS Y : ", player_position.get_y())
+				print("PLAYER VEL X : ", player_position.get_velX())
+				print("PLAYER VEL Y : ", player_position.get_velY())
 				update_player_pos.emit(Vector2(player_position.get_x(), player_position.get_y()))
 				
 			PBServerMetadata.PBServerMessageType.PBGameEntityState:
@@ -68,6 +71,8 @@ func _process(delta):
 				print("ENTITY ID: ", entity_state.get_entityId())
 				print("ENTITY POS X : ", entity_state.get_position().get_x())
 				print("ENTITY POS Y : ", entity_state.get_position().get_y())
+				print("ENTITY VEL X : ", entity_state.get_velocity().get_velX())
+				print("ENTITY VEL Y : ", entity_state.get_velocity().get_vely())
 				var entity_position = entity_state.get_position()
 				update_other_player_pos.emit(entity_state.get_entityId(), Vector2(entity_position.get_x(), entity_position.get_y()))
 			
@@ -96,7 +101,7 @@ func _process(delta):
 
 func init_pos(position, screen_size):
 	var player_init = PBPlayerInit.PBPlayerInit.new()
-	player_init.set_username("Flu")
+	player_init.set_username("Javi")
 	var player_init_bytes = player_init.to_bytes()
 	
 	send_protocol_buffer(player_init_bytes, PBClientMetadata.PBClientMessageType.PBPlayerInit)
