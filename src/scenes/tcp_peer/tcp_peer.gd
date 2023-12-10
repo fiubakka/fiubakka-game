@@ -14,7 +14,7 @@ const PBPlayerPosition = preload("res://compiled/server/position/player_position
 const PBGameEntityState = preload("res://compiled/server/state/game_entity_state.gd")
 
 const host = "127.0.0.1"
-const port = 9090
+const port = 2020
 var socket = StreamPeerTCP.new()
 var connected = false
 

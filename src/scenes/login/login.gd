@@ -10,7 +10,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if (Input.is_action_just_pressed("open_chat")): # open_chat == Yaaaaaaaaaaaaaaaaaaaaaaa
-		init_tcp_peer.emit("miusername2aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-		change_to_zone_scene.emit()aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-		get_node(".").free()aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+	if (Input.is_action_just_pressed("open_chat")): # open_chat == Y
+		init_tcp_peer.emit("flu")
+		change_to_zone_scene.emit()
+		get_node(".").free()
