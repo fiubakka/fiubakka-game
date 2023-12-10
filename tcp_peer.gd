@@ -37,7 +37,7 @@ func _process(delta):
 	if socket.get_available_bytes() > 0:
 		var len = socket.get_data(4)
 		len = big_endian_bytes_to_int(len[1])
-		var res = socket.get_partial_data(len)
+		var res = socket.get_data(len)
 		var error = res[0]
 		var read_bytes: PackedByteArray = res[1]
 		
@@ -74,7 +74,7 @@ func _process(delta):
 			PBServerMetadata.PBServerMessageType.PBPlayerMessage:
 				var player_message = PBServerPlayerMessage.PBPlayerMessage.new()
 				var result = player_message.from_bytes(msg_bytes) # TODO: check for errors
-				var username = player_message.get_instance_id()
+				var username = player_message.get_entityId()
 				var content = player_message.get_content()
 				update_content.emit(username, content)
 			
@@ -96,7 +96,7 @@ func _process(delta):
 
 func init_pos(position, screen_size):
 	var player_init = PBPlayerInit.PBPlayerInit.new()
-	player_init.set_username("Doc")
+	player_init.set_username("Flu")
 	var player_init_bytes = player_init.to_bytes()
 	
 	send_protocol_buffer(player_init_bytes, PBClientMetadata.PBClientMessageType.PBPlayerInit)

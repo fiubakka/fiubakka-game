@@ -1,6 +1,6 @@
 extends RichTextLabel
 
-var messages = []
+var player_colors = {}
 
 func _ready():
 	pass
@@ -15,4 +15,4 @@ func _on_text_edit_send_message(new_message):
 	
 func add_new_message(username, new_message):
 	# TODO: format other player messages with other colors
-	text += "[" + str(username) + "] :" + new_message + "\n"
+	text += "[" + username + "] : " + new_message + "\n"
