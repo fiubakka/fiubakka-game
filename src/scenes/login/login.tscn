@@ -8,8 +8,10 @@ anchors_preset = 0
 script = ExtResource("1_dkklg")
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 48.0
 offset_top = 20.0
 offset_right = 273.0
 offset_bottom = 131.0
-text = "Este es el login"
+text = "This is the LOGIN scene.
+Press L"
