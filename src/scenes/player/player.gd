@@ -63,5 +63,5 @@ func _on_main_set_player_id(id):
 	self.id = id
 
 
-func _on_main_update_player_pos(position):
+func _on_tcp_peer_update_player_pos(position):
 	self.position = position

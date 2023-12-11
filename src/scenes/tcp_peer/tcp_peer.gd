@@ -97,7 +97,7 @@ func init_pos(username):
 	send_protocol_buffer(player_init_bytes, PBClientMetadata.PBClientMessageType.PBPlayerInit)
 	
 	
-func _on_main_change_velocity(vel):
+func _on_player_change_velocity(vel):
 	var player_velocity = PBPlayerVelocity.PBPlayerVelocity.new()
 	player_velocity.set_x(vel.x)
 	player_velocity.set_y(vel.y)

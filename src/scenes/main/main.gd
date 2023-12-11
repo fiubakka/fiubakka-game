@@ -1,9 +1,5 @@
 extends Node
 
-signal set_player_id
-signal update_player_pos
-signal change_velocity
-
 @export var other_placer_scene: PackedScene
 @export var zone_scene: PackedScene
 
@@ -23,14 +19,6 @@ func _process(delta):
 		$Chatbox.focus_chat()
 	if (Input.is_action_pressed("close_chat") and $Chatbox.visible):
 		$Chatbox.visible = false
-
-
-func _on_tcp_peer_update_player_pos(new_position):
-	update_player_pos.emit(new_position)
-
-
-func _on_player_change_velocity(velocity):
-	change_velocity.emit(velocity)
 
 
 func _on_tcp_peer_create_other_player(id, position):

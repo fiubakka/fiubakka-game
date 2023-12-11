@@ -27,14 +27,11 @@ offset_top = 323.0
 offset_right = 439.0
 offset_bottom = 323.0
 
-[connection signal="change_velocity" from="." to="TCPPeer" method="_on_main_change_velocity"]
-[connection signal="set_player_id" from="." to="Player" method="_on_main_set_player_id"]
-[connection signal="update_player_pos" from="." to="Player" method="_on_main_update_player_pos"]
-[connection signal="change_velocity" from="Player" to="." method="_on_player_change_velocity"]
+[connection signal="change_velocity" from="Player" to="TCPPeer" method="_on_player_change_velocity"]
 [connection signal="create_other_player" from="TCPPeer" to="." method="_on_tcp_peer_create_other_player"]
 [connection signal="update_content" from="TCPPeer" to="Chatbox" method="_on_tcp_peer_update_content"]
 [connection signal="update_other_player_pos" from="TCPPeer" to="." method="_on_tcp_peer_update_other_player_pos"]
-[connection signal="update_player_pos" from="TCPPeer" to="." method="_on_tcp_peer_update_player_pos"]
+[connection signal="update_player_pos" from="TCPPeer" to="Player" method="_on_tcp_peer_update_player_pos"]
 [connection signal="change_to_zone_scene" from="login" to="." method="_on_login_change_to_zone_scene"]
 [connection signal="init_tcp_peer" from="login" to="TCPPeer" method="_on_login_init_tcp_peer"]
 [connection signal="send_message" from="Chatbox" to="TCPPeer" method="_on_chatbox_send_message"]
