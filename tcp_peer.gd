@@ -72,9 +72,9 @@ func _process(delta):
 				print("ENTITY POS X : ", entity_state.get_position().get_x())
 				print("ENTITY POS Y : ", entity_state.get_position().get_y())
 				print("ENTITY VEL X : ", entity_state.get_velocity().get_velX())
-				print("ENTITY VEL Y : ", entity_state.get_velocity().get_vely())
+				print("ENTITY VEL Y : ", entity_state.get_velocity().get_velY())
 				var entity_position = entity_state.get_position()
-				update_other_player_pos.emit(entity_state.get_entityId(), Vector2(entity_position.get_x(), entity_position.get_y()))
+				update_other_player_pos.emit(entity_state.get_entityId(), Vector2(entity_position.get_x(), entity_position.get_y()), Vector2(entity_state.get_velocity().get_velX(), entity_state.get_velocity().get_velY()))
 
 			PBServerMetadata.PBServerMessageType.PBPlayerMessage:
 				var player_message = PBServerPlayerMessage.PBPlayerMessage.new()
@@ -82,26 +82,11 @@ func _process(delta):
 				var username = player_message.get_entityId()
 				var content = player_message.get_content()
 				update_content.emit(username, content)
-			
-			#"ID":
-			#	var id = int(msg[1])
-			#	set_player_id.emit(id)
-			
-			#"NEW_PLAYER":
-			#	var id = int(msg[1])
-			#	var position = Vector2(float(msg[2]), float(msg[3]))
-			#	create_other_player.emit(id, position)
-			
-			#"OTHER_PLAYER_POS":
-			#	var id = int(msg[1])
-			#	var position = Vector2(float(msg[2]), float(msg[3]))
-			#	print(id, position)
-			#	update_other_player_pos.emit(id, position)
 
 
 func init_pos(position, screen_size):
 	var player_init = PBPlayerInit.PBPlayerInit.new()
-	player_init.set_username("Javi")
+	player_init.set_username("Parker")
 	var player_init_bytes = player_init.to_bytes()
 	
 	send_protocol_buffer(player_init_bytes, PBClientMetadata.PBClientMessageType.PBPlayerInit)

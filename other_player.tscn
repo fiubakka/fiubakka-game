@@ -127,7 +127,7 @@ texture_filter = 1
 position = Vector2(-1, 0)
 scale = Vector2(3.917, 3.917)
 sprite_frames = SubResource("SpriteFrames_ruyji")
-animation = &"idle_left"
+animation = &"idle_front"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_xdu57")
