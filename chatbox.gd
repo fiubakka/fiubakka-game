@@ -12,6 +12,9 @@ func _process(delta):
 	pass
 
 
+func focus_chat():
+	$LineEdit.grab_focus()
+
 func _on_line_edit_send_message(message):
 	send_message.emit(message)
 

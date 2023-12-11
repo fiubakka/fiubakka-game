@@ -75,7 +75,7 @@ func _process(delta):
 				print("ENTITY VEL Y : ", entity_state.get_velocity().get_vely())
 				var entity_position = entity_state.get_position()
 				update_other_player_pos.emit(entity_state.get_entityId(), Vector2(entity_position.get_x(), entity_position.get_y()))
-			
+
 			PBServerMetadata.PBServerMessageType.PBPlayerMessage:
 				var player_message = PBServerPlayerMessage.PBPlayerMessage.new()
 				var result = player_message.from_bytes(msg_bytes) # TODO: check for errors

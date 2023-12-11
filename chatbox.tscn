@@ -5,7 +5,6 @@
 [ext_resource type="Script" path="res://RichTextLabel.gd" id="2_ypy1e"]
 
 [node name="Chatbox" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_rru4p")
@@ -27,7 +26,7 @@ offset_left = 4.0
 offset_top = 3.0
 offset_right = 438.0
 offset_bottom = 217.0
-fit_content = true
+scroll_following = true
 script = ExtResource("2_ypy1e")
 
 [node name="Polygon2D" type="Polygon2D" parent="RichTextLabel"]
@@ -44,7 +43,7 @@ offset_right = 441.0
 offset_bottom = 270.0
 text = "Send"
 
-[connection signal="gui_input" from="LineEdit" to="LineEdit" method="_on_gui_input"]
 [connection signal="send_message" from="LineEdit" to="." method="_on_line_edit_send_message"]
 [connection signal="send_message" from="LineEdit" to="RichTextLabel" method="_on_text_edit_send_message"]
+[connection signal="text_submitted" from="LineEdit" to="LineEdit" method="_on_text_submitted"]
 [connection signal="pressed" from="Button" to="LineEdit" method="_on_button_pressed"]
