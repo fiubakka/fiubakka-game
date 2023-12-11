@@ -11,6 +11,7 @@ var id = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#$TCPPeer.update_player_pos.connect(_on_tcp_peer_update_player_pos)
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -62,5 +63,5 @@ func _on_main_set_player_id(id):
 	self.id = id
 
 
-func _on_main_update_player_pos(position):
+func _on_tcp_peer_update_player_pos(position):
 	self.position = position
