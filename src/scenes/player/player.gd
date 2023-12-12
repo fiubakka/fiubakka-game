@@ -68,8 +68,6 @@ func _process(delta):
 			$AnimatedSprite2D.play("idle_right")
 		elif (Input.is_action_just_released("move_left")):
 			$AnimatedSprite2D.play("idle_left")
-	
-	print(last_movement, "can move: ", can_move)
 
 func _on_main_set_player_id(id):
 	self.id = id
@@ -82,3 +80,8 @@ func _on_tcp_peer_update_player_pos(position):
 func _on_area_entered(area):
 	if area.is_in_group("walls"):
 		can_move = false
+		velocity.x = 0
+		velocity.y = 0
+		velocity = velocity.normalized()
+		change_velocity.emit(velocity)
+		

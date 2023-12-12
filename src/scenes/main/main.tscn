@@ -15,8 +15,6 @@ zone_scene = ExtResource("3_s3c76")
 
 [node name="Player" parent="." instance=ExtResource("4_1vjnt")]
 position = Vector2(162, 183)
-idle = false
-speed = 400
 
 [node name="TCPPeer" parent="." instance=ExtResource("5_2vkm8")]
 
