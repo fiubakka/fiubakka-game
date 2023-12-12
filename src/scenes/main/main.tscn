@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/scenes/main/main.gd" id="1_kecny"]
 [ext_resource type="PackedScene" uid="uid://d11b7734y2pbu" path="res://src/scenes/other_player/other_player.tscn" id="2_l2cc2"]
 [ext_resource type="PackedScene" uid="uid://tu3fgs3gf4g2" path="res://src/scenes/zone/zone.tscn" id="3_s3c76"]
-[ext_resource type="PackedScene" uid="uid://cg416qwq7gb4d" path="res://src/scenes/player/player.tscn" id="4_1vjnt"]
+[ext_resource type="PackedScene" uid="uid://rns0k2q76gqf" path="res://src/scenes/player/player.tscn" id="4_1vjnt"]
 [ext_resource type="PackedScene" uid="uid://vsxw7oso1o2b" path="res://src/scenes/tcp_peer/tcp_peer.tscn" id="5_2vkm8"]
 [ext_resource type="PackedScene" uid="uid://6mcomak80lww" path="res://src/scenes/login/login.tscn" id="6_0f0yx"]
 [ext_resource type="PackedScene" uid="uid://oihrx253mx55" path="res://src/scenes/chatbox/chatbox.tscn" id="7_p2d4x"]
@@ -15,6 +15,8 @@ zone_scene = ExtResource("3_s3c76")
 
 [node name="Player" parent="." instance=ExtResource("4_1vjnt")]
 position = Vector2(162, 183)
+idle = false
+speed = 400
 
 [node name="TCPPeer" parent="." instance=ExtResource("5_2vkm8")]
 

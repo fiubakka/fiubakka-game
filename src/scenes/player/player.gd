@@ -7,6 +7,7 @@ signal change_velocity
 var screen_size # Size of the game window.
 var velocity = Vector2.ZERO # The player's movement vector.
 var id = null
+var can_move = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -65,3 +66,8 @@ func _on_main_set_player_id(id):
 
 func _on_tcp_peer_update_player_pos(position):
 	self.position = position
+
+
+func _on_area_entered(area):
+	if area.is_in_group("walls"):
+		can_move = false
