@@ -7,6 +7,8 @@ signal change_velocity
 var screen_size # Size of the game window.
 var velocity = Vector2.ZERO # The player's movement vector.
 var id = null
+var can_move = true
+var last_movement = null
 
 
 # Called when the node enters the scene tree for the first time.
@@ -22,22 +24,30 @@ func _process(delta):
 		idle = false
 	if (idle): return
 	
-	if (Input.is_action_just_pressed("move_right")):
+	if (Input.is_action_just_pressed("move_right") and !(last_movement == "move_right" and !can_move)):
+		last_movement = "move_right"
+		can_move = true
 		velocity.x = 1
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
 		$AnimatedSprite2D.play("walk_right")
-	if (Input.is_action_just_pressed("move_left")):
+	if (Input.is_action_just_pressed("move_left") and !(last_movement == "move_left" and !can_move)):
+		last_movement = "move_left"
+		can_move = true
 		velocity.x = -1
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
 		$AnimatedSprite2D.play("walk_left")
-	if (Input.is_action_just_pressed("move_up")):
+	if (Input.is_action_just_pressed("move_up") and !(last_movement == "move_up" and !can_move)):
+		last_movement = "move_up"
+		can_move = true
 		velocity.y = -1
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
 		$AnimatedSprite2D.play("walk_up")
-	if (Input.is_action_just_pressed("move_down")):
+	if (Input.is_action_just_pressed("move_down") and !(last_movement == "move_down" and !can_move)):
+		last_movement = "move_down"
+		can_move = true
 		velocity.y = 1
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
@@ -65,3 +75,13 @@ func _on_main_set_player_id(id):
 
 func _on_tcp_peer_update_player_pos(position):
 	self.position = position
+
+
+func _on_area_entered(area):
+	if area.is_in_group("walls"):
+		can_move = false
+		velocity.x = 0
+		velocity.y = 0
+		velocity = velocity.normalized()
+		change_velocity.emit(velocity)
+		

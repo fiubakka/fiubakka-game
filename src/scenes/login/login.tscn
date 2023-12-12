@@ -13,5 +13,4 @@ offset_left = 48.0
 offset_top = 20.0
 offset_right = 273.0
 offset_bottom = 131.0
-text = "This is the LOGIN scene.
-Press L"
+text = "Este es el login"
