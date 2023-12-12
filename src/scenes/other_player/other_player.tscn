@@ -1,6 +1,6 @@
 [gd_scene load_steps=34 format=3 uid="uid://d11b7734y2pbu"]
 
-[ext_resource type="Script" path="res://other_player.gd" id="1_bnkx2"]
+[ext_resource type="Script" path="res://src/scenes/other_player/other_player.gd" id="1_b0a0t"]
 [ext_resource type="Texture2D" uid="uid://b73nn4usjai1f" path="res://art/player/char_a_p1_0bas_humn_v01.png" id="2_g0vfd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2a31k"]
@@ -259,7 +259,7 @@ radius = 46.0
 height = 98.0
 
 [node name="OtherPlayer" type="Area2D"]
-script = ExtResource("1_bnkx2")
+script = ExtResource("1_b0a0t")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

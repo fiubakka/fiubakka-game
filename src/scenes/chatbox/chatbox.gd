@@ -11,7 +11,6 @@ func _ready():
 func _process(delta):
 	pass
 
-
 func focus_chat():
 	$LineEdit.grab_focus()
 

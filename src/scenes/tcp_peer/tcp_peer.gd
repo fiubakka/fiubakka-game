@@ -1,7 +1,6 @@
 extends Node
 
 signal update_player_pos
-signal set_player_id
 signal create_other_player
 signal update_other_player_pos
 signal update_content
@@ -29,7 +28,7 @@ func _ready():
 	if error:
 		print("fail")
 	socket.poll()
-	print(socket.get_status())
+	print("tcp peer ready")
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -75,15 +74,15 @@ func _process(delta):
 				update_content.emit(username, content)
 
 
-func init_pos(position, screen_size):
+func init_pos(username):
 	var player_init = PBPlayerInit.PBPlayerInit.new()
-	player_init.set_username("Sully")
+	player_init.set_username(username)
 	var player_init_bytes = player_init.to_bytes()
 	
 	send_protocol_buffer(player_init_bytes, PBClientMetadata.PBClientMessageType.PBPlayerInit)
 	
 	
-func _on_main_change_velocity(vel):
+func _on_player_change_velocity(vel):
 	var player_velocity = PBPlayerVelocity.PBPlayerVelocity.new()
 	player_velocity.set_x(vel.x)
 	player_velocity.set_y(vel.y)
@@ -125,3 +124,7 @@ func int_to_big_endian_bytes(value: int) -> PackedByteArray:
 func big_endian_bytes_to_int(bytes: PackedByteArray) -> int:
 	var integer_value : int = (bytes[0] << 24) + (bytes[1] << 16) + (bytes[2] << 8) + bytes[3]
 	return integer_value
+
+
+func _on_login_init_tcp_peer(username):
+	init_pos(username)
