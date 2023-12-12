@@ -50,16 +50,13 @@ func _process(delta):
 		
 		var msg_bytes = read_bytes.slice(4 + meta_len)
 		
-		print(metadata.get_type())
 		match metadata.get_type():
 			PBServerMetadata.PBServerMessageType.PBPlayerPosition:
-				print("will update position")
 				var player_position = PBPlayerPosition.PBPlayerPosition.new()
 				var result = player_position.from_bytes(msg_bytes) # TODO: check for errors
 				update_player_pos.emit(Vector2(player_position.get_x(), player_position.get_y()))
 				
 			PBServerMetadata.PBServerMessageType.PBGameEntityState:
-				print("will update entity state")
 				var entity_state = PBGameEntityState.PBGameEntityState.new()
 				var result = entity_state.from_bytes(msg_bytes) # TODO: check for errors
 				#TODO: debug prints, delete when message is working correctly
@@ -87,7 +84,6 @@ func _on_player_change_velocity(vel):
 	player_velocity.set_x(vel.x)
 	player_velocity.set_y(vel.y)
 	var player_velocity_bytes = player_velocity.to_bytes()
-	print("sending velocity")
 	
 	send_protocol_buffer(player_velocity_bytes, PBClientMetadata.PBClientMessageType.PBPlayerVelocity)
 	

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdpy6kvpweytm"]
+
+[ext_resource type="Texture2D" uid="uid://chu7dcpb4qvm3" path="res://art/tilemaps/A4.png" id="1_7seq8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yla8b"]
+atlas = ExtResource("1_7seq8")
+region = Rect2(96, 241, 96, 95)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e1hxs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yla8b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1wkm"]
+size = Vector2(96, 9)
+
+[node name="Wall01" type="Area2D" groups=["walls"]]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_e1hxs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 43.5)
+shape = SubResource("RectangleShape2D_e1wkm")
