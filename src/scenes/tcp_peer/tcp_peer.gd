@@ -59,7 +59,6 @@ func _process(delta):
 			PBServerMetadata.PBServerMessageType.PBGameEntityState:
 				var entity_state = PBGameEntityState.PBGameEntityState.new()
 				var result = entity_state.from_bytes(msg_bytes) # TODO: check for errors
-				#TODO: debug prints, delete when message is working correctly
 				var entity_position = entity_state.get_position()
 				update_other_player_pos.emit(entity_state.get_entityId(), Vector2(entity_position.get_x(), entity_position.get_y()), Vector2(entity_state.get_velocity().get_velX(), entity_state.get_velocity().get_velY()))
 

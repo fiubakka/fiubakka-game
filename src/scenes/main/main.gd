@@ -47,7 +47,7 @@ func _on_tcp_peer_update_other_player_pos(id, position, velocity):
 		add_child(other_player)
 		var nameLabel = Label.new()
 		nameLabel.text = get_username_from_id(other_player.id) # Because id is like Player-username and we want to show only the name
-		nameLabel.position = Vector2(other_player.position.x - 35, other_player.position.y - 100) # There must be a way to handle the position dynamically instead of magic numbers
+		nameLabel.position = Vector2(other_player.position.x - 35, other_player.position.y - 100) # TODO: There must be a way to handle the position dynamically instead of magic numbers
 		other_players_label[id] = nameLabel
 		add_child(nameLabel)
 		
