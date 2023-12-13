@@ -246,7 +246,6 @@ animations = [{
 size = Vector2(43, 17)
 
 [node name="Player" type="Area2D"]
-z_index = 1000
 script = ExtResource("1_mrf4w")
 metadata/_edit_group_ = true
 

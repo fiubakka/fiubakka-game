@@ -18,9 +18,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xdu57"]
-radius = 46.0
-height = 98.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qurnp"]
+size = Vector2(54, 15)
 
 [node name="OtherPlayer" type="Area2D"]
 script = ExtResource("1_b0a0t")
@@ -33,4 +32,5 @@ scale = Vector2(3.917, 3.917)
 sprite_frames = SubResource("SpriteFrames_ruyji")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_xdu57")
+position = Vector2(-1, 39.5)
+shape = SubResource("RectangleShape2D_qurnp")
