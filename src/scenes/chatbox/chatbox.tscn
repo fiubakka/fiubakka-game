@@ -7,43 +7,45 @@
 [node name="Chatbox" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 431.0
+offset_bottom = 219.0
 script = ExtResource("1_i2ex6")
 metadata/_edit_group_ = true
 
-[node name="LineEdit" type="LineEdit" parent="."]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 216.0
-offset_right = 374.0
-offset_bottom = 271.0
-placeholder_text = "(Say something...)"
-script = ExtResource("2_fix1v")
-metadata/_edit_use_anchors_ = true
-
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 3.0
-offset_right = 438.0
-offset_bottom = 217.0
+layout_mode = 2
+offset_right = 429.0
+offset_bottom = 214.0
 scroll_following = true
 script = ExtResource("3_nta7l")
 
-[node name="Polygon2D" type="Polygon2D" parent="RichTextLabel"]
-position = Vector2(0.283336, -0.00471699)
-scale = Vector2(1.14167, 0.995283)
-color = Color(0, 0, 0, 0.352941)
-polygon = PackedVector2Array(-2, -2.00474, 378, -1, 378.504, 104.533, 379.022, 213.009, -1, 211)
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+anchor_right = -0.00930233
+offset_top = 219.0
+offset_right = 370.0
+offset_bottom = 250.0
+placeholder_text = "(Diga algo...)"
+script = ExtResource("2_fix1v")
 
 [node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 377.0
+layout_mode = 2
+offset_left = 371.0
 offset_top = 219.0
-offset_right = 441.0
-offset_bottom = 270.0
-text = "Send"
+offset_right = 428.0
+offset_bottom = 250.0
+text = "Enviar"
 
-[connection signal="send_message" from="LineEdit" to="." method="_on_line_edit_send_message"]
+[node name="TextureRect" type="ColorRect" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_right = 428.0
+offset_bottom = 216.0
+color = Color(0.278431, 0.278431, 0.278431, 0.576471)
+
 [connection signal="send_message" from="LineEdit" to="RichTextLabel" method="_on_text_edit_send_message"]
+[connection signal="send_message" from="LineEdit" to="." method="_on_line_edit_send_message"]
 [connection signal="text_submitted" from="LineEdit" to="LineEdit" method="_on_text_submitted"]
 [connection signal="pressed" from="Button" to="LineEdit" method="_on_button_pressed"]

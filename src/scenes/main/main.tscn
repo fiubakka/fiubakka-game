@@ -14,6 +14,7 @@ other_placer_scene = ExtResource("2_l2cc2")
 zone_scene = ExtResource("3_s3c76")
 
 [node name="Player" parent="." instance=ExtResource("4_1vjnt")]
+visible = false
 position = Vector2(162, 183)
 
 [node name="TCPPeer" parent="." instance=ExtResource("5_2vkm8")]
@@ -22,10 +23,10 @@ position = Vector2(162, 183)
 
 [node name="Chatbox" parent="." instance=ExtResource("7_p2d4x")]
 visible = false
-offset_left = 158.0
-offset_top = 323.0
-offset_right = 439.0
-offset_bottom = 323.0
+offset_left = 199.0
+offset_top = 207.0
+offset_right = 480.0
+offset_bottom = 207.0
 
 [connection signal="change_velocity" from="Player" to="TCPPeer" method="_on_player_change_velocity"]
 [connection signal="create_other_player" from="TCPPeer" to="." method="_on_tcp_peer_create_other_player"]

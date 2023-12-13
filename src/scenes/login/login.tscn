@@ -1,17 +1,62 @@
-[gd_scene load_steps=2 format=3 uid="uid://6mcomak80lww"]
+[gd_scene load_steps=5 format=3 uid="uid://6mcomak80lww"]
 
 [ext_resource type="Script" path="res://src/scenes/login/login.gd" id="1_dkklg"]
+[ext_resource type="Texture2D" uid="uid://bfby521njxe1i" path="res://art/login/fiuba-front.jpeg" id="2_32wrg"]
+[ext_resource type="Texture2D" uid="uid://ctnrkmckjhxjy" path="res://art/login/fiuba-logo.png" id="3_cfpjm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fcmeu"]
+font_size = 24
+font_color = Color(0.827451, 0.827451, 0.827451, 1)
+shadow_color = Color(0, 0, 0, 1)
 
 [node name="login" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_dkklg")
 
-[node name="Label" type="Label" parent="."]
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.521569, 0.8, 1, 1)
 layout_mode = 0
-offset_left = 48.0
-offset_top = 20.0
-offset_right = 273.0
-offset_bottom = 131.0
-text = "This is the LOGIN scene.
-Press L"
+offset_right = 640.0
+offset_bottom = 480.0
+texture = ExtResource("2_32wrg")
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 382.0
+offset_top = 4.0
+offset_right = 978.0
+offset_bottom = 230.0
+scale = Vector2(0.435, 0.435)
+texture = ExtResource("3_cfpjm")
+stretch_mode = 1
+
+[node name="BoxContainer" type="ColorRect" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 166.0
+offset_top = 203.0
+offset_right = 524.0
+offset_bottom = 329.0
+color = Color(0.14902, 0.14902, 0.14902, 0.858824)
+
+[node name="Label" type="Label" parent="BoxContainer"]
+layout_mode = 2
+offset_left = 6.0
+offset_top = 8.0
+offset_right = 351.0
+offset_bottom = 82.0
+text = "Bienvenido a FiubAkka
+Ingrese su nombre de usuario"
+label_settings = SubResource("LabelSettings_fcmeu")
+horizontal_alignment = 1
+
+[node name="UserInput" type="LineEdit" parent="BoxContainer"]
+layout_mode = 2
+offset_left = 6.0
+offset_top = 90.0
+offset_right = 351.0
+offset_bottom = 121.0
+placeholder_text = "Su usuario..."
+
+[connection signal="text_submitted" from="BoxContainer/UserInput" to="." method="_on_user_input_text_submitted"]

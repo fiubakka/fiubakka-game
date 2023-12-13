@@ -48,6 +48,8 @@ func _on_login_change_to_zone_scene():
 	print(get_children())
 	print(zone.change_scene)
 	zone.change_scene.connect(_mi_metodo_handler)
+	$Player.visible = true
+	$Player.idle = false
 	
 func _mi_metodo_handler(mensaje):
 	print(mensaje)
