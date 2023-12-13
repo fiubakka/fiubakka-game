@@ -1,12 +1,32 @@
 extends Area2D
 
-var id = null
+@export var id = 1
+var velocity = Vector2(0,0)
+var prev_vel = Vector2(0,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if (velocity.x > 0):
+		$AnimatedSprite2D.play("walk_right")
+	elif (velocity.x < 0):
+		$AnimatedSprite2D.play("walk_left")
+	elif (velocity.y < 0):
+		$AnimatedSprite2D.play("walk_up")
+	elif (velocity.y > 0):
+		$AnimatedSprite2D.play("walk_down")
+	else:
+		if (prev_vel.x > 0):
+			$AnimatedSprite2D.play("idle_right")
+		elif (prev_vel.x < 0):
+			$AnimatedSprite2D.play("idle_left")
+		elif (prev_vel.y < 0):
+			$AnimatedSprite2D.play("idle_back")
+		elif (prev_vel.y > 0):
+			$AnimatedSprite2D.play("idle_front")
+		
+	prev_vel = velocity

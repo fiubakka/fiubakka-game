@@ -676,6 +676,12 @@ class PBGameEntityState:
 		service.func_ref = Callable(self, "new_position")
 		data[_position.tag] = service
 		
+		_velocity = PBField.new("velocity", PB_DATA_TYPE.MESSAGE, PB_RULE.REQUIRED, 3, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = _velocity
+		service.func_ref = Callable(self, "new_velocity")
+		data[_velocity.tag] = service
+		
 	var data = {}
 	
 	var _entityId: PBField
@@ -696,6 +702,16 @@ class PBGameEntityState:
 	func new_position() -> PBGameEntityPosition:
 		_position.value = PBGameEntityPosition.new()
 		return _position.value
+	
+	var _velocity: PBField
+	func get_velocity() -> PBGameEntityVelocity:
+		return _velocity.value
+	func clear_velocity() -> void:
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		_velocity.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
+	func new_velocity() -> PBGameEntityVelocity:
+		_velocity.value = PBGameEntityVelocity.new()
+		return _velocity.value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)
@@ -751,6 +767,61 @@ class PBGameEntityPosition:
 		_y.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
 	func set_y(value : float) -> void:
 		_y.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class PBGameEntityVelocity:
+	func _init():
+		var service
+		
+		_velX = PBField.new("velX", PB_DATA_TYPE.FLOAT, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT])
+		service = PBServiceField.new()
+		service.field = _velX
+		data[_velX.tag] = service
+		
+		_velY = PBField.new("velY", PB_DATA_TYPE.FLOAT, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT])
+		service = PBServiceField.new()
+		service.field = _velY
+		data[_velY.tag] = service
+		
+	var data = {}
+	
+	var _velX: PBField
+	func get_velX() -> float:
+		return _velX.value
+	func clear_velX() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		_velX.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
+	func set_velX(value : float) -> void:
+		_velX.value = value
+	
+	var _velY: PBField
+	func get_velY() -> float:
+		return _velY.value
+	func clear_velY() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		_velY.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
+	func set_velY(value : float) -> void:
+		_velY.value = value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)
