@@ -13,7 +13,7 @@ offset_right = 272.0
 offset_bottom = 307.0
 text = "This is the ZONE"
 
-[node name="Walls" type="Node" parent="."]
+[node name="Walls" type="Node2D" parent="."]
 
 [node name="Wall01" parent="Walls" instance=ExtResource("2_gw5ix")]
 position = Vector2(48, 48)
