@@ -24,7 +24,8 @@ size = Vector2(96, 9)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_e1hxs")
+offset = Vector2(0, -40)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 43.5)
+position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_e1wkm")
