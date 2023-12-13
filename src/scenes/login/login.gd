@@ -18,4 +18,3 @@ func _on_user_input_text_submitted(username: String):
 		init_tcp_peer.emit(username)
 		change_to_zone_scene.emit()
 		get_node(".").queue_free()
-		

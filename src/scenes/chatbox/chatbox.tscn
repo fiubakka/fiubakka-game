@@ -23,6 +23,7 @@ script = ExtResource("3_nta7l")
 
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 2
+anchor_left = -0.00930233
 anchor_right = -0.00930233
 offset_top = 219.0
 offset_right = 370.0
@@ -45,7 +46,7 @@ offset_right = 428.0
 offset_bottom = 216.0
 color = Color(0.278431, 0.278431, 0.278431, 0.576471)
 
-[connection signal="send_message" from="LineEdit" to="RichTextLabel" method="_on_text_edit_send_message"]
 [connection signal="send_message" from="LineEdit" to="." method="_on_line_edit_send_message"]
+[connection signal="send_message" from="LineEdit" to="RichTextLabel" method="_on_text_edit_send_message"]
 [connection signal="text_submitted" from="LineEdit" to="LineEdit" method="_on_text_submitted"]
 [connection signal="pressed" from="Button" to="LineEdit" method="_on_button_pressed"]

@@ -675,6 +675,16 @@ class PBPlayerPosition:
 		service.field = _y
 		data[_y.tag] = service
 		
+		_velX = PBField.new("velX", PB_DATA_TYPE.FLOAT, PB_RULE.REQUIRED, 3, false, DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT])
+		service = PBServiceField.new()
+		service.field = _velX
+		data[_velX.tag] = service
+		
+		_velY = PBField.new("velY", PB_DATA_TYPE.FLOAT, PB_RULE.REQUIRED, 4, false, DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT])
+		service = PBServiceField.new()
+		service.field = _velY
+		data[_velY.tag] = service
+		
 	var data = {}
 	
 	var _x: PBField
@@ -694,6 +704,24 @@ class PBPlayerPosition:
 		_y.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
 	func set_y(value : float) -> void:
 		_y.value = value
+	
+	var _velX: PBField
+	func get_velX() -> float:
+		return _velX.value
+	func clear_velX() -> void:
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		_velX.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
+	func set_velX(value : float) -> void:
+		_velX.value = value
+	
+	var _velY: PBField
+	func get_velY() -> float:
+		return _velY.value
+	func clear_velY() -> void:
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		_velY.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
+	func set_velY(value : float) -> void:
+		_velY.value = value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)

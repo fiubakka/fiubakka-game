@@ -11,8 +11,12 @@ shadow_color = Color(0, 0, 0, 1)
 
 [node name="login" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_dkklg")
+metadata/_edit_group_ = true
 
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color(0.521569, 0.8, 1, 1)
@@ -34,11 +38,12 @@ stretch_mode = 1
 [node name="BoxContainer" type="ColorRect" parent="."]
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
-offset_left = 166.0
-offset_top = 203.0
-offset_right = 524.0
-offset_bottom = 329.0
+offset_left = 146.0
+offset_top = 176.0
+offset_right = 504.0
+offset_bottom = 302.0
 color = Color(0.14902, 0.14902, 0.14902, 0.858824)
+metadata/_edit_group_ = true
 
 [node name="Label" type="Label" parent="BoxContainer"]
 layout_mode = 2

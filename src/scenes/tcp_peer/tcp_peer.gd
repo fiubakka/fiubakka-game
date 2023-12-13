@@ -50,25 +50,17 @@ func _process(delta):
 		
 		var msg_bytes = read_bytes.slice(4 + meta_len)
 		
-		print(metadata.get_type())
 		match metadata.get_type():
 			PBServerMetadata.PBServerMessageType.PBPlayerPosition:
-				print("will update position")
 				var player_position = PBPlayerPosition.PBPlayerPosition.new()
 				var result = player_position.from_bytes(msg_bytes) # TODO: check for errors
-				print(result)
 				update_player_pos.emit(Vector2(player_position.get_x(), player_position.get_y()))
 				
 			PBServerMetadata.PBServerMessageType.PBGameEntityState:
-				print("will update entity state")
 				var entity_state = PBGameEntityState.PBGameEntityState.new()
 				var result = entity_state.from_bytes(msg_bytes) # TODO: check for errors
-				#TODO: debug prints, delete when message is working correctly
-				print("ENTITY ID: ", entity_state.get_entityId())
-				print("ENTITY POS X : ", entity_state.get_position().get_x())
-				print("ENTITY POS Y : ", entity_state.get_position().get_y())
 				var entity_position = entity_state.get_position()
-				update_other_player_pos.emit(entity_state.get_entityId(), Vector2(entity_position.get_x(), entity_position.get_y()))
+				update_other_player_pos.emit(entity_state.get_entityId(), Vector2(entity_position.get_x(), entity_position.get_y()), Vector2(entity_state.get_velocity().get_velX(), entity_state.get_velocity().get_velY()))
 
 			PBServerMetadata.PBServerMessageType.PBPlayerMessage:
 				var player_message = PBServerPlayerMessage.PBPlayerMessage.new()
@@ -76,17 +68,6 @@ func _process(delta):
 				var username = player_message.get_entityId()
 				var content = player_message.get_content()
 				update_content.emit(username, content)
-			
-			#"NEW_PLAYER":
-			#	var id = int(msg[1])
-			#	var position = Vector2(float(msg[2]), float(msg[3]))
-			#	create_other_player.emit(id, position)
-			
-			#"OTHER_PLAYER_POS":
-			#	var id = int(msg[1])
-			#	var position = Vector2(float(msg[2]), float(msg[3]))
-			#	print(id, position)
-			#	update_other_player_pos.emit(id, position)
 
 
 func init_pos(username):
@@ -102,7 +83,6 @@ func _on_player_change_velocity(vel):
 	player_velocity.set_x(vel.x)
 	player_velocity.set_y(vel.y)
 	var player_velocity_bytes = player_velocity.to_bytes()
-	print("sending velocity")
 	
 	send_protocol_buffer(player_velocity_bytes, PBClientMetadata.PBClientMessageType.PBPlayerVelocity)
 	
