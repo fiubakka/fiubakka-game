@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 @export var other_placer_scene: PackedScene
 @export var zone_scene: PackedScene

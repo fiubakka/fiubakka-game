@@ -8,7 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://6mcomak80lww" path="res://src/scenes/login/login.tscn" id="6_0f0yx"]
 [ext_resource type="PackedScene" uid="uid://oihrx253mx55" path="res://src/scenes/chatbox/chatbox.tscn" id="7_p2d4x"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_kecny")
 other_placer_scene = ExtResource("2_l2cc2")
 zone_scene = ExtResource("3_s3c76")
