@@ -61,6 +61,7 @@ func get_username_from_id(id):
 		username = match.get_string(1)
 	else:
 		username = id
+	return username
 	
 
 func _on_login_change_to_zone_scene():
