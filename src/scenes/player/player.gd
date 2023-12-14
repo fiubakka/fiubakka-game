@@ -2,7 +2,7 @@ extends Area2D
 
 signal change_velocity
 
-@export var idle: bool = false
+@export var idle: bool = true
 @export var speed = 400 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 var velocity = Vector2.ZERO # The player's movement vector.
