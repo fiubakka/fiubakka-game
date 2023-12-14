@@ -4,8 +4,6 @@ extends Node2D
 @export var zone_scene: PackedScene
 
 var other_players = {}
-var other_players_label = {}
-var screen_size
 const pattern = "^Player-(.*)$"
 
 
@@ -36,20 +34,14 @@ func _on_tcp_peer_update_other_player_pos(id, position, velocity):
 		var other_player = other_players[id]
 		other_player.position = position
 		other_player.velocity = velocity
-		var label = other_players_label[id]
-		label.position = Vector2(other_player.position.x - 35, other_player.position.y - 100)
 	else:
 		var other_player = other_placer_scene.instantiate()
 		other_player.id = id
 		other_player.position = position
 		other_player.velocity = velocity
+		other_player.player_name = get_username_from_id(id)
 		other_players[id] = other_player
 		add_child(other_player)
-		var nameLabel = Label.new()
-		nameLabel.text = get_username_from_id(other_player.id) # Because id is like Player-username and we want to show only the name
-		nameLabel.position = Vector2(other_player.position.x - 35, other_player.position.y - 100) # TODO: There must be a way to handle the position dynamically instead of magic numbers
-		other_players_label[id] = nameLabel
-		add_child(nameLabel)
 		
 
 func get_username_from_id(id):
