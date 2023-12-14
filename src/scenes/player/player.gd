@@ -8,9 +8,9 @@ var screen_size # Size of the game window.
 var velocity = Vector2.ZERO # The player's movement vector.
 var prev_vel = Vector2.ZERO
 var id = null
-var can_move = true
-var last_movement = null
 
+var collision_inputs = {}
+var last_movement = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,31 +25,31 @@ func _process(delta):
 		idle = false
 	if (idle): return
 	
-	if (Input.is_action_just_pressed("move_right") and !(last_movement == "move_right" and !can_move)):
+	if (Input.is_action_just_pressed("move_right") and !(collision_inputs.has("move_right"))):
 		last_movement = "move_right"
-		can_move = true
 		velocity.x = 1
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
-	if (Input.is_action_just_pressed("move_left") and !(last_movement == "move_left" and !can_move)):
+		$AnimatedSprite2D.play("walk_right")
+	if (Input.is_action_just_pressed("move_left") and !(collision_inputs.has("move_left"))):
 		last_movement = "move_left"
-		can_move = true
 		velocity.x = -1
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
-	if (Input.is_action_just_pressed("move_up") and !(last_movement == "move_up" and !can_move)):
+		$AnimatedSprite2D.play("walk_left")
+	if (Input.is_action_just_pressed("move_up") and !(collision_inputs.has("move_up"))):
 		last_movement = "move_up"
-		can_move = true
 		velocity.y = -1
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
-	if (Input.is_action_just_pressed("move_down") and !(last_movement == "move_down" and !can_move)):
+		$AnimatedSprite2D.play("walk_up")
+	if (Input.is_action_just_pressed("move_down") and !(collision_inputs.has("move_down"))):
 		last_movement = "move_down"
-		can_move = true
 		velocity.y = 1
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
-	if (Input.is_action_just_released("move_down") or Input.is_action_just_released("move_up")):
+		$AnimatedSprite2D.play("walk_down")
+	if (Input.is_action_just_released("move_down")):
 		velocity.y = 0
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
@@ -80,6 +80,7 @@ func play_move_animation(velocity, prev_vel):
 		elif (prev_vel.y > 0):
 			$AnimatedSprite2D.play("idle_front")
 
+
 func _on_main_set_player_id(id):
 	self.id = id
 
@@ -89,10 +90,16 @@ func _on_tcp_peer_update_player_pos(position):
 
 
 func _on_area_entered(area):
-	if area.is_in_group("walls"):
-		can_move = false
-		velocity.x = 0
-		velocity.y = 0
-		velocity = velocity.normalized()
-		change_velocity.emit(velocity)
-		
+	collision_inputs[last_movement] = area
+	velocity.x = 0
+	velocity.y = 0
+	velocity = velocity.normalized()
+	change_velocity.emit(velocity)
+
+
+func _on_area_exited(area):
+	for key in collision_inputs:
+		if (collision_inputs[key] == area):
+			collision_inputs.erase(key)
+			
+			
