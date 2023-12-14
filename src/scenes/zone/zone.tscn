@@ -4,7 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://bdpy6kvpweytm" path="res://src/scenes/map/walls/wall_01.tscn" id="2_gw5ix"]
 
 [node name="zone" type="Node2D"]
+position = Vector2(-3, -1)
 script = ExtResource("1_coya7")
+metadata/_edit_group_ = true
 
 [node name="Label" type="Label" parent="."]
 offset_left = 17.0
