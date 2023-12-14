@@ -49,7 +49,7 @@ func _process(delta):
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
 		$AnimatedSprite2D.play("walk_down")
-	if (Input.is_action_just_released("move_down")):
+	if (Input.is_action_just_released("move_down") or Input.is_action_just_released("move_up")):
 		velocity.y = 0
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
