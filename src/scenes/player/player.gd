@@ -7,8 +7,8 @@ signal change_velocity
 var screen_size # Size of the game window.
 var velocity = Vector2.ZERO # The player's movement vector.
 var id = null
-var can_move = true
-var last_movement = null
+
+var collision_movement = {}
 
 
 # Called when the node enters the scene tree for the first time.
@@ -24,30 +24,22 @@ func _process(delta):
 		idle = false
 	if (idle): return
 	
-	if (Input.is_action_just_pressed("move_right") and !(last_movement == "move_right" and !can_move)):
-		last_movement = "move_right"
-		can_move = true
+	if (Input.is_action_just_pressed("move_right") and !(collision_movement.has("wall_east"))):
 		velocity.x = 1
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
 		$AnimatedSprite2D.play("walk_right")
-	if (Input.is_action_just_pressed("move_left") and !(last_movement == "move_left" and !can_move)):
-		last_movement = "move_left"
-		can_move = true
+	if (Input.is_action_just_pressed("move_left")):
 		velocity.x = -1
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
 		$AnimatedSprite2D.play("walk_left")
-	if (Input.is_action_just_pressed("move_up") and !(last_movement == "move_up" and !can_move)):
-		last_movement = "move_up"
-		can_move = true
+	if (Input.is_action_just_pressed("move_up") and !(collision_movement.has("wall_north"))):
 		velocity.y = -1
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
 		$AnimatedSprite2D.play("walk_up")
-	if (Input.is_action_just_pressed("move_down") and !(last_movement == "move_down" and !can_move)):
-		last_movement = "move_down"
-		can_move = true
+	if (Input.is_action_just_pressed("move_down")):
 		velocity.y = 1
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
@@ -69,6 +61,7 @@ func _process(delta):
 		elif (Input.is_action_just_released("move_left")):
 			$AnimatedSprite2D.play("idle_left")
 
+
 func _on_main_set_player_id(id):
 	self.id = id
 
@@ -78,10 +71,24 @@ func _on_tcp_peer_update_player_pos(position):
 
 
 func _on_area_entered(area):
-	if area.is_in_group("walls"):
-		can_move = false
+	if (area.is_in_group("wall_north")):
+		collision_movement["wall_north"] = null
 		velocity.x = 0
 		velocity.y = 0
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
+	elif (area.is_in_group("wall_east")):
+		collision_movement["wall_east"] = null
+		velocity.x = 0
+		velocity.y = 0
+		velocity = velocity.normalized()
+		change_velocity.emit(velocity)
+
+
+func _on_area_exited(area):
+	if (area.is_in_group("wall_north")):
+		collision_movement.erase("wall_north")
+	elif (area.is_in_group("wall_east")):
+		collision_movement.erase("wall_east")
 		
+
