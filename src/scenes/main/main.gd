@@ -14,10 +14,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if (Input.is_action_pressed("open_chat") and !$Player/Chatbox.visible):
+	if (Input.is_action_pressed("open_chat") and 
+		!$Player/Chatbox.visible and
+		!$Player/Chatbox.idle):
 		$Player/Chatbox.visible = true
 		$Player/Chatbox.focus_chat()
-	if (Input.is_action_pressed("close_chat") and $Player/Chatbox.visible):
+	if (Input.is_action_pressed("close_chat") and
+		$Player/Chatbox.visible and
+		!$Player/Chatbox.idle):
 		$Player/Chatbox.visible = false
 
 
@@ -65,6 +69,7 @@ func _on_login_change_to_zone_scene():
 	zone.change_scene.connect(_mi_metodo_handler)
 	$Player.visible = true
 	$Player.idle = false
+	$Player/Chatbox.idle = false
 	
 	
 func _mi_metodo_handler(mensaje):
