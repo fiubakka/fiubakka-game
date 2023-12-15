@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://tu3fgs3gf4g2"]
+[gd_scene load_steps=22 format=3 uid="uid://tu3fgs3gf4g2"]
 
 [ext_resource type="Script" path="res://src/scenes/zone/zone.gd" id="1_coya7"]
 [ext_resource type="Texture2D" uid="uid://188h0x2rhokl" path="res://art/tilemaps/Inside_C.png" id="2_8j555"]
@@ -3676,11 +3676,13 @@ size = Vector2(13.5, 253.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nrtp0"]
 size = Vector2(33, 31)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hiwpd"]
+size = Vector2(59, 58.5)
+
 [node name="zone" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(-3, -1)
 script = ExtResource("1_coya7")
-metadata/_edit_group_ = true
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -3703,50 +3705,60 @@ layer_2/y_sort_origin = 0
 layer_2/z_index = 1
 layer_2/tile_data = PackedInt32Array(1441827, 2818048, 21, -131052, 1179648, 1, -131050, 1310720, 1, -131049, 1310720, 1, -131048, 1310720, 1, -131047, 1310720, 1, -131046, 1310720, 1, -131045, 1310720, 1, -131044, 1310720, 1, -131043, 1310720, 1, -131042, 1441792, 1, -131018, 2818048, 33, -131014, 2818048, 33, -131022, 2818048, 33, -131040, 2818048, 27, 42, 393216, 21, 41, 393216, 21, 40, 393216, 21)
 
-[node name="Wall" type="Area2D" parent="."]
+[node name="Walls" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+[node name="Wall" type="Area2D" parent="Walls"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall"]
 position = Vector2(526, 2.5)
 shape = SubResource("RectangleShape2D_6046u")
 
-[node name="Wall2" type="Area2D" parent="."]
+[node name="Wall2" type="Area2D" parent="Walls"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2"]
 position = Vector2(1077, 116.5)
 shape = SubResource("RectangleShape2D_fabcy")
 
-[node name="Wall3" type="Area2D" parent="."]
+[node name="Wall3" type="Area2D" parent="Walls"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall3"]
 position = Vector2(908, 235.5)
 shape = SubResource("RectangleShape2D_m40ve")
 
-[node name="Wall4" type="Area2D" parent="."]
+[node name="Wall4" type="Area2D" parent="Walls"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall4"]
 position = Vector2(724.5, 378)
 shape = SubResource("RectangleShape2D_8ydlv")
 
-[node name="Wall5" type="Area2D" parent="."]
+[node name="Wall5" type="Area2D" parent="Walls"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall5"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall5"]
 position = Vector2(410.75, 382)
 shape = SubResource("RectangleShape2D_dgpxt")
 
-[node name="Wall6" type="Area2D" parent="."]
+[node name="Wall6" type="Area2D" parent="Walls"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall6"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall6"]
 position = Vector2(198, 235.5)
 shape = SubResource("RectangleShape2D_03vqp")
 
-[node name="Wall7" type="Area2D" parent="."]
+[node name="Wall7" type="Area2D" parent="Walls"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall7"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall7"]
 position = Vector2(-6.75, 115.25)
 shape = SubResource("RectangleShape2D_gfvqw")
 
-[node name="Statue" type="Area2D" parent="."]
+[node name="Objects" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Statue"]
+[node name="Statue" type="Area2D" parent="Objects"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Statue"]
 position = Vector2(565.5, 392.5)
 shape = SubResource("RectangleShape2D_nrtp0")
+
+[node name="TrashCans" type="Area2D" parent="Objects"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/TrashCans"]
+position = Vector2(669.5, 8.75)
+shape = SubResource("RectangleShape2D_hiwpd")
