@@ -20,10 +20,10 @@ position = Vector2(162, 183)
 
 [node name="Chatbox" parent="Player" instance=ExtResource("7_p2d4x")]
 visible = false
-offset_left = -116.0
-offset_top = -17.0
-offset_right = 165.0
-offset_bottom = -17.0
+offset_left = 210.0
+offset_top = 226.0
+offset_right = 491.0
+offset_bottom = 226.0
 
 [node name="TCPPeer" parent="." instance=ExtResource("5_2vkm8")]
 
