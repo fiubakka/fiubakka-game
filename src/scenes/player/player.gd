@@ -2,7 +2,7 @@ extends Area2D
 
 signal change_velocity
 
-@export var idle: bool = false
+@export var idle: bool = true
 @export var speed = 400 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
 var velocity = Vector2.ZERO # The player's movement vector.
@@ -49,7 +49,7 @@ func _process(delta):
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
 		$AnimatedSprite2D.play("walk_down")
-	if (Input.is_action_just_released("move_down")):
+	if (Input.is_action_just_released("move_down") or Input.is_action_just_released("move_up")):
 		velocity.y = 0
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)

@@ -10,7 +10,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if (Input.is_action_just_pressed("force_login")): # force_login == L
-		init_tcp_peer.emit("akka3")
+	pass
+
+
+func _on_user_input_text_submitted(username: String):
+	var trimmed_username = username.replace(" ", "")
+	print(trimmed_username)
+	if (!trimmed_username.is_empty()):
+		init_tcp_peer.emit(trimmed_username)
 		change_to_zone_scene.emit()
-		get_node(".").free()
+		get_node(".").queue_free()
