@@ -5,6 +5,7 @@
 [ext_resource type="Script" path="res://src/scenes/chatbox/RichTextLabel.gd" id="3_nta7l"]
 
 [node name="Chatbox" type="Control"]
+z_index = 1
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1.0
