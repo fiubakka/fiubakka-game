@@ -25,36 +25,35 @@ func _process(delta):
 		idle = false
 	if (idle): return
 	
-	if (Input.is_action_just_pressed("move_right") and !(collision_inputs.has("move_right"))):
+	velocity = Vector2.ZERO
+	if (Input.is_action_pressed("move_right") and !(collision_inputs.has("move_right"))):
 		last_movement = "move_right"
 		velocity.x = 1
-		velocity = velocity.normalized()
-		change_velocity.emit(velocity)
-		$AnimatedSprite2D.play("walk_right")
-	if (Input.is_action_just_pressed("move_left") and !(collision_inputs.has("move_left"))):
+	if (Input.is_action_pressed("move_left") and !(collision_inputs.has("move_left"))):
 		last_movement = "move_left"
 		velocity.x = -1
-		velocity = velocity.normalized()
-		change_velocity.emit(velocity)
-		$AnimatedSprite2D.play("walk_left")
-	if (Input.is_action_just_pressed("move_up") and !(collision_inputs.has("move_up"))):
+	if (Input.is_action_pressed("move_up") and !(collision_inputs.has("move_up"))):
 		last_movement = "move_up"
 		velocity.y = -1
-		velocity = velocity.normalized()
-		change_velocity.emit(velocity)
-		$AnimatedSprite2D.play("walk_up")
-	if (Input.is_action_just_pressed("move_down") and !(collision_inputs.has("move_down"))):
+	if (Input.is_action_pressed("move_down") and !(collision_inputs.has("move_down"))):
 		last_movement = "move_down"
 		velocity.y = 1
+		
+	if (Input.is_action_just_released("move_left") or Input.is_action_just_released("move_right")):
+		velocity.x = 0
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
-		$AnimatedSprite2D.play("walk_down")
 	if (Input.is_action_just_released("move_down") or Input.is_action_just_released("move_up")):
 		velocity.y = 0
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
 	if (Input.is_action_just_released("move_right") or Input.is_action_just_released("move_left")):
 		velocity.x = 0
+		velocity = velocity.normalized()
+		change_velocity.emit(velocity)
+	
+	
+	if velocity != Vector2.ZERO:
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
 	
