@@ -4,7 +4,6 @@ extends Node2D
 @export var zone_scene: PackedScene
 
 var other_players = {}
-const pattern = "^Player-(.*)$"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -43,22 +42,10 @@ func _on_tcp_peer_update_other_player_pos(id, position, velocity):
 		other_player.id = id
 		other_player.position = position
 		other_player.velocity = velocity
-		other_player.player_name = get_username_from_id(id)
+		other_player.player_name = id
 		other_players[id] = other_player
 		add_child(other_player)
 		
-
-func get_username_from_id(id):
-	var regex = RegEx.new()
-	var username
-	regex.compile(pattern)
-	var match = regex.search(id)
-	if match:
-		username = match.get_string(1)
-	else:
-		username = id
-	return username
-	
 
 func _on_login_change_to_zone_scene():
 	var zone = zone_scene.instantiate()
