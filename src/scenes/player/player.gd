@@ -11,6 +11,7 @@ var id = null
 
 var collision_inputs = {}
 var last_movement = null
+var should_update_move_counter = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,6 +20,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	should_update_move_counter += delta
+	
 	if (Input.is_action_just_pressed("open_chat")):
 		idle = true
 	if (Input.is_action_just_pressed("close_chat")):
@@ -53,7 +56,8 @@ func _process(delta):
 		change_velocity.emit(velocity)
 	
 	
-	if velocity != Vector2.ZERO:
+	if velocity != Vector2.ZERO and should_update_move_counter > 0.01666:
+		should_update_move_counter = 0
 		velocity = velocity.normalized()
 		change_velocity.emit(velocity)
 	
