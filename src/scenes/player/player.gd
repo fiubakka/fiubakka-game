@@ -90,15 +90,11 @@ func _on_tcp_peer_update_player_pos(position):
 func _on_area_entered(area):
 	for i in range(area.get_child_count()):
 		var collision_node = area.get_child(i)
-		print("ENTRE")
-		print(collision_node)
 		var collision_direction = collision_node.get_meta("collision_direction")
 		match int(collision_direction.x):
 			1:
-				print("hola")
 				collision_inputs["move_right"] = collision_node
 			-1:
-				print("chau")
 				collision_inputs["move_left"] = collision_node
 		match int(collision_direction.y):
 			1:
@@ -114,9 +110,8 @@ func _on_area_entered(area):
 
 
 func _on_area_exited(area):
-	print("BUENAS")
-	print(area)
-	for key in collision_inputs:
-		print(collision_inputs[key])
-		if (collision_inputs[key] == area):
-			collision_inputs.erase(key)
+	for i in range(area.get_child_count()):
+		var collision_node = area.get_child(i)
+		for key in collision_inputs:
+			if (collision_inputs[key] == collision_node):
+				collision_inputs.erase(key)
