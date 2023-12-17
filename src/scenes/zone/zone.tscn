@@ -3704,16 +3704,14 @@ layer_2/tile_data = PackedInt32Array(1441827, 2818048, 21, -131052, 1179648, 1, 
 
 [node name="Walls" type="Node2D" parent="."]
 
-[node name="Wall" type="Area2D" parent="Walls"]
-metadata/collision_direction = Vector2(0, -1)
+[node name="Wall" type="StaticBody2D" parent="Walls"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall"]
 position = Vector2(526, 2.5)
 shape = SubResource("RectangleShape2D_6046u")
 metadata/collision_direction = Vector2(0, -1)
 
-[node name="Wall2" type="Area2D" parent="Walls"]
-metadata/collision_direction = Vector2(1, 0)
+[node name="Wall2" type="StaticBody2D" parent="Walls"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2"]
 position = Vector2(1077, 116.5)
@@ -3722,40 +3720,35 @@ shape = SubResource("RectangleShape2D_fabcy")
 one_way_collision_margin = 0.0
 metadata/collision_direction = Vector2(1, 0)
 
-[node name="Wall3" type="Area2D" parent="Walls"]
-metadata/collision_direction = Vector2(0, 1)
+[node name="Wall3" type="StaticBody2D" parent="Walls"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall3"]
 position = Vector2(908, 235.5)
 shape = SubResource("RectangleShape2D_m40ve")
 metadata/collision_direction = Vector2(0, 1)
 
-[node name="Wall4" type="Area2D" parent="Walls"]
-metadata/collision_direction = Vector2(1, 0)
+[node name="Wall4" type="StaticBody2D" parent="Walls"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall4"]
 position = Vector2(724.5, 378)
 shape = SubResource("RectangleShape2D_8ydlv")
 metadata/collision_direction = Vector2(1, 0)
 
-[node name="Wall5" type="Area2D" parent="Walls"]
-metadata/collision_direction = Vector2(-1, 0)
+[node name="Wall5" type="StaticBody2D" parent="Walls"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall5"]
 position = Vector2(410.75, 382)
 shape = SubResource("RectangleShape2D_dgpxt")
 metadata/collision_direction = Vector2(-1, 0)
 
-[node name="Wall6" type="Area2D" parent="Walls"]
-metadata/collision_direction = Vector2(0, 1)
+[node name="Wall6" type="StaticBody2D" parent="Walls"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall6"]
 position = Vector2(198, 235.5)
 shape = SubResource("RectangleShape2D_03vqp")
 metadata/collision_direction = Vector2(0, 1)
 
-[node name="Wall7" type="Area2D" parent="Walls"]
-metadata/collision_direction = Vector2(-1, 0)
+[node name="Wall7" type="StaticBody2D" parent="Walls"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall7"]
 position = Vector2(-6.75, 115.25)

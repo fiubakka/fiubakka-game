@@ -4,3 +4,5 @@
 
 [node name="TCPPeer" type="Node"]
 script = ExtResource("1_hl0yo")
+
+[connection signal="update_player_pos" from="." to="." method="_on_tcp_peer_update_player_pos"]
