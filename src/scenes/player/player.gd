@@ -10,7 +10,6 @@ var prev_vel = Vector2.ZERO
 var id = null
 
 var collision_inputs = {}
-var last_movement = null
 var should_update_move_counter = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -30,16 +29,12 @@ func _process(delta):
 	
 	velocity = Vector2.ZERO
 	if (Input.is_action_pressed("move_right") and !(collision_inputs.has("move_right"))):
-		last_movement = "move_right"
 		velocity.x = 1
 	if (Input.is_action_pressed("move_left") and !(collision_inputs.has("move_left"))):
-		last_movement = "move_left"
 		velocity.x = -1
 	if (Input.is_action_pressed("move_up") and !(collision_inputs.has("move_up"))):
-		last_movement = "move_up"
 		velocity.y = -1
 	if (Input.is_action_pressed("move_down") and !(collision_inputs.has("move_down"))):
-		last_movement = "move_down"
 		velocity.y = 1
 		
 	if (Input.is_action_just_released("move_left") or Input.is_action_just_released("move_right")):
@@ -93,16 +88,35 @@ func _on_tcp_peer_update_player_pos(position):
 
 
 func _on_area_entered(area):
-	collision_inputs[last_movement] = area
-	velocity.x = 0
-	velocity.y = 0
-	velocity = velocity.normalized()
-	change_velocity.emit(velocity)
+	for i in range(area.get_child_count()):
+		var collision_node = area.get_child(i)
+		print("ENTRE")
+		print(collision_node)
+		var collision_direction = collision_node.get_meta("collision_direction")
+		match int(collision_direction.x):
+			1:
+				print("hola")
+				collision_inputs["move_right"] = collision_node
+			-1:
+				print("chau")
+				collision_inputs["move_left"] = collision_node
+		match int(collision_direction.y):
+			1:
+				collision_inputs["move_down"] = collision_node
+			-1:
+				collision_inputs["move_up"] = collision_node
+		if (collision_direction.x != 0):
+			velocity.x = 0
+		if (collision_direction.y != 0):
+			velocity.y = 0
+		velocity = velocity.normalized()
+		change_velocity.emit(velocity)
 
 
 func _on_area_exited(area):
+	print("BUENAS")
+	print(area)
 	for key in collision_inputs:
+		print(collision_inputs[key])
 		if (collision_inputs[key] == area):
 			collision_inputs.erase(key)
-			
-			
