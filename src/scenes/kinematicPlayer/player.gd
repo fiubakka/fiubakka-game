@@ -46,8 +46,10 @@ func _physics_process(delta):
 			velocity = velocity.slide(collision.get_normal()).normalized()
 			change_velocity.emit(velocity)
 		
-	play_move_animation(velocity, prev_vel)
-	prev_vel = velocity
+	if (velocity != prev_vel):
+		print(velocity)
+		play_move_animation(velocity, prev_vel)
+		prev_vel = velocity
 
 func play_move_animation(velocity, prev_vel):
 	if (velocity.x > 0):

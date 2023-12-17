@@ -3673,14 +3673,14 @@ size = Vector2(440, 15)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gfvqw"]
 size = Vector2(13.5, 253.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nrtp0"]
-size = Vector2(33, 31)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hiwpd"]
 size = Vector2(54.125, 9.8125)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1b8bo"]
 size = Vector2(8, 24.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nrtp0"]
+size = Vector2(33, 31)
 
 [node name="zone" type="Node2D"]
 y_sort_enabled = true
@@ -3757,13 +3757,6 @@ metadata/collision_direction = Vector2(-1, 0)
 
 [node name="Objects" type="Node2D" parent="."]
 
-[node name="Statue" type="Area2D" parent="Objects"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Statue"]
-position = Vector2(565.5, 392.5)
-shape = SubResource("RectangleShape2D_nrtp0")
-metadata/collision_detection = Vector2(1, 0)
-
 [node name="TrashCans" type="Area2D" parent="Objects"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/TrashCans"]
@@ -3780,3 +3773,10 @@ metadata/collision_direction = Vector2(-1, 0)
 position = Vector2(642, 18)
 shape = SubResource("RectangleShape2D_1b8bo")
 metadata/collision_direction = Vector2(1, 0)
+
+[node name="Statue" type="StaticBody2D" parent="Objects"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Statue"]
+position = Vector2(565.5, 392.5)
+shape = SubResource("RectangleShape2D_nrtp0")
+metadata/collision_detection = Vector2(1, 0)
