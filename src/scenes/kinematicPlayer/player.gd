@@ -56,6 +56,8 @@ func _physics_process(delta):
 	if (self.position != next_position or velocity != prev_vel):
 		update_movement.emit(velocity, next_position)
 		
+	self.position = next_position
+		
 	if (velocity != prev_vel):
 		play_move_animation(velocity, prev_vel)
 		prev_vel = velocity
@@ -79,9 +81,5 @@ func play_move_animation(velocity, prev_vel):
 		elif (prev_vel.y > 0):
 			$AnimatedSprite2D.play("idle_front")
 
-
 func _on_main_set_player_id(id):
 	self.id = id
-
-func _on_tcp_peer_update_player_pos(position):
-	self.position = position
