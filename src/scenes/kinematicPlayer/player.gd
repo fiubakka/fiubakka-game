@@ -38,12 +38,13 @@ func _physics_process(delta):
 		velocity.x = 0
 		
 	if (prev_vel != Vector2.ZERO):
-		velocity = velocity.normalized()
-		var collision = move_and_collide(velocity * 5, true)
-		move_and_slide()
+		velocity = velocity.normalized() * 4
+		var collision = move_and_collide(velocity, true)
+		var remainder_distance = Vector2.ZERO
 		if (collision != null):
-			velocity = velocity.slide(collision.get_normal()).normalized()
-		var next_position: Vector2 = self.position + (velocity * 5)
+			velocity = velocity.slide(collision.get_normal())
+			remainder_distance = collision.get_travel()
+		var next_position: Vector2 = self.position + remainder_distance + velocity
 		update_movement.emit(velocity, next_position)
 		
 	if (velocity != prev_vel):
