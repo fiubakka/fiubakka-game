@@ -6,7 +6,7 @@ signal update_other_player_pos
 signal update_content
 
 const PBPlayerInit = preload("res://compiled/client/init/player_init.gd")
-const PBPlayerVelocity = preload("res://compiled/client/movement/player_velocity.gd")
+const PBPlayerMovement = preload("res://compiled/client/movement/player_movement.gd")
 const PBClientMetadata = preload("res://compiled/client/metadata.gd")
 const PBClientPlayerMessage = preload("res://compiled/client/chat/message.gd")
 
@@ -78,13 +78,17 @@ func init_pos(username):
 	send_protocol_buffer(player_init_bytes, PBClientMetadata.PBClientMessageType.PBPlayerInit)
 	
 	
-func _on_player_change_velocity(vel):
-	var player_velocity = PBPlayerVelocity.PBPlayerVelocity.new()
-	player_velocity.set_x(vel.x)
-	player_velocity.set_y(vel.y)
-	var player_velocity_bytes = player_velocity.to_bytes()
+func _on_player_update_movement(velocity, position):
+	var player_movement = PBPlayerMovement.PBPlayerMovement.new()
+	var player_velocity = player_movement.new_velocity()
+	var player_position = player_movement.new_position()
+	player_velocity.set_x(velocity.x)
+	player_velocity.set_y(velocity.y)
+	player_position.set_x(position.x)
+	player_position.set_y(position.y)
+	var player_movement_bytes = player_movement.to_bytes()
 	
-	send_protocol_buffer(player_velocity_bytes, PBClientMetadata.PBClientMessageType.PBPlayerVelocity)
+	send_protocol_buffer(player_movement_bytes, PBClientMetadata.PBClientMessageType.PBPlayerMovement)
 	
 func _on_chatbox_send_message(message):
 	var player_message = PBClientPlayerMessage.PBPlayerMessage.new()

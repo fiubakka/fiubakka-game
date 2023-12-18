@@ -382,3 +382,12 @@ position = Vector2(-2.5, 33)
 shape = SubResource("RectangleShape2D_6hhbj")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Name" type="RichTextLabel" parent="."]
+offset_left = -26.0
+offset_top = -92.0
+offset_right = 26.0
+offset_bottom = -69.0
+bbcode_enabled = true
+text = "[center][b]You[/b][/center]"
+fit_content = true

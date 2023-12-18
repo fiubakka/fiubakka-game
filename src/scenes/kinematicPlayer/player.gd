@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-signal change_velocity
+signal update_movement
 
 @export var idle: bool = false
 var screen_size # Size of the game window.
@@ -40,14 +40,13 @@ func _physics_process(delta):
 	if (prev_vel != Vector2.ZERO):
 		velocity = velocity.normalized()
 		var collision = move_and_collide(velocity * 5, true)
-		if (collision == null):
-			change_velocity.emit(velocity)
-		else:
+		move_and_slide()
+		if (collision != null):
 			velocity = velocity.slide(collision.get_normal()).normalized()
-			change_velocity.emit(velocity)
+		var next_position: Vector2 = self.position + (velocity * 5)
+		update_movement.emit(velocity, next_position)
 		
 	if (velocity != prev_vel):
-		print(velocity)
 		play_move_animation(velocity, prev_vel)
 		prev_vel = velocity
 
@@ -73,7 +72,6 @@ func play_move_animation(velocity, prev_vel):
 
 func _on_main_set_player_id(id):
 	self.id = id
-
 
 func _on_tcp_peer_update_player_pos(position):
 	self.position = position
