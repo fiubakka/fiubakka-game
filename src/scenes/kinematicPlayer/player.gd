@@ -38,6 +38,7 @@ func _physics_process(delta):
 		velocity.x = 0
 		
 	var next_position: Vector2 = self.position
+	
 	if (velocity != Vector2.ZERO):
 		velocity = velocity.normalized() * 4
 		var collision = move_and_collide(velocity, true)
@@ -45,8 +46,15 @@ func _physics_process(delta):
 		if (collision != null):
 			velocity = velocity.slide(collision.get_normal())
 			remainder_distance = collision.get_travel()
+			# If we collided again it means we are in a corner / intersection. Don't move.
+			if (move_and_collide(velocity, true) != null):
+				velocity = Vector2.ZERO
+				remainder_distance = Vector2.ZERO
 		next_position = self.position + remainder_distance + velocity
-	update_movement.emit(velocity, next_position)
+		
+	# State changed, notify the server
+	if (self.position != next_position or velocity != prev_vel):
+		update_movement.emit(velocity, next_position)
 		
 	if (velocity != prev_vel):
 		play_move_animation(velocity, prev_vel)
