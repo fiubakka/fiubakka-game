@@ -17,15 +17,16 @@ zone_scene = ExtResource("3_s3c76")
 [node name="TCPPeer" parent="." instance=ExtResource("5_2vkm8")]
 
 [node name="login" parent="." instance=ExtResource("6_0f0yx")]
-offset_left = -159.0
-offset_top = -58.0
-offset_right = -159.0
-offset_bottom = -58.0
+offset_left = -299.0
+offset_top = -220.0
+offset_right = -299.0
+offset_bottom = -220.0
 grow_horizontal = 1
 grow_vertical = 1
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("8_mnvnq")]
+visible = false
 idle = true
 
 [node name="Chatbox" parent="Player" instance=ExtResource("7_p2d4x")]
