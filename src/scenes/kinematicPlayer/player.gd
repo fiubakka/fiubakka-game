@@ -37,15 +37,16 @@ func _physics_process(delta):
 	if (Input.is_action_just_released("move_right") or Input.is_action_just_released("move_left")):
 		velocity.x = 0
 		
-	if (prev_vel != Vector2.ZERO):
+	var next_position: Vector2 = self.position
+	if (velocity != Vector2.ZERO):
 		velocity = velocity.normalized() * 4
 		var collision = move_and_collide(velocity, true)
 		var remainder_distance = Vector2.ZERO
 		if (collision != null):
 			velocity = velocity.slide(collision.get_normal())
 			remainder_distance = collision.get_travel()
-		var next_position: Vector2 = self.position + remainder_distance + velocity
-		update_movement.emit(velocity, next_position)
+		next_position = self.position + remainder_distance + velocity
+	update_movement.emit(velocity, next_position)
 		
 	if (velocity != prev_vel):
 		play_move_animation(velocity, prev_vel)
