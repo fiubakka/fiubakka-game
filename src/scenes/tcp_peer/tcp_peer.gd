@@ -67,7 +67,10 @@ func _run():
 				var result = player_message.from_bytes(msg_bytes) # TODO: check for errors
 				var username = player_message.get_entityId()
 				var content = player_message.get_content()
-				update_content.emit(username, content)
+				call_deferred("_update_chat_message", username, content)
+				
+func _update_chat_message(username, content):
+	update_content.emit(username, content)
 
 func _update_entity_state(entity_state: PBGameEntityState.PBGameEntityState):
 	var entity_position = entity_state.get_position()
