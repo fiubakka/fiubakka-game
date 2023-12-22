@@ -20,6 +20,7 @@ const host = "127.0.0.1"
 const port = 2020
 var socket = StreamPeerTCP.new()
 var connected = false
+var thread = Thread.new()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -29,11 +30,12 @@ func _ready():
 		print("fail")
 	socket.poll()
 	print("tcp peer ready")
+	thread.start(_run)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if socket.get_available_bytes() > 0:
+func _run():
+	while true:
 		var len = socket.get_data(4)
 		len = big_endian_bytes_to_int(len[1])
 		var res = socket.get_data(len)
@@ -51,16 +53,14 @@ func _process(delta):
 		var msg_bytes = read_bytes.slice(4 + meta_len)
 		
 		match metadata.get_type():
-			PBServerMetadata.PBServerMessageType.PBPlayerPosition:
-				var player_position = PBPlayerPosition.PBPlayerPosition.new()
-				var result = player_position.from_bytes(msg_bytes) # TODO: check for errors
-				update_player_pos.emit(Vector2(player_position.get_x(), player_position.get_y()))
-				
 			PBServerMetadata.PBServerMessageType.PBGameEntityState:
 				var entity_state = PBGameEntityState.PBGameEntityState.new()
 				var result = entity_state.from_bytes(msg_bytes) # TODO: check for errors
-				var entity_position = entity_state.get_position()
-				update_other_player_pos.emit(entity_state.get_entityId(), Vector2(entity_position.get_x(), entity_position.get_y()), Vector2(entity_state.get_velocity().get_velX(), entity_state.get_velocity().get_velY()))
+
+				if (entity_state.get_entityId() == "mark"):
+					print(entity_state.get_position())
+
+				call_deferred("_update_entity_state", entity_state)
 
 			PBServerMetadata.PBServerMessageType.PBPlayerMessage:
 				var player_message = PBServerPlayerMessage.PBPlayerMessage.new()
@@ -68,6 +68,10 @@ func _process(delta):
 				var username = player_message.get_entityId()
 				var content = player_message.get_content()
 				update_content.emit(username, content)
+
+func _update_entity_state(entity_state: PBGameEntityState.PBGameEntityState):
+	var entity_position = entity_state.get_position()
+	update_other_player_pos.emit(entity_state.get_entityId(), Vector2(entity_position.get_x(), entity_position.get_y()), Vector2(entity_state.get_velocity().get_velX(), entity_state.get_velocity().get_velY()))
 
 
 func init_pos(username):
