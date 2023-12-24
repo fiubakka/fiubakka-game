@@ -56,10 +56,6 @@ func _run():
 			PBServerMetadata.PBServerMessageType.PBGameEntityState:
 				var entity_state = PBGameEntityState.PBGameEntityState.new()
 				var result = entity_state.from_bytes(msg_bytes) # TODO: check for errors
-
-				if (entity_state.get_entityId() == "mark"):
-					print(entity_state.get_position())
-
 				call_deferred("_update_entity_state", entity_state)
 
 			PBServerMetadata.PBServerMessageType.PBPlayerMessage:
