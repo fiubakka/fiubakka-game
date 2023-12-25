@@ -25,9 +25,10 @@ var thread = Thread.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var error = socket.connect_to_host(host, port)
-	if error:
-		print("fail")
+	
+	var conn_result = socket.connect_to_host(host, port)
+	while conn_result != OK:
+		conn_result = socket.connect_to_host(host, port)
 	socket.poll()
 	print("tcp peer ready")
 	thread.start(_run)
