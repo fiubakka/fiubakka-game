@@ -523,6 +523,11 @@ position = Vector2(0, 52)
 shape = SubResource("RectangleShape2D_6hhbj")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_right = 672
+limit_bottom = 768
+position_smoothing_enabled = true
 
 [node name="Name" type="RichTextLabel" parent="."]
 offset_left = -24.0

@@ -10,3 +10,4 @@ script = ExtResource("1_kecny")
 other_placer_scene = ExtResource("2_l2cc2")
 
 [node name="Room200" parent="." instance=ExtResource("7_awmhv")]
+position = Vector2(45, -32)
