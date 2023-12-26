@@ -505,14 +505,12 @@ func _on_area_exited(area):
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6hhbj"]
 size = Vector2(44, 14.5)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
-position = Vector2(20, 20)
+[node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_j2141")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-40, -56)
 scale = Vector2(1.349, 1.2)
 sprite_frames = SubResource("SpriteFrames_v8327")
 animation = &"idle_front"
@@ -521,17 +519,16 @@ frame_progress = 0.807545
 script = SubResource("GDScript_r82dr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-40, -4)
+position = Vector2(0, 52)
 shape = SubResource("RectangleShape2D_6hhbj")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-40, -40)
 
 [node name="Name" type="RichTextLabel" parent="."]
-offset_left = -66.0
-offset_top = -108.0
-offset_right = -14.0
-offset_bottom = -85.0
+offset_left = -24.0
+offset_top = -50.0
+offset_right = 28.0
+offset_bottom = -27.0
 bbcode_enabled = true
 text = "[center][b]You[/b][/center]"
 fit_content = true

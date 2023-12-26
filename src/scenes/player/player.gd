@@ -18,7 +18,7 @@ func _physics_process(delta):
 		idle = true
 	if (Input.is_action_just_pressed("close_chat")):
 		idle = false
-	if (idle): return
+	# if (idle): return
 	
 	velocity = Vector2.ZERO
 	if (Input.is_action_pressed("move_right")):
