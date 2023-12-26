@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwgonn6l2afs6"]
+[gd_scene load_steps=8 format=3 uid="uid://bwgonn6l2afs6"]
 
 [ext_resource type="Script" path="res://src/scenes/main/main.gd" id="1_kecny"]
 [ext_resource type="PackedScene" uid="uid://d11b7734y2pbu" path="res://src/scenes/other_player/other_player.tscn" id="2_l2cc2"]
 [ext_resource type="PackedScene" uid="uid://tu3fgs3gf4g2" path="res://src/scenes/zone/zone.tscn" id="3_s3c76"]
 [ext_resource type="PackedScene" uid="uid://vsxw7oso1o2b" path="res://src/scenes/tcp_peer/tcp_peer.tscn" id="5_2vkm8"]
 [ext_resource type="PackedScene" uid="uid://6mcomak80lww" path="res://src/scenes/login/login.tscn" id="6_0f0yx"]
+[ext_resource type="PackedScene" uid="uid://dhrlrip83sqyk" path="res://src/scenes/maps/room_200/room_200.tscn" id="7_awmhv"]
 [ext_resource type="PackedScene" uid="uid://b0ckgcsol4ucx" path="res://src/scenes/player/player.tscn" id="8_mnvnq"]
 
 [node name="Main" type="Node2D"]
@@ -16,6 +17,7 @@ zone_scene = ExtResource("3_s3c76")
 [node name="TCPPeer" parent="." instance=ExtResource("5_2vkm8")]
 
 [node name="login" parent="." instance=ExtResource("6_0f0yx")]
+visible = false
 offset_left = -299.0
 offset_top = -220.0
 offset_right = -299.0
@@ -25,8 +27,9 @@ grow_vertical = 1
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("8_mnvnq")]
-visible = false
 idle = true
+
+[node name="Room200" parent="." instance=ExtResource("7_awmhv")]
 
 [connection signal="update_other_player_pos" from="TCPPeer" to="." method="_on_tcp_peer_update_other_player_pos"]
 [connection signal="update_player_pos" from="TCPPeer" to="Player" method="_on_tcp_peer_update_player_pos"]
