@@ -10,7 +10,7 @@ metadata={
 
 [deps]
 
-source_file="res://art/tilesets/5_Classroom_and_library_48x48.png"
+source_file="res://art/maps/5_Classroom_and_library_48x48.png"
 dest_files=["res://.godot/imported/5_Classroom_and_library_48x48.png-68ec8a6328ab31b87849d26a7c5ad860.ctex"]
 
 [params]

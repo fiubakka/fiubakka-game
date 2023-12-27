@@ -10,7 +10,7 @@ metadata={
 
 [deps]
 
-source_file="res://art/tilesets/13_Conference_Hall_48x48.png"
+source_file="res://art/maps/13_Conference_Hall_48x48.png"
 dest_files=["res://.godot/imported/13_Conference_Hall_48x48.png-88a0819cb4b2327ef65aca1e6485ae16.ctex"]
 
 [params]

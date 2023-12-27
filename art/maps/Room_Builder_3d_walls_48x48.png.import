@@ -10,7 +10,7 @@ metadata={
 
 [deps]
 
-source_file="res://art/tilesets/Room_Builder_3d_walls_48x48.png"
+source_file="res://art/maps/Room_Builder_3d_walls_48x48.png"
 dest_files=["res://.godot/imported/Room_Builder_3d_walls_48x48.png-e6b34a1a84830dc27fa4c67c96b5a77c.ctex"]
 
 [params]

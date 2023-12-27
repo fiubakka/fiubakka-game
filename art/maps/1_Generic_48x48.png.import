@@ -10,7 +10,7 @@ metadata={
 
 [deps]
 
-source_file="res://art/tilesets/1_Generic_48x48.png"
+source_file="res://art/maps/1_Generic_48x48.png"
 dest_files=["res://.godot/imported/1_Generic_48x48.png-fff96bdec7a63fe2df3a736b2e0c41d2.ctex"]
 
 [params]
