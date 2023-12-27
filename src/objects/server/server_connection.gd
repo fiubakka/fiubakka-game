@@ -15,25 +15,28 @@ var conn: StreamPeerTCP
 var consumer: Consumer
 var producer: Producer
 
+
 func _init():
-    conn = StreamPeerTCP.new()
-    consumer = Consumer.new()
-    producer = Producer.new()
+	conn = StreamPeerTCP.new()
+	consumer = Consumer.new()
+	producer = Producer.new()
+
 
 func start() -> int:
-    var r := conn.connect_to_host(HOST, PORT)
-    if r != OK:
-        printerr("Error connecting to server at " + HOST + ":" + str(PORT))
-        return r
-    r = conn.poll()
-    if r != OK:
-        printerr("Error polling server connection at " + HOST + ":" + str(PORT))
-        return r
-    consumer.start(conn)
-    producer.start(conn)
-    return OK
+	var r := conn.connect_to_host(HOST, PORT)
+	if r != OK:
+		printerr("Error connecting to server at " + HOST + ":" + str(PORT))
+		return r
+	r = conn.poll()
+	if r != OK:
+		printerr("Error polling server connection at " + HOST + ":" + str(PORT))
+		return r
+	consumer.start(conn)
+	producer.start(conn)
+	return OK
+
 
 func stop():
-    producer.stop()
-    consumer.stop()
-    conn.disconnect_from_host()
+	producer.stop()
+	consumer.stop()
+	conn.disconnect_from_host()

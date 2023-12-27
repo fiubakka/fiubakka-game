@@ -12,22 +12,20 @@ var server_connection: ServerConnection
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	server_connection = ServerConnection.new()
-	server_connection.start() #TODO handle connection errors
+	server_connection.start()  #TODO handle connection errors
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if (Input.is_action_pressed("open_chat") and 
-		!$Player/Chatbox.visible and
-		!$Player/Chatbox.idle):
+	if Input.is_action_pressed("open_chat") and !$Player/Chatbox.visible and !$Player/Chatbox.idle:
 		$Player/Chatbox.visible = true
 		$Player/Chatbox.focus_chat()
-	if (Input.is_action_pressed("close_chat") and
-		$Player/Chatbox.visible and
-		!$Player/Chatbox.idle):
+	if Input.is_action_pressed("close_chat") and $Player/Chatbox.visible and !$Player/Chatbox.idle:
 		$Player/Chatbox.visible = false
 
+
 func _on_tcp_peer_update_other_player_pos(id, position, velocity):
-	if (other_players.has(id)):
+	if other_players.has(id):
 		var other_player = other_players[id]
 		other_player.position = position
 		other_player.velocity = velocity
@@ -39,6 +37,7 @@ func _on_tcp_peer_update_other_player_pos(id, position, velocity):
 		other_player.player_name = id
 		other_players[id] = other_player
 		add_child(other_player)
+
 
 func _on_login_change_to_room_200_scene():
 	var room_200 = room_200_scene.instantiate()
