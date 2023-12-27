@@ -1,4 +1,4 @@
-[submodule "protobuf"]
-	path = protobuf
+[submodule "src/protocol/protobuf"]
+	path = src/protocol/protobuf
 	url = git@github.com:fiubakka/fiubakka-protocol-buffers.git
-	branch = main
+    branch = main

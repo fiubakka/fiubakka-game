@@ -1,15 +1,18 @@
 extends Node2D
 
+const ServerConnection = preload("res://src/objects/server/server_connection.gd")
+
 @export var other_placer_scene: PackedScene
-@export var zone_scene: PackedScene
+@export var room_200_scene: PackedScene
 
 var other_players = {}
+var server_connection: ServerConnection
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
-
+	server_connection = ServerConnection.new()
+	server_connection.start() #TODO handle connection errors
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -22,15 +25,6 @@ func _process(delta):
 		$Player/Chatbox.visible and
 		!$Player/Chatbox.idle):
 		$Player/Chatbox.visible = false
-
-
-func _on_tcp_peer_create_other_player(id, position):
-	var other_player = other_placer_scene.instantiate()
-	other_player.id = id
-	other_player.position = position
-	other_players[id] = other_player
-	add_child(other_player)
-
 
 func _on_tcp_peer_update_other_player_pos(id, position, velocity):
 	if (other_players.has(id)):
@@ -45,19 +39,13 @@ func _on_tcp_peer_update_other_player_pos(id, position, velocity):
 		other_player.player_name = id
 		other_players[id] = other_player
 		add_child(other_player)
-		
 
-func _on_login_change_to_zone_scene():
-	var zone = zone_scene.instantiate()
-	print("main will add zone scene")
-	add_child(zone)
+func _on_login_change_to_room_200_scene():
+	var room_200 = room_200_scene.instantiate()
+	print("main will add room_200 scene")
+	add_child(room_200)
 	print(get_children())
-	print(zone.change_scene)
-	zone.change_scene.connect(_mi_metodo_handler)
+	print(room_200.change_scene)
 	$Player.visible = true
 	$Player.idle = false
 	$Player/Chatbox.idle = false
-	
-	
-func _mi_metodo_handler(mensaje):
-	print(mensaje)
