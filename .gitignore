@@ -2,4 +2,4 @@
 src/protocol/protobuf/
 .vscode/
 .venv/
-
+node_modules/

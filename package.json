@@ -1,0 +1,21 @@
+{
+  "name": "fiubakka-game",
+  "version": "1.0.0",
+  "description": "Fiubakka Game",
+  "scripts": {
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fiubakka/fiubakka-game.git"
+  },
+  "author": "Marcos Rolando",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fiubakka/fiubakka-game/issues"
+  },
+  "homepage": "https://github.com/fiubakka/fiubakka-game#readme",
+  "devDependencies": {
+    "husky": "^8.0.3"
+  }
+}
