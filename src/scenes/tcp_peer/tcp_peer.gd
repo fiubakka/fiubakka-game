@@ -52,7 +52,7 @@ func _run():
 		metadata.from_bytes(meta_bytes)
 		
 		var msg_bytes = read_bytes.slice(4 + meta_len)
-		
+
 		match metadata.get_type():
 			PBServerMetadata.PBServerMessageType.PBGameEntityState:
 				var entity_state = PBGameEntityState.PBGameEntityState.new()

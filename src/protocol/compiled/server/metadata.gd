@@ -717,9 +717,8 @@ class PBServerMetadata:
 		return result
 	
 enum PBServerMessageType {
-	PBPlayerPosition = 0,
-	PBGameEntityState = 1,
-	PBPlayerMessage = 2
+	PBGameEntityState = 0,
+	PBPlayerMessage = 1
 }
 
 ################ USER DATA END #################

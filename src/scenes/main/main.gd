@@ -1,15 +1,18 @@
 extends Node2D
 
+const ServerConnection = preload("res://src/objects/server/server_connection.gd")
+
 @export var other_placer_scene: PackedScene
 @export var room_200_scene: PackedScene
 
 var other_players = {}
+var server_connection: ServerConnection
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
-
+	server_connection = ServerConnection.new()
+	server_connection.run() #TODO handle connection errors
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
