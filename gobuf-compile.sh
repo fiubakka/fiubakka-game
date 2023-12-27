@@ -21,7 +21,7 @@ find "$source_directory" -type f -name "*.proto" | while read proto_file; do
     proto_file="$source_directory$relative_path/$(basename "$proto_file")"
     gd_file="$compiled_directory$relative_path/$(basename "${proto_file%.proto}.gd")"
 
-    godot -q -s "addons/protobuf/protobuf_cmdln.gd" --input="$proto_file" --output="$gd_file"
+    godot --headless -q -s "addons/protobuf/protobuf_cmdln.gd" --input="$proto_file" --output="$gd_file"
 done
 
 echo "Compilation completed. Compiled files are located in the '$compiled_directory' directory."
