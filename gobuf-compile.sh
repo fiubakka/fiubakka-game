@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Set the source directory containing .proto files
-source_directory="protobuf"
+source_directory="src/protocol/protobuf"
 
 # Set the target directory for compiled files
-compiled_directory="compiled"
+compiled_directory="src/protocol/compiled"
 
 # Create the compiled directory if it doesn't exist
 mkdir -p "$compiled_directory"

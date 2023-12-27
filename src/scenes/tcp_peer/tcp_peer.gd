@@ -5,16 +5,16 @@ signal create_other_player
 signal update_other_player_pos
 signal update_content
 
-const PBPlayerInit = preload("res://compiled/client/init/player_init.gd")
-const PBPlayerMovement = preload("res://compiled/client/movement/player_movement.gd")
-const PBClientMetadata = preload("res://compiled/client/metadata.gd")
-const PBClientPlayerMessage = preload("res://compiled/client/chat/message.gd")
+const PBPlayerInit = preload("res://src/protocol/compiled/client/init/player_init.gd")
+const PBPlayerMovement = preload("res://src/protocol/compiled/client/movement/player_movement.gd")
+const PBClientMetadata = preload("res://src/protocol/compiled/client/metadata.gd")
+const PBClientPlayerMessage = preload("res://src/protocol/compiled/client/chat/message.gd")
 
-const PBServerMetadata = preload("res://compiled/server/metadata.gd")
-const PBPlayerPosition = preload("res://compiled/server/position/player_position.gd")
-const PBServerPlayerMessage = preload("res://compiled/server/chat/message.gd")
+const PBServerMetadata = preload("res://src/protocol/compiled/server/metadata.gd")
+const PBPlayerPosition = preload("res://src/protocol/compiled/server/position/player_position.gd")
+const PBServerPlayerMessage = preload("res://src/protocol/compiled/server/chat/message.gd")
 
-const PBGameEntityState = preload("res://compiled/server/state/game_entity_state.gd")
+const PBGameEntityState = preload("res://src/protocol/compiled/server/state/game_entity_state.gd")
 
 const host = "127.0.0.1"
 const port = 2020
