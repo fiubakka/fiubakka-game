@@ -6,6 +6,8 @@ const PBServerMetadata = preload("res://src/protocol/compiled/server/metadata.gd
 
 const PBGameEntityState = preload("res://src/protocol/compiled/server/state/game_entity_state.gd")
 
+const PBPlayerInitReady = preload("res://src/protocol/compiled/server/init/player_init_ready.gd")
+
 const ServerMessageFactory = preload("res://src/objects/server/server_message_factory.gd")
 
 const MESSAGE_LEN_SIZE = 4
@@ -76,3 +78,6 @@ func _handle_message(message: Object):
 				Vector2(msg.get_velocity().get_x(), msg.get_velocity().get_y()),
 			)
 		)
+	elif message is PBPlayerInitReady.PBPlayerInitReady:
+		var msg := message as PBPlayerInitReady.PBPlayerInitReady
+		print("PLAYER READY WITH STATE: ", msg.get_initialState())

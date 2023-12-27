@@ -776,6 +776,6 @@ class PBServerMetadata:
 		return result
 
 
-enum PBServerMessageType { PBGameEntityState = 0, PBPlayerMessage = 1 }
+enum PBServerMessageType { PBGameEntityState = 0, PBPlayerMessage = 1, PBPlayerInitReady = 2 }
 
 ################ USER DATA END #################

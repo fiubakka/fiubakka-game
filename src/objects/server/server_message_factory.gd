@@ -3,10 +3,12 @@ extends Object
 const PBServerMetadata = preload("res://src/protocol/compiled/server/metadata.gd")
 const PBGameEntityState = preload("res://src/protocol/compiled/server/state/game_entity_state.gd")
 const PBPlayerMessage = preload("res://src/protocol/compiled/server/chat/message.gd")
+const PBPlayerInitReady = preload("res://src/protocol/compiled/server/init/player_init_ready.gd")
 
 static var MESSAGE_MAP := {
 	PBServerMetadata.PBServerMessageType.PBGameEntityState: PBGameEntityState.PBGameEntityState,
 	PBServerMetadata.PBServerMessageType.PBPlayerMessage: PBPlayerMessage.PBPlayerMessage,
+	PBServerMetadata.PBServerMessageType.PBPlayerInitReady: PBPlayerInitReady.PBPlayerInitReady,
 }
 
 

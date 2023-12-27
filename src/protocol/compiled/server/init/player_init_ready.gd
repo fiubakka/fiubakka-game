@@ -700,6 +700,114 @@ class PBPacker:
 ############### USER DATA BEGIN ################
 
 
+class PBPlayerInitReady:
+	func _init():
+		var service
+
+		_initialState = PBField.new(
+			"initialState",
+			PB_DATA_TYPE.MESSAGE,
+			PB_RULE.REQUIRED,
+			1,
+			false,
+			DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
+		)
+		service = PBServiceField.new()
+		service.field = _initialState
+		service.func_ref = Callable(self, "new_initialState")
+		data[_initialState.tag] = service
+
+	var data = {}
+
+	var _initialState: PBField
+
+	func get_initialState() -> PBPlayerInitialState:
+		return _initialState.value
+
+	func clear_initialState() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		_initialState.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
+
+	func new_initialState() -> PBPlayerInitialState:
+		_initialState.value = PBPlayerInitialState.new()
+		return _initialState.value
+
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+
+	func from_bytes(bytes: PackedByteArray, offset: int = 0, limit: int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+
+
+class PBPlayerInitialState:
+	func _init():
+		var service
+
+		_position = PBField.new(
+			"position",
+			PB_DATA_TYPE.MESSAGE,
+			PB_RULE.REQUIRED,
+			1,
+			false,
+			DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
+		)
+		service = PBServiceField.new()
+		service.field = _position
+		service.func_ref = Callable(self, "new_position")
+		data[_position.tag] = service
+
+	var data = {}
+
+	var _position: PBField
+
+	func get_position() -> PBPlayerPosition:
+		return _position.value
+
+	func clear_position() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		_position.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
+
+	func new_position() -> PBPlayerPosition:
+		_position.value = PBPlayerPosition.new()
+		return _position.value
+
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+
+	func from_bytes(bytes: PackedByteArray, offset: int = 0, limit: int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+
+
 class PBPlayerPosition:
 	func _init():
 		var service
@@ -728,30 +836,6 @@ class PBPlayerPosition:
 		service.field = _y
 		data[_y.tag] = service
 
-		_velX = PBField.new(
-			"velX",
-			PB_DATA_TYPE.FLOAT,
-			PB_RULE.REQUIRED,
-			3,
-			false,
-			DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
-		)
-		service = PBServiceField.new()
-		service.field = _velX
-		data[_velX.tag] = service
-
-		_velY = PBField.new(
-			"velY",
-			PB_DATA_TYPE.FLOAT,
-			PB_RULE.REQUIRED,
-			4,
-			false,
-			DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
-		)
-		service = PBServiceField.new()
-		service.field = _velY
-		data[_velY.tag] = service
-
 	var data = {}
 
 	var _x: PBField
@@ -777,30 +861,6 @@ class PBPlayerPosition:
 
 	func set_y(value: float) -> void:
 		_y.value = value
-
-	var _velX: PBField
-
-	func get_velX() -> float:
-		return _velX.value
-
-	func clear_velX() -> void:
-		data[3].state = PB_SERVICE_STATE.UNFILLED
-		_velX.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
-
-	func set_velX(value: float) -> void:
-		_velX.value = value
-
-	var _velY: PBField
-
-	func get_velY() -> float:
-		return _velY.value
-
-	func clear_velY() -> void:
-		data[4].state = PB_SERVICE_STATE.UNFILLED
-		_velY.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
-
-	func set_velY(value: float) -> void:
-		_velY.value = value
 
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)
