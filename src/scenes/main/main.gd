@@ -12,7 +12,7 @@ var server_connection: ServerConnection
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	server_connection = ServerConnection.new()
-	server_connection.run() #TODO handle connection errors
+	server_connection.start() #TODO handle connection errors
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

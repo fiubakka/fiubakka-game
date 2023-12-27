@@ -1,6 +1,7 @@
 extends Object
 
-signal update_entity_state
+const Consumer = preload("res://src/objects/server/consumer.gd")
+const Producer = preload("res://src/objects/server/producer.gd")
 
 const PBServerMetadata = preload("res://src/protocol/compiled/server/metadata.gd")
 const PBGameEntityState = preload("res://src/protocol/compiled/server/state/game_entity_state.gd")
@@ -9,20 +10,17 @@ const ServerMessageFactory = preload("res://src/objects/server/server_message_fa
 
 const HOST = "127.0.0.1"
 const PORT = 2020
-const MESSAGE_LEN_SIZE = 4
-const METADATA_LEN_SIZE = 4
 
 var conn: StreamPeerTCP
-var thread: Thread
-var keep_running: bool
-
+var consumer: Consumer
+var producer: Producer
 
 func _init():
     conn = StreamPeerTCP.new()
-    thread = Thread.new()
-    keep_running = true
+    consumer = Consumer.new()
+    producer = Producer.new()
 
-func run() -> int:
+func start() -> int:
     var r := conn.connect_to_host(HOST, PORT)
     if r != OK:
         printerr("Error connecting to server at " + HOST + ":" + str(PORT))
@@ -31,43 +29,9 @@ func run() -> int:
     if r != OK:
         printerr("Error polling server connection at " + HOST + ":" + str(PORT))
         return r
-    thread.start(_run)
+    consumer.start(conn)
     return OK
 
-func _run() -> void:
-    while keep_running:
-        var message_len := conn.get_data(MESSAGE_LEN_SIZE)
-        if message_len[0] != OK:
-            printerr("Error reading message length, skipping")
-            continue
-        var message := conn.get_data(_from_big_endian_bytes(message_len[1]))
-        if message[0] != OK:
-            printerr("Error reading message, skipping")
-            continue
-        
-        var metadata_len := _from_big_endian_bytes(message[1].slice(0, METADATA_LEN_SIZE))
-        var metadata_bytes: PackedByteArray = message[1].slice(METADATA_LEN_SIZE, METADATA_LEN_SIZE + metadata_len)
-
-        var metadata = PBServerMetadata.PBServerMetadata.new()
-        if metadata.from_bytes(metadata_bytes) != OK:
-            printerr("Error parsing metadata, skipping")
-            continue
-
-        var content_bytes: PackedByteArray = message[1].slice(METADATA_LEN_SIZE + metadata_len)
-        var content = ServerMessageFactory.from(metadata.get_type(), content_bytes)
-        call_deferred("_handle_message", content)
-
-
-func _from_big_endian_bytes(bytes: PackedByteArray) -> int:
-    return (bytes[0] << 24) + (bytes[1] << 16) + (bytes[2] << 8) + bytes[3]
-
-
-# Should always be an instance of a PB class
-func _handle_message(message: Object):
-    if message is PBGameEntityState.PBGameEntityState:
-        var msg := message as PBGameEntityState.PBGameEntityState
-        update_entity_state.emit(
-            msg.get_entityId(),
-            Vector2(msg.get_position().get_x(), msg.get_position().get_y()),
-            Vector2(msg.get_velocity().get_x(), msg.get_velocity().get_y()),
-        )
+func stop():
+    consumer.stop()
+    conn.disconnect_from_host()
