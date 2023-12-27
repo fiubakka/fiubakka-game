@@ -3,14 +3,7 @@ extends CharacterBody2D
 signal update_movement
 
 @export var idle: bool = false
-var screen_size # Size of the game window.
 var prev_vel = Vector2.ZERO
-var id = null
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	#$TCPPeer.update_player_pos.connect(_on_tcp_peer_update_player_pos)
-	pass
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -80,6 +73,3 @@ func play_move_animation(velocity, prev_vel):
 			$AnimatedSprite2D.play("idle_back")
 		elif (prev_vel.y > 0):
 			$AnimatedSprite2D.play("idle_front")
-
-func _on_main_set_player_id(id):
-	self.id = id

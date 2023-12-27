@@ -33,5 +33,6 @@ func start() -> int:
     return OK
 
 func stop():
+    producer.stop()
     consumer.stop()
     conn.disconnect_from_host()

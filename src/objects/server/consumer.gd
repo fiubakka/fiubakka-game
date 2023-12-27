@@ -3,6 +3,7 @@ extends Object
 signal update_entity_state
 
 const PBServerMetadata = preload("res://src/protocol/compiled/server/metadata.gd")
+
 const PBGameEntityState = preload("res://src/protocol/compiled/server/state/game_entity_state.gd")
 
 const ServerMessageFactory = preload("res://src/objects/server/server_message_factory.gd")
@@ -40,14 +41,17 @@ func _run() -> void:
         var metadata_len := _from_big_endian_bytes(message[1].slice(0, METADATA_LEN_SIZE))
         var metadata_bytes: PackedByteArray = message[1].slice(METADATA_LEN_SIZE, METADATA_LEN_SIZE + metadata_len)
 
-        var metadata = PBServerMetadata.PBServerMetadata.new()
+        var metadata := PBServerMetadata.PBServerMetadata.new()
         if metadata.from_bytes(metadata_bytes) != OK:
             printerr("Error parsing metadata, skipping")
             continue
 
         var content_bytes: PackedByteArray = message[1].slice(METADATA_LEN_SIZE + metadata_len)
-        var content = ServerMessageFactory.from(metadata.get_type(), content_bytes)
-        call_deferred("_handle_message", content)
+        var content := ServerMessageFactory.from(metadata.get_type(), content_bytes)
+        if content[0] != OK:
+            printerr("Error parsing content, skipping")
+            continue
+        call_deferred("_handle_message", content[1])
 
 
 func _from_big_endian_bytes(bytes: PackedByteArray) -> int:
