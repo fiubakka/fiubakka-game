@@ -30,6 +30,7 @@ func start() -> int:
         printerr("Error polling server connection at " + HOST + ":" + str(PORT))
         return r
     consumer.start(conn)
+    producer.start(conn)
     return OK
 
 func stop():

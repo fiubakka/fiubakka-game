@@ -793,35 +793,35 @@ class PBGameEntityVelocity:
 	func _init():
 		var service
 		
-		_velX = PBField.new("velX", PB_DATA_TYPE.FLOAT, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT])
+		_x = PBField.new("x", PB_DATA_TYPE.FLOAT, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT])
 		service = PBServiceField.new()
-		service.field = _velX
-		data[_velX.tag] = service
+		service.field = _x
+		data[_x.tag] = service
 		
-		_velY = PBField.new("velY", PB_DATA_TYPE.FLOAT, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT])
+		_y = PBField.new("y", PB_DATA_TYPE.FLOAT, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT])
 		service = PBServiceField.new()
-		service.field = _velY
-		data[_velY.tag] = service
+		service.field = _y
+		data[_y.tag] = service
 		
 	var data = {}
 	
-	var _velX: PBField
-	func get_velX() -> float:
-		return _velX.value
-	func clear_velX() -> void:
+	var _x: PBField
+	func get_x() -> float:
+		return _x.value
+	func clear_x() -> void:
 		data[1].state = PB_SERVICE_STATE.UNFILLED
-		_velX.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
-	func set_velX(value : float) -> void:
-		_velX.value = value
+		_x.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
+	func set_x(value : float) -> void:
+		_x.value = value
 	
-	var _velY: PBField
-	func get_velY() -> float:
-		return _velY.value
-	func clear_velY() -> void:
+	var _y: PBField
+	func get_y() -> float:
+		return _y.value
+	func clear_y() -> void:
 		data[2].state = PB_SERVICE_STATE.UNFILLED
-		_velY.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
-	func set_velY(value : float) -> void:
-		_velY.value = value
+		_y.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
+	func set_y(value : float) -> void:
+		_y.value = value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)

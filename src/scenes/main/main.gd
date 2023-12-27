@@ -39,7 +39,6 @@ func _on_tcp_peer_update_other_player_pos(id, position, velocity):
 		other_player.player_name = id
 		other_players[id] = other_player
 		add_child(other_player)
-		
 
 func _on_login_change_to_room_200_scene():
 	var room_200 = room_200_scene.instantiate()

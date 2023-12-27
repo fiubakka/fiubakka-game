@@ -12,6 +12,7 @@ func stop():
 
 func start(connection: StreamPeerTCP):
     conn = connection
+    _on_login_init_player("marktheman")
 
 func send(data: PackedByteArray, type: PBClientMetadata.PBClientMessageType):
     var metadata := PBClientMetadata.PBClientMetadata.new()
