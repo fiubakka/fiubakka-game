@@ -522,13 +522,6 @@ script = SubResource("GDScript_r82dr")
 position = Vector2(0, 52)
 shape = SubResource("RectangleShape2D_6hhbj")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-limit_left = 0
-limit_top = 0
-limit_right = 672
-limit_bottom = 768
-position_smoothing_enabled = true
-
 [node name="Name" type="RichTextLabel" parent="."]
 offset_left = -24.0
 offset_top = -50.0
@@ -537,3 +530,13 @@ offset_bottom = -27.0
 bbcode_enabled = true
 text = "[center][b]You[/b][/center]"
 fit_content = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+limit_left = 0
+limit_top = 0
+limit_right = 674
+limit_bottom = 768
+limit_smoothed = true
+position_smoothing_enabled = true
+editor_draw_limits = true

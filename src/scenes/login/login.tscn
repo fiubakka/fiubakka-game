@@ -1,68 +1,97 @@
-[gd_scene load_steps=5 format=3 uid="uid://6mcomak80lww"]
+[gd_scene load_steps=5 format=3 uid="uid://b6kg7qutp1h00"]
 
-[ext_resource type="Script" path="res://src/scenes/login/login.gd" id="1_dkklg"]
-[ext_resource type="Texture2D" uid="uid://bfby521njxe1i" path="res://art/login/fiuba-front.jpeg" id="2_32wrg"]
-[ext_resource type="Texture2D" uid="uid://ctnrkmckjhxjy" path="res://art/login/fiuba-logo.png" id="3_cfpjm"]
+[ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_f447j"]
+[ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_vs65q"]
+[ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="3_v6w8k"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_fcmeu"]
-font_size = 24
-font_color = Color(0.827451, 0.827451, 0.827451, 1)
-shadow_color = Color(0, 0, 0, 1)
+[sub_resource type="Theme" id="Theme_1qdqe"]
+default_font = ExtResource("3_v6w8k")
+default_font_size = 50
 
-[node name="login" type="Control"]
+[node name="Login" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_top = 1.0
-offset_bottom = 1.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_dkklg")
-metadata/_edit_group_ = true
 
-[node name="Background" type="TextureRect" parent="."]
-modulate = Color(0.521569, 0.8, 1, 1)
-layout_mode = 0
-offset_right = 640.0
-offset_bottom = 480.0
-texture = ExtResource("2_32wrg")
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_f447j")
 
-[node name="Logo" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 382.0
-offset_top = 4.0
-offset_right = 978.0
-offset_bottom = 230.0
-scale = Vector2(0.435, 0.435)
-texture = ExtResource("3_cfpjm")
-stretch_mode = 1
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_right = 0.75
+anchor_bottom = 1.0
+offset_right = -3.05176e-05
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="BoxContainer" type="ColorRect" parent="."]
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = 146.0
-offset_top = 176.0
-offset_right = 504.0
-offset_bottom = 302.0
-color = Color(0.14902, 0.14902, 0.14902, 0.858824)
-metadata/_edit_group_ = true
-
-[node name="Label" type="Label" parent="BoxContainer"]
+[node name="Title" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
-offset_left = 6.0
-offset_top = 8.0
-offset_right = 351.0
-offset_bottom = 82.0
-text = "Bienvenido a FiubAkka
-Ingrese su nombre de usuario"
-label_settings = SubResource("LabelSettings_fcmeu")
-horizontal_alignment = 1
+size_flags_vertical = 3
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
 
-[node name="UserInput" type="LineEdit" parent="BoxContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Title"]
+texture_filter = 1
 layout_mode = 2
-offset_left = 6.0
-offset_top = 90.0
-offset_right = 351.0
-offset_bottom = 121.0
-placeholder_text = "Su usuario..."
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 10.0
+texture = ExtResource("2_vs65q")
+region_rect = Rect2(40, 1104, 64, 48)
 
-[connection signal="text_submitted" from="BoxContainer/UserInput" to="." method="_on_user_input_text_submitted"]
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/Title/NinePatchRect"]
+self_modulate = Color(0.694118, 0.439216, 0.219608, 1)
+texture_filter = 1
+clip_contents = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_1qdqe")
+bbcode_enabled = true
+text = "[center]Fiubakka[/center]"
+scroll_active = false
+
+[node name="Username" type="Control" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+
+[node name="RichTextLabel" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Username"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -35.0
+offset_right = 125.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -3.14159
+pivot_offset = Vector2(125, 35)
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 5.0
+texture = ExtResource("2_vs65q")
+region_rect = Rect2(800, 1152, 80, 48)
+patch_margin_left = 5
