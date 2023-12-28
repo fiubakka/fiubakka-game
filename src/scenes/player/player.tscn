@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://b0ckgcsol4ucx"]
+[gd_scene load_steps=53 format=3 uid="uid://b0ckgcsol4ucx"]
 
 [ext_resource type="Script" path="res://src/scenes/player/player.gd" id="1_j2141"]
 [ext_resource type="Texture2D" uid="uid://bhtj4gmfxgewq" path="res://art/player/player.png" id="2_1pmbn"]
@@ -396,7 +396,6 @@ sprite_frames = SubResource("SpriteFrames_v8327")
 animation = &"idle_front"
 frame = 4
 frame_progress = 0.807545
-script = SubResource("GDScript_r82dr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 52)
