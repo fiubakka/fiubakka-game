@@ -1,7 +1,6 @@
 extends Node2D
 
-@export var other_placer_scene: PackedScene
-@export var room_200_scene: PackedScene
+const Room200Scene = preload("res://src/scenes/maps/room_200/room_200.tscn")
 
 var other_players = {}
 
@@ -14,24 +13,24 @@ func _process(_delta: float) -> void:
 		$Player/Chatbox.visible = false
 
 
-func _on_tcp_peer_update_other_player_pos(id, position, velocity):
-	if other_players.has(id):
-		var other_player = other_players[id]
-		other_player.position = position
-		other_player.velocity = velocity
-	else:
-		var other_player = other_placer_scene.instantiate()
-		other_player.id = id
-		other_player.position = position
-		other_player.velocity = velocity
-		other_player.player_name = id
-		other_players[id] = other_player
-		add_child(other_player)
+# func _on_tcp_peer_update_other_player_pos(id, position, velocity):
+# 	if other_players.has(id):
+# 		var other_player = other_players[id]
+# 		other_player.position = position
+# 		other_player.velocity = velocity
+# 	else:
+# 		var other_player = other_placer_scene.instantiate()
+# 		other_player.id = id
+# 		other_player.position = position
+# 		other_player.velocity = velocity
+# 		other_player.player_name = id
+# 		other_players[id] = other_player
+# 		add_child(other_player)
 
 
 func _on_login_user_logged_in(_username: String) -> void:
-	add_child(room_200_scene.instantiate())
+	add_child(Room200Scene.instantiate())
 	get_node("Login").queue_free()
-	$Player.visible = true
-	$Player.idle = false
+	# $Player.visible = true
+	# $Player.idle = false
 	# $Player/Chatbox.idle = false

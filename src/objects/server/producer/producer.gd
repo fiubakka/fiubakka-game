@@ -18,11 +18,14 @@ func _init(connection: StreamPeerTCP) -> void:
 	_conn = connection
 
 
-# func send(data: PackedByteArray, type: PBClientMessageType) -> void:
 func send(message: Object) -> Result:
 	var data: PackedByteArray = message.to_bytes()
 	var metadata := PBClientMetadata.new()
-	metadata.set_type(ProducerMessageTypeFactory.from(message))
+	var type := ProducerMessageTypeFactory.from(message)
+	if type.is_err():
+		printerr("Failed to get message type for produced message: ", type.get_err())
+		return type
+	metadata.set_type(type.get_value())
 	metadata.set_length(data.size())
 
 	var metadata_bytes := metadata.to_bytes()

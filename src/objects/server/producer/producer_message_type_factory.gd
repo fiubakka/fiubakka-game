@@ -12,15 +12,18 @@ const PBPlayerMessage = (
 	preload("res://src/protocol/compiled/client/chat/message.gd").PBPlayerMessage
 )
 
-static var _MESSAGE_TYPE_MAP := {
-	"PBPlayerInit": PBClientMessageType.PBPlayerInit,
-	"PBPlayerMovement": PBClientMessageType.PBPlayerMovement,
-	"PBPlayerMessage": PBClientMessageType.PBPlayerMessage
-}
+# static var _MESSAGE_TYPE_MAP := {
+# 	"PBPlayerInit": PBClientMessageType.PBPlayerInit,
+# 	"PBPlayerMovement": PBClientMessageType.PBPlayerMovement,
+# 	"PBPlayerMessage": PBClientMessageType.PBPlayerMessage
+# }
 
 
 static func from(message: Object) -> Result:
-	var message_type: int = _MESSAGE_TYPE_MAP.get(message.get_class())
+	var message_type: int
+	# var message_type: int = _MESSAGE_TYPE_MAP.get(message.get_class())
+	if message is PBPlayerInit:
+		message_type = PBClientMessageType.PBPlayerInit
 	if message_type == null:
 		printerr("Unknown message type for message class: " + message.get_class())
 		return Result.err(ERR_CANT_RESOLVE)
