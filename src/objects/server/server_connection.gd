@@ -16,7 +16,7 @@ var consumer: Consumer
 var producer: Producer
 
 
-func _init():
+func _init() -> void:
 	conn = StreamPeerTCP.new()
 	consumer = Consumer.new()
 	producer = Producer.new()
@@ -36,7 +36,7 @@ func start() -> int:
 	return OK
 
 
-func stop():
+func stop() -> void:
 	producer.stop()
 	consumer.stop()
 	conn.disconnect_from_host()

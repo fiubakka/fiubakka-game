@@ -2,11 +2,15 @@ extends Object
 
 signal update_entity_state
 
-const PBServerMetadata = preload("res://src/protocol/compiled/server/metadata.gd")
+const PBServerMetadata = preload("res://src/protocol/compiled/server/metadata.gd").PBServerMetadata
 
-const PBGameEntityState = preload("res://src/protocol/compiled/server/state/game_entity_state.gd")
+const PBGameEntityState = (
+	preload("res://src/protocol/compiled/server/state/game_entity_state.gd").PBGameEntityState
+)
 
-const PBPlayerInitReady = preload("res://src/protocol/compiled/server/init/player_init_ready.gd")
+const PBPlayerInitReady = (
+	preload("res://src/protocol/compiled/server/init/player_init_ready.gd").PBPlayerInitReady
+)
 
 const ServerMessageFactory = preload("res://src/objects/server/server_message_factory.gd")
 
@@ -18,17 +22,17 @@ var thread: Thread
 var keep_running: bool
 
 
-func _init():
+func _init() -> void:
 	thread = Thread.new()
 	keep_running = true
 
 
-func start(connection: StreamPeerTCP):
+func start(connection: StreamPeerTCP) -> void:
 	conn = connection
 	thread.start(_run)
 
 
-func stop():
+func stop() -> void:
 	keep_running = false
 	thread.wait_to_finish()
 
@@ -49,17 +53,17 @@ func _run() -> void:
 			METADATA_LEN_SIZE, METADATA_LEN_SIZE + metadata_len
 		)
 
-		var metadata := PBServerMetadata.PBServerMetadata.new()
+		var metadata := PBServerMetadata.new()
 		if metadata.from_bytes(metadata_bytes) != OK:
 			printerr("Error parsing metadata, skipping")
 			continue
 
 		var content_bytes: PackedByteArray = message[1].slice(METADATA_LEN_SIZE + metadata_len)
 		var content := ServerMessageFactory.from(metadata.get_type(), content_bytes)
-		if content[0] != OK:
+		if content.is_err():
 			printerr("Error parsing content, skipping")
 			continue
-		call_deferred("_handle_message", content[1])
+		call_deferred("_handle_message", content.get_value())
 
 
 func _from_big_endian_bytes(bytes: PackedByteArray) -> int:
@@ -67,9 +71,9 @@ func _from_big_endian_bytes(bytes: PackedByteArray) -> int:
 
 
 # Should always be an instance of a PB class
-func _handle_message(message: Object):
-	if message is PBGameEntityState.PBGameEntityState:
-		var msg := message as PBGameEntityState.PBGameEntityState
+func _handle_message(message: Object) -> void:
+	if message is PBGameEntityState:
+		var msg := message as PBGameEntityState
 		(
 			update_entity_state
 			. emit(
@@ -78,6 +82,6 @@ func _handle_message(message: Object):
 				Vector2(msg.get_velocity().get_x(), msg.get_velocity().get_y()),
 			)
 		)
-	elif message is PBPlayerInitReady.PBPlayerInitReady:
-		var msg := message as PBPlayerInitReady.PBPlayerInitReady
+	elif message is PBPlayerInitReady:
+		var msg := message as PBPlayerInitReady
 		print("PLAYER READY WITH STATE: ", msg.get_initialState())
