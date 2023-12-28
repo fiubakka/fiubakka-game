@@ -24,5 +24,5 @@ script = ExtResource("4_gxvl4")
 [node name="ServerProducer" type="Node" parent="ServerConnection"]
 script = ExtResource("5_xlac2")
 
-[connection signal="user_logged_in" from="Login" to="." method="_on_login_user_logged_in"]
 [connection signal="user_logged_in" from="Login" to="ServerConnection/ServerProducer" method="_on_login_user_logged_in"]
+[connection signal="user_init_ready" from="ServerConnection/ServerConsumer" to="." method="_on_server_consumer_user_init_ready"]

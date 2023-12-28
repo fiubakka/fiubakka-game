@@ -28,9 +28,11 @@ func _process(_delta: float) -> void:
 # 		add_child(other_player)
 
 
-func _on_login_user_logged_in(_username: String) -> void:
+func _on_server_consumer_user_init_ready(_position: Vector2) -> void:
 	add_child(Room200Scene.instantiate())
+	#TODO: Is it okay to change the initial position of the player like this or should we use something else
+	# like signals for example?
+	var player := get_node("Room200").get_node("Player")
+	player.position = _position
 	get_node("Login").queue_free()
-	# $Player.visible = true
-	# $Player.idle = false
 	# $Player/Chatbox.idle = false

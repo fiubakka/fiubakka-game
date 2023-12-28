@@ -1,6 +1,7 @@
 extends Node
 
 signal update_entity_state(entityId: String, position: Vector2, velocity: Vector2)
+signal user_init_ready(position: Vector2)
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 
@@ -50,4 +51,14 @@ func _handle_message(message: Object) -> void:
 		)
 	elif message is PBPlayerInitReady:
 		var msg := message as PBPlayerInitReady
-		print("PLAYER READY WITH STATE: ", msg.get_initialState())
+		call_deferred(
+			"_user_init_ready",
+			Vector2(
+				msg.get_initialState().get_position().get_x(),
+				msg.get_initialState().get_position().get_y()
+			)
+		)
+
+
+func _user_init_ready(position: Vector2) -> void:
+	user_init_ready.emit(position)
