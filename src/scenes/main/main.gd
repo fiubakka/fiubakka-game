@@ -1,17 +1,9 @@
 extends Node2D
 
-const ServerConnection = preload("res://src/objects/server/server_connection.gd")
-
 @export var other_placer_scene: PackedScene
 @export var room_200_scene: PackedScene
 
 var other_players = {}
-var server_connection: ServerConnection
-
-
-func _ready() -> void:
-	server_connection = ServerConnection.new()
-	server_connection.start()  #TODO handle connection errors
 
 
 func _process(_delta: float) -> void:
@@ -37,7 +29,7 @@ func _on_tcp_peer_update_other_player_pos(id, position, velocity):
 		add_child(other_player)
 
 
-func _on_login_user_logged_in(username: String) -> void:
+func _on_login_user_logged_in(_username: String) -> void:
 	add_child(room_200_scene.instantiate())
 	get_node("Login").queue_free()
 	$Player.visible = true

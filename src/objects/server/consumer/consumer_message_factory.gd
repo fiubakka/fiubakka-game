@@ -13,7 +13,7 @@ const PBPlayerInitReady = (
 	preload("res://src/protocol/compiled/server/init/player_init_ready.gd").PBPlayerInitReady
 )
 
-static var MESSAGE_MAP := {
+static var _MESSAGE_MAP := {
 	PBServerMessageType.PBGameEntityState: PBGameEntityState,
 	PBServerMessageType.PBPlayerMessage: PBPlayerMessage,
 	PBServerMessageType.PBPlayerInitReady: PBPlayerInitReady,
@@ -21,7 +21,7 @@ static var MESSAGE_MAP := {
 
 
 static func from(type: PBServerMessageType, data: PackedByteArray) -> Result:
-	var message_constructor: Object = MESSAGE_MAP.get(type)
+	var message_constructor: Object = _MESSAGE_MAP.get(type)
 	if message_constructor == null:
 		printerr("Unknown message type: ", type)
 		return Result.err(ERR_CANT_RESOLVE)

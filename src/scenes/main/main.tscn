@@ -1,18 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwgonn6l2afs6"]
+[gd_scene load_steps=6 format=3 uid="uid://bwgonn6l2afs6"]
 
 [ext_resource type="Script" path="res://src/scenes/main/main.gd" id="1_kecny"]
-[ext_resource type="PackedScene" uid="uid://d11b7734y2pbu" path="res://src/scenes/other_player/other_player.tscn" id="2_l2cc2"]
 [ext_resource type="PackedScene" uid="uid://b6kg7qutp1h00" path="res://src/scenes/login/login.tscn" id="3_2am71"]
-[ext_resource type="PackedScene" uid="uid://dhrlrip83sqyk" path="res://src/scenes/maps/room_200/room_200.tscn" id="7_awmhv"]
+[ext_resource type="Script" path="res://src/scenes/main/server/server_connection.gd" id="3_ffkqj"]
+[ext_resource type="Script" path="res://src/scenes/main/server/server_consumer.gd" id="4_gxvl4"]
+[ext_resource type="Script" path="res://src/scenes/main/server/server_producer.gd" id="5_xlac2"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_kecny")
-other_placer_scene = ExtResource("2_l2cc2")
 
 [node name="Login" parent="." instance=ExtResource("3_2am71")]
 custom_minimum_size = Vector2(960, 540)
 offset_right = 960.0
 offset_bottom = 540.0
 
-[node name="Room200" parent="." instance=ExtResource("7_awmhv")]
-visible = false
+[node name="ServerConnection" type="Node" parent="."]
+script = ExtResource("3_ffkqj")
+
+[node name="ServerConsumer" type="Node" parent="ServerConnection"]
+script = ExtResource("4_gxvl4")
+
+[node name="ServerProducer" type="Node" parent="ServerConnection"]
+script = ExtResource("5_xlac2")
+
+[connection signal="user_logged_in" from="Login" to="." method="_on_login_user_logged_in"]
+[connection signal="user_logged_in" from="Login" to="ServerConnection/ServerProducer" method="_on_login_user_logged_in"]

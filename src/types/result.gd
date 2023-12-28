@@ -1,10 +1,14 @@
 class_name Result
 
 var _error: Error
-var _value: Object
+# Godot does not have an Any type, so ignore the warning
+@warning_ignore("untyped_declaration")
+var _value
+
+@warning_ignore("untyped_declaration")
 
 
-static func ok(value: Object) -> Result:
+static func ok(value) -> Result:
 	var result := Result.new()
 	result._error = OK
 	result._value = value
@@ -26,7 +30,10 @@ func is_err() -> bool:
 	return _error != OK
 
 
-func get_value() -> Object:
+@warning_ignore("untyped_declaration")
+
+
+func get_value():
 	return _value
 
 
