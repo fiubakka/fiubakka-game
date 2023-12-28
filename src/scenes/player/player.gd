@@ -1,13 +1,13 @@
 extends CharacterBody2D
 
-signal update_movement
+signal update_movement(velocity: Vector2, position: Vector2)
 
 @export var idle: bool = false
-var prev_vel = Vector2.ZERO
+var prev_vel := Vector2.ZERO
 
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("open_chat"):
 		idle = true
 	if Input.is_action_just_pressed("close_chat"):
@@ -35,8 +35,8 @@ func _physics_process(delta):
 
 	if velocity != Vector2.ZERO:
 		velocity = velocity.normalized() * 4
-		var collision = move_and_collide(velocity, true)
-		var remainder_distance = Vector2.ZERO
+		var collision := move_and_collide(velocity, true)
+		var remainder_distance := Vector2.ZERO
 		if collision != null:
 			velocity = velocity.slide(collision.get_normal())
 			remainder_distance = collision.get_travel()
@@ -53,11 +53,11 @@ func _physics_process(delta):
 	self.position = next_position
 
 	if velocity != prev_vel:
-		play_move_animation(velocity, prev_vel)
+		play_move_animation()
 		prev_vel = velocity
 
 
-func play_move_animation(velocity, prev_vel):
+func play_move_animation() -> void:
 	if velocity.x > 0:
 		$AnimatedSprite2D.play("walk_right")
 	elif velocity.x < 0:

@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6kg7qutp1h00"]
+[gd_scene load_steps=12 format=3 uid="uid://b6kg7qutp1h00"]
 
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_f447j"]
+[ext_resource type="Script" path="res://src/scenes/login/login.gd" id="1_mxn2w"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_vs65q"]
 [ext_resource type="Script" path="res://src/scenes/login/title.gd" id="2_wof1i"]
 [ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="3_v6w8k"]
@@ -24,6 +25,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_mxn2w")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -106,7 +108,7 @@ texture = ExtResource("2_vs65q")
 region_rect = Rect2(800, 1152, 80, 48)
 patch_margin_left = 5
 
-[node name="LoginUsernameBox" type="LineEdit" parent="NinePatchRect/VBoxContainer/Username"]
+[node name="LoginUsername" type="LineEdit" parent="NinePatchRect/VBoxContainer/Username"]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -136,4 +138,5 @@ stream = ExtResource("5_ktkbl")
 volume_db = -5.0
 autoplay = true
 
-[connection signal="text_changed" from="NinePatchRect/VBoxContainer/Username/LoginUsernameBox" to="NinePatchRect/VBoxContainer/Username/LoginUsernameBox" method="_on_text_changed"]
+[connection signal="text_changed" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_text_changed"]
+[connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="." method="_on_login_username_text_submitted"]

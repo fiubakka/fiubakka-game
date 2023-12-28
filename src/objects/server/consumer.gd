@@ -1,6 +1,6 @@
 extends Object
 
-signal update_entity_state
+signal update_entity_state(entityId: String, position: Vector2, velocity: Vector2)
 
 const PBServerMetadata = preload("res://src/protocol/compiled/server/metadata.gd").PBServerMetadata
 

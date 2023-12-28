@@ -9,14 +9,12 @@ var other_players = {}
 var server_connection: ServerConnection
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	server_connection = ServerConnection.new()
 	server_connection.start()  #TODO handle connection errors
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta: float) -> void:
 	if Input.is_action_pressed("open_chat") and !$Player/Chatbox.visible and !$Player/Chatbox.idle:
 		$Player/Chatbox.visible = true
 		$Player/Chatbox.focus_chat()
@@ -39,12 +37,9 @@ func _on_tcp_peer_update_other_player_pos(id, position, velocity):
 		add_child(other_player)
 
 
-func _on_login_change_to_room_200_scene():
-	var room_200 = room_200_scene.instantiate()
-	print("main will add room_200 scene")
-	add_child(room_200)
-	print(get_children())
-	print(room_200.change_scene)
+func _on_login_user_logged_in(username: String) -> void:
+	add_child(room_200_scene.instantiate())
+	get_node("Login").queue_free()
 	$Player.visible = true
 	$Player.idle = false
-	$Player/Chatbox.idle = false
+	# $Player/Chatbox.idle = false
