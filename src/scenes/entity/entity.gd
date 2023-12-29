@@ -1,26 +1,27 @@
-extends Area2D
+extends Node2D
 
-@export var id = 1
-var velocity = Vector2(0, 0)
-var prev_vel = Vector2(0, 0)
-var player_name = ""
+@export var id := 1
+var velocity := Vector2(0, 0)
+var prev_vel := Vector2(0, 0)
+var player_name := ""
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	$Name.text = "[center][color=#ffaaaa]" + player_name + "[/color][/center]"
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta: float) -> void:
+	if prev_vel == velocity:
+		return
+
 	if velocity.x > 0:
 		$AnimatedSprite2D.play("walk_right")
 	elif velocity.x < 0:
 		$AnimatedSprite2D.play("walk_left")
 	elif velocity.y < 0:
-		$AnimatedSprite2D.play("walk_up")
+		$AnimatedSprite2D.play("walk_back")
 	elif velocity.y > 0:
-		$AnimatedSprite2D.play("walk_down")
+		$AnimatedSprite2D.play("walk_front")
 	else:
 		if prev_vel.x > 0:
 			$AnimatedSprite2D.play("idle_right")
