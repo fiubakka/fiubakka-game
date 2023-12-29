@@ -1,7 +1,7 @@
 extends Node
 
-signal update_entity_state(entityId: String, position: Vector2, velocity: Vector2)
 signal user_init_ready(position: Vector2)
+signal update_entity_state(entityId: String, position: Vector2, velocity: Vector2)
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 
@@ -39,26 +39,30 @@ func _run() -> void:
 
 # Should always be an instance of a PB class
 func _handle_message(message: Object) -> void:
+	var handler: String
 	if message is PBGameEntityState:
-		var msg := message as PBGameEntityState
-		(
-			update_entity_state  # TODO use call_deferred
-			. emit(
-				msg.get_entityId(),
-				Vector2(msg.get_position().get_x(), msg.get_position().get_y()),
-				Vector2(msg.get_velocity().get_x(), msg.get_velocity().get_y()),
-			)
-		)
+		handler = "_handle_game_entity_state"
 	elif message is PBPlayerInitReady:
-		var msg := message as PBPlayerInitReady
-		call_deferred(
-			"_user_init_ready",
-			Vector2(
-				msg.get_initialState().get_position().get_x(),
-				msg.get_initialState().get_position().get_y()
-			)
+		handler = "_handle_player_init_ready"
+
+	call_deferred(handler, message)
+
+
+func _handle_player_init_ready(msg: PBPlayerInitReady) -> void:
+	user_init_ready.emit(
+		Vector2(
+			msg.get_initialState().get_position().get_x(),
+			msg.get_initialState().get_position().get_y()
 		)
+	)
 
 
-func _user_init_ready(position: Vector2) -> void:
-	user_init_ready.emit(position)
+func _handle_game_entity_state(msg: PBGameEntityState) -> void:
+	(
+		update_entity_state
+		. emit(
+			msg.get_entityId(),
+			Vector2(msg.get_position().get_x(), msg.get_position().get_y()),
+			Vector2(msg.get_velocity().get_x(), msg.get_velocity().get_y()),
+		)
+	)

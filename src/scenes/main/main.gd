@@ -32,7 +32,8 @@ func _on_server_consumer_user_init_ready(_position: Vector2) -> void:
 	add_child(Room200Scene.instantiate())
 	#TODO: Is it okay to change the initial position of the player like this or should we use something else
 	# like signals for example?
-	var player := get_node("Room200").get_node("Player")
+	var player := get_node("Room200/Player")
+	player.update_movement.connect(get_node("ServerConnection/ServerProducer")._on_player_movement)
 	player.position = _position
 	get_node("Login").queue_free()
 	# $Player/Chatbox.idle = false

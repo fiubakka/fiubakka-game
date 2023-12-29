@@ -12,8 +12,9 @@ script = ExtResource("1_kecny")
 
 [node name="Login" parent="." instance=ExtResource("3_2am71")]
 custom_minimum_size = Vector2(960, 540)
+offset_top = -3.0
 offset_right = 960.0
-offset_bottom = 540.0
+offset_bottom = 537.0
 
 [node name="ServerConnection" type="Node" parent="."]
 script = ExtResource("3_ffkqj")
