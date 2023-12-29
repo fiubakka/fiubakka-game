@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b6kg7qutp1h00"]
+[gd_scene load_steps=11 format=3 uid="uid://b6kg7qutp1h00"]
 
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_f447j"]
 [ext_resource type="Script" path="res://src/scenes/login/login.gd" id="1_mxn2w"]
@@ -15,8 +15,6 @@ default_font_size = 50
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g065x"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_63wf8"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_xun4p"]
 
 [node name="Login" type="Control"]
 layout_mode = 3
@@ -128,7 +126,6 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_g065x")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_63wf8")
 placeholder_text = "Usuario..."
 max_length = 12
-right_icon = SubResource("ViewportTexture_xun4p")
 script = ExtResource("4_m2urp")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
