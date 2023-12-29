@@ -32,7 +32,7 @@ func _run() -> void:
 	while _keep_running:
 		var message := _consumer.read_message()
 		if message.is_err():
-			print("Error reading message: ", message.get_error())
+			print("Error reading message: ", message.get_err())
 			continue
 		_handle_message(message.get_value())
 
