@@ -4,7 +4,7 @@
 source_directory="src/protocol/protobuf"
 
 # Set the target directory for compiled files
-compiled_directory="src/protocol/compiled"
+compiled_directory="addons/protocol/compiled"
 
 # Create the compiled directory if it doesn't exist
 mkdir -p "$compiled_directory"
@@ -21,7 +21,8 @@ find "$source_directory" -type f -name "*.proto" | while read proto_file; do
     proto_file="$source_directory$relative_path/$(basename "$proto_file")"
     gd_file="$compiled_directory$relative_path/$(basename "${proto_file%.proto}.gd")"
 
-    godot --headless -q -s "addons/protobuf/protobuf_cmdln.gd" --input="$proto_file" --output="$gd_file"
+    godot --headless -q -s "addons/protobuf/protobuf_cmdln.gd" \
+        --input="$proto_file" --output="$gd_file" 2>/dev/null
 done
 
 echo "Compilation completed. Compiled files are located in the '$compiled_directory' directory."

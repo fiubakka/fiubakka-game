@@ -1,16 +1,16 @@
 extends Object
 
 const PBServerMessageType = (
-	preload("res://src/protocol/compiled/server/metadata.gd").PBServerMessageType
+	preload("res://addons/protocol/compiled/server/metadata.gd").PBServerMessageType
 )
 const PBGameEntityState = (
-	preload("res://src/protocol/compiled/server/state/game_entity_state.gd").PBGameEntityState
+	preload("res://addons/protocol/compiled/server/state/game_entity_state.gd").PBGameEntityState
 )
 const PBPlayerMessage = (
-	preload("res://src/protocol/compiled/server/chat/message.gd").PBPlayerMessage
+	preload("res://addons/protocol/compiled/server/chat/message.gd").PBPlayerMessage
 )
 const PBPlayerInitReady = (
-	preload("res://src/protocol/compiled/server/init/player_init_ready.gd").PBPlayerInitReady
+	preload("res://addons/protocol/compiled/server/init/player_init_ready.gd").PBPlayerInitReady
 )
 
 static var _MESSAGE_MAP := {

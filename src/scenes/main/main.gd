@@ -2,7 +2,7 @@ extends Node2D
 
 const Room200Scene = preload("res://src/scenes/maps/room_200/room_200.tscn")
 
-var other_players = {}
+var other_players: Dictionary = {}
 
 
 func _process(_delta: float) -> void:

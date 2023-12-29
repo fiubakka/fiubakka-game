@@ -1,15 +1,17 @@
 extends Object
 
 const PBClientMessageType = (
-	preload("res://src/protocol/compiled/client/metadata.gd").PBClientMessageType
+	preload("res://addons/protocol/compiled/client/metadata.gd").PBClientMessageType
 )
 
-const PBPlayerInit = preload("res://src/protocol/compiled/client/init/player_init.gd").PBPlayerInit
+const PBPlayerInit = (
+	preload("res://addons/protocol/compiled/client/init/player_init.gd").PBPlayerInit
+)
 const PBPlayerMovement = (
-	preload("res://src/protocol/compiled/client/movement/player_movement.gd").PBPlayerMovement
+	preload("res://addons/protocol/compiled/client/movement/player_movement.gd").PBPlayerMovement
 )
 const PBPlayerMessage = (
-	preload("res://src/protocol/compiled/client/chat/message.gd").PBPlayerMessage
+	preload("res://addons/protocol/compiled/client/chat/message.gd").PBPlayerMessage
 )
 
 

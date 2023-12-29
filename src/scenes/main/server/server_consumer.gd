@@ -6,10 +6,10 @@ signal update_entity_state(entityId: String, position: Vector2, velocity: Vector
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 
 const PBGameEntityState = (
-	preload("res://src/protocol/compiled/server/state/game_entity_state.gd").PBGameEntityState
+	preload("res://addons/protocol/compiled/server/state/game_entity_state.gd").PBGameEntityState
 )
 const PBPlayerInitReady = (
-	preload("res://src/protocol/compiled/server/init/player_init_ready.gd").PBPlayerInitReady
+	preload("res://addons/protocol/compiled/server/init/player_init_ready.gd").PBPlayerInitReady
 )
 
 var _thread: Thread

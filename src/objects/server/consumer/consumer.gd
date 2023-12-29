@@ -1,6 +1,8 @@
 extends Object
 
-const PBServerMetadata = preload("res://src/protocol/compiled/server/metadata.gd").PBServerMetadata
+const PBServerMetadata = (
+	preload("res://addons/protocol/compiled/server/metadata.gd").PBServerMetadata
+)
 
 const ConsumerMessageFactory = preload(
 	"res://src/objects/server/consumer/consumer_message_factory.gd"

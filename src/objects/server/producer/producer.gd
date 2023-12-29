@@ -1,8 +1,10 @@
 extends Object
 
-const PBClientMetadata = preload("res://src/protocol/compiled/client/metadata.gd").PBClientMetadata
+const PBClientMetadata = (
+	preload("res://addons/protocol/compiled/client/metadata.gd").PBClientMetadata
+)
 const PBClientMessageType = (
-	preload("res://src/protocol/compiled/client/metadata.gd").PBClientMessageType
+	preload("res://addons/protocol/compiled/client/metadata.gd").PBClientMessageType
 )
 
 const ProducerMessageTypeFactory = preload(

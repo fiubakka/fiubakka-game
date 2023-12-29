@@ -2,9 +2,11 @@ extends Node
 
 const Producer = preload("res://src/objects/server/producer/producer.gd")
 
-const PBPlayerInit = preload("res://src/protocol/compiled/client/init/player_init.gd").PBPlayerInit
+const PBPlayerInit = (
+	preload("res://addons/protocol/compiled/client/init/player_init.gd").PBPlayerInit
+)
 const PBPlayerMovement = (
-	preload("res://src/protocol/compiled/client/movement/player_movement.gd").PBPlayerMovement
+	preload("res://addons/protocol/compiled/client/movement/player_movement.gd").PBPlayerMovement
 )
 
 var _producer: Producer
