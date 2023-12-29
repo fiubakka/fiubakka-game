@@ -1,8 +1,18 @@
 extends Control
 
+var timer: Timer
+
 signal user_logged_in(username: String)
 
 
 func _on_login_username_text_submitted(username: String) -> void:
-	#TODO: Add logic to send the init every x seconds until we get a response in case the server loses the msg
+	timer = Timer.new()  #This timer is to send the init message until we get a response from the server
+	timer.timeout.connect(Callable(self, "_on_timer_timeout").bind(username))
+	add_child(timer)
+	timer.start()
+	timer.set_wait_time(2.0)
+
+
+func _on_timer_timeout(username: String) -> void:
+	print("SENDING INIT")
 	user_logged_in.emit(username)
