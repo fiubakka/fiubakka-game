@@ -1,14 +1,50 @@
-[gd_scene format=3 uid="uid://dv7baj7ykjngg"]
+[gd_scene load_steps=2 format=3 uid="uid://dv7baj7ykjngg"]
+
+[ext_resource type="Script" path="res://src/scenes/GUI/pause/pause.gd" id="1_8f46u"]
 
 [node name="Pause" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_8f46u")
 
 [node name="TextureRect2" type="ColorRect" parent="."]
 self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
 offset_right = 958.0
 offset_bottom = 539.0
 color = Color(0.278431, 0.278431, 0.278431, 0.576471)
+
+[node name="Continue" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -15.5
+offset_right = 77.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Continue"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = 70.5
+offset_right = 77.0
+offset_bottom = 120.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+
+[connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

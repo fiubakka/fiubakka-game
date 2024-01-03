@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwgonn6l2afs6"]
+[gd_scene load_steps=8 format=3 uid="uid://bwgonn6l2afs6"]
 
 [ext_resource type="Script" path="res://src/scenes/main/main.gd" id="1_kecny"]
 [ext_resource type="PackedScene" uid="uid://b6kg7qutp1h00" path="res://src/scenes/login/login.tscn" id="3_2am71"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://src/scenes/main/server/server_producer.gd" id="5_xlac2"]
 [ext_resource type="PackedScene" uid="uid://oihrx253mx55" path="res://src/scenes/GUI/chatbox/chatbox.tscn" id="6_q0kgv"]
 [ext_resource type="PackedScene" uid="uid://dv7baj7ykjngg" path="res://src/scenes/GUI/pause/pause.tscn" id="7_2ia4i"]
-[ext_resource type="Script" path="res://src/scenes/GUI/pause/pause.gd" id="8_8ng4v"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(0, 3)
@@ -31,7 +30,6 @@ script = ExtResource("5_xlac2")
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="Chatbox" parent="GUI" instance=ExtResource("6_q0kgv")]
-z_index = 0
 anchors_preset = -1
 anchor_left = 1.0
 anchor_top = 1.0
@@ -45,9 +43,9 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="Pause" parent="GUI" instance=ExtResource("7_2ia4i")]
+visible = false
 offset_right = 961.0
 offset_bottom = 537.0
-script = ExtResource("8_8ng4v")
 
 [connection signal="login_ready" from="." to="GUI/Chatbox" method="_on_main_login_ready"]
 [connection signal="login_ready" from="." to="GUI/Pause" method="_on_main_login_ready"]

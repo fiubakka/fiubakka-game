@@ -20,3 +20,12 @@ func _process(delta: float) -> void:
 
 func _on_main_login_ready() -> void:
 	self.waiting_for_login = false
+
+
+func _on_continue_pressed() -> void:
+	self.is_paused = !self.is_paused
+	self.visible = !self.visible
+
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()
