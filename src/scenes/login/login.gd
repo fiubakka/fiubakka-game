@@ -14,5 +14,4 @@ func _on_login_username_text_submitted(username: String) -> void:
 
 
 func _on_timer_timeout(username: String) -> void:
-	print("SENDING INIT")
 	user_logged_in.emit(username)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bwgonn6l2afs6"]
+[gd_scene load_steps=7 format=3 uid="uid://bwgonn6l2afs6"]
 
 [ext_resource type="Script" path="res://src/scenes/main/main.gd" id="1_kecny"]
 [ext_resource type="PackedScene" uid="uid://b6kg7qutp1h00" path="res://src/scenes/login/login.tscn" id="3_2am71"]
 [ext_resource type="Script" path="res://src/scenes/main/server/server_connection.gd" id="3_ffkqj"]
 [ext_resource type="Script" path="res://src/scenes/main/server/server_consumer.gd" id="4_gxvl4"]
 [ext_resource type="Script" path="res://src/scenes/main/server/server_producer.gd" id="5_xlac2"]
+[ext_resource type="PackedScene" uid="uid://oihrx253mx55" path="res://src/scenes/chatbox/chatbox.tscn" id="6_q0kgv"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(0, 3)
@@ -24,6 +25,8 @@ script = ExtResource("4_gxvl4")
 
 [node name="ServerProducer" type="Node" parent="ServerConnection"]
 script = ExtResource("5_xlac2")
+
+[node name="Chatbox" parent="." instance=ExtResource("6_q0kgv")]
 
 [connection signal="user_logged_in" from="Login" to="ServerConnection/ServerProducer" method="_on_login_user_logged_in"]
 [connection signal="update_entity_state" from="ServerConnection/ServerConsumer" to="." method="_on_server_consumer_update_entity_state"]

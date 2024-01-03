@@ -7,11 +7,7 @@ var entities: Dictionary = {}
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_pressed("open_chat") and !$Player/Chatbox.visible and !$Player/Chatbox.idle:
-		$Player/Chatbox.visible = true
-		$Player/Chatbox.focus_chat()
-	if Input.is_action_pressed("close_chat") and $Player/Chatbox.visible and !$Player/Chatbox.idle:
-		$Player/Chatbox.visible = false
+	pass
 
 
 func _on_server_consumer_user_init_ready(_position: Vector2) -> void:
@@ -22,7 +18,6 @@ func _on_server_consumer_user_init_ready(_position: Vector2) -> void:
 	player.update_movement.connect($ServerConnection/ServerProducer._on_player_movement)
 	player.position = _position
 	$Login.queue_free()
-	# $Player/Chatbox.idle = false
 
 
 func _on_server_consumer_update_entity_state(
