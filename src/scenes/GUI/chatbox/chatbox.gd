@@ -12,13 +12,8 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if !waiting_for_login:
-		if Input.is_action_pressed("open_chat") and !self.visible:
-			self.visible = true
-			self.focus_chat()
-		if Input.is_action_pressed("close_chat") and self.visible:
-			self.visible = false
+func _process(_delta: float) -> void:
+	pass
 
 
 func focus_chat() -> void:
@@ -35,3 +30,19 @@ func _on_server_consumer_update_content(entityId: String, content: String) -> vo
 
 func _on_main_login_ready() -> void:
 	self.waiting_for_login = false
+
+
+func _on_main_chat_opened() -> void:
+	if !waiting_for_login:
+		self.visible = true
+		self.focus_chat()
+
+
+func _on_main_chat_closed() -> void:
+	if !waiting_for_login:
+		self.visible = false
+
+
+func _on_main_paused() -> void:
+	if !waiting_for_login:
+		self.visible = false

@@ -1,5 +1,7 @@
 extends Node
 
+signal unpaused
+
 var waiting_for_login: bool = true
 var is_paused: bool = false
 
@@ -10,21 +12,25 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if !waiting_for_login:
-		#TODO: Handle case where chat is open and esc key is pressed
-		if Input.is_action_just_pressed("pause"):
-			self.is_paused = !self.is_paused
-			self.visible = !self.visible
+func _process(_delta: float) -> void:
+	pass
 
 
 func _on_main_login_ready() -> void:
 	self.waiting_for_login = false
 
 
+func _on_main_paused() -> void:
+	if !waiting_for_login:
+		self.is_paused = true
+		self.visible = true
+
+
 func _on_continue_pressed() -> void:
-	self.is_paused = !self.is_paused
-	self.visible = !self.visible
+	if !waiting_for_login:
+		self.is_paused = false
+		self.visible = false
+		unpaused.emit()
 
 
 func _on_quit_pressed() -> void:

@@ -8,12 +8,6 @@ var prev_vel := Vector2.ZERO
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
-	if Input.is_action_just_pressed("open_chat"):
-		idle = true
-		velocity = Vector2.ZERO
-		play_move_animation()
-	if Input.is_action_just_pressed("close_chat"):
-		idle = false
 	if idle:
 		return
 
@@ -78,3 +72,23 @@ func play_move_animation() -> void:
 			$AnimatedSprite2D.play("idle_back")
 		elif prev_vel.y > 0:
 			$AnimatedSprite2D.play("idle_front")
+
+
+func _on_main_chat_opened() -> void:
+	idle = true
+	velocity = Vector2.ZERO
+	play_move_animation()
+
+
+func _on_main_chat_closed() -> void:
+	idle = false
+
+
+func _on_main_paused() -> void:
+	idle = true
+	velocity = Vector2.ZERO
+	play_move_animation()
+
+
+func _on_main_unpaused() -> void:
+	idle = false
