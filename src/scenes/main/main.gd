@@ -17,6 +17,8 @@ func _on_server_consumer_user_init_ready(_position: Vector2) -> void:
 	var player := $Room200/Player
 	player.update_movement.connect($ServerConnection/ServerProducer._on_player_movement)
 	player.position = _position
+	var chatbox := get_node("./GUI/Chatbox")
+	chatbox.disabled = false
 	$Login.queue_free()
 
 

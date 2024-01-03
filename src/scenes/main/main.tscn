@@ -29,7 +29,6 @@ script = ExtResource("5_xlac2")
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="Chatbox" parent="GUI" instance=ExtResource("6_q0kgv")]
-visible = true
 z_index = 0
 anchors_preset = -1
 anchor_left = 1.0
