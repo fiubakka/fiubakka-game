@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dv7baj7ykjngg"]
+
+[node name="Pause" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect2" type="ColorRect" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+offset_right = 958.0
+offset_bottom = 539.0
+color = Color(0.278431, 0.278431, 0.278431, 0.576471)

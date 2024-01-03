@@ -1,12 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://oihrx253mx55"]
 
-[ext_resource type="Script" path="res://src/scenes/chatbox/chatbox.gd" id="1_i2ex6"]
-[ext_resource type="Script" path="res://src/scenes/chatbox/LineEdit.gd" id="2_fix1v"]
-[ext_resource type="Script" path="res://src/scenes/chatbox/RichTextLabel.gd" id="3_nta7l"]
+[ext_resource type="Script" path="res://src/scenes/GUI/chatbox/chatbox.gd" id="1_i2ex6"]
+[ext_resource type="Script" path="res://src/scenes/GUI/chatbox/LineEdit.gd" id="2_fix1v"]
+[ext_resource type="Script" path="res://src/scenes/GUI/chatbox/RichTextLabel.gd" id="3_nta7l"]
 
 [node name="Chatbox" type="Control"]
 visible = false
-z_index = 1
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1.0

@@ -2,7 +2,7 @@ extends Node
 
 signal send_message
 
-var disabled: bool = true
+var waiting_for_login: bool = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -13,7 +13,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if !disabled:
+	if !waiting_for_login:
 		if Input.is_action_pressed("open_chat") and !self.visible:
 			self.visible = true
 			self.focus_chat()
@@ -31,3 +31,7 @@ func _on_line_edit_send_message(message: String) -> void:
 
 func _on_server_consumer_update_content(entityId: String, content: String) -> void:
 	$RichTextLabel.add_new_message(entityId, content)
+
+
+func _on_main_login_ready() -> void:
+	self.waiting_for_login = false
