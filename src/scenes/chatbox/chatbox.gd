@@ -5,6 +5,7 @@ signal send_message
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#TOOD: How can we instantiate this scene AFTER login is succesful?
 	pass  # Replace with function body.
 
 
@@ -25,5 +26,5 @@ func _on_line_edit_send_message(message: String) -> void:
 	send_message.emit(message)
 
 
-func _on_tcp_peer_update_content(username: String, content: String) -> void:
-	$RichTextLabel.add_new_message(username, content)
+func _on_server_consumer_update_content(entityId: String, content: String) -> void:
+	$RichTextLabel.add_new_message(entityId, content)

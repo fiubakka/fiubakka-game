@@ -9,6 +9,10 @@ const PBPlayerMovement = (
 	preload("res://addons/protocol/compiled/client/movement/player_movement.gd").PBPlayerMovement
 )
 
+const PBPlayerMessage = (
+	preload("res://addons/protocol/compiled/client/chat/message.gd").PBPlayerMessage
+)
+
 var _producer: Producer
 
 
@@ -35,3 +39,9 @@ func _on_login_user_logged_in(username: String) -> void:
 	var player_init := PBPlayerInit.new()
 	player_init.set_username(username)
 	_producer.send(player_init)
+
+
+func _on_chatbox_send_message(message: String) -> void:
+	var player_message := PBPlayerMessage.new()
+	player_message.set_content(message)
+	_producer.send(player_message)

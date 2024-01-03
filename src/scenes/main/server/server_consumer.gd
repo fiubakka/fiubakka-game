@@ -2,6 +2,7 @@ extends Node
 
 signal user_init_ready(position: Vector2)
 signal update_entity_state(entityId: String, position: Vector2, velocity: Vector2)
+signal update_content(entityId: String, content: String)
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 
@@ -10,6 +11,10 @@ const PBGameEntityState = (
 )
 const PBPlayerInitReady = (
 	preload("res://addons/protocol/compiled/server/init/player_init_ready.gd").PBPlayerInitReady
+)
+
+const PBPlayerMessage = (
+	preload("res://addons/protocol/compiled/server/chat/message.gd").PBPlayerMessage
 )
 
 var _thread: Thread
@@ -44,6 +49,8 @@ func _handle_message(message: Object) -> void:
 		handler = "_handle_game_entity_state"
 	elif message is PBPlayerInitReady:
 		handler = "_handle_player_init_ready"
+	elif message is PBPlayerMessage:
+		handler = "_handle_player_message"
 
 	call_deferred(handler, message)
 
@@ -64,5 +71,15 @@ func _handle_game_entity_state(msg: PBGameEntityState) -> void:
 			msg.get_entityId(),
 			Vector2(msg.get_position().get_x(), msg.get_position().get_y()),
 			Vector2(msg.get_velocity().get_x(), msg.get_velocity().get_y()),
+		)
+	)
+
+
+func _handle_player_message(msg: PBPlayerMessage) -> void:
+	(
+		update_content
+		. emit(
+			msg.get_entityId(),
+			msg.get_content(),
 		)
 	)
