@@ -1,6 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://dv7baj7ykjngg"]
+[gd_scene load_steps=12 format=3 uid="uid://dv7baj7ykjngg"]
 
 [ext_resource type="Script" path="res://src/scenes/GUI/pause/pause.gd" id="1_8f46u"]
+[ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="2_dxbm7"]
+[ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="3_qu78l"]
+[ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="4_osv2q"]
+
+[sub_resource type="Theme" id="Theme_j8n4e"]
+default_font = ExtResource("4_osv2q")
+default_font_size = 50
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tba4p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_60pdv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_djk7j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b4l5r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_407f1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ittwg"]
 
 [node name="Pause" type="Control"]
 layout_mode = 3
@@ -16,35 +35,119 @@ offset_right = 958.0
 offset_bottom = 539.0
 color = Color(0.278431, 0.278431, 0.278431, 0.576471)
 
-[node name="Continue" type="Button" parent="."]
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 957.0
+offset_bottom = 544.0
+texture = ExtResource("2_dxbm7")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -43.0
-offset_top = -15.5
-offset_right = 77.0
-offset_bottom = 34.5
+offset_left = -115.0
+offset_top = -157.5
+offset_right = 115.0
+offset_bottom = -78.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "Continue"
+texture = ExtResource("3_qu78l")
+region_rect = Rect2(36.8972, 1104.05, 71.3756, 47.5839)
 
-[node name="Quit" type="Button" parent="."]
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/NinePatchRect"]
+self_modulate = Color(0.694118, 0.439216, 0.219608, 1)
+clip_contents = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -24.5
+offset_right = -2.0
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_j8n4e")
+bbcode_enabled = true
+text = "[center]Continue[/center]"
+scroll_active = false
+
+[node name="Continue" type="Button" parent="NinePatchRect/NinePatchRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -43.0
-offset_top = 70.5
-offset_right = 77.0
-offset_bottom = 120.5
+offset_left = -107.0
+offset_top = -37.5
+offset_right = 108.0
+offset_bottom = 41.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "Quit"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tba4p")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_60pdv")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_djk7j")
 
-[connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[node name="NinePatchRect2" type="NinePatchRect" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -86.0
+offset_top = -77.0
+offset_right = 86.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_qu78l")
+region_rect = Rect2(36.8972, 1104.05, 71.3756, 47.5839)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/NinePatchRect2"]
+self_modulate = Color(0.694118, 0.439216, 0.219608, 1)
+clip_contents = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -24.5
+offset_right = -2.0
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_j8n4e")
+bbcode_enabled = true
+text = "[center]Quit[/center]"
+scroll_active = false
+
+[node name="Quit" type="Button" parent="NinePatchRect/NinePatchRect2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -27.5
+offset_right = 79.0
+offset_bottom = 27.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_b4l5r")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_407f1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ittwg")
+
+[connection signal="pressed" from="NinePatchRect/NinePatchRect/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="NinePatchRect/NinePatchRect2/Quit" to="." method="_on_quit_pressed"]
