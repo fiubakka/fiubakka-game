@@ -1,0 +1,176 @@
+[gd_scene load_steps=7 format=3 uid="uid://2focfqtvt576"]
+
+[ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_x5dhn"]
+[ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_nt0o2"]
+[ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="3_61440"]
+[ext_resource type="Script" path="res://src/scenes/character_creation/CompositeSprites.gd" id="4_4wa33"]
+[ext_resource type="Script" path="res://src/scenes/character_creation/CharacterSprite.gd" id="4_vhfj7"]
+[ext_resource type="PackedScene" uid="uid://cgqjqesphj8ha" path="res://src/scenes/GUI/selector/selector.tscn" id="6_rgcdb"]
+
+[node name="CharacterCreation" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 961.0
+offset_bottom = 537.0
+texture = ExtResource("1_x5dhn")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = -38.0
+offset_top = -46.0
+offset_right = 989.0
+offset_bottom = 550.0
+texture = ExtResource("2_nt0o2")
+region_rect = Rect2(24, 744, 88, 88)
+patch_margin_left = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+modulate = Color(1, 1, 1, 0.921569)
+layout_mode = 0
+offset_left = 175.0
+offset_top = 111.0
+offset_right = 860.0
+offset_bottom = 525.0
+metadata/_edit_group_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.694118, 0.439216, 0.219608, 1)
+theme_override_fonts/normal_font = ExtResource("3_61440")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]Cree su personaje[/center]"
+
+[node name="Character" type="HSplitContainer" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+split_offset = 100
+
+[node name="Left" type="VSplitContainer" parent="NinePatchRect/VBoxContainer/Character"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="NinePatchRect/VBoxContainer/Character/Left"]
+custom_minimum_size = Vector2(300, 240)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="CharacterSprite" type="Node2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control"]
+position = Vector2(150, 150)
+scale = Vector2(3, 3)
+script = ExtResource("4_vhfj7")
+
+[node name="CompositeSprites" type="Node2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite"]
+script = ExtResource("4_4wa33")
+
+[node name="Body" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite/CompositeSprites"]
+region_enabled = true
+region_rect = Rect2(144, 32, 48, 64)
+
+[node name="Hair" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite/CompositeSprites"]
+position = Vector2(0, -20)
+region_enabled = true
+region_rect = Rect2(144, 24, 48, 40)
+
+[node name="Eyes" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite/CompositeSprites"]
+region_enabled = true
+region_rect = Rect2(144, 48, 48, 32)
+
+[node name="Outfit" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite/CompositeSprites"]
+position = Vector2(0, 20)
+region_enabled = true
+region_rect = Rect2(144, 64, 48, 40)
+
+[node name="FacialHair" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite/CompositeSprites"]
+position = Vector2(0, 4)
+region_enabled = true
+region_rect = Rect2(152, 56, 32, 24)
+
+[node name="Glasses" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite/CompositeSprites"]
+region_enabled = true
+region_rect = Rect2(152, 56, 32, 16)
+
+[node name="Hats" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite/CompositeSprites"]
+position = Vector2(0, -28)
+region_enabled = true
+region_rect = Rect2(144, 0, 48, 72)
+
+[node name="Randomize" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Character/Left"]
+layout_mode = 2
+texture = ExtResource("2_nt0o2")
+region_rect = Rect2(40, 1104, 64, 48)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/Character/Left/Randomize"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 21.0
+offset_right = 277.0
+offset_bottom = 89.0
+theme_override_colors/default_color = Color(0.698039, 0.458824, 0.247059, 1)
+theme_override_fonts/normal_font = ExtResource("3_61440")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]Randomize[/center]"
+
+[node name="Button" type="Button" parent="NinePatchRect/VBoxContainer/Character/Left/Randomize"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 299.0
+offset_bottom = 109.0
+
+[node name="Selectors" type="VBoxContainer" parent="NinePatchRect/VBoxContainer/Character"]
+layout_mode = 2
+
+[node name="HatsSelect" parent="NinePatchRect/VBoxContainer/Character/Selectors" instance=ExtResource("6_rgcdb")]
+layout_mode = 2
+label = "Hats"
+
+[node name="HairSelect" parent="NinePatchRect/VBoxContainer/Character/Selectors" instance=ExtResource("6_rgcdb")]
+layout_mode = 2
+label = "Hair"
+
+[node name="EyesSelect" parent="NinePatchRect/VBoxContainer/Character/Selectors" instance=ExtResource("6_rgcdb")]
+layout_mode = 2
+label = "Eyes"
+
+[node name="GlassesSelect" parent="NinePatchRect/VBoxContainer/Character/Selectors" instance=ExtResource("6_rgcdb")]
+layout_mode = 2
+label = "Glasses"
+
+[node name="FacialHairSelect" parent="NinePatchRect/VBoxContainer/Character/Selectors" instance=ExtResource("6_rgcdb")]
+layout_mode = 2
+label = "Facial Hair"
+
+[node name="BodySelect" parent="NinePatchRect/VBoxContainer/Character/Selectors" instance=ExtResource("6_rgcdb")]
+layout_mode = 2
+label = "Body"
+
+[node name="OutfitSelect" parent="NinePatchRect/VBoxContainer/Character/Selectors" instance=ExtResource("6_rgcdb")]
+layout_mode = 2
+label = "Outfit"
+
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/Left/Randomize/Button" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_randomize_button_pressed"]
+[connection signal="next" from="NinePatchRect/VBoxContainer/Character/Selectors/HatsSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hats_select_next"]
+[connection signal="prev" from="NinePatchRect/VBoxContainer/Character/Selectors/HatsSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hats_select_prev"]
+[connection signal="next" from="NinePatchRect/VBoxContainer/Character/Selectors/HairSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hair_select_next"]
+[connection signal="prev" from="NinePatchRect/VBoxContainer/Character/Selectors/HairSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hair_select_prev"]
+[connection signal="next" from="NinePatchRect/VBoxContainer/Character/Selectors/EyesSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_eyes_select_next"]
+[connection signal="prev" from="NinePatchRect/VBoxContainer/Character/Selectors/EyesSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_eyes_select_prev"]
+[connection signal="next" from="NinePatchRect/VBoxContainer/Character/Selectors/GlassesSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_glasses_select_next"]
+[connection signal="prev" from="NinePatchRect/VBoxContainer/Character/Selectors/GlassesSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_glasses_select_prev"]
+[connection signal="next" from="NinePatchRect/VBoxContainer/Character/Selectors/FacialHairSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_facial_hair_select_next"]
+[connection signal="prev" from="NinePatchRect/VBoxContainer/Character/Selectors/FacialHairSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_facial_hair_select_prev"]
+[connection signal="next" from="NinePatchRect/VBoxContainer/Character/Selectors/BodySelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_body_select_next"]
+[connection signal="prev" from="NinePatchRect/VBoxContainer/Character/Selectors/BodySelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_body_select_prev"]
+[connection signal="next" from="NinePatchRect/VBoxContainer/Character/Selectors/OutfitSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_outfit_select_next"]
+[connection signal="prev" from="NinePatchRect/VBoxContainer/Character/Selectors/OutfitSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_outfit_select_prev"]

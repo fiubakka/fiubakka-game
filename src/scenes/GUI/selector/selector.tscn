@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgqjqesphj8ha"]
+
+[ext_resource type="Script" path="res://src/scenes/GUI/selector/selector.gd" id="1_5baaw"]
+[ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="1_jginc"]
+[ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="2_mlqde"]
+
+[node name="HBoxContainer2" type="HBoxContainer"]
+offset_right = 304.0
+offset_bottom = 48.0
+alignment = 1
+script = ExtResource("1_5baaw")
+
+[node name="Prev" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("1_jginc")
+region_rect = Rect2(1872, 144, 48, 48)
+
+[node name="PrevButton" type="Button" parent="Prev"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+offset_right = 48.0
+offset_bottom = 48.0
+
+[node name="Label" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(200, 48)
+layout_mode = 2
+texture = ExtResource("1_jginc")
+region_rect = Rect2(40, 1104, 64, 48)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Label"]
+modulate = Color(0.694118, 0.439216, 0.219608, 1)
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 185.0
+offset_bottom = 40.0
+theme_override_fonts/normal_font = ExtResource("2_mlqde")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+
+[node name="Next" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+texture = ExtResource("1_jginc")
+region_rect = Rect2(1824, 144, 48, 48)
+
+[node name="NextButton" type="Button" parent="Next"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+offset_right = 48.0
+offset_bottom = 48.0
+
+[connection signal="pressed" from="Prev/PrevButton" to="." method="_on_prev_button_pressed"]
+[connection signal="pressed" from="Next/NextButton" to="." method="_on_next_button_pressed"]
