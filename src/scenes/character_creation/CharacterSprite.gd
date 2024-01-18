@@ -149,3 +149,15 @@ func _on_randomize_button_pressed() -> void:
 	facial_hair_sprite.texture = cs.facial_hair_spritesheet[facial_hair_idx]
 	body_sprite.texture = cs.body_spritesheet[body_idx]
 	outfit_sprite.texture = cs.outfit_spritesheet[outfit_idx]
+
+
+func _on_save_button_pressed() -> void:
+	PlayerInfo.player_customization = {
+		'body': body_idx,
+		'hair': hair_idx,
+		'eyes': eyes_idx,
+		'outfit': outfit_idx,
+		'facial_hair': facial_hair_idx,
+		'glasses': glasses_idx,
+		'hats': hats_idx
+	}
