@@ -14,4 +14,7 @@ func _ready() -> void:
 	
 func _on_Slot_Pressed(item: InventoryItemData) -> void:
 	if (item):
-		print(item.description)
+		var name: RichTextLabel = $Description/VBoxContainer/Name
+		name.add_text(item.name)
+		var description: RichTextLabel = $Description/VBoxContainer/Description
+		description.add_text(item.description)
