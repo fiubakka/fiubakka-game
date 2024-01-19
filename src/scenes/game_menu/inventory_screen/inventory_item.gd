@@ -1,9 +1,6 @@
 extends TextureButton
 
-@export var itemData: InventoryItemData = null
-
 func update(item: InventoryItemData) -> void:
-	itemData = item
 	var sprite: Sprite2D = $CenterContainer/Panel/Sprite2D
 	sprite.texture = item.texture
 	var availableSize: Vector2 = size * Vector2(0.7, 0.7)

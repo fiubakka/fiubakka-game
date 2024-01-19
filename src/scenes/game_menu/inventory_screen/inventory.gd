@@ -7,9 +7,10 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	slots[0].update(dni)
-	for slot: TextureButton in slots:
-		slot.pressed.connect(self._on_Slot_Pressed.bind(slot.itemData))
+	Inventory.append(dni)
+	for i in range(0, len(Inventory)):
+		slots[i].update(Inventory[i])
+		slots[i].pressed.connect(self._on_Slot_Pressed.bind(Inventory[i]))
 	
 func _on_Slot_Pressed(item: InventoryItemData) -> void:
 	if (item):
