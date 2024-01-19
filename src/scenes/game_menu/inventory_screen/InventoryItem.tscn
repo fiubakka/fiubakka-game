@@ -13,4 +13,13 @@ offset_bottom = 80.0
 texture = SubResource("AtlasTexture_uny7k")
 script = ExtResource("2_skkke")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 79.0
+offset_bottom = 78.0
+
+[node name="Panel" type="Panel" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CenterContainer/Panel"]
