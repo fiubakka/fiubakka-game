@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://nqpqnx1lgim3"]
+[gd_scene load_steps=7 format=3 uid="uid://nqpqnx1lgim3"]
 
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="1_1frap"]
 
@@ -21,6 +21,10 @@ atlas = ExtResource("1_1frap")
 region = Rect2(2256, 336, 48, 48)
 margin = Rect2(0, 10, 0, 10)
 filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7p02c"]
+atlas = ExtResource("1_1frap")
+region = Rect2(32, 752, 80, 80)
 
 [node name="GameMenu" type="Control"]
 layout_mode = 3
@@ -76,3 +80,35 @@ texture_pressed = SubResource("AtlasTexture_lfvif")
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_1fklc")
 texture_pressed = SubResource("AtlasTexture_vdbqe")
+
+[node name="GridContainer" type="GridContainer" parent="Control"]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 157.0
+offset_right = 655.0
+offset_bottom = 378.0
+columns = 4
+
+[node name="TextureRect" type="TextureRect" parent="Control/GridContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_7p02c")
+
+[node name="TextureRect2" type="TextureRect" parent="Control/GridContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_7p02c")
+
+[node name="TextureRect3" type="TextureRect" parent="Control/GridContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_7p02c")
+
+[node name="TextureRect4" type="TextureRect" parent="Control/GridContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_7p02c")
+
+[node name="TextureRect5" type="TextureRect" parent="Control/GridContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_7p02c")
+
+[node name="TextureRect6" type="TextureRect" parent="Control/GridContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_7p02c")
