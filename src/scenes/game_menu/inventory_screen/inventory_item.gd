@@ -11,5 +11,4 @@ func update(item: InventoryItemData) -> void:
 		scaleValue = availableSize.y / item.texture.get_size().y
 	sprite.scale = Vector2(scaleValue, scaleValue)
 		
-	
-	
+
