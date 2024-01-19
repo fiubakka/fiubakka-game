@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://csa1aukvil678"]
+[gd_scene load_steps=4 format=3 uid="uid://csa1aukvil678"]
 
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="1_smlhh"]
+[ext_resource type="Script" path="res://src/scenes/game_menu/inventory_screen/inventory_item.gd" id="2_skkke"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uny7k"]
 atlas = ExtResource("1_smlhh")
@@ -10,5 +11,6 @@ region = Rect2(32, 752, 80, 80)
 offset_right = 80.0
 offset_bottom = 80.0
 texture = SubResource("AtlasTexture_uny7k")
+script = ExtResource("2_skkke")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

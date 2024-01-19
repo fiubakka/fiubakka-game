@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cswpkq3rymi6"]
+[gd_scene load_steps=5 format=3 uid="uid://cswpkq3rymi6"]
 
 [ext_resource type="PackedScene" uid="uid://csa1aukvil678" path="res://src/scenes/game_menu/inventory_screen/InventoryItem.tscn" id="1_pexyc"]
+[ext_resource type="Script" path="res://src/scenes/game_menu/inventory_screen/inventory.gd" id="1_qi08f"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_y7p64"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3k5bc"]
@@ -14,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_qi08f")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -48,7 +50,7 @@ layout_mode = 2
 [node name="InventoryItem8" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
 layout_mode = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
+[node name="Description" type="NinePatchRect" parent="."]
 layout_mode = 2
 offset_top = 168.0
 offset_right = 332.0
@@ -59,7 +61,7 @@ patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Description"]
 layout_mode = 2
 offset_top = 4.0
 offset_right = 332.0

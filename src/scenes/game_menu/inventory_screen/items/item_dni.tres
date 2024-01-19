@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://du0jmp1ykvyni"]
+
+[ext_resource type="Script" path="res://src/scenes/game_menu/inventory_screen/inventory_item_data.gd" id="1_gp45a"]
+[ext_resource type="Texture2D" uid="uid://b680ivd7y3bvg" path="res://art/miscellaneous/dni.png" id="2_k3mg2"]
+
+[resource]
+script = ExtResource("1_gp45a")
+name = "dni"
+id = 0
+description = "Permite ingresar a la universidad y rendir exámenes."
+texture = ExtResource("2_k3mg2")
