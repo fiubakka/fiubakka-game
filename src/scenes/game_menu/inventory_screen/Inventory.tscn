@@ -51,33 +51,36 @@ layout_mode = 2
 [node name="InventoryItem8" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
 layout_mode = 2
 
-[node name="Description" type="NinePatchRect" parent="."]
+[node name="Panel" type="Panel" parent="VBoxContainer"]
 layout_mode = 2
-offset_top = 168.0
-offset_right = 332.0
-offset_bottom = 230.0
+
+[node name="Description" type="NinePatchRect" parent="VBoxContainer/Panel"]
+layout_mode = 2
+offset_right = 326.0
+offset_bottom = 104.0
 texture = SubResource("AtlasTexture_3k5bc")
 patch_margin_left = 4
 patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Description"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Panel/Description"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 6.0
 offset_right = 323.0
-offset_bottom = 56.0
-theme_override_constants/separation = -15
+offset_bottom = 97.0
+theme_override_constants/separation = -5
 
-[node name="Name" type="RichTextLabel" parent="Description/VBoxContainer"]
+[node name="Name" type="RichTextLabel" parent="VBoxContainer/Panel/Description/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("4_45so7")
+theme_override_font_sizes/normal_font_size = 20
+
+[node name="Description" type="RichTextLabel" parent="VBoxContainer/Panel/Description/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
 theme_override_fonts/normal_font = ExtResource("4_45so7")
 theme_override_font_sizes/normal_font_size = 15
-
-[node name="Description" type="RichTextLabel" parent="Description/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_fonts/normal_font = ExtResource("4_45so7")
-theme_override_font_sizes/normal_font_size = 10
