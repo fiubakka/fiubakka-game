@@ -68,32 +68,23 @@ func _physics_process(_delta: float) -> void:
 
 func play_move_animation() -> void:
 	set_walk_region()
-	# TODO: delete $AnimatedSprite2D
 	if velocity.x > 0:
-		#$AnimatedSprite2D.play("walk_right")
 		$PlayerSprite/AnimationPlayer.play("body_right")
 	elif velocity.x < 0:
-		#$AnimatedSprite2D.play("walk_left")
 		$PlayerSprite/AnimationPlayer.play("body_left")
 	elif velocity.y < 0:
-		#$AnimatedSprite2D.play("walk_back")
 		$PlayerSprite/AnimationPlayer.play("body_back")
 	elif velocity.y > 0:
-		#$AnimatedSprite2D.play("walk_front")
 		$PlayerSprite/AnimationPlayer.play("body_front")
 	else:
 		set_idle_region()
 		if prev_vel.x > 0:
-			#$AnimatedSprite2D.play("idle_right")
 			$PlayerSprite/AnimationPlayer.play("body_right")
 		elif prev_vel.x < 0:
-			#$AnimatedSprite2D.play("idle_left")
 			$PlayerSprite/AnimationPlayer.play("body_left")
 		elif prev_vel.y < 0:
-			#$AnimatedSprite2D.play("idle_back")
 			$PlayerSprite/AnimationPlayer.play("body_back")
 		elif prev_vel.y > 0:
-			#$AnimatedSprite2D.play("idle_front")
 			$PlayerSprite/AnimationPlayer.play("body_front")
 
 func set_idle_region() -> void:

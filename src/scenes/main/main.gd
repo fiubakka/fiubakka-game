@@ -1,5 +1,6 @@
 extends Node2D
 
+const LoginScene = preload("res://src/scenes/login/login.tscn")
 const EntityScene = preload("res://src/scenes/entity/entity.tscn")
 const Room200Scene = preload("res://src/scenes/maps/room_200/room_200.tscn")
 
@@ -58,3 +59,7 @@ func _on_server_consumer_update_entity_state(
 func _on_pause_unpaused() -> void:
 	is_game_paused = false
 	unpaused.emit()
+
+
+func _on_character_creation_save_character() -> void:
+	$CharacterCreation.queue_free()

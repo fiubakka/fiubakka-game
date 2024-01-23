@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://2focfqtvt576"]
+[gd_scene load_steps=8 format=3 uid="uid://2focfqtvt576"]
 
+[ext_resource type="Script" path="res://src/scenes/character_creation/character_creation.gd" id="1_7ub86"]
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_x5dhn"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_nt0o2"]
 [ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="3_61440"]
@@ -14,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_7ub86")
 
 [node name="Background" type="NinePatchRect" parent="."]
 layout_mode = 0
@@ -208,4 +210,5 @@ offset_bottom = 50.0
 [connection signal="prev" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/BodySelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_body_select_prev"]
 [connection signal="next" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/OutfitSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_outfit_select_next"]
 [connection signal="prev" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/OutfitSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_outfit_select_prev"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Save/NinePatchRect/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Save/NinePatchRect/Button" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_save_button_pressed"]
