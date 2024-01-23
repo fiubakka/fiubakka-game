@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3 uid="uid://cswpkq3rymi6"]
+
+[ext_resource type="PackedScene" uid="uid://csa1aukvil678" path="res://src/scenes/game_menu/inventory_screen/InventoryItem.tscn" id="1_pexyc"]
+[ext_resource type="Script" path="res://src/scenes/game_menu/inventory_screen/inventory.gd" id="1_qi08f"]
+[ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_y7p64"]
+[ext_resource type="FontFile" uid="uid://cv2bywsa6irhc" path="res://fonts/Xolonium-Regular.ttf" id="4_45so7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3k5bc"]
+atlas = ExtResource("2_y7p64")
+region = Rect2(152, 240, 128, 48)
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qi08f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="InventoryItem" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
+layout_mode = 2
+
+[node name="InventoryItem2" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
+layout_mode = 2
+
+[node name="InventoryItem3" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
+layout_mode = 2
+
+[node name="InventoryItem4" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
+layout_mode = 2
+
+[node name="InventoryItem5" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
+layout_mode = 2
+
+[node name="InventoryItem6" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
+layout_mode = 2
+
+[node name="InventoryItem7" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
+layout_mode = 2
+
+[node name="InventoryItem8" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Description" type="NinePatchRect" parent="VBoxContainer/Panel"]
+layout_mode = 2
+offset_right = 326.0
+offset_bottom = 104.0
+texture = SubResource("AtlasTexture_3k5bc")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Panel/Description"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 323.0
+offset_bottom = 97.0
+theme_override_constants/separation = -5
+
+[node name="Name" type="RichTextLabel" parent="VBoxContainer/Panel/Description/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("4_45so7")
+theme_override_font_sizes/normal_font_size = 20
+
+[node name="Description" type="RichTextLabel" parent="VBoxContainer/Panel/Description/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+theme_override_fonts/normal_font = ExtResource("4_45so7")
+theme_override_font_sizes/normal_font_size = 15

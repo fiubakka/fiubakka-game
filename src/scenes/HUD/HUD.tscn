@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://d13a3saifdhox"]
+
+[ext_resource type="FontFile" uid="uid://cv2bywsa6irhc" path="res://fonts/Xolonium-Regular.ttf" id="1_v6k7q"]
+
+[sub_resource type="Theme" id="Theme_2g6pq"]
+RichTextLabel/font_sizes/normal_font_size = 40
+RichTextLabel/fonts/normal_font = ExtResource("1_v6k7q")
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_2g6pq")
+
+[node name="ClassRoom" type="RichTextLabel" parent="."]
+layout_mode = 1
+offset_right = 227.0
+offset_bottom = 61.0
+text = "Classroom"
+
+[node name="Time" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -130.0
+offset_bottom = 60.0
+grow_horizontal = 0
+text = "12:00"

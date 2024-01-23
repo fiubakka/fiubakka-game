@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://csa1aukvil678"]
+
+[ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="1_smlhh"]
+[ext_resource type="Script" path="res://src/scenes/game_menu/inventory_screen/inventory_item.gd" id="2_skkke"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xfl3"]
+atlas = ExtResource("1_smlhh")
+region = Rect2(32, 752, 80, 80)
+
+[node name="InventoryItem" type="TextureButton"]
+offset_right = 80.0
+offset_bottom = 80.0
+texture_normal = SubResource("AtlasTexture_1xfl3")
+script = ExtResource("2_skkke")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_top = 1.0
+offset_right = 79.0
+offset_bottom = 78.0
+
+[node name="Panel" type="Panel" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CenterContainer/Panel"]

@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=3 uid="uid://nqpqnx1lgim3"]
+
+[ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="1_1frap"]
+[ext_resource type="PackedScene" uid="uid://cswpkq3rymi6" path="res://src/scenes/game_menu/inventory_screen/Inventory.tscn" id="2_bbmvf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_53pf2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5wa6"]
+atlas = ExtResource("1_1frap")
+region = Rect2(2448, 40, 48, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfvif"]
+atlas = ExtResource("1_1frap")
+region = Rect2(2544, 48, 48, 48)
+margin = Rect2(0, 10, 0, 10)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fklc"]
+atlas = ExtResource("1_1frap")
+region = Rect2(2160, 328, 48, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdbqe"]
+atlas = ExtResource("1_1frap")
+region = Rect2(2256, 336, 48, 48)
+margin = Rect2(0, 10, 0, 10)
+filter_clip = true
+
+[node name="GameMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 2.0
+offset_right = -1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 0
+offset_right = 611.0
+offset_bottom = 343.0
+metadata/_edit_group_ = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_1frap")
+region_rect = Rect2(35.918, 752.864, 72.2153, 75.1348)
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="Panel" type="Panel" parent="HSplitContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = -137.0
+offset_right = 166.0
+offset_bottom = 137.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_53pf2")
+
+[node name="Inventory" parent="HSplitContainer/NinePatchRect/Panel" instance=ExtResource("2_bbmvf")]
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer"]
+layout_mode = 2
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="InventoryButton" type="TextureButton" parent="HSplitContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_c5wa6")
+texture_pressed = SubResource("AtlasTexture_lfvif")
+
+[node name="StatsButton" type="TextureButton" parent="HSplitContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_1fklc")
+texture_pressed = SubResource("AtlasTexture_vdbqe")
