@@ -17,6 +17,10 @@ func _ready() -> void:
 	$PlayerSprite/FacialHair.texture = cs.facial_hair_spritesheet[customization['facial_hair']]
 	$PlayerSprite/Outfit.texture = cs.outfit_spritesheet[customization['outfit']]
 	
+	# Set idle front animation when spawning player
+	set_idle_region()
+	$PlayerSprite/AnimationPlayer.play("body_front")
+	
 	
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
