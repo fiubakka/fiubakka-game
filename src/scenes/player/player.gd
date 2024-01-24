@@ -99,7 +99,7 @@ func set_idle_region() -> void:
 	$PlayerSprite/Outfit.region_rect = idle_region_rect
 	$PlayerSprite/FacialHair.region_rect = idle_region_rect
 	$PlayerSprite/Glasses.region_rect = idle_region_rect
-	$PlayerSprite/Hats.region_rect = idle_region_rect
+	$PlayerSprite/Hats.region_rect = Rect2(0, 96, 1152, 72)
 	
 func set_walk_region() -> void:
 	var walk_region_rect := Rect2 (0, 216, 1152, 72)
@@ -109,7 +109,7 @@ func set_walk_region() -> void:
 	$PlayerSprite/Outfit.region_rect = walk_region_rect
 	$PlayerSprite/FacialHair.region_rect = walk_region_rect
 	$PlayerSprite/Glasses.region_rect = walk_region_rect
-	$PlayerSprite/Hats.region_rect = walk_region_rect
+	$PlayerSprite/Hats.region_rect = Rect2(0, 190, 1152, 72)
 
 func _on_main_chat_opened() -> void:
 	idle = true

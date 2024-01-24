@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cq8pxfh85rsgw" path="res://art/char_creator/outfit/Outfit_01_48x48_01.png" id="6_1wty7"]
 [ext_resource type="Texture2D" uid="uid://bq6m73w3ttiwi" path="res://art/char_creator/facial_hair/Accessory_12_Mustache_48x48_01.png" id="7_48afg"]
 [ext_resource type="Texture2D" uid="uid://dptdxji4an7mg" path="res://art/char_creator/glasses/Accessory_15_Glasses_48x48_01.png" id="8_37csh"]
-[ext_resource type="Texture2D" uid="uid://dwlxot7yeg5rd" path="res://art/char_creator/hats/Accessory_04_Snapback_48x48_01.png" id="9_7qbtc"]
+[ext_resource type="Texture2D" uid="uid://q6m5gokdbmfu" path="res://art/char_creator/hats/Accessory_18_Chef_48x48_01.png" id="9_750an"]
 
 [sub_resource type="Animation" id="Animation_1oepq"]
 length = 0.001
@@ -512,10 +512,11 @@ region_enabled = true
 region_rect = Rect2(0, 120, 1152, 72)
 
 [node name="Hats" type="Sprite2D" parent="PlayerSprite"]
-texture = ExtResource("9_7qbtc")
+texture = ExtResource("9_750an")
+offset = Vector2(0, -24)
 hframes = 24
 region_enabled = true
-region_rect = Rect2(0, 120, 1152, 72)
+region_rect = Rect2(0, 88, 1152, 72)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerSprite"]
 libraries = {
