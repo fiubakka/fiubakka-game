@@ -5,7 +5,23 @@ signal update_movement(velocity: Vector2, position: Vector2)
 @export var idle: bool = false
 var prev_vel := Vector2.ZERO
 
+const cs = preload("res://src/scenes/character_creation/CompositeSprites.gd")
 
+func _ready() -> void:
+	var customization := PlayerInfo.player_customization
+	$PlayerSprite/Hats.texture = cs.hats_spritesheet[customization['hats']]
+	$PlayerSprite/Hair.texture = cs.hair_spritesheet[customization['hair']]
+	$PlayerSprite/Eyes.texture = cs.eyes_spritesheet[customization['eyes']]
+	$PlayerSprite/Body.texture = cs.body_spritesheet[customization['body']]
+	$PlayerSprite/Glasses.texture = cs.glasses_spritesheet[customization['glasses']]
+	$PlayerSprite/FacialHair.texture = cs.facial_hair_spritesheet[customization['facial_hair']]
+	$PlayerSprite/Outfit.texture = cs.outfit_spritesheet[customization['outfit']]
+	
+	# Set idle front animation when spawning player
+	set_idle_region()
+	$PlayerSprite/AnimationPlayer.play("body_front")
+	
+	
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
 	if idle:
@@ -55,24 +71,45 @@ func _physics_process(_delta: float) -> void:
 
 
 func play_move_animation() -> void:
+	set_walk_region()
 	if velocity.x > 0:
-		$AnimatedSprite2D.play("walk_right")
+		$PlayerSprite/AnimationPlayer.play("body_right")
 	elif velocity.x < 0:
-		$AnimatedSprite2D.play("walk_left")
+		$PlayerSprite/AnimationPlayer.play("body_left")
 	elif velocity.y < 0:
-		$AnimatedSprite2D.play("walk_back")
+		$PlayerSprite/AnimationPlayer.play("body_back")
 	elif velocity.y > 0:
-		$AnimatedSprite2D.play("walk_front")
+		$PlayerSprite/AnimationPlayer.play("body_front")
 	else:
+		set_idle_region()
 		if prev_vel.x > 0:
-			$AnimatedSprite2D.play("idle_right")
+			$PlayerSprite/AnimationPlayer.play("body_right")
 		elif prev_vel.x < 0:
-			$AnimatedSprite2D.play("idle_left")
+			$PlayerSprite/AnimationPlayer.play("body_left")
 		elif prev_vel.y < 0:
-			$AnimatedSprite2D.play("idle_back")
+			$PlayerSprite/AnimationPlayer.play("body_back")
 		elif prev_vel.y > 0:
-			$AnimatedSprite2D.play("idle_front")
+			$PlayerSprite/AnimationPlayer.play("body_front")
 
+func set_idle_region() -> void:
+	var idle_region_rect := Rect2(0, 120, 1152, 72)
+	$PlayerSprite/Body.region_rect = idle_region_rect
+	$PlayerSprite/Hair.region_rect = idle_region_rect
+	$PlayerSprite/Eyes.region_rect = idle_region_rect
+	$PlayerSprite/Outfit.region_rect = idle_region_rect
+	$PlayerSprite/FacialHair.region_rect = idle_region_rect
+	$PlayerSprite/Glasses.region_rect = idle_region_rect
+	$PlayerSprite/Hats.region_rect = Rect2(0, 96, 1152, 72)
+	
+func set_walk_region() -> void:
+	var walk_region_rect := Rect2 (0, 216, 1152, 72)
+	$PlayerSprite/Body.region_rect = walk_region_rect
+	$PlayerSprite/Hair.region_rect = walk_region_rect
+	$PlayerSprite/Eyes.region_rect = walk_region_rect
+	$PlayerSprite/Outfit.region_rect = walk_region_rect
+	$PlayerSprite/FacialHair.region_rect = walk_region_rect
+	$PlayerSprite/Glasses.region_rect = walk_region_rect
+	$PlayerSprite/Hats.region_rect = Rect2(0, 190, 1152, 72)
 
 func _on_main_chat_opened() -> void:
 	idle = true
