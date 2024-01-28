@@ -1,0 +1,161 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpkjmhxodrn0l"]
+
+[ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_wggl5"]
+[ext_resource type="Script" path="res://src/scenes/login/title.gd" id="2_xyn7x"]
+[ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="3_0e5pr"]
+[ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="4_xgi56"]
+
+[sub_resource type="Theme" id="Theme_myfhy"]
+default_font = ExtResource("4_xgi56")
+default_font_size = 50
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_wggl5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_right = 0.75
+anchor_bottom = 1.0
+offset_right = -3.05176e-05
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+script = ExtResource("2_xyn7x")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Title"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 10.0
+texture = ExtResource("3_0e5pr")
+region_rect = Rect2(40, 1104, 64, 48)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/Title/NinePatchRect"]
+self_modulate = Color(0.694118, 0.439216, 0.219608, 1)
+clip_contents = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_myfhy")
+bbcode_enabled = true
+text = "[center]Fiubakka[/center]"
+scroll_active = false
+
+[node name="Login" type="Control" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Login"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -35.0
+offset_right = 125.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(125, 35)
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 5.0
+texture = ExtResource("3_0e5pr")
+region_rect = Rect2(184, 1104, 64, 48)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/Login/NinePatchRect"]
+layout_mode = 0
+offset_left = 13.4999
+offset_top = 16.5003
+offset_right = 233.5
+offset_bottom = 51.5003
+theme_override_colors/default_color = Color(0.709804, 0.458824, 0.301961, 1)
+theme_override_fonts/normal_font = ExtResource("4_xgi56")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]Login[/center]"
+
+[node name="Button" type="Button" parent="NinePatchRect/VBoxContainer/Login/NinePatchRect"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 247.0
+offset_bottom = 67.0
+
+[node name="Register" type="Control" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Register"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -35.0
+offset_right = 125.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(125, 35)
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 5.0
+texture = ExtResource("3_0e5pr")
+region_rect = Rect2(184, 1104, 64, 48)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/Register/NinePatchRect"]
+offset_left = 16.4999
+offset_top = 16.5003
+offset_right = 236.5
+offset_bottom = 51.5003
+theme_override_colors/default_color = Color(0.709804, 0.458824, 0.301961, 1)
+theme_override_fonts/normal_font = ExtResource("4_xgi56")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center]Register[/center]"
+
+[node name="Button" type="Button" parent="NinePatchRect/VBoxContainer/Register/NinePatchRect"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -1.0
+offset_top = 3.0
+offset_right = 250.0
+offset_bottom = 69.0
