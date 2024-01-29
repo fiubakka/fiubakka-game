@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dpkjmhxodrn0l"]
+[gd_scene load_steps=7 format=3 uid="uid://dpkjmhxodrn0l"]
 
+[ext_resource type="Script" path="res://src/scenes/main_menu/main_menu.gd" id="1_ab4io"]
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_wggl5"]
 [ext_resource type="Script" path="res://src/scenes/login/title.gd" id="2_xyn7x"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="3_0e5pr"]
@@ -16,6 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ab4io")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -107,7 +109,7 @@ theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[center]Login[/center]"
 
-[node name="Button" type="Button" parent="NinePatchRect/VBoxContainer/Login/NinePatchRect"]
+[node name="LoginButton" type="Button" parent="NinePatchRect/VBoxContainer/Login/NinePatchRect"]
 modulate = Color(1, 1, 1, 0)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
@@ -141,6 +143,7 @@ texture = ExtResource("3_0e5pr")
 region_rect = Rect2(184, 1104, 64, 48)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/Register/NinePatchRect"]
+layout_mode = 0
 offset_left = 16.4999
 offset_top = 16.5003
 offset_right = 236.5
@@ -151,7 +154,7 @@ theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[center]Register[/center]"
 
-[node name="Button" type="Button" parent="NinePatchRect/VBoxContainer/Register/NinePatchRect"]
+[node name="RegisterButton" type="Button" parent="NinePatchRect/VBoxContainer/Register/NinePatchRect"]
 modulate = Color(1, 1, 1, 0)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
@@ -159,3 +162,6 @@ offset_left = -1.0
 offset_top = 3.0
 offset_right = 250.0
 offset_bottom = 69.0
+
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Login/NinePatchRect/LoginButton" to="." method="_on_login_button_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Register/NinePatchRect/RegisterButton" to="." method="_on_register_button_pressed"]
