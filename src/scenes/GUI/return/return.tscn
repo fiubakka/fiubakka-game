@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl2ppg848l7il"]
+
+[ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="1_cg5dy"]
+[ext_resource type="Script" path="res://src/scenes/GUI/return/return.gd" id="2_gw136"]
+
+[node name="Return" type="NinePatchRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -912.0
+offset_bottom = -484.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_cg5dy")
+region_rect = Rect2(2304, 1480, 48, 56)
+script = ExtResource("2_gw136")
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 59.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6kg7qutp1h00"]
+[gd_scene load_steps=12 format=3 uid="uid://b6kg7qutp1h00"]
 
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_f447j"]
 [ext_resource type="Script" path="res://src/scenes/login/login.gd" id="1_mxn2w"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_vs65q"]
 [ext_resource type="Script" path="res://src/scenes/login/title.gd" id="2_wof1i"]
+[ext_resource type="PackedScene" uid="uid://dl2ppg848l7il" path="res://src/scenes/GUI/return/return.tscn" id="3_ke864"]
 [ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="3_v6w8k"]
 [ext_resource type="Script" path="res://src/scenes/login/login_username_box.gd" id="4_m2urp"]
 [ext_resource type="AudioStream" uid="uid://ck7nysfydevjl" path="res://audio/music/login.ogg" id="5_ktkbl"]
@@ -35,12 +36,10 @@ grow_vertical = 2
 texture = ExtResource("1_f447j")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.25
-anchor_right = 0.75
-anchor_bottom = 1.0
-offset_right = -3.05176e-05
+layout_mode = 2
+offset_left = 268.825
+offset_right = 715.824
+offset_bottom = 541.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -128,6 +127,16 @@ placeholder_text = "Usuario..."
 max_length = 12
 script = ExtResource("4_m2urp")
 
+[node name="Return" parent="." instance=ExtResource("3_ke864")]
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 73.0
+offset_top = 24.0
+offset_right = 121.0
+offset_bottom = 80.0
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_ktkbl")
 volume_db = -5.0
@@ -135,3 +144,4 @@ autoplay = true
 
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_text_changed"]
 [connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="." method="_on_login_username_text_submitted"]
+[connection signal="return_to_menu" from="Return" to="." method="_on_return_return_to_menu"]

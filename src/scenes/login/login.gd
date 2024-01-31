@@ -3,6 +3,7 @@ extends Control
 var timer: Timer
 
 signal user_logged_in(username: String)
+signal return_to_menu
 
 
 func _on_login_username_text_submitted(username: String) -> void:
@@ -17,3 +18,7 @@ func _on_login_username_text_submitted(username: String) -> void:
 
 func _on_timer_timeout(username: String) -> void:
 	user_logged_in.emit(username)
+
+
+func _on_return_return_to_menu() -> void:
+	return_to_menu.emit()

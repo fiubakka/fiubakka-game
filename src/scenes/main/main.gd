@@ -1,6 +1,7 @@
 extends Node2D
 
 const LoginScene = preload("res://src/scenes/login/login.tscn")
+const CharCreationScene = preload("res://src/scenes/character_creation/character_creation.tscn")
 const EntityScene = preload("res://src/scenes/entity/entity.tscn")
 const Room200Scene = preload("res://src/scenes/maps/room_200/room_200.tscn")
 
@@ -63,3 +64,23 @@ func _on_pause_unpaused() -> void:
 
 func _on_character_creation_save_character() -> void:
 	$CharacterCreation.queue_free()
+
+
+func _on_main_menu_go_to_login() -> void:
+	$Login.visible = true
+	$MainMenu.visible = false
+
+
+func _on_main_menu_go_to_register() -> void:
+	$CharacterCreation.visible = true
+	$MainMenu.visible = false
+
+
+func _on_login_return_to_menu() -> void:
+	$MainMenu.visible = true
+	$Login.visible = false
+
+
+func _on_character_creation_return_to_menu() -> void:
+	$MainMenu.visible = true
+	$CharacterCreation.visible = false

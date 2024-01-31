@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://2focfqtvt576"]
+[gd_scene load_steps=9 format=3 uid="uid://2focfqtvt576"]
 
 [ext_resource type="Script" path="res://src/scenes/character_creation/character_creation.gd" id="1_7ub86"]
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_x5dhn"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://src/scenes/character_creation/CompositeSprites.gd" id="4_4wa33"]
 [ext_resource type="Script" path="res://src/scenes/character_creation/CharacterSprite.gd" id="4_vhfj7"]
 [ext_resource type="PackedScene" uid="uid://cgqjqesphj8ha" path="res://src/scenes/GUI/selector/selector.tscn" id="6_rgcdb"]
+[ext_resource type="PackedScene" uid="uid://dl2ppg848l7il" path="res://src/scenes/GUI/return/return.tscn" id="8_4gecp"]
 
 [node name="CharacterCreation" type="Control"]
 layout_mode = 3
@@ -195,6 +196,13 @@ layout_mode = 0
 offset_right = 200.0
 offset_bottom = 50.0
 
+[node name="Return" parent="NinePatchRect" instance=ExtResource("8_4gecp")]
+layout_mode = 1
+offset_left = 175.0
+offset_top = 118.0
+offset_right = -804.0
+offset_bottom = -422.0
+
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/Left/Randomize/Button" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_randomize_button_pressed"]
 [connection signal="next" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HatsSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hats_select_next"]
 [connection signal="prev" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HatsSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hats_select_prev"]
@@ -212,3 +220,4 @@ offset_bottom = 50.0
 [connection signal="prev" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/OutfitSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_outfit_select_prev"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Save/NinePatchRect/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Save/NinePatchRect/Button" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_save_button_pressed"]
+[connection signal="return_to_menu" from="NinePatchRect/Return" to="." method="_on_return_return_to_menu"]
