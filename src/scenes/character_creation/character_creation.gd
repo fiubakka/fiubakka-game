@@ -24,4 +24,5 @@ func _on_timer_timeout(username: String) -> void:
 
 
 func _on_return_return_to_menu() -> void:
+	$NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername.clear()
 	return_to_menu.emit()
