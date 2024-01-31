@@ -3,3 +3,6 @@ src/protocol/protobuf/
 .vscode/
 .venv/
 node_modules/
+templates/
+exported/
+*.exe
