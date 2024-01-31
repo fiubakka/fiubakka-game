@@ -21,7 +21,7 @@ offset_top = -3.0
 offset_right = 960.0
 offset_bottom = 537.0
 
-[node name="CharacterCreation" parent="." instance=ExtResource("8_veqb1")]
+[node name="Register" parent="." instance=ExtResource("8_veqb1")]
 visible = false
 
 [node name="ServerConnection" type="Node" parent="."]
@@ -67,9 +67,9 @@ offset_bottom = 537.0
 [connection signal="paused" from="." to="GUI/Pause" method="_on_main_paused"]
 [connection signal="return_to_menu" from="Login" to="." method="_on_login_return_to_menu"]
 [connection signal="user_logged_in" from="Login" to="ServerConnection/ServerProducer" method="_on_user_logged_in"]
-[connection signal="return_to_menu" from="CharacterCreation" to="." method="_on_character_creation_return_to_menu"]
-[connection signal="save_character" from="CharacterCreation" to="." method="_on_character_creation_save_character"]
-[connection signal="user_logged_in" from="CharacterCreation" to="ServerConnection/ServerProducer" method="_on_user_logged_in"]
+[connection signal="return_to_menu" from="Register" to="." method="_on_register_return_to_menu"]
+[connection signal="save_character" from="Register" to="." method="_on_register_save_character"]
+[connection signal="user_logged_in" from="Register" to="ServerConnection/ServerProducer" method="_on_user_logged_in"]
 [connection signal="update_content" from="ServerConnection/ServerConsumer" to="GUI/Chatbox" method="_on_server_consumer_update_content"]
 [connection signal="update_entity_state" from="ServerConnection/ServerConsumer" to="." method="_on_server_consumer_update_entity_state"]
 [connection signal="user_init_ready" from="ServerConnection/ServerConsumer" to="." method="_on_server_consumer_user_init_ready"]
