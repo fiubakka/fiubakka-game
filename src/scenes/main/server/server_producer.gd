@@ -35,7 +35,7 @@ func _on_player_movement(velocity: Vector2, position: Vector2) -> void:
 	_producer.send(player_movement)
 
 
-func _on_login_user_logged_in(username: String) -> void:
+func _on_user_logged_in(username: String) -> void:
 	var player_init := PBPlayerInit.new()
 	player_init.set_username(username)
 	_producer.send(player_init)
