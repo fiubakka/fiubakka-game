@@ -35,9 +35,18 @@ func _on_player_movement(velocity: Vector2, position: Vector2) -> void:
 	_producer.send(player_movement)
 
 
-func _on_user_logged_in(username: String) -> void:
+func _on_user_logged_in(username: String, equipment: Equipment) -> void:
 	var player_init := PBPlayerInit.new()
 	player_init.set_username(username)
+	if equipment:
+		var player_equipment := player_init.new_equipment()
+		player_equipment.set_hat(equipment.hat)
+		player_equipment.set_hair(equipment.hair)
+		player_equipment.set_eyes(equipment.eyes)
+		player_equipment.set_glasses(equipment.glasses)
+		player_equipment.set_facial_hair(equipment.facial_hair)
+		player_equipment.set_body(equipment.body)
+		player_equipment.set_outfit(equipment.outfit)
 	_producer.send(player_init)
 
 

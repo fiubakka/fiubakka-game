@@ -15,8 +15,7 @@ func _ready() -> void:
 
 
 func set_equipment(equipment: Equipment) -> void:
-	print("SETTING EQUIPMENT", equipment)
-	$PlayerSprite/Hats.texture = cs.hats_spritesheet[equipment.hat]
+	$PlayerSprite/Hats.texture = cs.hats_spritesheet[equipment["hat"]]
 	$PlayerSprite/Hair.texture = cs.hair_spritesheet[equipment["hair"]]
 	$PlayerSprite/Eyes.texture = cs.eyes_spritesheet[equipment["eyes"]]
 	$PlayerSprite/Body.texture = cs.body_spritesheet[equipment["body"]]
