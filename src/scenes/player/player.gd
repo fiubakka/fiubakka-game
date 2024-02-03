@@ -7,21 +7,24 @@ var prev_vel := Vector2.ZERO
 
 const cs = preload("res://src/scenes/character_creation/CompositeSprites.gd")
 
+
 func _ready() -> void:
-	var customization := PlayerInfo.player_customization
-	$PlayerSprite/Hats.texture = cs.hats_spritesheet[customization['hats']]
-	$PlayerSprite/Hair.texture = cs.hair_spritesheet[customization['hair']]
-	$PlayerSprite/Eyes.texture = cs.eyes_spritesheet[customization['eyes']]
-	$PlayerSprite/Body.texture = cs.body_spritesheet[customization['body']]
-	$PlayerSprite/Glasses.texture = cs.glasses_spritesheet[customization['glasses']]
-	$PlayerSprite/FacialHair.texture = cs.facial_hair_spritesheet[customization['facial_hair']]
-	$PlayerSprite/Outfit.texture = cs.outfit_spritesheet[customization['outfit']]
-	
 	# Set idle front animation when spawning player
 	set_idle_region()
 	$PlayerSprite/AnimationPlayer.play("body_front")
-	
-	
+
+
+func set_equipment(equipment: Equipment) -> void:
+	print("SETTING EQUIPMENT", equipment)
+	$PlayerSprite/Hats.texture = cs.hats_spritesheet[equipment.hat]
+	$PlayerSprite/Hair.texture = cs.hair_spritesheet[equipment["hair"]]
+	$PlayerSprite/Eyes.texture = cs.eyes_spritesheet[equipment["eyes"]]
+	$PlayerSprite/Body.texture = cs.body_spritesheet[equipment["body"]]
+	$PlayerSprite/Glasses.texture = cs.glasses_spritesheet[equipment["glasses"]]
+	$PlayerSprite/FacialHair.texture = cs.facial_hair_spritesheet[equipment["facial_hair"]]
+	$PlayerSprite/Outfit.texture = cs.outfit_spritesheet[equipment["outfit"]]
+
+
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
 	if idle:
@@ -91,6 +94,7 @@ func play_move_animation() -> void:
 		elif prev_vel.y > 0:
 			$PlayerSprite/AnimationPlayer.play("body_front")
 
+
 func set_idle_region() -> void:
 	var idle_region_rect := Rect2(0, 120, 1152, 72)
 	$PlayerSprite/Body.region_rect = idle_region_rect
@@ -100,9 +104,10 @@ func set_idle_region() -> void:
 	$PlayerSprite/FacialHair.region_rect = idle_region_rect
 	$PlayerSprite/Glasses.region_rect = idle_region_rect
 	$PlayerSprite/Hats.region_rect = Rect2(0, 96, 1152, 72)
-	
+
+
 func set_walk_region() -> void:
-	var walk_region_rect := Rect2 (0, 216, 1152, 72)
+	var walk_region_rect := Rect2(0, 216, 1152, 72)
 	$PlayerSprite/Body.region_rect = walk_region_rect
 	$PlayerSprite/Hair.region_rect = walk_region_rect
 	$PlayerSprite/Eyes.region_rect = walk_region_rect
@@ -110,6 +115,7 @@ func set_walk_region() -> void:
 	$PlayerSprite/FacialHair.region_rect = walk_region_rect
 	$PlayerSprite/Glasses.region_rect = walk_region_rect
 	$PlayerSprite/Hats.region_rect = Rect2(0, 190, 1152, 72)
+
 
 func _on_main_chat_opened() -> void:
 	idle = true

@@ -11,7 +11,7 @@ func _on_button_pressed() -> void:
 	var username: String = $NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername.text
 	if username.is_empty():
 		return
-	timer = Timer.new() # Timer to send init message until we get a response
+	timer = Timer.new()  # Timer to send init message until we get a response
 	timer.timeout.connect(Callable(self, "_on_timer_timeout").bind(username))
 	add_child(timer)
 	timer.set_wait_time(2.0)
