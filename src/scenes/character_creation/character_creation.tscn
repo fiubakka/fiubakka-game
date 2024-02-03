@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://2focfqtvt576"]
+[gd_scene load_steps=12 format=3 uid="uid://2focfqtvt576"]
 
 [ext_resource type="Script" path="res://src/scenes/character_creation/character_creation.gd" id="1_7ub86"]
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_x5dhn"]
@@ -7,7 +7,12 @@
 [ext_resource type="Script" path="res://src/scenes/character_creation/CompositeSprites.gd" id="4_4wa33"]
 [ext_resource type="Script" path="res://src/scenes/character_creation/CharacterSprite.gd" id="4_vhfj7"]
 [ext_resource type="PackedScene" uid="uid://cgqjqesphj8ha" path="res://src/scenes/GUI/selector/selector.tscn" id="6_rgcdb"]
+[ext_resource type="Script" path="res://src/scenes/login/login_username_box.gd" id="7_b50nj"]
 [ext_resource type="PackedScene" uid="uid://dl2ppg848l7il" path="res://src/scenes/GUI/return/return.tscn" id="8_4gecp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_isp5o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fvq1j"]
 
 [node name="CharacterCreation" type="Control"]
 layout_mode = 3
@@ -37,10 +42,10 @@ patch_margin_left = 8
 [node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
 modulate = Color(1, 1, 1, 0.921569)
 layout_mode = 0
-offset_left = 176.0
-offset_top = 122.0
-offset_right = 861.0
-offset_bottom = 528.0
+offset_left = 174.0
+offset_top = 120.0
+offset_right = 859.0
+offset_bottom = 562.0
 metadata/_edit_group_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
@@ -107,30 +112,57 @@ position = Vector2(0, -28)
 region_enabled = true
 region_rect = Rect2(144, 0, 48, 72)
 
-[node name="Randomize" type="CenterContainer" parent="NinePatchRect/VBoxContainer/Character/Left"]
+[node name="Username" type="Control" parent="NinePatchRect/VBoxContainer/Character/Left"]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
 
-[node name="ButtonTexture" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Character/Left/Randomize"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
+[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Character/Left/Username"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -35.0
+offset_right = 125.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -3.14159
+pivot_offset = Vector2(125, 35)
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 5.0
 texture = ExtResource("2_nt0o2")
-region_rect = Rect2(184, 904, 64, 72)
+region_rect = Rect2(800, 1152, 80, 48)
+patch_margin_left = 5
 
-[node name="QuestionMarkTexture" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Character/Left/Randomize/ButtonTexture"]
-custom_minimum_size = Vector2(40, 60)
-layout_mode = 2
-offset_left = 30.0
-offset_top = 14.405
-offset_right = 70.0
-offset_bottom = 74.4051
-texture = ExtResource("2_nt0o2")
-region_rect = Rect2(392, 0, 32, 48)
-
-[node name="Button" type="Button" parent="NinePatchRect/VBoxContainer/Character/Left/Randomize"]
-modulate = Color(1, 1, 1, 0)
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
+[node name="LoginUsername" type="LineEdit" parent="NinePatchRect/VBoxContainer/Character/Left/Username"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.5312
+offset_top = -15.5
+offset_right = 33.5312
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.694118, 0.439216, 0.219608, 1)
+theme_override_colors/font_placeholder_color = Color(0.796078, 0.517647, 0.282353, 0.231373)
+theme_override_fonts/font = ExtResource("3_61440")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxEmpty_isp5o")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fvq1j")
+placeholder_text = "Usuario..."
+max_length = 12
+script = ExtResource("7_b50nj")
 
 [node name="VSplitContainer" type="VSplitContainer" parent="NinePatchRect/VBoxContainer/Character"]
 layout_mode = 2
@@ -168,32 +200,63 @@ label = "Body"
 layout_mode = 2
 label = "Outfit"
 
-[node name="Save" type="CenterContainer" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer"]
+layout_mode = 2
+split_offset = 138
+
+[node name="Randomize" type="CenterContainer" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer"]
 layout_mode = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/Save"]
+[node name="ButtonTexture" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Randomize"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("2_nt0o2")
+region_rect = Rect2(184, 904, 64, 72)
+
+[node name="QuestionMarkTexture" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Randomize/ButtonTexture"]
+custom_minimum_size = Vector2(20, 30)
+layout_mode = 2
+offset_left = 15.0
+offset_top = 7.0
+offset_right = 35.0
+offset_bottom = 37.0
+texture = ExtResource("2_nt0o2")
+region_rect = Rect2(392, 0, 32, 48)
+
+[node name="Button" type="Button" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Randomize/ButtonTexture"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+offset_right = 50.0
+offset_bottom = 50.0
+
+[node name="Register" type="MarginContainer" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 texture = ExtResource("2_nt0o2")
 region_rect = Rect2(184, 1104, 64, 48)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/Save/NinePatchRect"]
+[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect"]
 layout_mode = 0
-offset_left = 20.0
+offset_left = 30.0
 offset_top = 9.0
-offset_right = 182.0
+offset_right = 192.0
 offset_bottom = 43.0
 theme_override_colors/default_color = Color(0.698039, 0.458824, 0.247059, 1)
 theme_override_fonts/normal_font = ExtResource("3_61440")
 theme_override_font_sizes/normal_font_size = 37
 bbcode_enabled = true
-text = "[center]Save[/center]"
+text = "[center]Register[/center]"
 
-[node name="Button" type="Button" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/Save/NinePatchRect"]
+[node name="Button" type="Button" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect"]
 modulate = Color(1, 1, 1, 0)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_right = 200.0
+offset_right = 212.0
 offset_bottom = 50.0
 
 [node name="Return" parent="NinePatchRect" instance=ExtResource("8_4gecp")]
@@ -203,7 +266,7 @@ offset_top = 118.0
 offset_right = -804.0
 offset_bottom = -422.0
 
-[connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/Left/Randomize/Button" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_randomize_button_pressed"]
+[connection signal="text_changed" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" method="_on_text_changed"]
 [connection signal="next" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HatsSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hats_select_next"]
 [connection signal="prev" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HatsSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hats_select_prev"]
 [connection signal="next" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HairSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hair_select_next"]
@@ -218,6 +281,7 @@ offset_bottom = -422.0
 [connection signal="prev" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/BodySelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_body_select_prev"]
 [connection signal="next" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/OutfitSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_outfit_select_next"]
 [connection signal="prev" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/OutfitSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_outfit_select_prev"]
-[connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Save/NinePatchRect/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Save/NinePatchRect/Button" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_save_button_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Randomize/ButtonTexture/Button" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_randomize_button_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect/Button" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_save_button_pressed"]
 [connection signal="return_to_menu" from="NinePatchRect/Return" to="." method="_on_return_return_to_menu"]
