@@ -163,7 +163,7 @@ tracks/6/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_3vkh5"]
-resource_name = "body_back"
+resource_name = "back"
 length = 1.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -252,7 +252,7 @@ tracks/6/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_6nanr"]
-resource_name = "body_front"
+resource_name = "front"
 length = 1.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -341,7 +341,7 @@ tracks/6/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_ekm0y"]
-resource_name = "body_left"
+resource_name = "left"
 length = 1.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -430,7 +430,7 @@ tracks/6/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_5hc27"]
-resource_name = "body_right"
+resource_name = "right"
 length = 1.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -521,16 +521,15 @@ tracks/6/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d7gpy"]
 _data = {
 "RESET": SubResource("Animation_1oepq"),
-"body_back": SubResource("Animation_3vkh5"),
-"body_front": SubResource("Animation_6nanr"),
-"body_left": SubResource("Animation_ekm0y"),
-"body_right": SubResource("Animation_5hc27")
+"back": SubResource("Animation_3vkh5"),
+"front": SubResource("Animation_6nanr"),
+"left": SubResource("Animation_ekm0y"),
+"right": SubResource("Animation_5hc27")
 }
 
 [node name="Entity" type="Node2D"]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_2la61")
-id = null
 
 [node name="CompositeSprites" type="Node2D" parent="."]
 script = SubResource("GDScript_tkbsd")

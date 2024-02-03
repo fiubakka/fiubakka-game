@@ -19,7 +19,7 @@ func _ready() -> void:
 	
 	# Set idle front animation when spawning player
 	set_idle_region()
-	$PlayerSprite/AnimationPlayer.play("body_front")
+	$PlayerSprite/AnimationPlayer.play("front")
 	
 	
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
@@ -73,23 +73,23 @@ func _physics_process(_delta: float) -> void:
 func play_move_animation() -> void:
 	set_walk_region()
 	if velocity.x > 0:
-		$PlayerSprite/AnimationPlayer.play("body_right")
+		$PlayerSprite/AnimationPlayer.play("right")
 	elif velocity.x < 0:
-		$PlayerSprite/AnimationPlayer.play("body_left")
+		$PlayerSprite/AnimationPlayer.play("left")
 	elif velocity.y < 0:
-		$PlayerSprite/AnimationPlayer.play("body_back")
+		$PlayerSprite/AnimationPlayer.play("back")
 	elif velocity.y > 0:
-		$PlayerSprite/AnimationPlayer.play("body_front")
+		$PlayerSprite/AnimationPlayer.play("front")
 	else:
 		set_idle_region()
 		if prev_vel.x > 0:
-			$PlayerSprite/AnimationPlayer.play("body_right")
+			$PlayerSprite/AnimationPlayer.play("right")
 		elif prev_vel.x < 0:
-			$PlayerSprite/AnimationPlayer.play("body_left")
+			$PlayerSprite/AnimationPlayer.play("left")
 		elif prev_vel.y < 0:
-			$PlayerSprite/AnimationPlayer.play("body_back")
+			$PlayerSprite/AnimationPlayer.play("back")
 		elif prev_vel.y > 0:
-			$PlayerSprite/AnimationPlayer.play("body_front")
+			$PlayerSprite/AnimationPlayer.play("front")
 
 func set_idle_region() -> void:
 	var idle_region_rect := Rect2(0, 120, 1152, 72)
