@@ -14,10 +14,10 @@ func _on_login_username_text_submitted(username: String) -> void:
 	add_child(timer)
 	timer.start()
 	timer.set_wait_time(2.0)
- 
+
 
 func _on_timer_timeout(username: String) -> void:
-	user_logged_in.emit(username)
+	user_logged_in.emit(username, null)
 
 
 func _on_return_return_to_menu() -> void:

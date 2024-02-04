@@ -1,6 +1,6 @@
 extends Node
 
-signal user_init_ready(position: Vector2)
+signal user_init_ready(position: Vector2, equipment: Equipment)  #TOOD: Tipar esto
 signal update_entity_state(entityId: String, position: Vector2, velocity: Vector2)
 signal update_content(entityId: String, content: String)
 
@@ -56,11 +56,22 @@ func _handle_message(message: Object) -> void:
 
 
 func _handle_player_init_ready(msg: PBPlayerInitReady) -> void:
+	var equipment := Equipment.new()
+	equipment.set_equipment(
+		msg.get_initialState().get_equipment().get_hat(),
+		msg.get_initialState().get_equipment().get_hair(),
+		msg.get_initialState().get_equipment().get_eyes(),
+		msg.get_initialState().get_equipment().get_glasses(),
+		msg.get_initialState().get_equipment().get_facial_hair(),
+		msg.get_initialState().get_equipment().get_body(),
+		msg.get_initialState().get_equipment().get_outfit()
+	)
 	user_init_ready.emit(
 		Vector2(
 			msg.get_initialState().get_position().get_x(),
 			msg.get_initialState().get_position().get_y()
-		)
+		),
+		equipment
 	)
 
 

@@ -1,5 +1,6 @@
 extends TextureButton
 
+
 func update(item: InventoryItemData) -> void:
 	var sprite: Sprite2D = $CenterContainer/Panel/Sprite2D
 	sprite.texture = item.texture
@@ -10,5 +11,3 @@ func update(item: InventoryItemData) -> void:
 	else:
 		scaleValue = availableSize.y / item.texture.get_size().y
 	sprite.scale = Vector2(scaleValue, scaleValue)
-		
-

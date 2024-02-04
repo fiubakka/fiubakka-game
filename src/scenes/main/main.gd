@@ -25,7 +25,7 @@ func _process(_delta: float) -> void:
 		paused.emit()
 
 
-func _on_server_consumer_user_init_ready(_position: Vector2) -> void:
+func _on_server_consumer_user_init_ready(_position: Vector2, equipment: Equipment) -> void:
 	add_child(Room200Scene.instantiate())
 	#TODO: Is it okay to change the initial position of the player like this or should we use something else
 	# like signals for example?
@@ -35,6 +35,7 @@ func _on_server_consumer_user_init_ready(_position: Vector2) -> void:
 	chat_closed.connect(player._on_main_chat_closed)
 	paused.connect(player._on_main_paused)
 	unpaused.connect(player._on_main_unpaused)
+	player.set_equipment(equipment)
 	player.position = _position
 	login_ready.emit()
 	$Login.queue_free()
