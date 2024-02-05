@@ -5,7 +5,7 @@ var velocity := Vector2(0, 0)
 var prev_vel := Vector2(0, 0)
 var player_name := ""
 
-const cs = preload("res://src/scenes/character_creation/CompositeSprites.gd")
+var cs := CompositeSprites
 
 func _ready() -> void:
 	$Name.text = "[center][color=#ffaaaa]" + player_name + "[/color][/center]"
@@ -21,7 +21,7 @@ func _ready() -> void:
 	
 	# Set idle front animation when spawning player
 	set_idle_region()
-	$EntitySprite/AnimationPlayer.play("front")
+	$AnimationPlayer.play("front")
 
 # TODO: this is for local testing only
 # Remove this method and use the data in the message
@@ -45,23 +45,23 @@ func _process(_delta: float) -> void:
 
 	set_walk_region()
 	if velocity.x > 0:
-		$EntitySprite/AnimationPlayer.play("right")
+		$AnimationPlayer.play("right")
 	elif velocity.x < 0:
-		$EntitySprite/AnimationPlayer.play("left")
+		$AnimationPlayer.play("left")
 	elif velocity.y < 0:
-		$EntitySprite/AnimationPlayer.play("back")
+		$AnimationPlayer.play("back")
 	elif velocity.y > 0:
-		$EntitySprite/AnimationPlayer.play("front")
+		$AnimationPlayer.play("front")
 	else:
 		set_idle_region()
 		if prev_vel.x > 0:
-			$EntitySprite/AnimationPlayer.play("right")
+			$AnimationPlayer.play("right")
 		elif prev_vel.x < 0:
-			$EntitySprite/AnimationPlayer.play("left")
+			$AnimationPlayer.play("left")
 		elif prev_vel.y < 0:
-			$EntitySprite/AnimationPlayer.play("back")
+			$AnimationPlayer.play("back")
 		elif prev_vel.y > 0:
-			$EntitySprite/AnimationPlayer.play("front")
+			$AnimationPlayer.play("front")
 
 	prev_vel = velocity
 	

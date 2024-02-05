@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://2focfqtvt576"]
+[gd_scene load_steps=11 format=3 uid="uid://2focfqtvt576"]
 
 [ext_resource type="Script" path="res://src/scenes/character_creation/character_creation.gd" id="1_7ub86"]
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_x5dhn"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_nt0o2"]
 [ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="3_61440"]
-[ext_resource type="Script" path="res://src/scenes/character_creation/CompositeSprites.gd" id="4_4wa33"]
 [ext_resource type="Script" path="res://src/scenes/character_creation/CharacterSprite.gd" id="4_vhfj7"]
 [ext_resource type="PackedScene" uid="uid://cgqjqesphj8ha" path="res://src/scenes/GUI/selector/selector.tscn" id="6_rgcdb"]
 [ext_resource type="Script" path="res://src/scenes/login/login_username_box.gd" id="7_b50nj"]
@@ -77,37 +76,34 @@ position = Vector2(150, 150)
 scale = Vector2(3, 3)
 script = ExtResource("4_vhfj7")
 
-[node name="CompositeSprites" type="Node2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite"]
-script = ExtResource("4_4wa33")
-
-[node name="Body" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite/CompositeSprites"]
+[node name="Body" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite"]
 region_enabled = true
 region_rect = Rect2(144, 32, 48, 64)
 
-[node name="Hair" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite/CompositeSprites"]
+[node name="Hair" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite"]
 position = Vector2(0, -20)
 region_enabled = true
 region_rect = Rect2(144, 24, 48, 40)
 
-[node name="Eyes" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite/CompositeSprites"]
+[node name="Eyes" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite"]
 region_enabled = true
 region_rect = Rect2(144, 48, 48, 32)
 
-[node name="Outfit" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite/CompositeSprites"]
+[node name="Outfit" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite"]
 position = Vector2(0, 20)
 region_enabled = true
 region_rect = Rect2(144, 64, 48, 40)
 
-[node name="FacialHair" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite/CompositeSprites"]
+[node name="FacialHair" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite"]
 position = Vector2(0, 4)
 region_enabled = true
 region_rect = Rect2(152, 56, 32, 24)
 
-[node name="Glasses" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite/CompositeSprites"]
+[node name="Glasses" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite"]
 region_enabled = true
 region_rect = Rect2(152, 56, 32, 16)
 
-[node name="Hats" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite/CompositeSprites"]
+[node name="Hats" type="Sprite2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite"]
 position = Vector2(0, -28)
 region_enabled = true
 region_rect = Rect2(144, 0, 48, 72)
