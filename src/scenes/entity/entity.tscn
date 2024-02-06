@@ -462,7 +462,7 @@ script = ExtResource("1_2la61")
 [node name="EntitySprite" parent="." instance=ExtResource("2_0mjch")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("")
+root_node = NodePath("../EntitySprite")
 libraries = {
 "": SubResource("AnimationLibrary_d7gpy")
 }
