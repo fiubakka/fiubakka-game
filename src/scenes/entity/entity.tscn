@@ -1,396 +1,589 @@
-[gd_scene load_steps=52 format=3 uid="uid://cyysqnwra020e"]
+[gd_scene load_steps=16 format=3 uid="uid://cyysqnwra020e"]
 
 [ext_resource type="Script" path="res://src/scenes/entity/entity.gd" id="1_2la61"]
-[ext_resource type="Texture2D" uid="uid://dr0y3ge8lp11a" path="res://art/player/entity.png" id="2_5owr3"]
+[ext_resource type="Texture2D" uid="uid://cjobgobveaoex" path="res://art/char_creator/body/Body_48x48_02.png" id="2_0cl5o"]
+[ext_resource type="Texture2D" uid="uid://b4nw2nn62dojr" path="res://art/char_creator/hairstyle/Hairstyle_01_48x48_02.png" id="3_du8nq"]
+[ext_resource type="Texture2D" uid="uid://ci4u31deh3mko" path="res://art/char_creator/eyes/Eyes_48x48_02.png" id="4_qi5uw"]
+[ext_resource type="Texture2D" uid="uid://cq8pxfh85rsgw" path="res://art/char_creator/outfit/Outfit_01_48x48_01.png" id="5_usjdu"]
+[ext_resource type="Texture2D" uid="uid://bq6m73w3ttiwi" path="res://art/char_creator/facial_hair/Accessory_12_Mustache_48x48_01.png" id="6_n6lhc"]
+[ext_resource type="Texture2D" uid="uid://dptdxji4an7mg" path="res://art/char_creator/glasses/Accessory_15_Glasses_48x48_01.png" id="7_ad0ui"]
+[ext_resource type="Texture2D" uid="uid://q6m5gokdbmfu" path="res://art/char_creator/hats/Accessory_18_Chef_48x48_01.png" id="8_gk1rl"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7c156"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(288, 96, 48, 96)
+[sub_resource type="GDScript" id="GDScript_ds8j0"]
+script/source = "extends Node2D
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7ed3t"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(336, 96, 48, 96)
+# TODO: move all of its children into CharacterSprite
+# this is to be able to use this node as a singleton in other places and
+# preload the sprites
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hj8je"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(384, 96, 48, 96)
+const body_spritesheet = {
+	0: preload(\"res://art/char_creator/body/Body_48x48_01.png\"),
+	1: preload(\"res://art/char_creator/body/Body_48x48_02.png\"),
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_86nvh"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(432, 96, 48, 96)
+const hair_spritesheet = {
+	0: null,
+	1: preload(\"res://art/char_creator/hairstyle/Hairstyle_01_48x48_01.png\"),
+	2: preload(\"res://art/char_creator/hairstyle/Hairstyle_01_48x48_02.png\"),
+	3: preload(\"res://art/char_creator/hairstyle/Hairstyle_25_48x48_01.png\"),
+	4: preload(\"res://art/char_creator/hairstyle/Hairstyle_25_48x48_02.png\"),
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qdokk"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(480, 96, 48, 96)
+const eyes_spritesheet = {
+	0: preload(\"res://art/char_creator/eyes/Eyes_48x48_01.png\"),
+	1: preload(\"res://art/char_creator/eyes/Eyes_48x48_02.png\"),
+	2: preload(\"res://art/char_creator/eyes/Eyes_48x48_07.png\"),
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7tvkr"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(528, 96, 48, 96)
+const outfit_spritesheet = {
+	0: preload(\"res://art/char_creator/outfit/Outfit_01_48x48_01.png\"),
+	1: preload(\"res://art/char_creator/outfit/Outfit_01_48x48_02.png\"),
+	2: preload(\"res://art/char_creator/outfit/Outfit_01_48x48_03.png\"),
+	3: preload(\"res://art/char_creator/outfit/Outfit_01_48x48_04.png\"),
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_poo6x"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(864, 96, 48, 96)
+const facial_hair_spritesheet = {
+	0: null,
+	1: preload(\"res://art/char_creator/facial_hair/Accessory_12_Mustache_48x48_01.png\"),
+	2: preload(\"res://art/char_creator/facial_hair/Accessory_12_Mustache_48x48_02.png\"),
+	3: preload(\"res://art/char_creator/facial_hair/Accessory_12_Mustache_48x48_03.png\"),
+	4: preload(\"res://art/char_creator/facial_hair/Accessory_13_Beard_48x48_01.png\"),
+	5: preload(\"res://art/char_creator/facial_hair/Accessory_13_Beard_48x48_02.png\"),
+	6: preload(\"res://art/char_creator/facial_hair/Accessory_13_Beard_48x48_03.png\"),
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dgpdm"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(912, 96, 48, 96)
+const glasses_spritesheet = {
+	0: null,
+	1: preload(\"res://art/char_creator/glasses/Accessory_15_Glasses_48x48_01.png\"),
+	2: preload(\"res://art/char_creator/glasses/Accessory_15_Glasses_48x48_02.png\"),
+	3: preload(\"res://art/char_creator/glasses/Accessory_15_Glasses_48x48_03.png\"),
+	4: preload(\"res://art/char_creator/glasses/Accessory_15_Glasses_48x48_04.png\"),
+	5: preload(\"res://art/char_creator/glasses/Accessory_15_Glasses_48x48_05.png\"),
+	6: preload(\"res://art/char_creator/glasses/Accessory_15_Glasses_48x48_06.png\"),
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_27rtg"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(960, 96, 48, 96)
+const hats_spritesheet = {
+	0: null,
+	1: preload(\"res://art/char_creator/hats/Accessory_04_Snapback_48x48_01.png\"),
+	2: preload(\"res://art/char_creator/hats/Accessory_05_Dino_Snapback_48x48_02.png\"),
+	3: preload(\"res://art/char_creator/hats/Accessory_06_Policeman_Hat_48x48_01.png\"),
+	4: preload(\"res://art/char_creator/hats/Accessory_07_Bataclava_48x48_01.png\"),
+	5: preload(\"res://art/char_creator/hats/Accessory_08_Detective_Hat_48x48_01.png\"),
+	6: preload(\"res://art/char_creator/hats/Accessory_11_Beanie_48x48_01.png\"),
+	7: preload(\"res://art/char_creator/hats/Accessory_18_Chef_48x48_01.png\"),
+	8: preload(\"res://art/char_creator/hats/Accessory_19_Party_Cone_48x48_01.png\"),
+}
+"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_glrum"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(1008, 96, 48, 96)
+[sub_resource type="Animation" id="Animation_1oepq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hair:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Eyes:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Outfit:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FacialHair:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Glasses:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Hats:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dn7xe"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(1056, 96, 48, 96)
+[sub_resource type="Animation" id="Animation_3vkh5"]
+resource_name = "body_back"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hair:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Eyes:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Outfit:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FacialHair:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Glasses:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Hats:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hpeli"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(1104, 96, 48, 96)
+[sub_resource type="Animation" id="Animation_6nanr"]
+resource_name = "body_front"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [18, 19, 20, 21, 22, 23]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hair:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [18, 19, 20, 21, 22, 23]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Eyes:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [18, 19, 20, 21, 22, 23]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Outfit:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [18, 19, 20, 21, 22, 23]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FacialHair:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [18, 19, 20, 21, 22, 23]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Glasses:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [18, 19, 20, 21, 22, 23]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Hats:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [18, 19, 20, 21, 22, 23]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ij1nn"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(576, 96, 48, 96)
+[sub_resource type="Animation" id="Animation_ekm0y"]
+resource_name = "body_left"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hair:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Eyes:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Outfit:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FacialHair:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Glasses:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Hats:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b4r16"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(624, 96, 48, 96)
+[sub_resource type="Animation" id="Animation_5hc27"]
+resource_name = "body_right"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hair:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Eyes:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Outfit:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FacialHair:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Glasses:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Hats:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sy538"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(672, 96, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_edi53"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(720, 96, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2t3gf"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(768, 96, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bx1f1"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(816, 96, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tnjmu"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(0, 96, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xixva"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(48, 96, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2yjvy"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(96, 96, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vuvfw"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(144, 96, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w01cy"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(192, 96, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k6xko"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(240, 96, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_li1mx"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(288, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hxk3t"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(336, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v6ala"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(384, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wmi2w"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(432, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f5oho"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(480, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g3nju"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(528, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uk2g3"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(864, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vdeij"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(912, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gtt0a"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(960, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i4pde"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(1008, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x57mm"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(1056, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s8twr"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(1104, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o3ky2"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(576, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_syeoh"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(624, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mc2ch"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(672, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1dqm7"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(720, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sswo8"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(768, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gxxjq"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(816, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qhmsg"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(0, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_no3l7"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(48, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_leyp8"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(96, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_im47d"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(144, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_10smf"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(192, 192, 48, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1tqmt"]
-atlas = ExtResource("2_5owr3")
-region = Rect2(240, 192, 48, 96)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_pkf6e"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7c156")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7ed3t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hj8je")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_86nvh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qdokk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7tvkr")
-}],
-"loop": true,
-"name": &"idle_back",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_poo6x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dgpdm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_27rtg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_glrum")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dn7xe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hpeli")
-}],
-"loop": true,
-"name": &"idle_front",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ij1nn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b4r16")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sy538")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_edi53")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2t3gf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bx1f1")
-}],
-"loop": true,
-"name": &"idle_left",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tnjmu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xixva")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2yjvy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vuvfw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w01cy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k6xko")
-}],
-"loop": true,
-"name": &"idle_right",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_li1mx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hxk3t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v6ala")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wmi2w")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f5oho")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g3nju")
-}],
-"loop": true,
-"name": &"walk_back",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uk2g3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vdeij")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gtt0a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_i4pde")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x57mm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s8twr")
-}],
-"loop": true,
-"name": &"walk_front",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o3ky2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_syeoh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mc2ch")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1dqm7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sswo8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gxxjq")
-}],
-"loop": true,
-"name": &"walk_left",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qhmsg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_no3l7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_leyp8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_im47d")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_10smf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1tqmt")
-}],
-"loop": true,
-"name": &"walk_right",
-"speed": 5.0
-}]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d7gpy"]
+_data = {
+"RESET": SubResource("Animation_1oepq"),
+"body_back": SubResource("Animation_3vkh5"),
+"body_front": SubResource("Animation_6nanr"),
+"body_left": SubResource("Animation_ekm0y"),
+"body_right": SubResource("Animation_5hc27")
+}
 
 [node name="Entity" type="Node2D"]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_2la61")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="CompositeSprites" type="Node2D" parent="."]
+script = SubResource("GDScript_ds8j0")
+
+[node name="EntitySprite" type="Node2D" parent="."]
 scale = Vector2(1.2, 1.2)
-sprite_frames = SubResource("SpriteFrames_pkf6e")
-animation = &"idle_front"
-frame_progress = 0.234761
+
+[node name="Body" type="Sprite2D" parent="EntitySprite"]
+texture = ExtResource("2_0cl5o")
+hframes = 24
+region_enabled = true
+region_rect = Rect2(0, 216, 1152, 72)
+
+[node name="Hair" type="Sprite2D" parent="EntitySprite"]
+texture = ExtResource("3_du8nq")
+hframes = 24
+region_enabled = true
+region_rect = Rect2(0, 120, 1152, 72)
+
+[node name="Eyes" type="Sprite2D" parent="EntitySprite"]
+texture = ExtResource("4_qi5uw")
+hframes = 24
+region_enabled = true
+region_rect = Rect2(0, 120, 1152, 72)
+
+[node name="Outfit" type="Sprite2D" parent="EntitySprite"]
+texture = ExtResource("5_usjdu")
+hframes = 24
+region_enabled = true
+region_rect = Rect2(0, 120, 1152, 72)
+
+[node name="FacialHair" type="Sprite2D" parent="EntitySprite"]
+texture = ExtResource("6_n6lhc")
+hframes = 24
+region_enabled = true
+region_rect = Rect2(0, 120, 1152, 72)
+
+[node name="Glasses" type="Sprite2D" parent="EntitySprite"]
+texture = ExtResource("7_ad0ui")
+hframes = 24
+region_enabled = true
+region_rect = Rect2(0, 120, 1152, 72)
+
+[node name="Hats" type="Sprite2D" parent="EntitySprite"]
+texture = ExtResource("8_gk1rl")
+offset = Vector2(0, -24)
+hframes = 24
+region_enabled = true
+region_rect = Rect2(0, 88, 1152, 72)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="EntitySprite"]
+libraries = {
+"": SubResource("AnimationLibrary_d7gpy")
+}
 
 [node name="Name" type="RichTextLabel" parent="."]
 offset_left = -24.0

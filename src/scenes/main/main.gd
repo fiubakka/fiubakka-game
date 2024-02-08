@@ -54,12 +54,14 @@ func _on_server_consumer_update_entity_state(
 		var entity: Node = entities[entityId]
 		entity.position = entityPosition
 		entity.velocity = entityVelocity
+		entity.set_equipment(equipment)
 	else:
 		var entity := EntityScene.instantiate()
 		entity.id = entityId
 		entity.position = entityPosition
 		entity.velocity = entityVelocity
 		entity.player_name = entityId
+		entity.set_equipment(equipment)
 		entities[entityId] = entity
 		$Room200.add_child(entity)
 
