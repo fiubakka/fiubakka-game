@@ -1,7 +1,9 @@
 extends Node
 
 signal user_init_ready(position: Vector2, equipment: Equipment)  #TOOD: Tipar esto
-signal update_entity_state(entityId: String, position: Vector2, velocity: Vector2)
+signal update_entity_state(
+	entityId: String, position: Vector2, velocity: Vector2, equipment: Equipment
+)
 signal update_content(entityId: String, content: String)
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
@@ -76,13 +78,24 @@ func _handle_player_init_ready(msg: PBPlayerInitReady) -> void:
 
 
 func _handle_game_entity_state(msg: PBGameEntityState) -> void:
+	var equipment := Equipment.new()
 	(
-		update_entity_state
-		. emit(
-			msg.get_entityId(),
-			Vector2(msg.get_position().get_x(), msg.get_position().get_y()),
-			Vector2(msg.get_velocity().get_x(), msg.get_velocity().get_y()),
+		equipment
+		. set_equipment(
+			msg.get_equipment().get_hat(),
+			msg.get_equipment().get_hair(),
+			msg.get_equipment().get_eyes(),
+			msg.get_equipment().get_glasses(),
+			msg.get_equipment().get_facial_hair(),
+			msg.get_equipment().get_body(),
+			msg.get_equipment().get_outfit(),
 		)
+	)
+	update_entity_state.emit(
+		msg.get_entityId(),
+		Vector2(msg.get_position().get_x(), msg.get_position().get_y()),
+		Vector2(msg.get_velocity().get_x(), msg.get_velocity().get_y()),
+		equipment
 	)
 
 

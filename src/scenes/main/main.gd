@@ -42,8 +42,14 @@ func _on_server_consumer_user_init_ready(_position: Vector2, equipment: Equipmen
 
 
 func _on_server_consumer_update_entity_state(
-	entityId: String, entityPosition: Vector2, entityVelocity: Vector2
+	entityId: String, entityPosition: Vector2, entityVelocity: Vector2, equipment: Equipment
 ) -> void:
+	print("ENTITY NAME", entityId)
+	print("ENTITY HAT", equipment.hat)
+	print("ENTITY EYES", equipment.eyes)
+	print("ENTITY HAIR", equipment.hair)
+	print("ENTITY OUTFIT", equipment.outfit)
+
 	if entities.has(entityId):
 		var entity: Node = entities[entityId]
 		entity.position = entityPosition
