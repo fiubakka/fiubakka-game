@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://bj12r5t8p4dpp"]
+
+[ext_resource type="Texture2D" uid="uid://cjobgobveaoex" path="res://art/char_creator/body/Body_48x48_02.png" id="1_1awav"]
+[ext_resource type="Texture2D" uid="uid://b4nw2nn62dojr" path="res://art/char_creator/hairstyle/Hairstyle_01_48x48_02.png" id="2_qv2ug"]
+[ext_resource type="Texture2D" uid="uid://ci4u31deh3mko" path="res://art/char_creator/eyes/Eyes_48x48_02.png" id="3_557ds"]
+[ext_resource type="Texture2D" uid="uid://cq8pxfh85rsgw" path="res://art/char_creator/outfit/Outfit_01_48x48_01.png" id="4_2nd03"]
+[ext_resource type="Texture2D" uid="uid://bq6m73w3ttiwi" path="res://art/char_creator/facial_hair/Accessory_12_Mustache_48x48_01.png" id="5_4mi84"]
+[ext_resource type="Texture2D" uid="uid://dptdxji4an7mg" path="res://art/char_creator/glasses/Accessory_15_Glasses_48x48_01.png" id="6_hjwe6"]
+[ext_resource type="Texture2D" uid="uid://q6m5gokdbmfu" path="res://art/char_creator/hats/Accessory_18_Chef_48x48_01.png" id="7_ktgwr"]
+
+[node name="CharacterSprite" type="Node2D"]
+scale = Vector2(1.2, 1.2)
+
+[node name="Body" type="Sprite2D" parent="."]
+texture = ExtResource("1_1awav")
+hframes = 24
+region_enabled = true
+region_rect = Rect2(144, 24, 1152, 72)
+
+[node name="Hair" type="Sprite2D" parent="."]
+texture = ExtResource("2_qv2ug")
+hframes = 24
+region_enabled = true
+region_rect = Rect2(144, 24, 1152, 72)
+
+[node name="Eyes" type="Sprite2D" parent="."]
+texture = ExtResource("3_557ds")
+hframes = 24
+region_enabled = true
+region_rect = Rect2(144, 24, 1152, 72)
+
+[node name="Outfit" type="Sprite2D" parent="."]
+texture = ExtResource("4_2nd03")
+hframes = 24
+region_enabled = true
+region_rect = Rect2(144, 24, 1152, 72)
+
+[node name="FacialHair" type="Sprite2D" parent="."]
+texture = ExtResource("5_4mi84")
+hframes = 24
+region_enabled = true
+region_rect = Rect2(144, 24, 1152, 72)
+
+[node name="Glasses" type="Sprite2D" parent="."]
+texture = ExtResource("6_hjwe6")
+hframes = 24
+region_enabled = true
+region_rect = Rect2(144, 24, 1152, 72)
+
+[node name="Hats" type="Sprite2D" parent="."]
+texture = ExtResource("7_ktgwr")
+offset = Vector2(0, -24)
+hframes = 24
+region_enabled = true
+region_rect = Rect2(144, 0, 1152, 72)
