@@ -1,9 +1,5 @@
 extends Node2D
 
-# TODO: move all of its children into CharacterSprite
-# this is to be able to use this node as a singleton in other places and
-# preload the sprites
-
 const body_spritesheet = {
 	0: preload("res://art/char_creator/body/Body_48x48_01.png"),
 	1: preload("res://art/char_creator/body/Body_48x48_02.png"),

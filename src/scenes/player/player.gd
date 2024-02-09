@@ -5,13 +5,13 @@ signal update_movement(velocity: Vector2, position: Vector2)
 @export var idle: bool = false
 var prev_vel := Vector2.ZERO
 
-const cs = preload("res://src/scenes/character_creation/CompositeSprites.gd")
+var cs := CompositeSprites
 
 
 func _ready() -> void:
 	# Set idle front animation when spawning player
 	set_idle_region()
-	$PlayerSprite/AnimationPlayer.play("body_front")
+	$AnimationPlayer.play("front")
 
 
 func set_equipment(equipment: Equipment) -> void:
@@ -75,23 +75,23 @@ func _physics_process(_delta: float) -> void:
 func play_move_animation() -> void:
 	set_walk_region()
 	if velocity.x > 0:
-		$PlayerSprite/AnimationPlayer.play("body_right")
+		$AnimationPlayer.play("right")
 	elif velocity.x < 0:
-		$PlayerSprite/AnimationPlayer.play("body_left")
+		$AnimationPlayer.play("left")
 	elif velocity.y < 0:
-		$PlayerSprite/AnimationPlayer.play("body_back")
+		$AnimationPlayer.play("back")
 	elif velocity.y > 0:
-		$PlayerSprite/AnimationPlayer.play("body_front")
+		$AnimationPlayer.play("front")
 	else:
 		set_idle_region()
 		if prev_vel.x > 0:
-			$PlayerSprite/AnimationPlayer.play("body_right")
+			$AnimationPlayer.play("right")
 		elif prev_vel.x < 0:
-			$PlayerSprite/AnimationPlayer.play("body_left")
+			$AnimationPlayer.play("left")
 		elif prev_vel.y < 0:
-			$PlayerSprite/AnimationPlayer.play("body_back")
+			$AnimationPlayer.play("back")
 		elif prev_vel.y > 0:
-			$PlayerSprite/AnimationPlayer.play("body_front")
+			$AnimationPlayer.play("front")
 
 
 func set_idle_region() -> void:

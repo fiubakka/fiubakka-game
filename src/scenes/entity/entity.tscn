@@ -1,79 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://cyysqnwra020e"]
+[gd_scene load_steps=9 format=3 uid="uid://cyysqnwra020e"]
 
 [ext_resource type="Script" path="res://src/scenes/entity/entity.gd" id="1_2la61"]
-[ext_resource type="Texture2D" uid="uid://cjobgobveaoex" path="res://art/char_creator/body/Body_48x48_02.png" id="2_0cl5o"]
-[ext_resource type="Texture2D" uid="uid://b4nw2nn62dojr" path="res://art/char_creator/hairstyle/Hairstyle_01_48x48_02.png" id="3_du8nq"]
-[ext_resource type="Texture2D" uid="uid://ci4u31deh3mko" path="res://art/char_creator/eyes/Eyes_48x48_02.png" id="4_qi5uw"]
-[ext_resource type="Texture2D" uid="uid://cq8pxfh85rsgw" path="res://art/char_creator/outfit/Outfit_01_48x48_01.png" id="5_usjdu"]
-[ext_resource type="Texture2D" uid="uid://bq6m73w3ttiwi" path="res://art/char_creator/facial_hair/Accessory_12_Mustache_48x48_01.png" id="6_n6lhc"]
-[ext_resource type="Texture2D" uid="uid://dptdxji4an7mg" path="res://art/char_creator/glasses/Accessory_15_Glasses_48x48_01.png" id="7_ad0ui"]
-[ext_resource type="Texture2D" uid="uid://q6m5gokdbmfu" path="res://art/char_creator/hats/Accessory_18_Chef_48x48_01.png" id="8_gk1rl"]
-
-[sub_resource type="GDScript" id="GDScript_ds8j0"]
-script/source = "extends Node2D
-
-# TODO: move all of its children into CharacterSprite
-# this is to be able to use this node as a singleton in other places and
-# preload the sprites
-
-const body_spritesheet = {
-	0: preload(\"res://art/char_creator/body/Body_48x48_01.png\"),
-	1: preload(\"res://art/char_creator/body/Body_48x48_02.png\"),
-}
-
-const hair_spritesheet = {
-	0: null,
-	1: preload(\"res://art/char_creator/hairstyle/Hairstyle_01_48x48_01.png\"),
-	2: preload(\"res://art/char_creator/hairstyle/Hairstyle_01_48x48_02.png\"),
-	3: preload(\"res://art/char_creator/hairstyle/Hairstyle_25_48x48_01.png\"),
-	4: preload(\"res://art/char_creator/hairstyle/Hairstyle_25_48x48_02.png\"),
-}
-
-const eyes_spritesheet = {
-	0: preload(\"res://art/char_creator/eyes/Eyes_48x48_01.png\"),
-	1: preload(\"res://art/char_creator/eyes/Eyes_48x48_02.png\"),
-	2: preload(\"res://art/char_creator/eyes/Eyes_48x48_07.png\"),
-}
-
-const outfit_spritesheet = {
-	0: preload(\"res://art/char_creator/outfit/Outfit_01_48x48_01.png\"),
-	1: preload(\"res://art/char_creator/outfit/Outfit_01_48x48_02.png\"),
-	2: preload(\"res://art/char_creator/outfit/Outfit_01_48x48_03.png\"),
-	3: preload(\"res://art/char_creator/outfit/Outfit_01_48x48_04.png\"),
-}
-
-const facial_hair_spritesheet = {
-	0: null,
-	1: preload(\"res://art/char_creator/facial_hair/Accessory_12_Mustache_48x48_01.png\"),
-	2: preload(\"res://art/char_creator/facial_hair/Accessory_12_Mustache_48x48_02.png\"),
-	3: preload(\"res://art/char_creator/facial_hair/Accessory_12_Mustache_48x48_03.png\"),
-	4: preload(\"res://art/char_creator/facial_hair/Accessory_13_Beard_48x48_01.png\"),
-	5: preload(\"res://art/char_creator/facial_hair/Accessory_13_Beard_48x48_02.png\"),
-	6: preload(\"res://art/char_creator/facial_hair/Accessory_13_Beard_48x48_03.png\"),
-}
-
-const glasses_spritesheet = {
-	0: null,
-	1: preload(\"res://art/char_creator/glasses/Accessory_15_Glasses_48x48_01.png\"),
-	2: preload(\"res://art/char_creator/glasses/Accessory_15_Glasses_48x48_02.png\"),
-	3: preload(\"res://art/char_creator/glasses/Accessory_15_Glasses_48x48_03.png\"),
-	4: preload(\"res://art/char_creator/glasses/Accessory_15_Glasses_48x48_04.png\"),
-	5: preload(\"res://art/char_creator/glasses/Accessory_15_Glasses_48x48_05.png\"),
-	6: preload(\"res://art/char_creator/glasses/Accessory_15_Glasses_48x48_06.png\"),
-}
-
-const hats_spritesheet = {
-	0: null,
-	1: preload(\"res://art/char_creator/hats/Accessory_04_Snapback_48x48_01.png\"),
-	2: preload(\"res://art/char_creator/hats/Accessory_05_Dino_Snapback_48x48_02.png\"),
-	3: preload(\"res://art/char_creator/hats/Accessory_06_Policeman_Hat_48x48_01.png\"),
-	4: preload(\"res://art/char_creator/hats/Accessory_07_Bataclava_48x48_01.png\"),
-	5: preload(\"res://art/char_creator/hats/Accessory_08_Detective_Hat_48x48_01.png\"),
-	6: preload(\"res://art/char_creator/hats/Accessory_11_Beanie_48x48_01.png\"),
-	7: preload(\"res://art/char_creator/hats/Accessory_18_Chef_48x48_01.png\"),
-	8: preload(\"res://art/char_creator/hats/Accessory_19_Party_Cone_48x48_01.png\"),
-}
-"
+[ext_resource type="PackedScene" uid="uid://bj12r5t8p4dpp" path="res://src/scenes/character_sprite/character_sprite.tscn" id="2_0mjch"]
 
 [sub_resource type="Animation" id="Animation_1oepq"]
 length = 0.001
@@ -163,7 +91,7 @@ tracks/6/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_3vkh5"]
-resource_name = "body_back"
+resource_name = "back"
 length = 1.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -252,7 +180,7 @@ tracks/6/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_6nanr"]
-resource_name = "body_front"
+resource_name = "front"
 length = 1.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -341,7 +269,7 @@ tracks/6/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_ekm0y"]
-resource_name = "body_left"
+resource_name = "left"
 length = 1.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -430,7 +358,7 @@ tracks/6/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_5hc27"]
-resource_name = "body_right"
+resource_name = "right"
 length = 1.2
 loop_mode = 1
 tracks/0/type = "value"
@@ -521,66 +449,20 @@ tracks/6/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d7gpy"]
 _data = {
 "RESET": SubResource("Animation_1oepq"),
-"body_back": SubResource("Animation_3vkh5"),
-"body_front": SubResource("Animation_6nanr"),
-"body_left": SubResource("Animation_ekm0y"),
-"body_right": SubResource("Animation_5hc27")
+"back": SubResource("Animation_3vkh5"),
+"front": SubResource("Animation_6nanr"),
+"left": SubResource("Animation_ekm0y"),
+"right": SubResource("Animation_5hc27")
 }
 
 [node name="Entity" type="Node2D"]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_2la61")
 
-[node name="CompositeSprites" type="Node2D" parent="."]
-script = SubResource("GDScript_ds8j0")
+[node name="EntitySprite" parent="." instance=ExtResource("2_0mjch")]
 
-[node name="EntitySprite" type="Node2D" parent="."]
-scale = Vector2(1.2, 1.2)
-
-[node name="Body" type="Sprite2D" parent="EntitySprite"]
-texture = ExtResource("2_0cl5o")
-hframes = 24
-region_enabled = true
-region_rect = Rect2(0, 216, 1152, 72)
-
-[node name="Hair" type="Sprite2D" parent="EntitySprite"]
-texture = ExtResource("3_du8nq")
-hframes = 24
-region_enabled = true
-region_rect = Rect2(0, 120, 1152, 72)
-
-[node name="Eyes" type="Sprite2D" parent="EntitySprite"]
-texture = ExtResource("4_qi5uw")
-hframes = 24
-region_enabled = true
-region_rect = Rect2(0, 120, 1152, 72)
-
-[node name="Outfit" type="Sprite2D" parent="EntitySprite"]
-texture = ExtResource("5_usjdu")
-hframes = 24
-region_enabled = true
-region_rect = Rect2(0, 120, 1152, 72)
-
-[node name="FacialHair" type="Sprite2D" parent="EntitySprite"]
-texture = ExtResource("6_n6lhc")
-hframes = 24
-region_enabled = true
-region_rect = Rect2(0, 120, 1152, 72)
-
-[node name="Glasses" type="Sprite2D" parent="EntitySprite"]
-texture = ExtResource("7_ad0ui")
-hframes = 24
-region_enabled = true
-region_rect = Rect2(0, 120, 1152, 72)
-
-[node name="Hats" type="Sprite2D" parent="EntitySprite"]
-texture = ExtResource("8_gk1rl")
-offset = Vector2(0, -24)
-hframes = 24
-region_enabled = true
-region_rect = Rect2(0, 88, 1152, 72)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="EntitySprite"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../EntitySprite")
 libraries = {
 "": SubResource("AnimationLibrary_d7gpy")
 }

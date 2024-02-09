@@ -1,14 +1,15 @@
 extends Node2D
 
-@onready var body_sprite := $CompositeSprites/Body
-@onready var hair_sprite := $CompositeSprites/Hair
-@onready var eyes_sprite := $CompositeSprites/Eyes
-@onready var outfit_sprite := $CompositeSprites/Outfit
-@onready var facial_hair_sprite := $CompositeSprites/FacialHair
-@onready var glasses_sprite := $CompositeSprites/Glasses
-@onready var hats_sprite := $CompositeSprites/Hats
+@onready var body_sprite := $Body
+@onready var hair_sprite := $Hair
+@onready var eyes_sprite := $Eyes
+@onready var outfit_sprite := $Outfit
+@onready var facial_hair_sprite := $FacialHair
+@onready var glasses_sprite := $Glasses
+@onready var hats_sprite := $Hats
 
-const cs = preload("res://src/scenes/character_creation/CompositeSprites.gd")
+#const cs = preload("res://src/scenes/character_creation/CompositeSprites.gd")
+var cs := CompositeSprites
 var rng := RandomNumberGenerator.new()
 var body_idx := 0
 var hair_idx := 0
