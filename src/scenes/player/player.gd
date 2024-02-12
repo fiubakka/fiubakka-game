@@ -7,6 +7,7 @@ var prev_vel := Vector2.ZERO
 
 var cs := CompositeSprites
 
+
 func _ready() -> void:
 	# Set idle front animation when spawning player
 	set_idle_region()
@@ -21,6 +22,7 @@ func set_equipment(equipment: Equipment) -> void:
 	$PlayerSprite/Glasses.texture = cs.glasses_spritesheet[equipment["glasses"]]
 	$PlayerSprite/FacialHair.texture = cs.facial_hair_spritesheet[equipment["facial_hair"]]
 	$PlayerSprite/Outfit.texture = cs.outfit_spritesheet[equipment["outfit"]]
+
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
