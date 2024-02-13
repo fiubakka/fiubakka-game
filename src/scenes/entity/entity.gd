@@ -9,7 +9,7 @@ var cs := CompositeSprites
 
 
 func _ready() -> void:
-	$Name.text = "[center][color=#ffaaaa]" + player_name + "[/color][/center]"
+	$Name.text = Utils.center_text("[color=#ffaaaa]" + player_name + "[/color]")
 
 	var customization := random_character()
 	$EntitySprite/Hats.texture = cs.hats_spritesheet[customization["hats"]]
