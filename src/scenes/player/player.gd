@@ -8,6 +8,7 @@ var prev_vel := Vector2.ZERO
 var cs := CompositeSprites
 
 func _ready() -> void:
+	$Name.text = "[center][b]" + tr("OWN_PLAYER_LABEL") + "[/b][/center]"
 	# Set idle front animation when spawning player
 	set_idle_region()
 	$AnimationPlayer.play("front")

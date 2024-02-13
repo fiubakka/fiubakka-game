@@ -7,6 +7,10 @@ signal return_to_menu
 signal user_logged_in(username: String, equipment: Equipment)
 
 
+func _ready() -> void:
+	$NinePatchRect/VBoxContainer/MarginContainer/RichTextLabel.text = "[center]" + tr("CHAR_CREATION_TITLE") + "[/center]"
+	$NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect/RichTextLabel.text = "[center]" + tr("REGISTER") + "[/center]"
+
 func _on_button_pressed() -> void:
 	var username: String = $NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername.text
 	if username.is_empty():
