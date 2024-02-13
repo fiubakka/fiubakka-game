@@ -43,6 +43,7 @@ texture = ExtResource("4_yt6vq")
 region_rect = Rect2(800, 1160, 16, 32)
 
 [node name="InputBackgroundR" type="NinePatchRect" parent="."]
+layout_mode = 0
 offset_left = 360.0
 offset_top = 222.0
 offset_right = 382.0
