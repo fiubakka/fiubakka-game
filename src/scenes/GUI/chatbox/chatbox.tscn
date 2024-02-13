@@ -29,7 +29,7 @@ anchor_right = -0.00930233
 offset_top = 219.0
 offset_right = 370.0
 offset_bottom = 250.0
-placeholder_text = "(Diga algo...)"
+placeholder_text = "CHAT_PLACEHOLDER"
 script = ExtResource("2_fix1v")
 
 [node name="Button" type="Button" parent="."]
@@ -38,7 +38,7 @@ offset_left = 371.0
 offset_top = 219.0
 offset_right = 428.0
 offset_bottom = 250.0
-text = "Enviar"
+text = "CHAT_SEND"
 
 [node name="TextureRect" type="ColorRect" parent="."]
 self_modulate = Color(0, 0, 0, 1)
