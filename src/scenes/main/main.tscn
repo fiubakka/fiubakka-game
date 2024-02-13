@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bwgonn6l2afs6"]
+[gd_scene load_steps=11 format=3 uid="uid://bwgonn6l2afs6"]
 
 [ext_resource type="Script" path="res://src/scenes/main/main.gd" id="1_kecny"]
 [ext_resource type="PackedScene" uid="uid://b6kg7qutp1h00" path="res://src/scenes/login/login.tscn" id="3_2am71"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dv7baj7ykjngg" path="res://src/scenes/GUI/pause/pause.tscn" id="7_2ia4i"]
 [ext_resource type="PackedScene" uid="uid://2focfqtvt576" path="res://src/scenes/character_creation/character_creation.tscn" id="8_veqb1"]
 [ext_resource type="PackedScene" uid="uid://dpkjmhxodrn0l" path="res://src/scenes/main_menu/main_menu.tscn" id="9_hsq23"]
+[ext_resource type="PackedScene" uid="uid://bjdyuheqlnwho" path="res://src/scenes/GUI/GUIManager/GuiManager.tscn" id="10_2hml5"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(0, 3)
@@ -53,6 +54,10 @@ visible = false
 offset_right = 961.0
 offset_bottom = 537.0
 
+[node name="GuiManager" parent="GUI" instance=ExtResource("10_2hml5")]
+offset_top = 3.0
+offset_bottom = 3.0
+
 [node name="MainMenu" parent="." instance=ExtResource("9_hsq23")]
 offset_left = 1.0
 offset_top = -3.0
@@ -75,5 +80,6 @@ offset_bottom = 537.0
 [connection signal="user_init_ready" from="ServerConnection/ServerConsumer" to="." method="_on_server_consumer_user_init_ready"]
 [connection signal="send_message" from="GUI/Chatbox" to="ServerConnection/ServerProducer" method="_on_chatbox_send_message"]
 [connection signal="unpaused" from="GUI/Pause" to="." method="_on_pause_unpaused"]
+[connection signal="ui_opened" from="GUI/GuiManager" to="." method="_on_gui_manager_ui_opened"]
 [connection signal="go_to_login" from="MainMenu" to="." method="_on_main_menu_go_to_login"]
 [connection signal="go_to_register" from="MainMenu" to="." method="_on_main_menu_go_to_register"]

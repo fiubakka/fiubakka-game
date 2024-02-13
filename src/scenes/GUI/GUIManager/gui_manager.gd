@@ -1,10 +1,8 @@
 extends Control
 
-signal player_can_move(can_move: bool)
+signal ui_opened(open: bool)
 
 var chat_focus: bool = false
-var chat_open: bool = false
-var inventory_open: bool = false
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("close_chat"):
@@ -22,8 +20,10 @@ func handle_chat_open() -> void:
 	if !menu.visible and !pause.visible:
 		if chat.visible:
 			chat.visible = false
+			ui_opened.emit(false)
 		else:
 			chat.visible = true
+			ui_opened.emit(true)
 
 
 func handle_inventory_open() -> void:
@@ -46,3 +46,4 @@ func handle_pause_open() -> void:
 
 func _on_chatbox_is_focused(focus: bool) -> void:
 	chat_focus = focus
+

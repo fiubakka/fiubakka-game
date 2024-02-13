@@ -132,3 +132,12 @@ func _on_main_paused() -> void:
 
 func _on_main_unpaused() -> void:
 	idle = false
+	
+	
+func _on_main_ui_opened(open: bool) -> void:
+	if open:
+		idle = true
+		velocity = Vector2.ZERO
+		play_move_animation()
+	else:
+		idle = false
