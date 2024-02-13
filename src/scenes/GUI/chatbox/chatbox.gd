@@ -14,15 +14,16 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	if self.visible:
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			var mouse_pos := get_viewport().get_mouse_position()
-			var lineEdit := $LineEdit
-			var pos: Vector2 = lineEdit.position
-			var size: Vector2 = lineEdit.size
-			if (mouse_pos.x > pos.x + size.x or mouse_pos.x < pos.x) or (mouse_pos.y > pos.y + size.y or mouse_pos.y < pos.y):
-				lineEdit.release_focus()
-				is_focused.emit(false)
+	#if self.visible:
+		#if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			#var mouse_pos := get_viewport().get_mouse_position()
+			#var lineEdit := $LineEdit
+			#var pos: Vector2 = lineEdit.position
+			#var size: Vector2 = lineEdit.size
+			#if (mouse_pos.x > pos.x + size.x or mouse_pos.x < pos.x) or (mouse_pos.y > pos.y + size.y or mouse_pos.y < pos.y):
+				#lineEdit.release_focus()
+				#is_focused.emit(false)
+	pass
 
 
 func focus_chat() -> void:
