@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjdyuheqlnwho"]
+
+[ext_resource type="Script" path="res://src/scenes/GUI/GUIManager/gui_manager.gd" id="1_f7tvf"]
+[ext_resource type="PackedScene" uid="uid://oihrx253mx55" path="res://src/scenes/GUI/chatbox/chatbox.tscn" id="2_t3huv"]
+
+[node name="GuiManager" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_f7tvf")
+
+[node name="Chatbox" parent="." instance=ExtResource("2_t3huv")]
+
+[connection signal="open_chat" from="." to="Chatbox" method="_on_gui_manager_open_chat"]
+[connection signal="is_focused" from="Chatbox" to="." method="_on_chatbox_is_focused"]

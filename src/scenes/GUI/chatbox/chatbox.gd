@@ -1,6 +1,7 @@
 extends Node
 
 signal send_message
+signal is_focused(focus: bool)
 
 var waiting_for_login: bool = true
 
@@ -46,3 +47,17 @@ func _on_main_chat_closed() -> void:
 func _on_main_paused() -> void:
 	if !waiting_for_login:
 		self.visible = false
+
+
+func _on_line_edit_focus_entered() -> void:
+	is_focused.emit(true)
+
+
+func _on_line_edit_focus_exited() -> void:
+	is_focused.emit(false)
+
+
+func _on_gui_manager_open_chat(open: bool) -> void:
+	#if !waiting_for_login:
+		#self.visible = open
+	self.visible = open
