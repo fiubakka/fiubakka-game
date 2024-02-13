@@ -1,23 +1,33 @@
 extends Control
 
-signal open_chat(open: bool)
 signal player_can_move(can_move: bool)
 
 var chat_focus: bool = false
 var chat_open: bool = false
+var inventory_open: bool = false
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("open_chat"):
+	if Input.is_action_just_pressed("close_chat"):
 		handle_chat_open()
+	if Input.is_action_just_pressed("inventory"):
+		handle_inventory_open()
+
 
 func handle_chat_open() -> void:
+	var chat := $Chatbox
+	if chat.visible:
+		chat.visible = false
+	else:
+		chat.visible = true
+
+
+func handle_inventory_open() -> void:
+	var menu := $GameMenu
 	if !chat_focus:
-		if chat_open:
-			open_chat.emit(false)
-			chat_open = false
+		if menu.visible:
+			menu.visible = false
 		else:
-			open_chat.emit(true)
-			chat_open = true
+			menu.visible = true
 
 
 func _on_chatbox_is_focused(focus: bool) -> void:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjdyuheqlnwho"]
+[gd_scene load_steps=4 format=3 uid="uid://bjdyuheqlnwho"]
 
 [ext_resource type="Script" path="res://src/scenes/GUI/GUIManager/gui_manager.gd" id="1_f7tvf"]
 [ext_resource type="PackedScene" uid="uid://oihrx253mx55" path="res://src/scenes/GUI/chatbox/chatbox.tscn" id="2_t3huv"]
+[ext_resource type="PackedScene" uid="uid://nqpqnx1lgim3" path="res://src/scenes/game_menu/GameMenu.tscn" id="3_436wp"]
 
 [node name="GuiManager" type="Control"]
 layout_mode = 3
@@ -10,5 +11,8 @@ script = ExtResource("1_f7tvf")
 
 [node name="Chatbox" parent="." instance=ExtResource("2_t3huv")]
 
-[connection signal="open_chat" from="." to="Chatbox" method="_on_gui_manager_open_chat"]
+[node name="GameMenu" parent="." instance=ExtResource("3_436wp")]
+visible = false
+layout_mode = 1
+
 [connection signal="is_focused" from="Chatbox" to="." method="_on_chatbox_is_focused"]
