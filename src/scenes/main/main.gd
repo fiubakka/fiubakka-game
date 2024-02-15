@@ -42,6 +42,7 @@ func _on_server_consumer_user_init_ready(_position: Vector2, equipment: Equipmen
 	login_ready.emit()
 	$Login.queue_free()
 	
+	$GUI/GuiManager.set_process(true)
 	ui_opened.connect(player._on_main_ui_opened)
 
 

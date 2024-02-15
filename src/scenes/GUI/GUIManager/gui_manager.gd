@@ -6,6 +6,10 @@ signal chat_visible(visible: bool)
 var chat_focus: bool = false
 
 
+func _ready() -> void:
+	self.set_process(false)
+
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("close_chat"):
 		handle_chat_open()
