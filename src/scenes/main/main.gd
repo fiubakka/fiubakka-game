@@ -33,10 +33,6 @@ func _on_server_consumer_user_init_ready(_position: Vector2, equipment: Equipmen
 	# like signals for example?
 	var player := $Room200/Player
 	player.update_movement.connect($ServerConnection/ServerProducer._on_player_movement)
-	chat_opened.connect(player._on_main_chat_opened)
-	chat_closed.connect(player._on_main_chat_closed)
-	paused.connect(player._on_main_paused)
-	unpaused.connect(player._on_main_unpaused)
 	player.set_equipment(equipment)
 	player.position = _position
 	login_ready.emit()
@@ -49,11 +45,11 @@ func _on_server_consumer_user_init_ready(_position: Vector2, equipment: Equipmen
 func _on_server_consumer_update_entity_state(
 	entityId: String, entityPosition: Vector2, entityVelocity: Vector2, equipment: Equipment
 ) -> void:
-	#print("ENTITY NAME", entityId)
-	#print("ENTITY HAT", equipment.hat)
-	#print("ENTITY EYES", equipment.eyes)
-	#print("ENTITY HAIR", equipment.hair)
-	#print("ENTITY OUTFIT", equipment.outfit)
+	print("ENTITY NAME", entityId)
+	print("ENTITY HAT", equipment.hat)
+	print("ENTITY EYES", equipment.eyes)
+	print("ENTITY HAIR", equipment.hair)
+	print("ENTITY OUTFIT", equipment.outfit)
 
 	if entities.has(entityId):
 		var entity: Node = entities[entityId]
