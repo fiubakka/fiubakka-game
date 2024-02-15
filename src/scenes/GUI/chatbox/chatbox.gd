@@ -14,16 +14,18 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	#if self.visible:
-		#if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			#var mouse_pos := get_viewport().get_mouse_position()
-			#var lineEdit := $LineEdit
-			#var pos: Vector2 = lineEdit.position
-			#var size: Vector2 = lineEdit.size
-			#if (mouse_pos.x > pos.x + size.x or mouse_pos.x < pos.x) or (mouse_pos.y > pos.y + size.y or mouse_pos.y < pos.y):
-				#lineEdit.release_focus()
-				#is_focused.emit(false)
-	pass
+	if self.visible:
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			var mouse_pos := get_viewport().get_mouse_position()
+			var lineEdit := $LineEdit
+			var pos: Vector2 = self.position
+			var size: Vector2 = self.size
+			if (mouse_pos.x > pos.x + size.x or
+				mouse_pos.x < pos.x) or \
+				(mouse_pos.y > pos.y + size.y or
+				mouse_pos.y < pos.y):
+				lineEdit.release_focus()
+				is_focused.emit(false)
 
 
 func focus_chat() -> void:
@@ -60,10 +62,8 @@ func _on_main_paused() -> void:
 
 func _on_line_edit_focus_entered() -> void:
 	is_focused.emit(true)
-	print("focused!")
 
 
 func _on_line_edit_focus_exited() -> void:
 	is_focused.emit(false)
-	print("no longer focused :(")
 
