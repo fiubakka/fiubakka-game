@@ -60,8 +60,10 @@ func _on_main_paused() -> void:
 
 func _on_line_edit_focus_entered() -> void:
 	is_focused.emit(true)
+	print("focused!")
 
 
 func _on_line_edit_focus_exited() -> void:
 	is_focused.emit(false)
+	print("no longer focused :(")
 
