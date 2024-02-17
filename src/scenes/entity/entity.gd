@@ -4,6 +4,7 @@ extends Node2D
 var velocity := Vector2(0, 0)
 var prev_vel := Vector2(0, 0)
 var player_name := ""
+var equipment: Equipment
 
 var cs := CompositeSprites
 
@@ -11,44 +12,20 @@ var cs := CompositeSprites
 func _ready() -> void:
 	$Name.text = "[center][color=#ffaaaa]" + player_name + "[/color][/center]"
 
-	var customization := random_character()
-	$EntitySprite/Hats.texture = cs.hats_spritesheet[customization["hats"]]
-	$EntitySprite/Hair.texture = cs.hair_spritesheet[customization["hair"]]
-	$EntitySprite/Eyes.texture = cs.eyes_spritesheet[customization["eyes"]]
-	$EntitySprite/Body.texture = cs.body_spritesheet[customization["body"]]
-	$EntitySprite/Glasses.texture = cs.glasses_spritesheet[customization["glasses"]]
-	$EntitySprite/FacialHair.texture = cs.facial_hair_spritesheet[customization["facial_hair"]]
-	$EntitySprite/Outfit.texture = cs.outfit_spritesheet[customization["outfit"]]
-
 	# Set idle front animation when spawning player
 	set_idle_region()
 	$AnimationPlayer.play("front")
 
 
-# TODO: this is for local testing only
-# Remove this method and use the data in the message
-# received from the server
-func random_character() -> Dictionary:
-	var rng := RandomNumberGenerator.new()
-	return {
-		"hats": rng.randi_range(0, cs.hats_spritesheet.size() - 1),
-		"hair": rng.randi_range(0, cs.hair_spritesheet.size() - 1),
-		"eyes": rng.randi_range(0, cs.eyes_spritesheet.size() - 1),
-		"glasses": rng.randi_range(0, cs.glasses_spritesheet.size() - 1),
-		"facial_hair": rng.randi_range(0, cs.facial_hair_spritesheet.size() - 1),
-		"body": rng.randi_range(0, cs.body_spritesheet.size() - 1),
-		"outfit": rng.randi_range(0, cs.outfit_spritesheet.size() - 1)
-	}
-
-
-func set_equipment(equipment: Equipment) -> void:
-	$EntitySprite/Hats.texture = cs.hats_spritesheet[equipment["hat"]]
-	$EntitySprite/Hair.texture = cs.hair_spritesheet[equipment["hair"]]
-	$EntitySprite/Eyes.texture = cs.eyes_spritesheet[equipment["eyes"]]
-	$EntitySprite/Body.texture = cs.body_spritesheet[equipment["body"]]
-	$EntitySprite/Glasses.texture = cs.glasses_spritesheet[equipment["glasses"]]
-	$EntitySprite/FacialHair.texture = cs.facial_hair_spritesheet[equipment["facial_hair"]]
-	$EntitySprite/Outfit.texture = cs.outfit_spritesheet[equipment["outfit"]]
+func set_equipment(new_equipment: Equipment) -> void:
+	equipment = new_equipment
+	$EntitySprite/Hats.texture = cs.hats_spritesheet[new_equipment["hat"]]
+	$EntitySprite/Hair.texture = cs.hair_spritesheet[new_equipment["hair"]]
+	$EntitySprite/Eyes.texture = cs.eyes_spritesheet[new_equipment["eyes"]]
+	$EntitySprite/Body.texture = cs.body_spritesheet[new_equipment["body"]]
+	$EntitySprite/Glasses.texture = cs.glasses_spritesheet[new_equipment["glasses"]]
+	$EntitySprite/FacialHair.texture = cs.facial_hair_spritesheet[new_equipment["facial_hair"]]
+	$EntitySprite/Outfit.texture = cs.outfit_spritesheet[new_equipment["outfit"]]
 
 
 func _process(_delta: float) -> void:
