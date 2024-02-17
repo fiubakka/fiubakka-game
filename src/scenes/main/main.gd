@@ -5,6 +5,8 @@ const CharCreationScene = preload("res://src/scenes/character_creation/character
 const EntityScene = preload("res://src/scenes/entity/entity.tscn")
 const Room200Scene = preload("res://src/scenes/maps/room_200/room_200.tscn")
 
+const MILISECONDS_UNTIL_DISCONNECT = 15000
+
 var entities: Dictionary = {}
 var is_game_paused: bool = false
 
@@ -23,6 +25,13 @@ func _process(_delta: float) -> void:
 	elif Input.is_action_just_pressed("pause"):
 		self.is_game_paused = true
 		paused.emit()
+
+	var curr_time := Time.get_ticks_msec()
+	for entityId: String in entities:
+		#If we dont get an update in 15s we consider that player disconnected and delete it
+		if curr_time - entities[entityId].last_update > MILISECONDS_UNTIL_DISCONNECT:
+			entities[entityId].queue_free()
+			entities.erase(entityId)
 
 
 func _on_server_consumer_user_init_ready(_position: Vector2, equipment: Equipment) -> void:
@@ -46,6 +55,7 @@ func _on_server_consumer_update_entity_state(
 ) -> void:
 	if entities.has(entityId):
 		var entity: Node = entities[entityId]
+		entity.last_update = Time.get_ticks_msec()
 		entity.position = entityPosition
 		entity.velocity = entityVelocity
 		#If equipment is the same we dont need to update it

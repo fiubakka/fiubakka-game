@@ -5,6 +5,7 @@ var velocity := Vector2(0, 0)
 var prev_vel := Vector2(0, 0)
 var player_name := ""
 var equipment: Equipment
+var last_update := Time.get_ticks_msec()
 
 var cs := CompositeSprites
 
