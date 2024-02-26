@@ -7,10 +7,19 @@ extends Control
 	"res://src/scenes/game_menu/inventory_screen/items/item_dni.tres"
 )
 
+@onready var hat: InventoryItemData = preload(
+	"res://src/scenes/game_menu/inventory_screen/items/item_hat.tres"
+)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Inventory.append(dni)
+	#Inventory.append(dni)
+	#var cs := CompositeSprites
+	#hat.texture.set_atlas(cs.hats_spritesheet[3])
+	#Inventory.append(hat)
+	var ic := ItemsCatalogue
+	print(ic.items_catalogue)
+	Inventory.append(ic.items_catalogue[0])
 	for i in range(0, len(Inventory)):
 		slots[i].update(Inventory[i])
 		slots[i].pressed.connect(self._on_Slot_Pressed.bind(Inventory[i]))
