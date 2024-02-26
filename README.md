@@ -1,4 +1,4 @@
-# trabajo-profesional-akka-client
+# Fiubakka Game
 Trabajo profesional: Juego distribuido en Akka (Client)
 
 ## Dependencies
