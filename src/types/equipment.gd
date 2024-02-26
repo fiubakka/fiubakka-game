@@ -9,6 +9,18 @@ var body: int
 var outfit: int
 
 
+static func compare_equipment(equipment1: Equipment, equipment2: Equipment) -> bool:
+	return (
+		equipment1.hat == equipment2.hat
+		&& equipment1.hair == equipment2.hair
+		&& equipment1.eyes == equipment2.eyes
+		&& equipment1.facial_hair == equipment2.facial_hair
+		&& equipment1.glasses == equipment2.glasses
+		&& equipment1.body == equipment2.body
+		&& equipment1.outfit == equipment2.outfit
+	)
+
+
 func set_equipment(
 	_hat: int, _hair: int, _eyes: int, _glasses: int, _facial_hair: int, _body: int, _outfit: int
 ) -> void:

@@ -1,0 +1,17 @@
+keys,es,en
+LOGIN,Login,Login
+REGISTER,Registrar,Register
+USER_PLACEHOLDER,"Usuario...","Username..."
+CHAR_CREATION_TITLE,Cree su personaje,Create your character
+HATS,Sombreros,Hats
+HAIR,Cabello,Hair
+EYES,Ojos,Eyes
+GLASSES,Anteojos,Glasses
+FACIAL_HAIR,Vello Facial,Facial Hair
+BODY,Cuerpo,Body
+OUTFIT,Ropa,Outfit
+OWN_PLAYER_LABEL,Vos,You
+OPTION_CONTINUE,Continuar,Continue
+OPTION_QUIT,Salir,Quit
+CHAT_PLACEHOLDER,"Diga algo...","Say something..."
+CHAT_SEND,Enviar,Send

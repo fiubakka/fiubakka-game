@@ -48,7 +48,9 @@ func _on_server_consumer_update_entity_state(
 		var entity: Node = entities[entityId]
 		entity.position = entityPosition
 		entity.velocity = entityVelocity
-		entity.set_equipment(equipment)
+		#If equipment is the same we dont need to update it
+		if !Equipment.compare_equipment(entity.equipment, equipment):
+			entity.set_equipment(equipment)
 	else:
 		var entity := EntityScene.instantiate()
 		entity.id = entityId
