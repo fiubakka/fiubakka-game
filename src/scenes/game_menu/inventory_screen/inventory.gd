@@ -18,8 +18,10 @@ func _ready() -> void:
 	#hat.texture.set_atlas(cs.hats_spritesheet[3])
 	#Inventory.append(hat)
 	var ic := ItemsCatalogue
-	print(ic.items_catalogue)
-	Inventory.append(ic.items_catalogue[0])
+	print(ic.items_catalogue[1].texture)
+	var sprite := $CharacterSprite/Hats
+	sprite.texture = ic.items_catalogue[1].texture.get_atlas()
+	Inventory.append(ic.items_catalogue[1])
 	for i in range(0, len(Inventory)):
 		slots[i].update(Inventory[i])
 		slots[i].pressed.connect(self._on_Slot_Pressed.bind(Inventory[i]))
