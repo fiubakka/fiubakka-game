@@ -10,7 +10,7 @@ var cs := CompositeSprites
 
 
 func _ready() -> void:
-	$Name.text = "[center][color=#ffaaaa]" + player_name + "[/color][/center]"
+	$Name.text = Utils.center_text("[color=#ffaaaa]" + player_name + "[/color]")
 
 	# Set idle front animation when spawning player
 	set_idle_region()
