@@ -39,7 +39,7 @@ func _ready() -> void:
 func _on_Slot_Pressed(item: InventoryItemData) -> void:
 	print("oressed")
 	if item:
-		var name: RichTextLabel = $VBoxContainer/Panel/Description/VBoxContainer/Name
+		var name: RichTextLabel = $Panel/Description/VBoxContainer/Name
 		name.add_text(item.name)
-		var description: RichTextLabel = $VBoxContainer/Panel/Description/VBoxContainer/Description
+		var description: RichTextLabel = $Panel/Description/VBoxContainer/Description
 		description.add_text(item.description)
