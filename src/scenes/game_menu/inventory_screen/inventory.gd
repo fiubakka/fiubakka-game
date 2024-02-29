@@ -23,8 +23,8 @@ func _ready() -> void:
 	#print(ic.items_catalogue[1].texture)
 	var sprite := $CharacterSprite/Hats
 	#sprite.texture = ic.items_catalogue[0].texture.get_atlas()
-	Inventory.append(ic.items_catalogue[0])
-	Inventory.append(ic.items_catalogue[0])
+	Inventory.append(ic.items_catalogue["hats"][1])
+	Inventory.append(ic.items_catalogue["hats"][2])
 	var slots := $ScrollContainer/GridContainer
 	for i in range(0, len(Inventory)):
 		var slot := inventory_slot_scene.instantiate()
@@ -37,7 +37,6 @@ func _ready() -> void:
 
 
 func _on_Slot_Pressed(item: InventoryItemData) -> void:
-	print("oressed")
 	if item:
 		var name: RichTextLabel = $Panel/Description/VBoxContainer/Name
 		name.add_text(item.name)
