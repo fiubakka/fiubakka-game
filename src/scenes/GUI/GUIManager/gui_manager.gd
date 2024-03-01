@@ -29,7 +29,6 @@ func handle_chat_open() -> void:
 	if !menu.visible or !pause.visible:
 		chat.visible = !chat.visible
 		var visible: bool = chat.visible or menu.visible or pause.visible
-		print(visible)
 		ui_opened.emit(visible)
 
 
@@ -37,7 +36,6 @@ func handle_inventory_open() -> void:
 	if !chat_focus and !pause.visible:
 		menu.visible = !menu.visible
 		var visible: bool = chat.visible or menu.visible or pause.visible
-		print(visible)
 		ui_opened.emit(visible)
 
 
@@ -45,7 +43,6 @@ func handle_pause_open() -> void:
 	print(pause.visible)
 	pause.visible = !pause.visible
 	var visible: bool = chat.visible or menu.visible or pause.visible
-	print(visible)
 	ui_opened.emit(visible)
 
 
