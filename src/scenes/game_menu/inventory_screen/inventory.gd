@@ -8,6 +8,8 @@ var selected_item :InventoryItemData = null
 
 var sprite : Node2D = null
 
+var can_equip := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$EquipButton.visible = false
@@ -41,10 +43,10 @@ func equip_button_text() -> void:
 			var hat := $CharacterSprite/Hats
 			if (selected_item_texture.get_atlas() == hat.texture):
 				$EquipButton.set_text("Unequip")
+				can_equip = false
 			else:
 				$EquipButton.set_text("Equip")
-			
-			
+				can_equip = true
 
 
 func _on_Slot_Pressed(item: InventoryItemData) -> void:
@@ -65,8 +67,10 @@ func _on_button_pressed() -> void:
 		if selected_item.equippable:
 			if selected_item.type == "hat":
 				var hat := $CharacterSprite/Hats
-				print(selected_item.texture)
-				hat.texture = selected_item.texture.get_atlas()
+				if can_equip:
+					hat.texture = selected_item.texture.get_atlas()
+				else:
+					hat.texture = null
 				#TODO: communication with the server
 	equip_button_text()
 
