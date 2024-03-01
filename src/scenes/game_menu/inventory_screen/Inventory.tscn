@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cswpkq3rymi6"]
+[gd_scene load_steps=11 format=3 uid="uid://cswpkq3rymi6"]
 
 [ext_resource type="PackedScene" uid="uid://csa1aukvil678" path="res://src/scenes/game_menu/inventory_screen/InventoryItem.tscn" id="1_pexyc"]
 [ext_resource type="Script" path="res://src/scenes/game_menu/inventory_screen/inventory.gd" id="1_qi08f"]
@@ -9,6 +9,31 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_3k5bc"]
 atlas = ExtResource("2_y7p64")
 region = Rect2(152, 240, 128, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jgxe"]
+atlas = ExtResource("2_y7p64")
+region = Rect2(32, 1104, 80, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_838tq"]
+texture = SubResource("AtlasTexture_5jgxe")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 10.0
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gmeuj"]
+texture = SubResource("AtlasTexture_5jgxe")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 10.0
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+modulate_color = Color(0.521141, 0.521141, 0.52114, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_la6fi"]
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
@@ -31,30 +56,6 @@ offset_bottom = 311.0
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
 layout_mode = 2
 columns = 3
-
-[node name="InventoryItem" parent="ScrollContainer/GridContainer" instance=ExtResource("1_pexyc")]
-layout_mode = 2
-
-[node name="InventoryItem2" parent="ScrollContainer/GridContainer" instance=ExtResource("1_pexyc")]
-layout_mode = 2
-
-[node name="InventoryItem3" parent="ScrollContainer/GridContainer" instance=ExtResource("1_pexyc")]
-layout_mode = 2
-
-[node name="InventoryItem4" parent="ScrollContainer/GridContainer" instance=ExtResource("1_pexyc")]
-layout_mode = 2
-
-[node name="InventoryItem5" parent="ScrollContainer/GridContainer" instance=ExtResource("1_pexyc")]
-layout_mode = 2
-
-[node name="InventoryItem6" parent="ScrollContainer/GridContainer" instance=ExtResource("1_pexyc")]
-layout_mode = 2
-
-[node name="InventoryItem7" parent="ScrollContainer/GridContainer" instance=ExtResource("1_pexyc")]
-layout_mode = 2
-
-[node name="InventoryItem8" parent="ScrollContainer/GridContainer" instance=ExtResource("1_pexyc")]
-layout_mode = 2
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2
@@ -94,3 +95,24 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 theme_override_fonts/normal_font = ExtResource("4_45so7")
 theme_override_font_sizes/normal_font_size = 15
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 207.0
+offset_right = 506.0
+offset_bottom = 251.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_838tq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_838tq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_gmeuj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_la6fi")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Button"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 9.0
+offset_right = 71.0
+offset_bottom = 35.0
+theme_override_fonts/normal_font = ExtResource("4_45so7")
+theme_override_font_sizes/normal_font_size = 20
+text = "Equip"

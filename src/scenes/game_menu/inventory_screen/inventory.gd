@@ -3,15 +3,9 @@ extends Control
 @export var inventory_slot_scene: PackedScene
 
 @export var Inventory: Array[InventoryItemData]
-#@onready var slots: Array = $VBoxContainer/GridContainer.get_children()
 
-@onready var dni: InventoryItemData = preload(
-	"res://src/scenes/game_menu/inventory_screen/items/item_dni.tres"
-)
+var selected_item :InventoryItemData = null
 
-@onready var hat: InventoryItemData = preload(
-	"res://src/scenes/game_menu/inventory_screen/items/item_hat.tres"
-)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,7 +32,10 @@ func _ready() -> void:
 
 func _on_Slot_Pressed(item: InventoryItemData) -> void:
 	if item:
+		selected_item = item
 		var name: RichTextLabel = $Panel/Description/VBoxContainer/Name
+		name.clear()
 		name.add_text(item.name)
 		var description: RichTextLabel = $Panel/Description/VBoxContainer/Description
+		description.clear()
 		description.add_text(item.description)

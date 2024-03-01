@@ -1,7 +1,10 @@
 extends TextureButton
 
+var item : InventoryItemData = null
 
-func update(item: InventoryItemData) -> void:
+
+func update(_item: InventoryItemData) -> void:
+	item = _item
 	var sprite: Sprite2D = $CenterContainer/Panel/Sprite2D
 	sprite.texture = item.texture
 	print(sprite.texture)
