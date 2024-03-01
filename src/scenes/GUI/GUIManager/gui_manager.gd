@@ -24,34 +24,23 @@ func handle_chat_open() -> void:
 	var menu := $GameMenu
 	var pause := $Pause
 	if !menu.visible or !pause.visible:
-		if chat.visible:
-			chat.visible = false
-			ui_opened.emit(false)
-		else:
-			chat.visible = true
-			ui_opened.emit(true)
+		chat.visible = !chat.visible
+		ui_opened.emit(chat.visible)
 
 
 func handle_inventory_open() -> void:
 	var menu := $GameMenu
 	var pause := $Pause
 	if !chat_focus and !pause.visible:
-		if menu.visible:
-			menu.visible = false
-			ui_opened.emit(false)
-		else:
-			menu.visible = true
-			ui_opened.emit(true)
+		menu.visible = !menu.visible
+		ui_opened.emit(menu.visible)
 
 
 func handle_pause_open() -> void:
 	var pause := $Pause
-	if pause.visible:
-		pause.visible = false
-		ui_opened.emit(false)
-	else:
-		pause.visible = true
-		ui_opened.emit(true)
+	print(pause.visible)
+	pause.visible = !pause.visible
+	ui_opened.emit(pause.visible)
 
 
 func _on_chatbox_is_focused(focus: bool) -> void:
