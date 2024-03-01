@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjdyuheqlnwho"]
+
+[ext_resource type="Script" path="res://src/scenes/GUI/GUIManager/gui_manager.gd" id="1_f7tvf"]
+
+[node name="GuiManager" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_f7tvf")
