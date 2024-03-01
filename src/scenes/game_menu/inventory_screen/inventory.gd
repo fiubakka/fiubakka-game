@@ -6,16 +6,18 @@ extends Control
 
 var selected_item :InventoryItemData = null
 
+var sprite : Node2D = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	sprite = $CharacterSprite
 	#Inventory.append(dni)
 	#var cs := CompositeSprites
 	#hat.texture.set_atlas(cs.hats_spritesheet[3])
 	#Inventory.append(hat)
 	var ic := ItemsCatalogue
 	#print(ic.items_catalogue[1].texture)
-	var sprite := $CharacterSprite/Hats
+	#var sprite := $CharacterSprite/Hats
 	#sprite.texture = ic.items_catalogue[0].texture.get_atlas()
 	Inventory.append(ic.items_catalogue["hats"][1])
 	Inventory.append(ic.items_catalogue["hats"][2])
@@ -39,3 +41,13 @@ func _on_Slot_Pressed(item: InventoryItemData) -> void:
 		var description: RichTextLabel = $Panel/Description/VBoxContainer/Description
 		description.clear()
 		description.add_text(item.description)
+
+
+func _on_button_pressed() -> void:
+	if selected_item:
+		if selected_item.equippable:
+			if selected_item.type == "hat":
+				var hat := $CharacterSprite/Hats
+				print(selected_item.texture)
+				hat.texture = selected_item.texture.get_atlas()
+			

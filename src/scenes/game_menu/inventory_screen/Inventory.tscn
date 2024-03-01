@@ -102,17 +102,11 @@ offset_left = 424.0
 offset_top = 207.0
 offset_right = 506.0
 offset_bottom = 251.0
+theme_override_fonts/font = ExtResource("4_45so7")
 theme_override_styles/normal = SubResource("StyleBoxTexture_838tq")
 theme_override_styles/hover = SubResource("StyleBoxTexture_838tq")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_gmeuj")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_la6fi")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Button"]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 9.0
-offset_right = 71.0
-offset_bottom = 35.0
-theme_override_fonts/normal_font = ExtResource("4_45so7")
-theme_override_font_sizes/normal_font_size = 20
 text = "Equip"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
