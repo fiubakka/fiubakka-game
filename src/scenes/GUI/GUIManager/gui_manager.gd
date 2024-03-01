@@ -5,9 +5,15 @@ signal chat_visible(visible: bool)
 
 var chat_focus: bool = false
 
+var chat : Control
+var menu : Control
+var pause : Control
 
 func _ready() -> void:
 	self.set_process(false)
+	chat = $Chatbox
+	menu = $GameMenu
+	pause = $Pause
 
 
 func _process(delta: float) -> void:
@@ -20,27 +26,27 @@ func _process(delta: float) -> void:
 
 
 func handle_chat_open() -> void:
-	var chat := $Chatbox
-	var menu := $GameMenu
-	var pause := $Pause
 	if !menu.visible or !pause.visible:
 		chat.visible = !chat.visible
-		ui_opened.emit(chat.visible)
+		var visible: bool = chat.visible or menu.visible or pause.visible
+		print(visible)
+		ui_opened.emit(visible)
 
 
 func handle_inventory_open() -> void:
-	var menu := $GameMenu
-	var pause := $Pause
 	if !chat_focus and !pause.visible:
 		menu.visible = !menu.visible
-		ui_opened.emit(menu.visible)
+		var visible: bool = chat.visible or menu.visible or pause.visible
+		print(visible)
+		ui_opened.emit(visible)
 
 
 func handle_pause_open() -> void:
-	var pause := $Pause
 	print(pause.visible)
 	pause.visible = !pause.visible
-	ui_opened.emit(pause.visible)
+	var visible: bool = chat.visible or menu.visible or pause.visible
+	print(visible)
+	ui_opened.emit(visible)
 
 
 func _on_chatbox_is_focused(focus: bool) -> void:
