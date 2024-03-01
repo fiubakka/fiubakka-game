@@ -45,22 +45,20 @@ func _on_server_consumer_user_init_ready(_position: Vector2, equipment: Equipmen
 func _on_server_consumer_update_entity_state(
 	entityId: String, entityPosition: Vector2, entityVelocity: Vector2, equipment: Equipment
 ) -> void:
-	print("ENTITY NAME", entityId)
-	print("ENTITY HAT", equipment.hat)
-	print("ENTITY EYES", equipment.eyes)
-	print("ENTITY HAIR", equipment.hair)
-	print("ENTITY OUTFIT", equipment.outfit)
-
 	if entities.has(entityId):
 		var entity: Node = entities[entityId]
 		entity.position = entityPosition
 		entity.velocity = entityVelocity
+		#If equipment is the same we dont need to update it
+		if !Equipment.compare_equipment(entity.equipment, equipment):
+			entity.set_equipment(equipment)
 	else:
 		var entity := EntityScene.instantiate()
 		entity.id = entityId
 		entity.position = entityPosition
 		entity.velocity = entityVelocity
 		entity.player_name = entityId
+		entity.set_equipment(equipment)
 		entities[entityId] = entity
 		$Room200.add_child(entity)
 

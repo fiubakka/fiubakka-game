@@ -8,7 +8,8 @@ var is_paused: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	$NinePatchRect/NinePatchRect/RichTextLabel.text = Utils.center_text(tr("OPTION_CONTINUE"))
+	$NinePatchRect/NinePatchRect2/RichTextLabel.text = Utils.center_text(tr("OPTION_QUIT"))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -1,24 +1,78 @@
-[gd_scene load_steps=4 format=3 uid="uid://oihrx253mx55"]
+[gd_scene load_steps=6 format=3 uid="uid://oihrx253mx55"]
 
 [ext_resource type="Script" path="res://src/scenes/GUI/chatbox/chatbox.gd" id="1_i2ex6"]
 [ext_resource type="Script" path="res://src/scenes/GUI/chatbox/LineEdit.gd" id="2_fix1v"]
 [ext_resource type="Script" path="res://src/scenes/GUI/chatbox/RichTextLabel.gd" id="3_nta7l"]
+[ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="4_yt6vq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2eq1e"]
 
 [node name="Chatbox" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1.0
-offset_top = 2.0
-offset_right = 431.0
-offset_bottom = 219.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = -1.0
 script = ExtResource("1_i2ex6")
 metadata/_edit_group_ = true
 
+[node name="Background" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 430.0
+offset_bottom = 220.0
+texture = ExtResource("4_yt6vq")
+region_rect = Rect2(40, 184, 64, 64)
+
+[node name="InputBackground" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 222.0
+offset_right = 364.0
+offset_bottom = 262.0
+texture = ExtResource("4_yt6vq")
+region_rect = Rect2(816, 1160, 48, 32)
+
+[node name="InputBackgroundL" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = -13.0
+offset_top = 222.0
+offset_right = 9.0
+offset_bottom = 262.0
+texture = ExtResource("4_yt6vq")
+region_rect = Rect2(800, 1160, 16, 32)
+
+[node name="InputBackgroundR" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 222.0
+offset_right = 382.0
+offset_bottom = 262.0
+texture = ExtResource("4_yt6vq")
+region_rect = Rect2(864, 1160, 16, 32)
+
+[node name="ButtonBackground" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 222.0
+offset_right = 440.0
+offset_bottom = 262.0
+texture = ExtResource("4_yt6vq")
+region_rect = Rect2(1344, 144, 48, 48)
+
+[node name="TextureRect" type="ColorRect" parent="."]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_right = 430.0
+offset_bottom = 220.0
+color = Color(0.278431, 0.278431, 0.278431, 0.576471)
+
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 2
-offset_right = 429.0
-offset_bottom = 214.0
+offset_left = 15.0
+offset_right = 415.0
+offset_bottom = 220.0
 scroll_following = true
 script = ExtResource("3_nta7l")
 
@@ -26,19 +80,24 @@ script = ExtResource("3_nta7l")
 layout_mode = 2
 anchor_left = -0.00930233
 anchor_right = -0.00930233
-offset_top = 219.0
-offset_right = 370.0
-offset_bottom = 250.0
-placeholder_text = "(Diga algo...)"
+offset_left = 5.0
+offset_top = 225.0
+offset_right = 374.0
+offset_bottom = 256.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2eq1e")
+placeholder_text = "CHAT_PLACEHOLDER"
+flat = true
 script = ExtResource("2_fix1v")
 
 [node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-offset_left = 371.0
-offset_top = 219.0
-offset_right = 428.0
-offset_bottom = 250.0
-text = "Enviar"
+offset_left = 380.0
+offset_top = 222.0
+offset_right = 440.0
+offset_bottom = 262.0
+text = "CHAT_SEND"
 
 [node name="TextureRect" type="ColorRect" parent="."]
 self_modulate = Color(0, 0, 0, 1)

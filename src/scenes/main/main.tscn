@@ -42,6 +42,7 @@ offset_top = 3.0
 offset_bottom = 3.0
 
 [node name="Chatbox" parent="GUI/GuiManager" instance=ExtResource("6_q0kgv")]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
