@@ -3,8 +3,7 @@ extends Node2D
 const LoginScene = preload("res://src/scenes/login/login.tscn")
 const CharCreationScene = preload("res://src/scenes/character_creation/character_creation.tscn")
 const EntityScene = preload("res://src/scenes/entity/entity.tscn")
-const Room200Scene = preload("res://src/scenes/maps/room_200/room_200.tscn")
-const MainHallScene = preload("res://src/scenes/maps/main_hall/main_hall.tscn")
+const main_hall_path = "res://src/scenes/maps/main_hall/main_hall.tscn"
 
 var entities: Dictionary = {}
 var is_game_paused: bool = false
@@ -27,10 +26,12 @@ func _process(_delta: float) -> void:
 
 
 func _on_server_consumer_user_init_ready(_position: Vector2, equipment: Equipment) -> void:
-	add_child(MainHallScene.instantiate())
+	SceneManager.load_new_scene(main_hall_path)
 	#TODO: Is it okay to change the initial position of the player like this or should we use something else
 	# like signals for example?
-	var player := $MainHall/Player
+	# TODO: first level is always MainHall (for now). Change it to receive player spawn level
+	await SceneManager.transition_finished
+	var player: Player = get_tree().root.get_node("MainHall/Player")
 	player.update_movement.connect($ServerConnection/ServerProducer._on_player_movement)
 	chat_opened.connect(player._on_main_chat_opened)
 	chat_closed.connect(player._on_main_chat_closed)
@@ -58,7 +59,7 @@ func _on_server_consumer_update_entity_state(
 		entity.player_name = entityId
 		entity.set_equipment(equipment)
 		entities[entityId] = entity
-		$MainHall.add_child(entity)
+		get_tree().current_scene.add_child(entity)
 
 
 func _on_pause_unpaused() -> void:

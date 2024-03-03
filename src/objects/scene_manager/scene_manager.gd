@@ -1,6 +1,7 @@
 extends Node
 
 signal content_finished_loading(content: Node)
+signal transition_finished
 
 var loading_screen: LoadingScreen
 var loading_screen_scene: PackedScene = preload("res://src/scenes/loading_screen/loading_screen.tscn")
@@ -54,7 +55,10 @@ func check_load_status() -> void:
 			
 func _on_content_finished_loading(new_scene: Node) -> void:
 	var current_scene := get_tree().current_scene
-	current_scene.queue_free()
+	
+	# quickfix for now
+	if current_scene.name != "Main":
+		current_scene.queue_free()
 	
 	get_tree().root.call_deferred('add_child', new_scene)
 	get_tree().set_deferred('current_scene', new_scene)
@@ -65,3 +69,4 @@ func _on_content_finished_loading(new_scene: Node) -> void:
 		loading_screen = null
 		if new_scene is Level:
 			new_scene.enter_level()
+	transition_finished.emit()
