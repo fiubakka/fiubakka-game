@@ -29,6 +29,7 @@ func get_inventory() -> void:
 	Inventory.append(ic.items_catalogue["miscellaneous"][0])
 	Inventory.append(ic.items_catalogue["hats"][1])
 	Inventory.append(ic.items_catalogue["hats"][2])
+	Inventory.append(ic.items_catalogue["outfits"][2])
 
 
 func handle_equip_button_availability() -> void:
@@ -93,5 +94,8 @@ func _on_button_pressed() -> void:
 
 
 func change_equipment(body_part: Node2D, selected_item_texture: Texture) -> void:
-	body_part.texture = selected_item_texture.get_atlas()
+	if can_equip:
+		body_part.texture = selected_item_texture.get_atlas()
+	else:
+		body_part.texture = null
 
