@@ -31,29 +31,41 @@ func get_inventory() -> void:
 	Inventory.append(ic.items_catalogue["hats"][2])
 
 
-func equip_button_availability() -> void:
+func handle_equip_button_availability() -> void:
 	if (selected_item):
 		$EquipButton.visible = selected_item.equippable
 
 
-func equip_button_text() -> void:
+func handle_equip_button_text() -> void:
 	if (selected_item):
 		var selected_item_texture := selected_item.texture
-		if (selected_item.type == "hat"):
-			var hat := $CharacterSprite/Hats
-			if (selected_item_texture.get_atlas() == hat.texture):
-				$EquipButton.set_text("Unequip")
-				can_equip = false
-			else:
-				$EquipButton.set_text("Equip")
-				can_equip = true
+		match selected_item.type:
+			"hat":
+				change_equip_button_text($CharacterSprite/Hats, selected_item_texture)
+			"outfit":
+				change_equip_button_text($CharacterSprite/Outfit, selected_item_texture)
+			"facial hair":
+				change_equip_button_text($CharacterSprite/FacialHair, selected_item_texture)
+			"glasses":
+				change_equip_button_text($CharacterSprite/Glasses, selected_item_texture)
+			"hair":
+				change_equip_button_text($CharacterSprite/Hair, selected_item_texture)
+
+
+func change_equip_button_text(piece: Node2D, selected_item_texture: Texture) -> void:
+	if (selected_item_texture.get_atlas() == piece.texture):
+		$EquipButton.set_text("Unequip")
+		can_equip = false
+	else:
+		$EquipButton.set_text("Equip")
+		can_equip = true
 
 
 func _on_Slot_Pressed(item: InventoryItemData) -> void:
 	if item:
 		selected_item = item
-		equip_button_availability()
-		equip_button_text()
+		handle_equip_button_availability()
+		handle_equip_button_text()
 		var name: RichTextLabel = $Panel/Description/VBoxContainer/Name
 		name.clear()
 		name.add_text(item.name)
@@ -63,15 +75,31 @@ func _on_Slot_Pressed(item: InventoryItemData) -> void:
 
 
 func _on_button_pressed() -> void:
-	if selected_item:
-		if selected_item.equippable:
-			if selected_item.type == "hat":
-				var hat := $CharacterSprite/Hats
-				if can_equip:
-					hat.texture = selected_item.texture.get_atlas()
-				else:
-					hat.texture = null
-				#TODO: communication with the server
-	equip_button_text()
+	#if selected_item:
+		#if selected_item.equippable:
+			#if selected_item.type == "hat":
+				#var hat := $CharacterSprite/Hats
+				#if can_equip:
+					#hat.texture = selected_item.texture.get_atlas()
+				#else:
+					#hat.texture = null
+				##TODO: communication with the server
+	if selected_item and selected_item.equippable:
+		var selected_item_texture := selected_item.texture
+		match selected_item.type:
+			"hat":
+				change_equipment($CharacterSprite/Hats, selected_item_texture)
+			"outfit":
+				change_equipment($CharacterSprite/Outfit, selected_item_texture)
+			"facial hair":
+				change_equipment($CharacterSprite/FacialHair, selected_item_texture)
+			"glasses":
+				change_equipment($CharacterSprite/Glasses, selected_item_texture)
+			"hair":
+				change_equipment($CharacterSprite/Hair, selected_item_texture)
+	handle_equip_button_text()
 
+
+func change_equipment(body_part: Node2D, selected_item_texture: Texture) -> void:
+	body_part.texture = selected_item_texture.get_atlas()
 
