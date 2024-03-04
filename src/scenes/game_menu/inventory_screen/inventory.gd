@@ -75,15 +75,6 @@ func _on_Slot_Pressed(item: InventoryItemData) -> void:
 
 
 func _on_button_pressed() -> void:
-	#if selected_item:
-		#if selected_item.equippable:
-			#if selected_item.type == "hat":
-				#var hat := $CharacterSprite/Hats
-				#if can_equip:
-					#hat.texture = selected_item.texture.get_atlas()
-				#else:
-					#hat.texture = null
-				##TODO: communication with the server
 	if selected_item and selected_item.equippable:
 		var selected_item_texture := selected_item.texture
 		match selected_item.type:
@@ -98,6 +89,7 @@ func _on_button_pressed() -> void:
 			"hair":
 				change_equipment($CharacterSprite/Hair, selected_item_texture)
 	handle_equip_button_text()
+	#TODO: communication with the server
 
 
 func change_equipment(body_part: Node2D, selected_item_texture: Texture) -> void:
