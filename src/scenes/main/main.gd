@@ -38,6 +38,9 @@ func _on_server_consumer_user_init_ready(_position: Vector2, equipment: Equipmen
 	paused.connect(player._on_main_paused)
 	unpaused.connect(player._on_main_unpaused)
 	player.set_equipment(equipment)
+	var current_level := get_tree().current_scene
+	current_level.data["player_equipment"] = equipment
+	current_level.enter_level()
 	#player.position = _position
 	login_ready.emit()
 	$Login.queue_free()

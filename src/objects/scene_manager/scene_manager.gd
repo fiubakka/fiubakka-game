@@ -56,6 +56,10 @@ func check_load_status() -> void:
 func _on_content_finished_loading(new_scene: Node) -> void:
 	var current_scene := get_tree().current_scene
 	
+	# Level data handoff
+	if current_scene is Level and new_scene is Level:
+		new_scene.data = current_scene.data
+	
 	# quickfix for now
 	if current_scene.name != "Main":
 		current_scene.queue_free()
