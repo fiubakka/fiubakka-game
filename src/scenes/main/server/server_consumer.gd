@@ -11,8 +11,8 @@ const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 const PBGameEntityState = (
 	preload("res://addons/protocol/compiled/server/state/game_entity_state.gd").PBGameEntityState
 )
-const PBPlayerInitReady = (
-	preload("res://addons/protocol/compiled/server/init/player_init_ready.gd").PBPlayerInitReady
+const PBPlayerInitSuccess = (
+	preload("res://addons/protocol/compiled/server/init/player_init.gd").PBPlayerInitSuccess
 )
 
 const PBPlayerMessage = (
@@ -49,7 +49,7 @@ func _handle_message(message: Object) -> void:
 	var handler: String
 	if message is PBGameEntityState:
 		handler = "_handle_game_entity_state"
-	elif message is PBPlayerInitReady:
+	elif message is PBPlayerInitSuccess:
 		handler = "_handle_player_init_ready"
 	elif message is PBPlayerMessage:
 		handler = "_handle_player_message"
@@ -57,7 +57,7 @@ func _handle_message(message: Object) -> void:
 	call_deferred(handler, message)
 
 
-func _handle_player_init_ready(msg: PBPlayerInitReady) -> void:
+func _handle_player_init_ready(msg: PBPlayerInitSuccess) -> void:
 	var equipment := Equipment.new()
 	equipment.set_equipment(
 		msg.get_initialState().get_equipment().get_hat(),

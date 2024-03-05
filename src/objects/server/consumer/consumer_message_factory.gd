@@ -9,14 +9,14 @@ const PBGameEntityState = (
 const PBPlayerMessage = (
 	preload("res://addons/protocol/compiled/server/chat/message.gd").PBPlayerMessage
 )
-const PBPlayerInitReady = (
-	preload("res://addons/protocol/compiled/server/init/player_init_ready.gd").PBPlayerInitReady
+const PBPlayerInitSuccess = (
+	preload("res://addons/protocol/compiled/server/init/player_init.gd").PBPlayerInitSuccess
 )
 
 static var _MESSAGE_MAP := {
 	PBServerMessageType.PBGameEntityState: PBGameEntityState,
 	PBServerMessageType.PBPlayerMessage: PBPlayerMessage,
-	PBServerMessageType.PBPlayerInitReady: PBPlayerInitReady,
+	PBServerMessageType.PBPlayerInitSuccess: PBPlayerInitSuccess,
 }
 
 
