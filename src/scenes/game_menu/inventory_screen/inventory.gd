@@ -12,7 +12,7 @@ var can_equip := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$VBoxContainer/EquipButton.visible = false
+	$VBoxContainer/Panel/EquipButton.visible = false
 	get_inventory()
 	sprite = $VBoxContainer/CenterContainer/Panel/CharacterSprite
 	var slots := $ScrollContainer/GridContainer
@@ -34,7 +34,7 @@ func get_inventory() -> void:
 
 func handle_equip_button_availability() -> void:
 	if (selected_item):
-		$VBoxContainer/EquipButton.visible = selected_item.equippable
+		$VBoxContainer/Panel/EquipButton.visible = selected_item.equippable
 
 
 func handle_equip_button_text() -> void:
@@ -65,10 +65,10 @@ func handle_equip_button_text() -> void:
 
 func change_equip_button_text(piece: Node2D, selected_item_texture: Texture) -> void:
 	if (selected_item_texture.get_atlas() == piece.texture):
-		$VBoxContainer/EquipButton.set_text("Unequip")
+		$VBoxContainer/Panel/EquipButton.set_text("Unequip")
 		can_equip = false
 	else:
-		$VBoxContainer/EquipButton.set_text("Equip")
+		$VBoxContainer/Panel/EquipButton.set_text("Equip")
 		can_equip = true
 
 
