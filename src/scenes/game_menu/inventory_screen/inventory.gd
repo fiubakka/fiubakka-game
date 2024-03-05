@@ -6,6 +6,8 @@ extends Control
 
 var selected_item :InventoryItemData = null
 
+var selected_slot: InventorySlot = null
+
 var sprite : Node2D = null
 
 var can_equip := false
@@ -19,7 +21,7 @@ func _ready() -> void:
 	for i in range(0, len(Inventory)):
 		var slot := inventory_slot_scene.instantiate()
 		slot.update(Inventory[i])
-		slot.pressed.connect(self._on_Slot_Pressed.bind(Inventory[i]))
+		slot.pressed.connect(self._on_Slot_Pressed.bind(slot, Inventory[i]))
 		slots.add_child(slot)
 
 
@@ -62,8 +64,12 @@ func change_equip_button_text(piece: Node2D, selected_item_texture: Texture) -> 
 		can_equip = true
 
 
-func _on_Slot_Pressed(item: InventoryItemData) -> void:
+func _on_Slot_Pressed(slot: InventorySlot, item: InventoryItemData) -> void:
 	if item:
+		if selected_slot:
+			selected_slot.set_focus(false)
+		selected_slot = slot
+		selected_slot.set_focus(true)
 		selected_item = item
 		handle_equip_button_availability()
 		handle_equip_button_text()
