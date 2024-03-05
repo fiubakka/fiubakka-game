@@ -1,8 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://cvu15htrnd5gc"]
+[gd_scene load_steps=11 format=3 uid="uid://cvu15htrnd5gc"]
 
 [ext_resource type="Script" path="res://src/scenes/loading_screen/loading_screen.gd" id="1_nlgno"]
+[ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_mmqya"]
+[ext_resource type="Script" path="res://src/scenes/loading_screen/logo.gd" id="3_6p0eo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3f8xr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3sjx7"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eoxv5"]
+bg_color = Color(0.286275, 0.34902, 0.345098, 1)
 
 [sub_resource type="Animation" id="Animation_432os"]
 length = 0.001
@@ -21,7 +29,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_qmljh"]
 resource_name = "fade_from_black"
-length = 0.5
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -37,6 +45,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_q1cwo"]
 resource_name = "fade_to_black"
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -61,12 +70,10 @@ _data = {
 script = ExtResource("1_nlgno")
 
 [node name="Control" type="Control" parent="."]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 957.0
+offset_bottom = 541.0
 
 [node name="Panel" type="Panel" parent="Control"]
 self_modulate = Color(0, 0, 0, 0)
@@ -75,10 +82,39 @@ offset_right = 960.0
 offset_bottom = 541.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_3f8xr")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Control"]
+[node name="Logo2" type="NinePatchRect" parent="Control"]
+offset_left = 389.0
+offset_top = 85.0
+offset_right = 539.0
+offset_bottom = 235.0
+pivot_offset = Vector2(75, 75)
+texture = ExtResource("2_mmqya")
+region_rect = Rect2(1296, 0, 48, 48)
+script = ExtResource("3_6p0eo")
+default_rot_speed = 0.05
+
+[node name="Logo" type="NinePatchRect" parent="Control"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 414.0
+offset_top = 114.0
+offset_right = 514.0
+offset_bottom = 214.0
+pivot_offset = Vector2(50, 50)
+texture = ExtResource("2_mmqya")
+region_rect = Rect2(1152, 144, 48, 48)
+script = ExtResource("3_6p0eo")
+default_rot_speed = 0.1
+
+[node name="ProgressBar" type="ProgressBar" parent="Control"]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 282.0
+offset_right = 632.0
+offset_bottom = 333.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_3sjx7")
+theme_override_styles/fill = SubResource("StyleBoxFlat_eoxv5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -86,3 +122,8 @@ libraries = {
 }
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="spin_logo" from="." to="Control/Logo" method="_on_loading_screen_spin_logo"]
+[connection signal="spin_logo" from="." to="Control/Logo2" method="_on_loading_screen_spin_logo"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

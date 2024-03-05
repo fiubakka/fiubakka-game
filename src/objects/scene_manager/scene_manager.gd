@@ -38,12 +38,16 @@ func load_content(content_path: String) -> void:
 	
 
 func check_load_status() -> void:
-	var status := ResourceLoader.load_threaded_get_status(_content_path)
+	var load_progress := [] 	
+	var status := ResourceLoader.load_threaded_get_status(_content_path, load_progress)
 	match status:
 		ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
 			push_error("Could not load resource %s" % _content_path)
 			load_progress_timer.stop()
 			return
+		ResourceLoader.THREAD_LOAD_IN_PROGRESS:
+			if loading_screen != null:
+				loading_screen.update_bar(load_progress[0] * 100)
 		ResourceLoader.THREAD_LOAD_FAILED:
 			push_error("Failed loading resource %s" % _content_path)
 			load_progress_timer.stop()
