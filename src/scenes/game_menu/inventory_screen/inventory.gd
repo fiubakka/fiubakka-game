@@ -41,16 +41,6 @@ func handle_equip_button_text() -> void:
 	if (selected_item):
 		var selected_item_texture := selected_item.texture
 		match selected_item.type:
-			#"hat":
-				#change_equip_button_text($CharacterSprite/Hats, selected_item_texture)
-			#"outfit":
-				#change_equip_button_text($CharacterSprite/Outfit, selected_item_texture)
-			#"facial hair":
-				#change_equip_button_text($CharacterSprite/FacialHair, selected_item_texture)
-			#"glasses":
-				#change_equip_button_text($CharacterSprite/Glasses, selected_item_texture)
-			#"hair":
-				#change_equip_button_text($CharacterSprite/Hair, selected_item_texture)
 			"hat":
 				change_equip_button_text(sprite.get_node("Hats"), selected_item_texture)
 			"outfit":
@@ -77,11 +67,9 @@ func _on_Slot_Pressed(item: InventoryItemData) -> void:
 		selected_item = item
 		handle_equip_button_availability()
 		handle_equip_button_text()
-		#var name: RichTextLabel = $VBoxContainer/Panel/Description/VBoxContainer/Name
 		var name: RichTextLabel = $VBoxContainer/Description/VBoxContainer/Name
 		name.clear()
 		name.add_text(item.name)
-		#var description: RichTextLabel = $VBoxContainer/Panel/Description/VBoxContainer/Description
 		var description: RichTextLabel = $VBoxContainer/Description/VBoxContainer/Description
 		description.clear()
 		description.add_text(item.description)
@@ -91,16 +79,6 @@ func _on_button_pressed() -> void:
 	if selected_item and selected_item.equippable:
 		var selected_item_texture := selected_item.texture
 		match selected_item.type:
-			#"hat":
-				#change_equipment($CharacterSprite/Hats, selected_item_texture)
-			#"outfit":
-				#change_equipment($CharacterSprite/Outfit, selected_item_texture)
-			#"facial hair":
-				#change_equipment($CharacterSprite/FacialHair, selected_item_texture)
-			#"glasses":
-				#change_equipment($CharacterSprite/Glasses, selected_item_texture)
-			#"hair":
-				#change_equipment($CharacterSprite/Hair, selected_item_texture)
 			"hat":
 				change_equipment(sprite.get_node("Hats"), selected_item_texture)
 			"outfit":
