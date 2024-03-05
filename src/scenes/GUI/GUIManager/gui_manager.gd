@@ -5,9 +5,10 @@ signal chat_visible(visible: bool)
 
 var chat_focus: bool = false
 
-var chat : Control
-var menu : Control
-var pause : Control
+var chat: Control
+var menu: Control
+var pause: Control
+
 
 func _ready() -> void:
 	self.set_process(false)
@@ -48,4 +49,3 @@ func handle_pause_open() -> void:
 
 func _on_chatbox_is_focused(focus: bool) -> void:
 	chat_focus = focus
-

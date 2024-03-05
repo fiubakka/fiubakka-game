@@ -18,12 +18,12 @@ signal ui_opened(open: bool)
 
 func _process(_delta: float) -> void:
 	#if Input.is_action_just_pressed("open_chat") && !is_game_paused:
-		#chat_opened.emit()
+	#chat_opened.emit()
 	#elif Input.is_action_just_pressed("close_chat") && !is_game_paused:
-		#chat_closed.emit()
+	#chat_closed.emit()
 	#elif Input.is_action_just_pressed("pause"):
-		#self.is_game_paused = true
-		#paused.emit()
+	#self.is_game_paused = true
+	#paused.emit()
 	pass
 
 
@@ -37,7 +37,7 @@ func _on_server_consumer_user_init_ready(_position: Vector2, equipment: Equipmen
 	player.position = _position
 	login_ready.emit()
 	$Login.queue_free()
-	
+
 	$GUI/GuiManager.set_process(true)
 	ui_opened.connect(player._on_main_ui_opened)
 
@@ -94,4 +94,3 @@ func _on_register_return_to_menu() -> void:
 
 func _on_gui_manager_ui_opened(open: bool) -> void:
 	ui_opened.emit(open)
-

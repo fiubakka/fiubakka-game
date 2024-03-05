@@ -20,10 +20,10 @@ func _process(_delta: float) -> void:
 			var lineEdit := $LineEdit
 			var pos: Vector2 = self.position
 			var size: Vector2 = self.size
-			if (mouse_pos.x > pos.x + size.x or
-				mouse_pos.x < pos.x) or \
-				(mouse_pos.y > pos.y + size.y or
-				mouse_pos.y < pos.y):
+			if (
+				(mouse_pos.x > pos.x + size.x or mouse_pos.x < pos.x)
+				or (mouse_pos.y > pos.y + size.y or mouse_pos.y < pos.y)
+			):
 				lineEdit.release_focus()
 				is_focused.emit(false)
 
@@ -66,4 +66,3 @@ func _on_line_edit_focus_entered() -> void:
 
 func _on_line_edit_focus_exited() -> void:
 	is_focused.emit(false)
-

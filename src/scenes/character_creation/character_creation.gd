@@ -8,8 +8,13 @@ signal user_logged_in(username: String, equipment: Equipment)
 
 
 func _ready() -> void:
-	$NinePatchRect/VBoxContainer/MarginContainer/RichTextLabel.text = Utils.center_text(tr("CHAR_CREATION_TITLE"))
-	$NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect/RichTextLabel.text = Utils.center_text(tr("REGISTER"))
+	$NinePatchRect/VBoxContainer/MarginContainer/RichTextLabel.text = Utils.center_text(
+		tr("CHAR_CREATION_TITLE")
+	)
+	$NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect/RichTextLabel.text = (
+		Utils.center_text(tr("REGISTER"))
+	)
+
 
 func _on_button_pressed() -> void:
 	var username: String = $NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername.text

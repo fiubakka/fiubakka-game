@@ -3,6 +3,7 @@ extends RichTextLabel
 var player_colors: Dictionary = {}
 var me: String = tr("OWN_PLAYER_LABEL")
 
+
 func _ready() -> void:
 	pass
 
