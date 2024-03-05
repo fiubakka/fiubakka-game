@@ -5,7 +5,6 @@ class_name InventorySlot
 var item : InventoryItemData = null
 var is_focused : bool
 
-
 func _ready() -> void:
 	set_focus(false)
 
@@ -30,3 +29,4 @@ func set_focus(_is_focused: bool) -> void:
 		modulate = Color(1, 1, 1)
 	else:
 		modulate = Color(0.5, 0.5, 0.5)
+

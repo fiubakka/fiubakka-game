@@ -4,12 +4,8 @@ extends Control
 
 @export var Inventory: Array[InventoryItemData]
 
-var selected_item :InventoryItemData = null
-
 var selected_slot: InventorySlot = null
-
 var sprite : Node2D = null
-
 var can_equip := false
 
 # Called when the node enters the scene tree for the first time.
@@ -35,14 +31,14 @@ func get_inventory() -> void:
 
 
 func handle_equip_button_availability() -> void:
-	if (selected_item):
-		$VBoxContainer/Panel/EquipButton.visible = selected_item.equippable
+	if (selected_slot):
+		$VBoxContainer/Panel/EquipButton.visible = selected_slot.item.equippable
 
 
 func handle_equip_button_text() -> void:
-	if (selected_item):
-		var selected_item_texture := selected_item.texture
-		match selected_item.type:
+	if (selected_slot):
+		var selected_item_texture := selected_slot.item.texture
+		match selected_slot.item.type:
 			"hat":
 				change_equip_button_text(sprite.get_node("Hats"), selected_item_texture)
 			"outfit":
@@ -70,7 +66,7 @@ func _on_Slot_Pressed(slot: InventorySlot, item: InventoryItemData) -> void:
 			selected_slot.set_focus(false)
 		selected_slot = slot
 		selected_slot.set_focus(true)
-		selected_item = item
+		selected_slot = selected_slot
 		handle_equip_button_availability()
 		handle_equip_button_text()
 		var name: RichTextLabel = $VBoxContainer/Description/VBoxContainer/Name
@@ -82,9 +78,9 @@ func _on_Slot_Pressed(slot: InventorySlot, item: InventoryItemData) -> void:
 
 
 func _on_button_pressed() -> void:
-	if selected_item and selected_item.equippable:
-		var selected_item_texture := selected_item.texture
-		match selected_item.type:
+	if selected_slot and selected_slot.item.equippable:
+		var selected_item_texture := selected_slot.item.texture
+		match selected_slot.item.type:
 			"hat":
 				change_equipment(sprite.get_node("Hats"), selected_item_texture)
 			"outfit":
