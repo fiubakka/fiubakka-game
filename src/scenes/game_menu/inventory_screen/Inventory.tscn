@@ -45,37 +45,42 @@ grow_vertical = 2
 script = ExtResource("1_qi08f")
 inventory_slot_scene = ExtResource("1_pexyc")
 
-[node name="CharacterSprite" parent="." instance=ExtResource("5_ep1qx")]
-position = Vector2(349, 80)
-
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 0
-offset_right = 255.0
-offset_bottom = 311.0
+offset_left = -15.0
+offset_top = 2.0
+offset_right = 240.0
+offset_bottom = 313.0
 
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
 layout_mode = 2
 columns = 3
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 2
-offset_left = 262.0
-offset_top = 131.0
-offset_right = 302.0
-offset_bottom = 131.0
-metadata/_edit_group_ = true
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 459.0
+offset_right = 717.0
+offset_bottom = 306.0
 
-[node name="Description" type="NinePatchRect" parent="Panel"]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 layout_mode = 2
-offset_right = 176.0
-offset_bottom = 108.0
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="CharacterSprite" parent="VBoxContainer/CenterContainer/Panel" instance=ExtResource("5_ep1qx")]
+
+[node name="Description" type="NinePatchRect" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 texture = SubResource("AtlasTexture_3k5bc")
 patch_margin_left = 4
 patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Description"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Description"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 6.0
@@ -83,25 +88,22 @@ offset_right = 172.0
 offset_bottom = 100.0
 theme_override_constants/separation = -5
 
-[node name="Name" type="RichTextLabel" parent="Panel/Description/VBoxContainer"]
+[node name="Name" type="RichTextLabel" parent="VBoxContainer/Description/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("4_45so7")
 theme_override_font_sizes/normal_font_size = 20
 
-[node name="Description" type="RichTextLabel" parent="Panel/Description/VBoxContainer"]
+[node name="Description" type="RichTextLabel" parent="VBoxContainer/Description/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 theme_override_fonts/normal_font = ExtResource("4_45so7")
 theme_override_font_sizes/normal_font_size = 15
 
-[node name="EquipButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 308.0
-offset_top = 245.0
-offset_right = 396.0
-offset_bottom = 289.0
+[node name="EquipButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("4_45so7")
 theme_override_styles/normal = SubResource("StyleBoxTexture_838tq")
 theme_override_styles/hover = SubResource("StyleBoxTexture_838tq")
@@ -109,4 +111,4 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_gmeuj")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_la6fi")
 text = "Equip"
 
-[connection signal="pressed" from="EquipButton" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/EquipButton" to="." method="_on_button_pressed"]
