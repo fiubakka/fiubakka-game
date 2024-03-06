@@ -661,39 +661,39 @@ class PBPacker:
 ############### USER DATA BEGIN ################
 
 
-class PBServerMetadata:
+class PBPlayerLogin:
 	func _init():
 		var service
 		
-		_length = PBField.new("length", PB_DATA_TYPE.UINT32, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.UINT32])
+		_username = PBField.new("username", PB_DATA_TYPE.STRING, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.STRING])
 		service = PBServiceField.new()
-		service.field = _length
-		data[_length.tag] = service
+		service.field = _username
+		data[_username.tag] = service
 		
-		_type = PBField.new("type", PB_DATA_TYPE.ENUM, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
+		_password = PBField.new("password", PB_DATA_TYPE.STRING, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.STRING])
 		service = PBServiceField.new()
-		service.field = _type
-		data[_type.tag] = service
+		service.field = _password
+		data[_password.tag] = service
 		
 	var data = {}
 	
-	var _length: PBField
-	func get_length() -> int:
-		return _length.value
-	func clear_length() -> void:
+	var _username: PBField
+	func get_username() -> String:
+		return _username.value
+	func clear_username() -> void:
 		data[1].state = PB_SERVICE_STATE.UNFILLED
-		_length.value = DEFAULT_VALUES_2[PB_DATA_TYPE.UINT32]
-	func set_length(value : int) -> void:
-		_length.value = value
+		_username.value = DEFAULT_VALUES_2[PB_DATA_TYPE.STRING]
+	func set_username(value : String) -> void:
+		_username.value = value
 	
-	var _type: PBField
-	func get_type():
-		return _type.value
-	func clear_type() -> void:
+	var _password: PBField
+	func get_password() -> String:
+		return _password.value
+	func clear_password() -> void:
 		data[2].state = PB_SERVICE_STATE.UNFILLED
-		_type.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
-	func set_type(value) -> void:
-		_type.value = value
+		_password.value = DEFAULT_VALUES_2[PB_DATA_TYPE.STRING]
+	func set_password(value : String) -> void:
+		_password.value = value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)
@@ -716,12 +716,4 @@ class PBServerMetadata:
 			return PB_ERR.PARSE_INCOMPLETE
 		return result
 	
-enum PBServerMessageType {
-	PBGameEntityState = 0,
-	PBPlayerMessage = 1,
-	PBPlayerInitError = 2,
-	PBPlayerInitSuccess = 3,
-	PBPlayerChangeMapReady = 4
-}
-
 ################ USER DATA END #################
