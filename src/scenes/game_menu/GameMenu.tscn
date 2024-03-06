@@ -35,12 +35,12 @@ offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HSplitContainer" type="HSplitContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 669.0
-offset_bottom = 389.0
+offset_right = 603.0
+offset_bottom = 379.0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="HSplitContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("1_1frap")
@@ -50,29 +50,40 @@ patch_margin_top = 9
 patch_margin_right = 9
 patch_margin_bottom = 9
 
-[node name="Inventory" parent="HSplitContainer/NinePatchRect" instance=ExtResource("2_bbmvf")]
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="HBoxContainer/NinePatchRect/CenterContainer"]
+layout_mode = 2
+
+[node name="Inventory" parent="HBoxContainer/NinePatchRect/CenterContainer/Panel" instance=ExtResource("2_bbmvf")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 60.0
-offset_top = 27.0
-offset_right = 60.0
-offset_bottom = 27.0
+offset_left = -246.0
+offset_top = -165.0
+offset_right = -246.0
+offset_bottom = -165.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 alignment = 1
 metadata/_edit_group_ = true
 
-[node name="InventoryButton" type="TextureButton" parent="HSplitContainer/VBoxContainer"]
+[node name="InventoryButton" type="TextureButton" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_c5wa6")
 texture_pressed = SubResource("AtlasTexture_lfvif")
 
-[node name="StatsButton" type="TextureButton" parent="HSplitContainer/VBoxContainer"]
+[node name="StatsButton" type="TextureButton" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_1fklc")
 texture_pressed = SubResource("AtlasTexture_vdbqe")
