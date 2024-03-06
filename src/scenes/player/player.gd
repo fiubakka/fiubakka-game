@@ -13,6 +13,7 @@ var cs := CompositeSprites
 
 
 func _ready() -> void:
+	$Name.text = Utils.center_text("[b]" + tr("OWN_PLAYER_LABEL") + "[/b]")
 	# Set idle front animation when spawning player
 	set_idle_region()
 	$AnimationPlayer.play("front")
@@ -125,28 +126,14 @@ func set_walk_region() -> void:
 	$PlayerSprite/Hats.region_rect = Rect2(0, 190, 1152, 72)
 
 
-func _on_main_chat_opened() -> void:
-	idle = true
-	velocity = Vector2.ZERO
-	play_move_animation()
+func _on_main_ui_opened(open: bool) -> void:
+	if open:
+		idle = true
+		velocity = Vector2.ZERO
+		play_move_animation()
+	else:
+		idle = false
 
-
-func _on_main_chat_closed() -> void:
-	idle = false
-
-
-func _on_main_paused() -> void:
-	idle = true
-	velocity = Vector2.ZERO
-	play_move_animation()
-
-
-func _on_main_unpaused() -> void:
-	idle = false
-	
-func set_warpable_to(can_warp: bool, new_scene: String) -> void:
-	warpable = can_warp
-	warps_to = new_scene
 	
 func disable() -> void:
 	idle = true

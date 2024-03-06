@@ -7,7 +7,7 @@ signal prev
 
 
 func _ready() -> void:
-	$Label/RichTextLabel.text = "[center]" + label + "[/center]"
+	$Label/RichTextLabel.text = Utils.center_text(tr(label))
 
 
 func _on_prev_button_pressed() -> void:

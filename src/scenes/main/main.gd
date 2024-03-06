@@ -13,16 +13,18 @@ signal chat_opened
 signal chat_closed
 signal paused
 signal unpaused
+signal ui_opened(open: bool)
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("open_chat") && !is_game_paused:
-		chat_opened.emit()
-	elif Input.is_action_just_pressed("close_chat") && !is_game_paused:
-		chat_closed.emit()
-	elif Input.is_action_just_pressed("pause"):
-		self.is_game_paused = true
-		paused.emit()
+	#if Input.is_action_just_pressed("open_chat") && !is_game_paused:
+	#chat_opened.emit()
+	#elif Input.is_action_just_pressed("close_chat") && !is_game_paused:
+	#chat_closed.emit()
+	#elif Input.is_action_just_pressed("pause"):
+	#self.is_game_paused = true
+	#paused.emit()
+	pass
 
 
 func _on_server_consumer_user_init_ready(_position: Vector2, equipment: Equipment) -> void:
@@ -33,10 +35,6 @@ func _on_server_consumer_user_init_ready(_position: Vector2, equipment: Equipmen
 	await SceneManager.transition_finished
 	var player: Player = get_tree().root.get_node("MainHall/Player")
 	player.update_movement.connect($ServerConnection/ServerProducer._on_player_movement)
-	chat_opened.connect(player._on_main_chat_opened)
-	chat_closed.connect(player._on_main_chat_closed)
-	paused.connect(player._on_main_paused)
-	unpaused.connect(player._on_main_unpaused)
 	player.set_equipment(equipment)
 	var current_level := get_tree().current_scene
 	current_level.data["player_equipment"] = equipment
@@ -44,6 +42,9 @@ func _on_server_consumer_user_init_ready(_position: Vector2, equipment: Equipmen
 	#player.position = _position
 	login_ready.emit()
 	$Login.queue_free()
+
+	$GUI/GuiManager.set_process(true)
+	ui_opened.connect(player._on_main_ui_opened)
 
 
 func _on_server_consumer_update_entity_state(
@@ -53,7 +54,9 @@ func _on_server_consumer_update_entity_state(
 		var entity: Node = entities[entityId]
 		entity.position = entityPosition
 		entity.velocity = entityVelocity
-		entity.set_equipment(equipment)
+		#If equipment is the same we dont need to update it
+		if !Equipment.compare_equipment(entity.equipment, equipment):
+			entity.set_equipment(equipment)
 	else:
 		var entity := EntityScene.instantiate()
 		entity.id = entityId
@@ -92,3 +95,7 @@ func _on_login_return_to_menu() -> void:
 func _on_register_return_to_menu() -> void:
 	$MainMenu.visible = true
 	$Register.visible = false
+
+
+func _on_gui_manager_ui_opened(open: bool) -> void:
+	ui_opened.emit(open)

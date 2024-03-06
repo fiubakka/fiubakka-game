@@ -661,7 +661,7 @@ class PBPacker:
 ############### USER DATA BEGIN ################
 
 
-class PBPlayerInit:
+class PBPlayerRegister:
 	func _init():
 		var service
 		
@@ -670,7 +670,12 @@ class PBPlayerInit:
 		service.field = _username
 		data[_username.tag] = service
 		
-		_equipment = PBField.new("equipment", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
+		_password = PBField.new("password", PB_DATA_TYPE.STRING, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.STRING])
+		service = PBServiceField.new()
+		service.field = _password
+		data[_password.tag] = service
+		
+		_equipment = PBField.new("equipment", PB_DATA_TYPE.MESSAGE, PB_RULE.REQUIRED, 3, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
 		service = PBServiceField.new()
 		service.field = _equipment
 		service.func_ref = Callable(self, "new_equipment")
@@ -687,11 +692,20 @@ class PBPlayerInit:
 	func set_username(value : String) -> void:
 		_username.value = value
 	
+	var _password: PBField
+	func get_password() -> String:
+		return _password.value
+	func clear_password() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		_password.value = DEFAULT_VALUES_2[PB_DATA_TYPE.STRING]
+	func set_password(value : String) -> void:
+		_password.value = value
+	
 	var _equipment: PBField
 	func get_equipment() -> PBPlayerEquipment:
 		return _equipment.value
 	func clear_equipment() -> void:
-		data[2].state = PB_SERVICE_STATE.UNFILLED
+		data[3].state = PB_SERVICE_STATE.UNFILLED
 		_equipment.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
 	func new_equipment() -> PBPlayerEquipment:
 		_equipment.value = PBPlayerEquipment.new()
