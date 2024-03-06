@@ -1,9 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://nqpqnx1lgim3"]
+[gd_scene load_steps=7 format=3 uid="uid://nqpqnx1lgim3"]
 
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="1_1frap"]
 [ext_resource type="PackedScene" uid="uid://cswpkq3rymi6" path="res://src/scenes/game_menu/inventory_screen/Inventory.tscn" id="2_bbmvf"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_53pf2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c5wa6"]
 atlas = ExtResource("1_1frap")
@@ -39,8 +37,8 @@ grow_vertical = 2
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 layout_mode = 0
-offset_right = 611.0
-offset_bottom = 343.0
+offset_right = 669.0
+offset_bottom = 389.0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HSplitContainer"]
 layout_mode = 2
@@ -52,30 +50,15 @@ patch_margin_top = 9
 patch_margin_right = 9
 patch_margin_bottom = 9
 
-[node name="Panel" type="Panel" parent="HSplitContainer/NinePatchRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -166.0
-offset_top = -137.0
-offset_right = 166.0
-offset_bottom = 137.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_53pf2")
-
 [node name="Inventory" parent="HSplitContainer/NinePatchRect" instance=ExtResource("2_bbmvf")]
 layout_mode = 1
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 52.0
-offset_top = 37.0
-offset_right = 52.0
-offset_bottom = 37.0
+offset_left = 60.0
+offset_top = 27.0
+offset_right = 60.0
+offset_bottom = 27.0
 grow_horizontal = 1
 grow_vertical = 1
 

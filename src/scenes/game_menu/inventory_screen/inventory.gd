@@ -10,10 +10,10 @@ var can_equip := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$VBoxContainer/Panel/EquipButton.visible = false
+	$HBoxContainer/VBoxContainer/Panel/EquipButton.visible = false
 	get_inventory()
-	sprite = $VBoxContainer/CenterContainer/Panel/CharacterSprite
-	var slots := $ScrollContainer/GridContainer
+	sprite = $HBoxContainer/VBoxContainer/CenterContainer/Panel/CharacterSprite
+	var slots := $HBoxContainer/ScrollContainer/GridContainer
 	for i in range(0, len(Inventory)):
 		var slot := inventory_slot_scene.instantiate()
 		slot.update(Inventory[i])
@@ -32,7 +32,7 @@ func get_inventory() -> void:
 
 func handle_equip_button_availability() -> void:
 	if (selected_slot):
-		$VBoxContainer/Panel/EquipButton.visible = selected_slot.item.equippable
+		$HBoxContainer/VBoxContainer/Panel/EquipButton.visible = selected_slot.item.equippable
 
 
 func handle_equip_button_text() -> void:
@@ -53,10 +53,10 @@ func handle_equip_button_text() -> void:
 
 func change_equip_button_text(piece: Node2D, selected_item_texture: Texture) -> void:
 	if (selected_item_texture.get_atlas() == piece.texture):
-		$VBoxContainer/Panel/EquipButton.set_text("Unequip")
+		$HBoxContainer/VBoxContainer/Panel/EquipButton.set_text("Unequip")
 		can_equip = false
 	else:
-		$VBoxContainer/Panel/EquipButton.set_text("Equip")
+		$HBoxContainer/VBoxContainer/Panel/EquipButton.set_text("Equip")
 		can_equip = true
 
 
@@ -69,10 +69,10 @@ func _on_Slot_Pressed(slot: InventorySlot, item: InventoryItemData) -> void:
 		selected_slot = selected_slot
 		handle_equip_button_availability()
 		handle_equip_button_text()
-		var name: RichTextLabel = $VBoxContainer/Description/VBoxContainer/Name
+		var name: RichTextLabel = $HBoxContainer/VBoxContainer/Description/VBoxContainer/Name
 		name.clear()
 		name.add_text(item.name)
-		var description: RichTextLabel = $VBoxContainer/Description/VBoxContainer/Description
+		var description: RichTextLabel = $HBoxContainer/VBoxContainer/Description/VBoxContainer/Description
 		description.clear()
 		description.add_text(item.description)
 
