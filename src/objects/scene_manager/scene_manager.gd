@@ -2,6 +2,7 @@ extends Node
 
 signal content_finished_loading(content: Node)
 signal transition_finished
+signal player_changed_map
 
 var loading_screen: LoadingScreen
 var loading_screen_scene: PackedScene = preload("res://src/scenes/loading_screen/loading_screen.tscn")
@@ -77,4 +78,11 @@ func _on_content_finished_loading(new_scene: Node) -> void:
 		loading_screen = null
 		if new_scene is Level:
 			new_scene.enter_level()
+			
+	# wait for server to respond with PBPlayerChangeMapReady message
+	await player_changed_map
 	transition_finished.emit()
+
+
+func player_change_map_ready() -> void:
+	player_changed_map.emit()

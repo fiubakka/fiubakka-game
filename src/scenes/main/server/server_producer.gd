@@ -54,3 +54,9 @@ func _on_chatbox_send_message(message: String) -> void:
 	var player_message := PBPlayerMessage.new()
 	player_message.set_content(message)
 	_producer.send(player_message)
+
+	
+func _on_player_changes_level(level_id: int) -> void:
+	var level_change := PBPlayerChangeMap.new()
+	level_change.id = level_id
+	_producer.send(level_change)
