@@ -717,9 +717,11 @@ class PBClientMetadata:
 		return result
 	
 enum PBClientMessageType {
-	PBPlayerInit = 0,
-	PBPlayerMovement = 1,
-	PBPlayerMessage = 2
+	PBPlayerLogin = 0,
+	PBPlayerRegister = 1,
+	PBPlayerMovement = 2,
+	PBPlayerMessage = 3,
+	PBPlayerChangeMap = 4
 }
 
 ################ USER DATA END #################

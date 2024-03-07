@@ -661,7 +661,54 @@ class PBPacker:
 ############### USER DATA BEGIN ################
 
 
-class PBPlayerInitReady:
+class PBPlayerInitError:
+	func _init():
+		var service
+		
+		_error_code = PBField.new("error_code", PB_DATA_TYPE.STRING, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.STRING])
+		service = PBServiceField.new()
+		service.field = _error_code
+		data[_error_code.tag] = service
+		
+	var data = {}
+	
+	var _error_code: PBField
+	func get_error_code() -> String:
+		return _error_code.value
+	func clear_error_code() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		_error_code.value = DEFAULT_VALUES_2[PB_DATA_TYPE.STRING]
+	func set_error_code(value : String) -> void:
+		_error_code.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+enum PBPlayerInitErrorCode {
+	UNKNOWN = 0,
+	INVALID_PLAYER_CREDENTIALS = 1,
+	PLAYER_ALREADY_EXISTS = 2
+}
+
+class PBPlayerInitSuccess:
 	func _init():
 		var service
 		

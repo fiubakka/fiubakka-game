@@ -4,8 +4,11 @@ const PBClientMessageType = (
 	preload("res://addons/protocol/compiled/client/metadata.gd").PBClientMessageType
 )
 
-const PBPlayerInit = (
-	preload("res://addons/protocol/compiled/client/init/player_init.gd").PBPlayerInit
+const PBPlayerLogin = (
+	preload("res://addons/protocol/compiled/client/init/player_login.gd").PBPlayerLogin
+)
+const PBPlayerRegister = (
+	preload("res://addons/protocol/compiled/client/init/player_register.gd").PBPlayerRegister
 )
 const PBPlayerMovement = (
 	preload("res://addons/protocol/compiled/client/movement/player_movement.gd").PBPlayerMovement
@@ -17,8 +20,10 @@ const PBPlayerMessage = (
 
 static func from(message: Object) -> Result:
 	var type: PBClientMessageType
-	if message is PBPlayerInit:
-		type = PBClientMessageType.PBPlayerInit
+	if message is PBPlayerRegister:
+		type = PBClientMessageType.PBPlayerRegister
+	elif message is PBPlayerLogin:
+		type = PBClientMessageType.PBPlayerLogin
 	elif message is PBPlayerMovement:
 		type = PBClientMessageType.PBPlayerMovement
 	elif message is PBPlayerMessage:
