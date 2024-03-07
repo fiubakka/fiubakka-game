@@ -83,6 +83,7 @@ offset_bottom = 541.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_3f8xr")
 
 [node name="Logo2" type="NinePatchRect" parent="Control"]
+layout_mode = 0
 offset_left = 389.0
 offset_top = 85.0
 offset_right = 539.0
@@ -124,6 +125,6 @@ libraries = {
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 
-[connection signal="spin_logo" from="." to="Control/Logo" method="_on_loading_screen_spin_logo"]
 [connection signal="spin_logo" from="." to="Control/Logo2" method="_on_loading_screen_spin_logo"]
+[connection signal="spin_logo" from="." to="Control/Logo" method="_on_loading_screen_spin_logo"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

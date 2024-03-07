@@ -471,7 +471,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 52)
+position = Vector2(0, 38)
 shape = SubResource("RectangleShape2D_6hhbj")
 
 [node name="Name" type="RichTextLabel" parent="."]

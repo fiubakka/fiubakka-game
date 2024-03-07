@@ -1,7 +1,5 @@
 extends Node
 
-class_name PBPlayerChangeMapReady
-
 signal user_init_ready(position: Vector2, equipment: Equipment)  #TOOD: Tipar esto
 signal update_entity_state(
 	entityId: String, position: Vector2, velocity: Vector2, equipment: Equipment
@@ -20,6 +18,10 @@ const PBPlayerInitSuccess = (
 
 const PBPlayerMessage = (
 	preload("res://addons/protocol/compiled/server/chat/message.gd").PBPlayerMessage
+)
+
+const PBPlayerChangeMapReady = (
+	preload("res://addons/protocol/compiled/server/map/change_map_ready.gd").PBPlayerChangeMapReady
 )
 
 var _thread: Thread
@@ -115,4 +117,8 @@ func _handle_player_message(msg: PBPlayerMessage) -> void:
 	
 	
 func _handle_player_change_map_ready(msg: PBPlayerChangeMapReady) -> void:
-	SceneManager.player_change_map_ready()
+	print("player change map ready")
+	var new_map_id := msg.get_new_map_id()
+	SceneManager.player_change_map_ready(new_map_id)
+	player_changed_map.emit()
+	
