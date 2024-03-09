@@ -117,7 +117,6 @@ func _handle_player_message(msg: PBPlayerMessage) -> void:
 	
 	
 func _handle_player_change_map_ready(msg: PBPlayerChangeMapReady) -> void:
-	print("player change map ready")
 	var new_map_id := msg.get_new_map_id()
 	SceneManager.player_change_map_ready(new_map_id)
 	player_changed_map.emit()

@@ -53,7 +53,6 @@ func create_resources(type: String, original_res: InventoryItemData, texture_dic
 
 
 func create_new_resource(index: int, type: String, original_res: InventoryItemData, texture_dic: Dictionary) -> void:
-	print(index)
 	if (texture_dic[index]):
 		var new_res := original_res.duplicate(true)
 		new_res.texture.set_atlas(texture_dic[index])
