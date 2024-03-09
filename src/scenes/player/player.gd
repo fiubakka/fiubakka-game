@@ -1,9 +1,13 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 signal update_movement(velocity: Vector2, position: Vector2)
+signal warp_to(new_scene: String)
 
 @export var idle: bool = false
+var warpable: bool = false
+var warps_to: String = ""
 var prev_vel := Vector2.ZERO
+var equipment: Equipment
 
 var cs := CompositeSprites
 
@@ -15,20 +19,25 @@ func _ready() -> void:
 	$AnimationPlayer.play("front")
 
 
-func set_equipment(equipment: Equipment) -> void:
-	$PlayerSprite/Hats.texture = cs.hats_spritesheet[equipment["hat"]]
-	$PlayerSprite/Hair.texture = cs.hair_spritesheet[equipment["hair"]]
-	$PlayerSprite/Eyes.texture = cs.eyes_spritesheet[equipment["eyes"]]
-	$PlayerSprite/Body.texture = cs.body_spritesheet[equipment["body"]]
-	$PlayerSprite/Glasses.texture = cs.glasses_spritesheet[equipment["glasses"]]
-	$PlayerSprite/FacialHair.texture = cs.facial_hair_spritesheet[equipment["facial_hair"]]
-	$PlayerSprite/Outfit.texture = cs.outfit_spritesheet[equipment["outfit"]]
+func set_equipment(_equipment: Equipment) -> void:
+	equipment = _equipment
+	$PlayerSprite/Hats.texture = cs.hats_spritesheet[_equipment["hat"]]
+	$PlayerSprite/Hair.texture = cs.hair_spritesheet[_equipment["hair"]]
+	$PlayerSprite/Eyes.texture = cs.eyes_spritesheet[_equipment["eyes"]]
+	$PlayerSprite/Body.texture = cs.body_spritesheet[_equipment["body"]]
+	$PlayerSprite/Glasses.texture = cs.glasses_spritesheet[_equipment["glasses"]]
+	$PlayerSprite/FacialHair.texture = cs.facial_hair_spritesheet[_equipment["facial_hair"]]
+	$PlayerSprite/Outfit.texture = cs.outfit_spritesheet[_equipment["outfit"]]
 
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
 	if idle:
 		return
+		
+	if Input.is_action_pressed("warp") and warpable and not warps_to.is_empty():
+		warp_to.emit(warps_to)
+		
 
 	velocity = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
@@ -124,3 +133,11 @@ func _on_main_ui_opened(open: bool) -> void:
 		play_move_animation()
 	else:
 		idle = false
+
+	
+func disable() -> void:
+	idle = true
+	
+func enable() -> void:
+	idle = false
+	visible = true
