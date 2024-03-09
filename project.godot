@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 PlayerInfo="*res://src/objects/player_info/player_info.gd"
 CompositeSprites="*res://src/objects/composite_sprites/composite_sprites.gd"
 SceneManager="*res://src/objects/scene_manager/scene_manager.gd"
+ItemsCatalogue="*res://src/scenes/game_menu/inventory_screen/items/items_catalogue.gd"
 Utils="*res://src/objects/utils/utils.gd"
 
 [debug]

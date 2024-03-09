@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="InventoryItemData" load_steps=4 format=3 uid="uid://bq87qqllkai0i"]
+
+[ext_resource type="Script" path="res://src/scenes/game_menu/inventory_screen/inventory_item_data.gd" id="1_5sk4j"]
+[ext_resource type="Texture2D" uid="uid://bq6m73w3ttiwi" path="res://art/char_creator/facial_hair/Accessory_12_Mustache_48x48_01.png" id="2_2k3rt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7isp"]
+atlas = ExtResource("2_2k3rt")
+region = Rect2(152, 64, 32, 16)
+
+[resource]
+script = ExtResource("1_5sk4j")
+name = "Facial Hair"
+id = 0
+description = "Generic facial hair"
+type = "facial hair"
+texture = SubResource("AtlasTexture_v7isp")
+equippable = true

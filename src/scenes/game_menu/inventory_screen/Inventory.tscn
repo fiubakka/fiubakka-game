@@ -1,13 +1,39 @@
-[gd_scene load_steps=6 format=3 uid="uid://cswpkq3rymi6"]
+[gd_scene load_steps=11 format=3 uid="uid://cswpkq3rymi6"]
 
 [ext_resource type="PackedScene" uid="uid://csa1aukvil678" path="res://src/scenes/game_menu/inventory_screen/InventoryItem.tscn" id="1_pexyc"]
 [ext_resource type="Script" path="res://src/scenes/game_menu/inventory_screen/inventory.gd" id="1_qi08f"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_y7p64"]
 [ext_resource type="FontFile" uid="uid://cv2bywsa6irhc" path="res://fonts/Xolonium-Regular.ttf" id="4_45so7"]
+[ext_resource type="PackedScene" uid="uid://bj12r5t8p4dpp" path="res://src/scenes/character_sprite/character_sprite.tscn" id="5_ep1qx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3k5bc"]
 atlas = ExtResource("2_y7p64")
 region = Rect2(152, 240, 128, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jgxe"]
+atlas = ExtResource("2_y7p64")
+region = Rect2(32, 1104, 80, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_838tq"]
+texture = SubResource("AtlasTexture_5jgxe")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 10.0
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gmeuj"]
+texture = SubResource("AtlasTexture_5jgxe")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 10.0
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+modulate_color = Color(0.521141, 0.521141, 0.52114, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_la6fi"]
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
@@ -17,70 +43,89 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qi08f")
+inventory_slot_scene = ExtResource("1_pexyc")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 493.0
+offset_bottom = 345.0
+alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
-layout_mode = 2
-columns = 4
-
-[node name="InventoryItem" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 
-[node name="InventoryItem2" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/ScrollContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="InventoryItem3" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer/CenterContainer"]
 layout_mode = 2
 
-[node name="InventoryItem4" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
-layout_mode = 2
+[node name="CharacterSprite" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel" instance=ExtResource("5_ep1qx")]
 
-[node name="InventoryItem5" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
+[node name="Description" type="NinePatchRect" parent="HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-
-[node name="InventoryItem6" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
-layout_mode = 2
-
-[node name="InventoryItem7" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
-layout_mode = 2
-
-[node name="InventoryItem8" parent="VBoxContainer/GridContainer" instance=ExtResource("1_pexyc")]
-layout_mode = 2
-
-[node name="Panel" type="Panel" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Description" type="NinePatchRect" parent="VBoxContainer/Panel"]
-layout_mode = 2
-offset_right = 326.0
-offset_bottom = 104.0
+size_flags_vertical = 3
 texture = SubResource("AtlasTexture_3k5bc")
 patch_margin_left = 4
 patch_margin_top = 4
 patch_margin_right = 4
 patch_margin_bottom = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Panel/Description"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/Description"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 6.0
-offset_right = 323.0
-offset_bottom = 97.0
+offset_right = 172.0
+offset_bottom = 100.0
 theme_override_constants/separation = -5
 
-[node name="Name" type="RichTextLabel" parent="VBoxContainer/Panel/Description/VBoxContainer"]
+[node name="Name" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/Description/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/normal_font = ExtResource("4_45so7")
 theme_override_font_sizes/normal_font_size = 20
 
-[node name="Description" type="RichTextLabel" parent="VBoxContainer/Panel/Description/VBoxContainer"]
+[node name="Description" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/Description/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 theme_override_fonts/normal_font = ExtResource("4_45so7")
 theme_override_font_sizes/normal_font_size = 15
+
+[node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="EquipButton" type="Button" parent="HBoxContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -20.0
+offset_right = 44.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("4_45so7")
+theme_override_styles/normal = SubResource("StyleBoxTexture_838tq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_838tq")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_gmeuj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_la6fi")
+text = "Equip"
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Panel/EquipButton" to="." method="_on_button_pressed"]
