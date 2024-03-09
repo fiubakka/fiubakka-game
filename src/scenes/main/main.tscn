@@ -89,7 +89,10 @@ offset_bottom = 537.0
 [connection signal="update_content" from="ServerConnection/ServerConsumer" to="GUI/GuiManager/Chatbox" method="_on_server_consumer_update_content"]
 [connection signal="update_entity_state" from="ServerConnection/ServerConsumer" to="." method="_on_server_consumer_update_entity_state"]
 [connection signal="user_init_ready" from="ServerConnection/ServerConsumer" to="." method="_on_server_consumer_user_init_ready"]
+[connection signal="user_init_ready" from="ServerConnection/ServerConsumer" to="GUI/GuiManager/GameMenu/HBoxContainer/NinePatchRect/CenterContainer/Panel/Inventory" method="_on_server_consumer_user_init_ready"]
 [connection signal="ui_opened" from="GUI/GuiManager" to="." method="_on_gui_manager_ui_opened"]
 [connection signal="send_message" from="GUI/GuiManager/Chatbox" to="ServerConnection/ServerProducer" method="_on_chatbox_send_message"]
 [connection signal="go_to_login" from="MainMenu" to="." method="_on_main_menu_go_to_login"]
 [connection signal="go_to_register" from="MainMenu" to="." method="_on_main_menu_go_to_register"]
+
+[editable path="GUI/GuiManager/GameMenu"]
