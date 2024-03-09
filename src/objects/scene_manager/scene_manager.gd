@@ -18,9 +18,9 @@ func load_new_scene(content_path: String) -> void:
 	loading_screen = loading_screen_scene.instantiate()
 	get_tree().root.add_child(loading_screen)
 	loading_screen.start_transition()
-	load_content(content_path)
+	_load_content(content_path)
 	
-func load_content(content_path: String) -> void:
+func _load_content(content_path: String) -> void:
 	# Load new scene in another thread.
 	# This lets us place a loading screen, a progress bar
 	# and even handle data sent and received from the Server
@@ -32,13 +32,13 @@ func load_content(content_path: String) -> void:
 	_content_path = content_path
 	load_progress_timer = Timer.new()
 	load_progress_timer.wait_time = 0.1
-	load_progress_timer.timeout.connect(check_load_status)
+	load_progress_timer.timeout.connect(_check_load_status)
 	get_tree().root.add_child(load_progress_timer)
 	load_progress_timer.start()
 	
 
-func check_load_status() -> void:
-	var load_progress := [] 	
+func _check_load_status() -> void:
+	var load_progress := []
 	var status := ResourceLoader.load_threaded_get_status(_content_path, load_progress)
 	match status:
 		ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
@@ -77,4 +77,10 @@ func _on_content_finished_loading(new_scene: Node) -> void:
 		loading_screen = null
 		if new_scene is Level:
 			new_scene.enter_level()
+	
 	transition_finished.emit()
+
+
+func player_change_map_ready(new_map_id: int) -> void:
+	var map_content_path := MapsDictionary.id_to_content_path(new_map_id)
+	load_new_scene(map_content_path)

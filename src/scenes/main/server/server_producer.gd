@@ -17,6 +17,10 @@ const PBPlayerMessage = (
 	preload("res://addons/protocol/compiled/client/chat/message.gd").PBPlayerMessage
 )
 
+const PBPlayerChangeMap = (
+	preload("res://addons/protocol/compiled/client/map/change_map.gd").PBPlayerChangeMap
+)
+
 var _producer: Producer
 
 
@@ -64,3 +68,9 @@ func _on_chatbox_send_message(message: String) -> void:
 	var player_message := PBPlayerMessage.new()
 	player_message.set_content(message)
 	_producer.send(player_message)
+
+	
+func _on_player_changes_level(level_id: int) -> void:
+	var level_change := PBPlayerChangeMap.new()
+	level_change.set_new_map_id(level_id)
+	_producer.send(level_change)

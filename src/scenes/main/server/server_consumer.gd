@@ -5,6 +5,7 @@ signal update_entity_state(
 	entityId: String, position: Vector2, velocity: Vector2, equipment: Equipment
 )
 signal update_content(entityId: String, content: String)
+signal player_changed_map
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 
@@ -17,6 +18,10 @@ const PBPlayerInitSuccess = (
 
 const PBPlayerMessage = (
 	preload("res://addons/protocol/compiled/server/chat/message.gd").PBPlayerMessage
+)
+
+const PBPlayerChangeMapReady = (
+	preload("res://addons/protocol/compiled/server/map/change_map_ready.gd").PBPlayerChangeMapReady
 )
 
 var _thread: Thread
@@ -53,6 +58,8 @@ func _handle_message(message: Object) -> void:
 		handler = "_handle_player_init_ready"
 	elif message is PBPlayerMessage:
 		handler = "_handle_player_message"
+	elif message is PBPlayerChangeMapReady:
+		handler = "_handle_player_change_map_ready"
 
 	call_deferred(handler, message)
 
@@ -107,3 +114,10 @@ func _handle_player_message(msg: PBPlayerMessage) -> void:
 			msg.get_content(),
 		)
 	)
+	
+	
+func _handle_player_change_map_ready(msg: PBPlayerChangeMapReady) -> void:
+	var new_map_id := msg.get_new_map_id()
+	SceneManager.player_change_map_ready(new_map_id)
+	player_changed_map.emit()
+	

@@ -41,7 +41,6 @@ func handle_inventory_open() -> void:
 
 
 func handle_pause_open() -> void:
-	print(pause.visible)
 	pause.visible = !pause.visible
 	var visible: bool = chat.visible or menu.visible or pause.visible
 	ui_opened.emit(visible)

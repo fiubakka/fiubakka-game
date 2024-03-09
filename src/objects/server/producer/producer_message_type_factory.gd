@@ -17,6 +17,10 @@ const PBPlayerMessage = (
 	preload("res://addons/protocol/compiled/client/chat/message.gd").PBPlayerMessage
 )
 
+const PBPlayerChangeMap = (
+	preload("res://addons/protocol/compiled/client/map/change_map.gd").PBPlayerChangeMap
+)
+
 
 static func from(message: Object) -> Result:
 	var type: PBClientMessageType
@@ -28,6 +32,8 @@ static func from(message: Object) -> Result:
 		type = PBClientMessageType.PBPlayerMovement
 	elif message is PBPlayerMessage:
 		type = PBClientMessageType.PBPlayerMessage
+	elif message is PBPlayerChangeMap:
+		type = PBClientMessageType.PBPlayerChangeMap
 
 	if type == null:
 		printerr("Unknown message type for message class: " + message.get_class())
