@@ -17,13 +17,6 @@ signal ui_opened(open: bool)
 
 
 func _process(_delta: float) -> void:
-	#if Input.is_action_just_pressed("open_chat") && !is_game_paused:
-	#chat_opened.emit()
-	#elif Input.is_action_just_pressed("close_chat") && !is_game_paused:
-	#chat_closed.emit()
-	#elif Input.is_action_just_pressed("pause"):
-	#self.is_game_paused = true
-	#paused.emit()
 	pass
 
 

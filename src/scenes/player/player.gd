@@ -1,8 +1,11 @@
 class_name Player extends CharacterBody2D
 
 signal update_movement(velocity: Vector2, position: Vector2)
+signal warp_to(new_scene: String)
 
 @export var idle: bool = false
+var warpable: bool = false
+var warps_to: String = ""
 var prev_vel := Vector2.ZERO
 var equipment: Equipment
 
@@ -31,6 +34,10 @@ func set_equipment(_equipment: Equipment) -> void:
 func _physics_process(_delta: float) -> void:
 	if idle:
 		return
+		
+	if Input.is_action_pressed("warp") and warpable and not warps_to.is_empty():
+		warp_to.emit(warps_to)
+		
 
 	velocity = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
