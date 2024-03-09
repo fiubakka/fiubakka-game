@@ -101,3 +101,17 @@ func change_equipment(body_part: Node2D, selected_item_texture: Texture) -> void
 	else:
 		body_part.texture = null
 
+
+
+func _on_server_consumer_user_init_ready(_position: Vector2, equipment: Equipment) -> void:
+	var cs := CompositeSprites
+	can_equip = true
+	sprite.get_node("Hair").texture = cs.hair_spritesheet[equipment.hair]
+	sprite.get_node("Hats").texture = cs.hats_spritesheet[equipment.hat]
+	sprite.get_node("Body").texture = cs.body_spritesheet[equipment.body]
+	sprite.get_node("Outfit").texture = cs.outfit_spritesheet[equipment.outfit]
+	sprite.get_node("FacialHair").texture = cs.facial_hair_spritesheet[equipment.facial_hair]
+	sprite.get_node("Glasses").texture = cs.glasses_spritesheet[equipment.glasses]
+	sprite.get_node("Eyes").texture = cs.eyes_spritesheet[equipment.eyes]
+	can_equip = false
+	
