@@ -23,13 +23,14 @@ func _process(_delta: float) -> void:
 func _on_server_consumer_user_init_ready(
 	_position: Vector2, equipment: Equipment, mapId: int
 ) -> void:
-	SceneManager.load_new_scene(main_hall_path)
+	print("INITIAL MAP ID: ", mapId)
+	var map_content_path := MapsDictionary.id_to_content_path(mapId)
+	print("INITIAL MAP NAME: ", map_content_path)
+	SceneManager.load_new_scene(map_content_path)
 	#TODO: Is it okay to change the initial position of the player like this or should we use something else
 	# like signals for example?
-	# TODO: first level is always MainHall (for now). Change it to receive player spawn level
-	print("INITIAL MPA: ", mapId)
 	await SceneManager.transition_finished
-	var player: Player = get_tree().root.get_node("MainHall/Player")
+	var player: Player = get_tree().current_scene.get_node("Player")
 	player.update_movement.connect($ServerConnection/ServerProducer._on_player_movement)
 	player.set_equipment(equipment)
 	var current_level := get_tree().current_scene
