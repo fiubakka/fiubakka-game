@@ -1,6 +1,6 @@
 extends Node
 
-signal user_init_ready(position: Vector2, equipment: Equipment, mapId: int)  #TOOD: Tipar esto
+signal user_init_ready(position: Vector2, equipment: Equipment, mapId: int)
 signal update_entity_state(
 	entityId: String, position: Vector2, velocity: Vector2, equipment: Equipment
 )
