@@ -6,8 +6,12 @@ signal player_changes_level(level: int)
 @export var path_to_new_scene: String
 var timer: Timer
 
+
 func _ready() -> void:
-	get_node("/root/Main/ServerConnection/ServerConsumer").player_changed_map.connect(self._on_player_change_map_ready)
+	get_node("/root/Main/ServerConnection/ServerConsumer").player_changed_map.connect(
+		self._on_player_change_map_ready
+	)
+
 
 func _on_body_entered(body: Node2D) -> void:
 	if not body is Player:
@@ -19,12 +23,14 @@ func _on_body_entered(body: Node2D) -> void:
 	add_child(timer)
 	timer.start()
 	timer.set_wait_time(2.0)
-	
+
+
 func _on_timer_timeout(level_id: int) -> void:
 	# Server producer and consumer are nested in Main
 	# TODO: change them to a singleton (autoload) to avoid fetching a node like this
 	var producer := get_node("/root/Main/ServerConnection/ServerProducer")
 	producer._on_player_changes_level(level_id)
-	
+
+
 func _on_player_change_map_ready() -> void:
 	queue_free()

@@ -5,8 +5,9 @@ extends Control
 @export var Inventory: Array[InventoryItemData]
 
 var selected_slot: InventorySlot = null
-var sprite : Node2D = null
+var sprite: Node2D = null
 var can_equip := false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,12 +32,12 @@ func get_inventory() -> void:
 
 
 func handle_equip_button_availability() -> void:
-	if (selected_slot):
+	if selected_slot:
 		$HBoxContainer/VBoxContainer/Panel/EquipButton.visible = selected_slot.item.equippable
 
 
 func handle_equip_button_text() -> void:
-	if (selected_slot):
+	if selected_slot:
 		var selected_item_texture := selected_slot.item.texture
 		match selected_slot.item.type:
 			"hat":
@@ -52,7 +53,7 @@ func handle_equip_button_text() -> void:
 
 
 func change_equip_button_text(piece: Node2D, selected_item_texture: Texture) -> void:
-	if (selected_item_texture.get_atlas() == piece.texture):
+	if selected_item_texture.get_atlas() == piece.texture:
 		$HBoxContainer/VBoxContainer/Panel/EquipButton.set_text("Unequip")
 		can_equip = false
 	else:
@@ -102,8 +103,9 @@ func change_equipment(body_part: Node2D, selected_item_texture: Texture) -> void
 		body_part.texture = null
 
 
-
-func _on_server_consumer_user_init_ready(_position: Vector2, equipment: Equipment) -> void:
+func _on_server_consumer_user_init_ready(
+	_position: Vector2, equipment: Equipment, mapId: int
+) -> void:
 	var cs := CompositeSprites
 	can_equip = true
 	sprite.get_node("Hair").texture = cs.hair_spritesheet[equipment.hair]
@@ -114,4 +116,3 @@ func _on_server_consumer_user_init_ready(_position: Vector2, equipment: Equipmen
 	sprite.get_node("Glasses").texture = cs.glasses_spritesheet[equipment.glasses]
 	sprite.get_node("Eyes").texture = cs.eyes_spritesheet[equipment.eyes]
 	can_equip = false
-	

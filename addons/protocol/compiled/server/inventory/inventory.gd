@@ -661,74 +661,47 @@ class PBPacker:
 ############### USER DATA BEGIN ################
 
 
-class PBPlayerInitError:
-	func _init():
-		var service
-		
-		_error_code = PBField.new("error_code", PB_DATA_TYPE.STRING, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.STRING])
-		service = PBServiceField.new()
-		service.field = _error_code
-		data[_error_code.tag] = service
-		
-	var data = {}
-	
-	var _error_code: PBField
-	func get_error_code() -> String:
-		return _error_code.value
-	func clear_error_code() -> void:
-		data[1].state = PB_SERVICE_STATE.UNFILLED
-		_error_code.value = DEFAULT_VALUES_2[PB_DATA_TYPE.STRING]
-	func set_error_code(value : String) -> void:
-		_error_code.value = value
-	
-	func _to_string() -> String:
-		return PBPacker.message_to_string(data)
-		
-	func to_bytes() -> PackedByteArray:
-		return PBPacker.pack_message(data)
-		
-	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
-		var cur_limit = bytes.size()
-		if limit != -1:
-			cur_limit = limit
-		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
-		if result == cur_limit:
-			if PBPacker.check_required(data):
-				if limit == -1:
-					return PB_ERR.NO_ERRORS
-			else:
-				return PB_ERR.REQUIRED_FIELDS
-		elif limit == -1 && result > 0:
-			return PB_ERR.PARSE_INCOMPLETE
-		return result
-	
-enum PBPlayerInitErrorCode {
-	UNKNOWN = 0,
-	INVALID_PLAYER_CREDENTIALS = 1,
-	PLAYER_ALREADY_EXISTS = 2
+enum PBInventoryItemType {
+	hair = 0,
+	outfit = 1,
+	facial_hair = 2,
+	glases = 3,
+	hats = 4
 }
 
-class PBPlayerInitSuccess:
+class PBInventoryItem:
 	func _init():
 		var service
 		
-		_initialState = PBField.new("initialState", PB_DATA_TYPE.MESSAGE, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
+		_id = PBField.new("id", PB_DATA_TYPE.UINT32, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.UINT32])
 		service = PBServiceField.new()
-		service.field = _initialState
-		service.func_ref = Callable(self, "new_initialState")
-		data[_initialState.tag] = service
+		service.field = _id
+		data[_id.tag] = service
+		
+		_type = PBField.new("type", PB_DATA_TYPE.ENUM, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
+		service = PBServiceField.new()
+		service.field = _type
+		data[_type.tag] = service
 		
 	var data = {}
 	
-	var _initialState: PBField
-	func get_initialState() -> PBPlayerInitialState:
-		return _initialState.value
-	func clear_initialState() -> void:
+	var _id: PBField
+	func get_id() -> int:
+		return _id.value
+	func clear_id() -> void:
 		data[1].state = PB_SERVICE_STATE.UNFILLED
-		_initialState.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
-	func new_initialState() -> PBPlayerInitialState:
-		_initialState.value = PBPlayerInitialState.new()
-		return _initialState.value
+		_id.value = DEFAULT_VALUES_2[PB_DATA_TYPE.UINT32]
+	func set_id(value : int) -> void:
+		_id.value = value
+	
+	var _type: PBField
+	func get_type():
+		return _type.value
+	func clear_type() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		_type.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
+	func set_type(value) -> void:
+		_type.value = value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)
@@ -751,237 +724,28 @@ class PBPlayerInitSuccess:
 			return PB_ERR.PARSE_INCOMPLETE
 		return result
 	
-class PBPlayerInitialState:
+class PBInventoryItemList:
 	func _init():
 		var service
 		
-		_position = PBField.new("position", PB_DATA_TYPE.MESSAGE, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
+		_items = PBField.new("items", PB_DATA_TYPE.MESSAGE, PB_RULE.REPEATED, 1, false, [])
 		service = PBServiceField.new()
-		service.field = _position
-		service.func_ref = Callable(self, "new_position")
-		data[_position.tag] = service
-		
-		_equipment = PBField.new("equipment", PB_DATA_TYPE.MESSAGE, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
-		service = PBServiceField.new()
-		service.field = _equipment
-		service.func_ref = Callable(self, "new_equipment")
-		data[_equipment.tag] = service
-		
-		_mapId = PBField.new("mapId", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 3, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
-		service = PBServiceField.new()
-		service.field = _mapId
-		data[_mapId.tag] = service
+		service.field = _items
+		service.func_ref = Callable(self, "add_items")
+		data[_items.tag] = service
 		
 	var data = {}
 	
-	var _position: PBField
-	func get_position() -> PBPlayerPosition:
-		return _position.value
-	func clear_position() -> void:
+	var _items: PBField
+	func get_items() -> Array:
+		return _items.value
+	func clear_items() -> void:
 		data[1].state = PB_SERVICE_STATE.UNFILLED
-		_position.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
-	func new_position() -> PBPlayerPosition:
-		_position.value = PBPlayerPosition.new()
-		return _position.value
-	
-	var _equipment: PBField
-	func get_equipment() -> PBPlayerEquipment:
-		return _equipment.value
-	func clear_equipment() -> void:
-		data[2].state = PB_SERVICE_STATE.UNFILLED
-		_equipment.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
-	func new_equipment() -> PBPlayerEquipment:
-		_equipment.value = PBPlayerEquipment.new()
-		return _equipment.value
-	
-	var _mapId: PBField
-	func get_mapId() -> int:
-		return _mapId.value
-	func clear_mapId() -> void:
-		data[3].state = PB_SERVICE_STATE.UNFILLED
-		_mapId.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
-	func set_mapId(value : int) -> void:
-		_mapId.value = value
-	
-	func _to_string() -> String:
-		return PBPacker.message_to_string(data)
-		
-	func to_bytes() -> PackedByteArray:
-		return PBPacker.pack_message(data)
-		
-	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
-		var cur_limit = bytes.size()
-		if limit != -1:
-			cur_limit = limit
-		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
-		if result == cur_limit:
-			if PBPacker.check_required(data):
-				if limit == -1:
-					return PB_ERR.NO_ERRORS
-			else:
-				return PB_ERR.REQUIRED_FIELDS
-		elif limit == -1 && result > 0:
-			return PB_ERR.PARSE_INCOMPLETE
-		return result
-	
-class PBPlayerPosition:
-	func _init():
-		var service
-		
-		_x = PBField.new("x", PB_DATA_TYPE.FLOAT, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT])
-		service = PBServiceField.new()
-		service.field = _x
-		data[_x.tag] = service
-		
-		_y = PBField.new("y", PB_DATA_TYPE.FLOAT, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT])
-		service = PBServiceField.new()
-		service.field = _y
-		data[_y.tag] = service
-		
-	var data = {}
-	
-	var _x: PBField
-	func get_x() -> float:
-		return _x.value
-	func clear_x() -> void:
-		data[1].state = PB_SERVICE_STATE.UNFILLED
-		_x.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
-	func set_x(value : float) -> void:
-		_x.value = value
-	
-	var _y: PBField
-	func get_y() -> float:
-		return _y.value
-	func clear_y() -> void:
-		data[2].state = PB_SERVICE_STATE.UNFILLED
-		_y.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
-	func set_y(value : float) -> void:
-		_y.value = value
-	
-	func _to_string() -> String:
-		return PBPacker.message_to_string(data)
-		
-	func to_bytes() -> PackedByteArray:
-		return PBPacker.pack_message(data)
-		
-	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
-		var cur_limit = bytes.size()
-		if limit != -1:
-			cur_limit = limit
-		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
-		if result == cur_limit:
-			if PBPacker.check_required(data):
-				if limit == -1:
-					return PB_ERR.NO_ERRORS
-			else:
-				return PB_ERR.REQUIRED_FIELDS
-		elif limit == -1 && result > 0:
-			return PB_ERR.PARSE_INCOMPLETE
-		return result
-	
-class PBPlayerEquipment:
-	func _init():
-		var service
-		
-		_hat = PBField.new("hat", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
-		service = PBServiceField.new()
-		service.field = _hat
-		data[_hat.tag] = service
-		
-		_hair = PBField.new("hair", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
-		service = PBServiceField.new()
-		service.field = _hair
-		data[_hair.tag] = service
-		
-		_eyes = PBField.new("eyes", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 3, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
-		service = PBServiceField.new()
-		service.field = _eyes
-		data[_eyes.tag] = service
-		
-		_glasses = PBField.new("glasses", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 4, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
-		service = PBServiceField.new()
-		service.field = _glasses
-		data[_glasses.tag] = service
-		
-		_facial_hair = PBField.new("facial_hair", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 5, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
-		service = PBServiceField.new()
-		service.field = _facial_hair
-		data[_facial_hair.tag] = service
-		
-		_body = PBField.new("body", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 6, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
-		service = PBServiceField.new()
-		service.field = _body
-		data[_body.tag] = service
-		
-		_outfit = PBField.new("outfit", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 7, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
-		service = PBServiceField.new()
-		service.field = _outfit
-		data[_outfit.tag] = service
-		
-	var data = {}
-	
-	var _hat: PBField
-	func get_hat() -> int:
-		return _hat.value
-	func clear_hat() -> void:
-		data[1].state = PB_SERVICE_STATE.UNFILLED
-		_hat.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
-	func set_hat(value : int) -> void:
-		_hat.value = value
-	
-	var _hair: PBField
-	func get_hair() -> int:
-		return _hair.value
-	func clear_hair() -> void:
-		data[2].state = PB_SERVICE_STATE.UNFILLED
-		_hair.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
-	func set_hair(value : int) -> void:
-		_hair.value = value
-	
-	var _eyes: PBField
-	func get_eyes() -> int:
-		return _eyes.value
-	func clear_eyes() -> void:
-		data[3].state = PB_SERVICE_STATE.UNFILLED
-		_eyes.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
-	func set_eyes(value : int) -> void:
-		_eyes.value = value
-	
-	var _glasses: PBField
-	func get_glasses() -> int:
-		return _glasses.value
-	func clear_glasses() -> void:
-		data[4].state = PB_SERVICE_STATE.UNFILLED
-		_glasses.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
-	func set_glasses(value : int) -> void:
-		_glasses.value = value
-	
-	var _facial_hair: PBField
-	func get_facial_hair() -> int:
-		return _facial_hair.value
-	func clear_facial_hair() -> void:
-		data[5].state = PB_SERVICE_STATE.UNFILLED
-		_facial_hair.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
-	func set_facial_hair(value : int) -> void:
-		_facial_hair.value = value
-	
-	var _body: PBField
-	func get_body() -> int:
-		return _body.value
-	func clear_body() -> void:
-		data[6].state = PB_SERVICE_STATE.UNFILLED
-		_body.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
-	func set_body(value : int) -> void:
-		_body.value = value
-	
-	var _outfit: PBField
-	func get_outfit() -> int:
-		return _outfit.value
-	func clear_outfit() -> void:
-		data[7].state = PB_SERVICE_STATE.UNFILLED
-		_outfit.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
-	func set_outfit(value : int) -> void:
-		_outfit.value = value
+		_items.value = []
+	func add_items() -> PBInventoryItem:
+		var element = PBInventoryItem.new()
+		_items.value.append(element)
+		return element
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)

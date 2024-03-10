@@ -127,10 +127,11 @@ func _on_main_ui_opened(open: bool) -> void:
 	else:
 		idle = false
 
-	
+
 func disable() -> void:
 	idle = true
-	
+
+
 func enable() -> void:
 	idle = false
 	visible = true

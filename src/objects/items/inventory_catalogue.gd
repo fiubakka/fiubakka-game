@@ -5,7 +5,8 @@ class_name InventoryCatalogue
 var cs := CompositeSprites
 
 const inventory_catalogue := {
-	"0": {
+	"0":
+	{
 		"id": 0,
 		"name": "Hat 0",
 		"description": "A hat",
@@ -14,4 +15,3 @@ const inventory_catalogue := {
 		"texture": cs.hats_spritesheet[1]
 	}
 }
-

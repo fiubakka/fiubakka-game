@@ -1,6 +1,6 @@
 extends Node
 
-signal user_init_ready(position: Vector2, equipment: Equipment)  #TOOD: Tipar esto
+signal user_init_ready(position: Vector2, equipment: Equipment, mapId: int)  #TOOD: Tipar esto
 signal update_entity_state(
 	entityId: String, position: Vector2, velocity: Vector2, equipment: Equipment
 )
@@ -80,7 +80,8 @@ func _handle_player_init_ready(msg: PBPlayerInitSuccess) -> void:
 			msg.get_initialState().get_position().get_x(),
 			msg.get_initialState().get_position().get_y()
 		),
-		equipment
+		equipment,
+		msg.get_initialState().get_mapId()
 	)
 
 
@@ -114,10 +115,9 @@ func _handle_player_message(msg: PBPlayerMessage) -> void:
 			msg.get_content(),
 		)
 	)
-	
-	
+
+
 func _handle_player_change_map_ready(msg: PBPlayerChangeMapReady) -> void:
 	var new_map_id := msg.get_new_map_id()
 	SceneManager.player_change_map_ready(new_map_id)
 	player_changed_map.emit()
-	
