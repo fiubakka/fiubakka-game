@@ -60,14 +60,6 @@ offset_bottom = 262.0
 texture = ExtResource("4_yt6vq")
 region_rect = Rect2(1344, 144, 48, 48)
 
-[node name="TextureRect" type="ColorRect" parent="."]
-visible = false
-self_modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_right = 430.0
-offset_bottom = 220.0
-color = Color(0.278431, 0.278431, 0.278431, 0.576471)
-
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 layout_mode = 2
 offset_left = 15.0
@@ -99,7 +91,7 @@ offset_right = 440.0
 offset_bottom = 262.0
 text = "CHAT_SEND"
 
-[node name="TextureRect" type="ColorRect" parent="."]
+[node name="TextureRect2" type="ColorRect" parent="."]
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_right = 428.0

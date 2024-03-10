@@ -8,6 +8,7 @@ var loading_screen_scene: PackedScene = preload(
 	"res://src/scenes/loading_screen/loading_screen.tscn"
 )
 var load_progress_timer: Timer
+var is_loading_scene := false
 
 # private
 var _content_path: String
@@ -19,6 +20,7 @@ func _ready() -> void:
 
 
 func load_new_scene(content_path: String) -> void:
+	is_loading_scene = true
 	loading_screen = loading_screen_scene.instantiate()
 	get_tree().root.add_child(loading_screen)
 	loading_screen.start_transition()
@@ -86,6 +88,7 @@ func _on_content_finished_loading(new_scene: Node) -> void:
 		if new_scene is Level:
 			new_scene.enter_level()
 
+	is_loading_scene = false
 	transition_finished.emit()
 
 
