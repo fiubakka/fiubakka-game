@@ -27,9 +27,10 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 			selected = false
-			var shortest_dist := 75
+			var shortest_dist := 300
 			for child: Node2D in rest_nodes:
-				var distance := global_position.distance_to(child.global_position)
+				var mouse_position: Vector2 = event.global_position
+				var distance := mouse_position.distance_to(child.global_position)
 				if distance < shortest_dist:
 					child.select()
 					rest_point = child.global_position
