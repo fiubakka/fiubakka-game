@@ -34,7 +34,6 @@ func _on_server_consumer_user_init_ready(
 	var current_level := get_tree().current_scene
 	current_level.data["player_equipment"] = equipment
 	current_level.enter_level()
-	#player.position = _position
 	login_ready.emit()
 	$Login.queue_free()
 
@@ -45,10 +44,12 @@ func _on_server_consumer_user_init_ready(
 func _on_server_consumer_update_entity_state(
 	entityId: String, entityPosition: Vector2, entityVelocity: Vector2, equipment: Equipment
 ) -> void:
+	if SceneManager.is_loading_scene:
+		await SceneManager.transition_finished
 	if entities.has(entityId):
 		var entity: Node = entities[entityId]
-		entity.position = entityPosition
-		entity.velocity = entityVelocity
+		entity.add_movement_update(entityPosition, entityVelocity)
+		# TODO handle all player updates inside of the player
 		#If equipment is the same we dont need to update it
 		if !Equipment.compare_equipment(entity.equipment, equipment):
 			entity.set_equipment(equipment)

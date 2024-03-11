@@ -6,7 +6,9 @@ var prev_vel := Vector2(0, 0)
 var player_name := ""
 var equipment: Equipment
 
-var cs := CompositeSprites
+var _cs := CompositeSprites
+
+var _movement_update_queue: Array = []
 
 
 func _ready() -> void:
@@ -15,17 +17,6 @@ func _ready() -> void:
 	# Set idle front animation when spawning player
 	set_idle_region()
 	$AnimationPlayer.play("front")
-
-
-func set_equipment(new_equipment: Equipment) -> void:
-	equipment = new_equipment
-	$EntitySprite/Hats.texture = cs.hats_spritesheet[new_equipment["hat"]]
-	$EntitySprite/Hair.texture = cs.hair_spritesheet[new_equipment["hair"]]
-	$EntitySprite/Eyes.texture = cs.eyes_spritesheet[new_equipment["eyes"]]
-	$EntitySprite/Body.texture = cs.body_spritesheet[new_equipment["body"]]
-	$EntitySprite/Glasses.texture = cs.glasses_spritesheet[new_equipment["glasses"]]
-	$EntitySprite/FacialHair.texture = cs.facial_hair_spritesheet[new_equipment["facial_hair"]]
-	$EntitySprite/Outfit.texture = cs.outfit_spritesheet[new_equipment["outfit"]]
 
 
 func _process(_delta: float) -> void:
@@ -53,6 +44,31 @@ func _process(_delta: float) -> void:
 			$AnimationPlayer.play("front")
 
 	prev_vel = velocity
+
+
+func _physics_process(_delta: float) -> void:
+	# Here we update the position and velocity based on the event queue
+	if !_movement_update_queue.is_empty():
+		var movement_update: Array = _movement_update_queue.pop_front()
+		var new_position: Vector2 = movement_update[0]
+		var new_velocity: Vector2 = movement_update[1]
+		velocity = new_velocity
+		position = new_position
+
+
+func add_movement_update(new_position: Vector2, new_velocity: Vector2) -> void:
+	_movement_update_queue.append([new_position, new_velocity])
+
+
+func set_equipment(new_equipment: Equipment) -> void:
+	equipment = new_equipment
+	$EntitySprite/Hats.texture = _cs.hats_spritesheet[new_equipment["hat"]]
+	$EntitySprite/Hair.texture = _cs.hair_spritesheet[new_equipment["hair"]]
+	$EntitySprite/Eyes.texture = _cs.eyes_spritesheet[new_equipment["eyes"]]
+	$EntitySprite/Body.texture = _cs.body_spritesheet[new_equipment["body"]]
+	$EntitySprite/Glasses.texture = _cs.glasses_spritesheet[new_equipment["glasses"]]
+	$EntitySprite/FacialHair.texture = _cs.facial_hair_spritesheet[new_equipment["facial_hair"]]
+	$EntitySprite/Outfit.texture = _cs.outfit_spritesheet[new_equipment["outfit"]]
 
 
 func set_idle_region() -> void:
