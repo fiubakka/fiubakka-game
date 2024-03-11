@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://btk0mejic855k"]
+
+[ext_resource type="PackedScene" uid="uid://44gpne03ucab" path="res://src/scenes/truco/card.tscn" id="1_kvobq"]
+[ext_resource type="PackedScene" uid="uid://bt8psjtejdr3q" path="res://src/scenes/truco/drop_zone.tscn" id="2_70d4q"]
+
+[node name="GameBoard" type="Node2D"]
+
+[node name="DropZone" parent="." instance=ExtResource("2_70d4q")]
+position = Vector2(82, 261)
+
+[node name="DropZone2" parent="." instance=ExtResource("2_70d4q")]
+position = Vector2(610, 48)
+
+[node name="Card" parent="." instance=ExtResource("1_kvobq")]
+position = Vector2(-2, -2)
