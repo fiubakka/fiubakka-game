@@ -35,10 +35,11 @@ size = Vector2(16, 417)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wfoqx"]
 size = Vector2(341, 48)
 
-[node name="Room200" type="Node2D" node_paths=PackedStringArray("player")]
+[node name="Room200" type="Node2D" node_paths=PackedStringArray("player", "doors")]
 y_sort_enabled = true
 script = ExtResource("1_b5d7a")
 player = NodePath("Player")
+doors = [NodePath("Door")]
 
 [node name="Base" type="TileMap" parent="."]
 tile_set = ExtResource("1_mj6gk")

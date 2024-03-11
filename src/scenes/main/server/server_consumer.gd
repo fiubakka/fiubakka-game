@@ -65,7 +65,6 @@ func _handle_message(message: Object) -> void:
 
 
 func _handle_player_init_ready(msg: PBPlayerInitSuccess) -> void:
-	print("PLAYER INIT READY")
 	var equipment := Equipment.new()
 	equipment.set_equipment(
 		msg.get_initialState().get_equipment().get_hat(),

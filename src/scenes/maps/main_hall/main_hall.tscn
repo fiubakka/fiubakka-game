@@ -3912,9 +3912,10 @@ size = Vector2(39.5, 383.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6o08y"]
 size = Vector2(671.5, 23)
 
-[node name="MainHall" type="Node2D" node_paths=PackedStringArray("player")]
+[node name="MainHall" type="Node2D" node_paths=PackedStringArray("player", "doors")]
 script = ExtResource("1_lqlib")
 player = NodePath("Player")
+doors = [NodePath("RightDoor")]
 
 [node name="Base" type="TileMap" parent="."]
 position = Vector2(0, 2)
