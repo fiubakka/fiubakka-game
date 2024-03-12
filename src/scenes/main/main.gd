@@ -31,6 +31,7 @@ func _on_server_consumer_user_init_ready(
 	var player: Player = get_tree().current_scene.get_node("Player")
 	player.update_movement.connect($ServerConnection/ServerProducer._on_player_movement)
 	player.set_equipment(equipment)
+	player.position = _position
 	var current_level := get_tree().current_scene
 	current_level.data["player_equipment"] = equipment
 	current_level.enter_level()
