@@ -661,39 +661,109 @@ class PBPacker:
 ############### USER DATA BEGIN ################
 
 
-class PBClientMetadata:
+class PBPlayerUpdateEquipment:
 	func _init():
 		var service
 		
-		_length = PBField.new("length", PB_DATA_TYPE.UINT32, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.UINT32])
+		_hat = PBField.new("hat", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
 		service = PBServiceField.new()
-		service.field = _length
-		data[_length.tag] = service
+		service.field = _hat
+		data[_hat.tag] = service
 		
-		_type = PBField.new("type", PB_DATA_TYPE.ENUM, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
+		_hair = PBField.new("hair", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
 		service = PBServiceField.new()
-		service.field = _type
-		data[_type.tag] = service
+		service.field = _hair
+		data[_hair.tag] = service
+		
+		_eyes = PBField.new("eyes", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 3, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
+		service = PBServiceField.new()
+		service.field = _eyes
+		data[_eyes.tag] = service
+		
+		_glasses = PBField.new("glasses", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 4, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
+		service = PBServiceField.new()
+		service.field = _glasses
+		data[_glasses.tag] = service
+		
+		_facial_hair = PBField.new("facial_hair", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 5, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
+		service = PBServiceField.new()
+		service.field = _facial_hair
+		data[_facial_hair.tag] = service
+		
+		_body = PBField.new("body", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 6, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
+		service = PBServiceField.new()
+		service.field = _body
+		data[_body.tag] = service
+		
+		_outfit = PBField.new("outfit", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 7, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
+		service = PBServiceField.new()
+		service.field = _outfit
+		data[_outfit.tag] = service
 		
 	var data = {}
 	
-	var _length: PBField
-	func get_length() -> int:
-		return _length.value
-	func clear_length() -> void:
+	var _hat: PBField
+	func get_hat() -> int:
+		return _hat.value
+	func clear_hat() -> void:
 		data[1].state = PB_SERVICE_STATE.UNFILLED
-		_length.value = DEFAULT_VALUES_2[PB_DATA_TYPE.UINT32]
-	func set_length(value : int) -> void:
-		_length.value = value
+		_hat.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
+	func set_hat(value : int) -> void:
+		_hat.value = value
 	
-	var _type: PBField
-	func get_type():
-		return _type.value
-	func clear_type() -> void:
+	var _hair: PBField
+	func get_hair() -> int:
+		return _hair.value
+	func clear_hair() -> void:
 		data[2].state = PB_SERVICE_STATE.UNFILLED
-		_type.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
-	func set_type(value) -> void:
-		_type.value = value
+		_hair.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
+	func set_hair(value : int) -> void:
+		_hair.value = value
+	
+	var _eyes: PBField
+	func get_eyes() -> int:
+		return _eyes.value
+	func clear_eyes() -> void:
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		_eyes.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
+	func set_eyes(value : int) -> void:
+		_eyes.value = value
+	
+	var _glasses: PBField
+	func get_glasses() -> int:
+		return _glasses.value
+	func clear_glasses() -> void:
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		_glasses.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
+	func set_glasses(value : int) -> void:
+		_glasses.value = value
+	
+	var _facial_hair: PBField
+	func get_facial_hair() -> int:
+		return _facial_hair.value
+	func clear_facial_hair() -> void:
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		_facial_hair.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
+	func set_facial_hair(value : int) -> void:
+		_facial_hair.value = value
+	
+	var _body: PBField
+	func get_body() -> int:
+		return _body.value
+	func clear_body() -> void:
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		_body.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
+	func set_body(value : int) -> void:
+		_body.value = value
+	
+	var _outfit: PBField
+	func get_outfit() -> int:
+		return _outfit.value
+	func clear_outfit() -> void:
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		_outfit.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
+	func set_outfit(value : int) -> void:
+		_outfit.value = value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)
@@ -716,13 +786,4 @@ class PBClientMetadata:
 			return PB_ERR.PARSE_INCOMPLETE
 		return result
 	
-enum PBClientMessageType {
-	PBPlayerLogin = 0,
-	PBPlayerRegister = 1,
-	PBPlayerMovement = 2,
-	PBPlayerMessage = 3,
-	PBPlayerChangeMap = 4,
-	PBPlayerUpdateEquipment = 5
-}
-
 ################ USER DATA END #################

@@ -8,6 +8,8 @@ var selected_slot: InventorySlot = null
 var sprite: Node2D = null
 var can_equip := false
 
+signal update_equipment(equipment: Equipment)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -67,7 +69,6 @@ func _on_Slot_Pressed(slot: InventorySlot, item: InventoryItemData) -> void:
 			selected_slot.set_focus(false)
 		selected_slot = slot
 		selected_slot.set_focus(true)
-		selected_slot = selected_slot
 		handle_equip_button_availability()
 		handle_equip_button_text()
 		var name: RichTextLabel = $HBoxContainer/VBoxContainer/Description/VBoxContainer/Name
@@ -79,21 +80,42 @@ func _on_Slot_Pressed(slot: InventorySlot, item: InventoryItemData) -> void:
 
 
 func _on_button_pressed() -> void:
+	var player: Player = get_tree().current_scene.get_node("Player")
+	var newEquipment := Equipment.new()
+	(
+		newEquipment
+		. set_equipment(
+			player.equipment.hat,
+			player.equipment.hair,
+			player.equipment.eyes,
+			player.equipment.glasses,
+			player.equipment.facial_hair,
+			player.equipment.body,
+			player.equipment.outfit,
+		)
+	)
+
 	if selected_slot and selected_slot.item.equippable:
 		var selected_item_texture := selected_slot.item.texture
 		match selected_slot.item.type:
 			"hat":
 				change_equipment(sprite.get_node("Hats"), selected_item_texture)
+				newEquipment.set_hat(selected_slot.item.id)
 			"outfit":
 				change_equipment(sprite.get_node("Outfit"), selected_item_texture)
+				newEquipment.set_outfit(selected_slot.item.id)
 			"facial hair":
 				change_equipment(sprite.get_node("FacialHair"), selected_item_texture)
+				newEquipment.set_facial_hair(selected_slot.item.id)
 			"glasses":
 				change_equipment(sprite.get_node("Glasses"), selected_item_texture)
+				newEquipment.set_glasses(selected_slot.item.id)
 			"hair":
 				change_equipment(sprite.get_node("Hair"), selected_item_texture)
+				newEquipment.set_hair(selected_slot.item.id)
 	handle_equip_button_text()
-	#TODO: communication with the server
+	player.set_equipment(newEquipment)
+	update_equipment.emit(newEquipment)
 
 
 func change_equipment(body_part: Node2D, selected_item_texture: Texture) -> void:

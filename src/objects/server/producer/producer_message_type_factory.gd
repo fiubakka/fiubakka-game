@@ -21,9 +21,14 @@ const PBPlayerChangeMap = (
 	preload("res://addons/protocol/compiled/client/map/change_map.gd").PBPlayerChangeMap
 )
 
+const PBPlayerUpdateEquipment = (
+	preload("res://addons/protocol/compiled/client/inventory/update_equipment.gd")
+	. PBPlayerUpdateEquipment
+)
+
 
 static func from(message: Object) -> Result:
-	var type: PBClientMessageType
+	var type: PBClientMessageType = -1
 	if message is PBPlayerRegister:
 		type = PBClientMessageType.PBPlayerRegister
 	elif message is PBPlayerLogin:
@@ -34,8 +39,10 @@ static func from(message: Object) -> Result:
 		type = PBClientMessageType.PBPlayerMessage
 	elif message is PBPlayerChangeMap:
 		type = PBClientMessageType.PBPlayerChangeMap
+	elif message is PBPlayerUpdateEquipment:
+		type = PBClientMessageType.PBPlayerUpdateEquipment
 
-	if type == null:
+	if type < 0:
 		printerr("Unknown message type for message class: " + message.get_class())
 		return Result.err(ERR_CANT_RESOLVE)
 	return Result.ok(type)
