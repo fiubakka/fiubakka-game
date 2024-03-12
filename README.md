@@ -23,14 +23,14 @@ Once the server is running, you can start the client by running the command `god
 
 ## Exporting the project
 
-### Windows
+### Windows / Linux
 
-To export the project as a Windows `.exe` file, you will first need to download the required Export Template. 
+To export the project as an executable file (either a Windows `.exe` file or a Linux executable binary), you will first need to download the required Export Template. 
 From the `Editor` menu, go to `Manage Export Templates`, select `Official GitHub Releases mirror` from the `Download from` dropdown and click `Download and Install`.
 
 ![Export Template Manager Menu](docs/Godot_v4.2.1-stable_win64_03kHSVtMJj.png)
 
-After the Export Template installation is finished, close the Export Template Manager and open the Export menu from `Project` > `Export`. From the Export menu, click Add and select `Windows Desktop`
+After the Export Template installation is finished, close the Export Template Manager and open the Export menu from `Project` > `Export`. From the Export menu, click Add and select your target platform. In this example we will choose `Windows Desktop`, but this guide works for `Linux/X11` as well.
 
 ![Export Menu](docs/Godot_v4.2.1-stable_win64_jn7nknKCvo.png)
 
