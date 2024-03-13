@@ -97,4 +97,3 @@ func _on_gui_manager_ui_opened(open: bool) -> void:
 
 func empty_entities() -> void:
 	entities = {}
-	print("test")
