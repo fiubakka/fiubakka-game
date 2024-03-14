@@ -36,7 +36,8 @@ func _input(event: InputEvent) -> void:
 				var mouse_position: Vector2 = event.global_position
 				var distance := mouse_position.distance_to(child.global_position)
 				if distance < shortest_dist:
-					child.select()
+					#child.select()
+					current_rest_point.deselect()
 					current_rest_point = child
-					#rest_point = child.global_position
+					current_rest_point.select()
 					shortest_dist = distance
