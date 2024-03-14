@@ -7,7 +7,6 @@ var current_rest_point: DropZone = null
 
 func _ready() -> void:
 	rest_nodes = get_tree().get_nodes_in_group("zone")
-	#rest_point = rest_nodes[0].global_position
 	current_rest_point = rest_nodes[0]
 	current_rest_point.select()
 	var current_rest_point_pos := current_rest_point.global_position
@@ -33,11 +32,11 @@ func _input(event: InputEvent) -> void:
 			selected = false
 			var shortest_dist := 300
 			for child: Node2D in rest_nodes:
-				var mouse_position: Vector2 = event.global_position
-				var distance := mouse_position.distance_to(child.global_position)
-				if distance < shortest_dist:
-					#child.select()
-					current_rest_point.deselect()
-					current_rest_point = child
-					current_rest_point.select()
-					shortest_dist = distance
+				if !child.has_card:
+					var mouse_position: Vector2 = event.global_position
+					var distance := mouse_position.distance_to(child.global_position)
+					if distance < shortest_dist:
+						current_rest_point.deselect()
+						current_rest_point = child
+						current_rest_point.select()
+						shortest_dist = distance
