@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name DropZone
+
 func _draw() -> void:
 	draw_circle(Vector2.ZERO, 75, Color.BLANCHED_ALMOND)
 

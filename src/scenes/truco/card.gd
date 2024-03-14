@@ -1,14 +1,17 @@
 extends Sprite2D
 
 var selected := false
-var rest_point: Vector2
 var rest_nodes := []
+var current_rest_point: DropZone = null
 
 
 func _ready() -> void:
 	rest_nodes = get_tree().get_nodes_in_group("zone")
-	rest_point = rest_nodes[0].global_position
-	rest_nodes[0].select()
+	#rest_point = rest_nodes[0].global_position
+	current_rest_point = rest_nodes[0]
+	current_rest_point.select()
+	var current_rest_point_pos := current_rest_point.global_position
+	global_position = lerp(global_position, current_rest_point_pos, 0)
 
 
 func _on_area_2d_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
@@ -20,7 +23,8 @@ func _physics_process(delta: float) -> void:
 	if selected:
 		global_position = lerp(global_position, get_global_mouse_position(), delta * 25)
 	else:
-		global_position = lerp(global_position, rest_point, 10 * delta)
+		var current_rest_point_pos := current_rest_point.global_position
+		global_position = lerp(global_position, current_rest_point_pos, 10 * delta)
 
 
 func _input(event: InputEvent) -> void:
@@ -33,5 +37,6 @@ func _input(event: InputEvent) -> void:
 				var distance := mouse_position.distance_to(child.global_position)
 				if distance < shortest_dist:
 					child.select()
-					rest_point = child.global_position
+					current_rest_point = child
+					#rest_point = child.global_position
 					shortest_dist = distance

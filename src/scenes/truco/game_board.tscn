@@ -6,9 +6,9 @@
 
 [node name="GameBoard" type="Node2D"]
 
-[node name="Card" parent="." instance=ExtResource("1_kvobq")]
-
 [node name="Hand" parent="." instance=ExtResource("1_tajr1")]
 
 [node name="DropZone" parent="." instance=ExtResource("2_70d4q")]
 position = Vector2(723, 344)
+
+[node name="Card" parent="." instance=ExtResource("1_kvobq")]
