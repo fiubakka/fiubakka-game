@@ -97,3 +97,6 @@ func _on_gui_manager_ui_opened(open: bool) -> void:
 
 func empty_entities() -> void:
 	entities = {}
+
+func remove_entity(other_player_id: String) -> void:
+	entities.erase(other_player_id)
