@@ -2,8 +2,12 @@ extends Node
 
 const Producer = preload("res://src/objects/server/producer/producer.gd")
 
-const PBPlayerInit = (
-	preload("res://addons/protocol/compiled/client/init/player_init.gd").PBPlayerInit
+const PBPlayerLogin = (
+	preload("res://addons/protocol/compiled/client/init/player_login.gd").PBPlayerLogin
+)
+
+const PBPlayerRegister = (
+	preload("res://addons/protocol/compiled/client/init/player_register.gd").PBPlayerRegister
 )
 const PBPlayerMovement = (
 	preload("res://addons/protocol/compiled/client/movement/player_movement.gd").PBPlayerMovement
@@ -11,6 +15,15 @@ const PBPlayerMovement = (
 
 const PBPlayerMessage = (
 	preload("res://addons/protocol/compiled/client/chat/message.gd").PBPlayerMessage
+)
+
+const PBPlayerChangeMap = (
+	preload("res://addons/protocol/compiled/client/map/change_map.gd").PBPlayerChangeMap
+)
+
+const PBPlayerUpdateEquipment = (
+	preload("res://addons/protocol/compiled/client/inventory/update_equipment.gd")
+	. PBPlayerUpdateEquipment
 )
 
 var _producer: Producer
@@ -36,10 +49,11 @@ func _on_player_movement(velocity: Vector2, position: Vector2) -> void:
 
 
 func _on_user_logged_in(username: String, equipment: Equipment) -> void:
-	var player_init := PBPlayerInit.new()
-	player_init.set_username(username)
 	if equipment:
-		var player_equipment := player_init.new_equipment()
+		var player_register := PBPlayerRegister.new()
+		player_register.set_username(username)
+		player_register.set_password("password")
+		var player_equipment := player_register.new_equipment()
 		player_equipment.set_hat(equipment.hat)
 		player_equipment.set_hair(equipment.hair)
 		player_equipment.set_eyes(equipment.eyes)
@@ -47,10 +61,33 @@ func _on_user_logged_in(username: String, equipment: Equipment) -> void:
 		player_equipment.set_facial_hair(equipment.facial_hair)
 		player_equipment.set_body(equipment.body)
 		player_equipment.set_outfit(equipment.outfit)
-	_producer.send(player_init)
+		_producer.send(player_register)
+	else:
+		var player_login := PBPlayerLogin.new()
+		player_login.set_username(username)
+		player_login.set_password("password")
+		_producer.send(player_login)
 
 
 func _on_chatbox_send_message(message: String) -> void:
 	var player_message := PBPlayerMessage.new()
 	player_message.set_content(message)
 	_producer.send(player_message)
+
+
+func _on_player_changes_level(level_id: int) -> void:
+	var level_change := PBPlayerChangeMap.new()
+	level_change.set_new_map_id(level_id)
+	_producer.send(level_change)
+
+
+func _on_inventory_update_equipment(equipment: Equipment) -> void:
+	var new_equipment := PBPlayerUpdateEquipment.new()
+	new_equipment.set_hat(equipment.hat)
+	new_equipment.set_hair(equipment.hair)
+	new_equipment.set_glasses(equipment.glasses)
+	new_equipment.set_facial_hair(equipment.facial_hair)
+	new_equipment.set_outfit(equipment.outfit)
+	new_equipment.set_body(equipment.body)
+	new_equipment.set_eyes(equipment.eyes)
+	_producer.send(new_equipment)

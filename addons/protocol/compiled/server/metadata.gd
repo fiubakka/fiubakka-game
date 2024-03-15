@@ -719,7 +719,9 @@ class PBServerMetadata:
 enum PBServerMessageType {
 	PBGameEntityState = 0,
 	PBPlayerMessage = 1,
-	PBPlayerInitReady = 2
+	PBPlayerInitError = 2,
+	PBPlayerInitSuccess = 3,
+	PBPlayerChangeMapReady = 4
 }
 
 ################ USER DATA END #################

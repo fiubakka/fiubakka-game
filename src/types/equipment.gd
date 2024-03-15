@@ -31,3 +31,23 @@ func set_equipment(
 	facial_hair = _facial_hair
 	body = _body
 	outfit = _outfit
+
+
+func set_hat(_hat: int) -> void:
+	hat = _hat
+
+
+func set_glasses(_glasses: int) -> void:
+	glasses = _glasses
+
+
+func set_hair(_hair: int) -> void:
+	hair = _hair
+
+
+func set_facial_hair(_facial_hair: int) -> void:
+	facial_hair = _facial_hair
+
+
+func set_outfit(_outfit: int) -> void:
+	outfit = _outfit

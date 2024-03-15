@@ -7,3 +7,6 @@ templates/
 exported/
 *.exe
 docs/*.import
+export_presets.cfg
+translations/*.import
+translations/*.translation

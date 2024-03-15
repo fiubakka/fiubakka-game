@@ -18,6 +18,10 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 
 PlayerInfo="*res://src/objects/player_info/player_info.gd"
 CompositeSprites="*res://src/objects/composite_sprites/composite_sprites.gd"
+SceneManager="*res://src/objects/scene_manager/scene_manager.gd"
+ItemsCatalogue="*res://src/scenes/game_menu/inventory_screen/items/items_catalogue.gd"
+Utils="*res://src/objects/utils/utils.gd"
+MapsDictionary="*res://src/objects/maps_dictionary/maps_dictionary.gd"
 
 [debug]
 
@@ -98,6 +102,21 @@ pause={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
+left_click={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(134, 11),"global_position":Vector2(138, 52),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+inventory={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":73,"key_label":0,"unicode":105,"echo":false,"script":null)
+]
+}
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://translations/ translations.en.translation", "res://translations/ translations.es.translation")
+locale/test="es"
 
 [rendering]
 

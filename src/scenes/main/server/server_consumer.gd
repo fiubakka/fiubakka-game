@@ -1,22 +1,27 @@
 extends Node
 
-signal user_init_ready(position: Vector2, equipment: Equipment)  #TOOD: Tipar esto
+signal user_init_ready(position: Vector2, equipment: Equipment, mapId: int)
 signal update_entity_state(
 	entityId: String, position: Vector2, velocity: Vector2, equipment: Equipment
 )
 signal update_content(entityId: String, content: String)
+signal player_changed_map
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 
 const PBGameEntityState = (
 	preload("res://addons/protocol/compiled/server/state/game_entity_state.gd").PBGameEntityState
 )
-const PBPlayerInitReady = (
-	preload("res://addons/protocol/compiled/server/init/player_init_ready.gd").PBPlayerInitReady
+const PBPlayerInitSuccess = (
+	preload("res://addons/protocol/compiled/server/init/player_init.gd").PBPlayerInitSuccess
 )
 
 const PBPlayerMessage = (
 	preload("res://addons/protocol/compiled/server/chat/message.gd").PBPlayerMessage
+)
+
+const PBPlayerChangeMapReady = (
+	preload("res://addons/protocol/compiled/server/map/change_map_ready.gd").PBPlayerChangeMapReady
 )
 
 var _thread: Thread
@@ -49,15 +54,17 @@ func _handle_message(message: Object) -> void:
 	var handler: String
 	if message is PBGameEntityState:
 		handler = "_handle_game_entity_state"
-	elif message is PBPlayerInitReady:
+	elif message is PBPlayerInitSuccess:
 		handler = "_handle_player_init_ready"
 	elif message is PBPlayerMessage:
 		handler = "_handle_player_message"
+	elif message is PBPlayerChangeMapReady:
+		handler = "_handle_player_change_map_ready"
 
 	call_deferred(handler, message)
 
 
-func _handle_player_init_ready(msg: PBPlayerInitReady) -> void:
+func _handle_player_init_ready(msg: PBPlayerInitSuccess) -> void:
 	var equipment := Equipment.new()
 	equipment.set_equipment(
 		msg.get_initialState().get_equipment().get_hat(),
@@ -73,7 +80,8 @@ func _handle_player_init_ready(msg: PBPlayerInitReady) -> void:
 			msg.get_initialState().get_position().get_x(),
 			msg.get_initialState().get_position().get_y()
 		),
-		equipment
+		equipment,
+		msg.get_initialState().get_mapId()
 	)
 
 
@@ -107,3 +115,9 @@ func _handle_player_message(msg: PBPlayerMessage) -> void:
 			msg.get_content(),
 		)
 	)
+
+
+func _handle_player_change_map_ready(msg: PBPlayerChangeMapReady) -> void:
+	var new_map_id := msg.get_new_map_id()
+	SceneManager.player_change_map_ready(new_map_id)
+	player_changed_map.emit()

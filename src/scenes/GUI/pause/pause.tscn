@@ -75,7 +75,6 @@ grow_vertical = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_j8n4e")
 bbcode_enabled = true
-text = "[center]Continue[/center]"
 scroll_active = false
 
 [node name="Continue" type="Button" parent="NinePatchRect/NinePatchRect"]
@@ -129,7 +128,6 @@ grow_vertical = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_j8n4e")
 bbcode_enabled = true
-text = "[center]Quit[/center]"
 scroll_active = false
 
 [node name="Quit" type="Button" parent="NinePatchRect/NinePatchRect2"]
