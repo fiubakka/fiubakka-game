@@ -7,7 +7,7 @@ const main_hall_path = "res://src/scenes/maps/main_hall/main_hall.tscn"
 
 const MILISECONDS_UNTIL_DISCONNECT = 15000
 
-var entities: Dictionary = {}
+# var entities: Dictionary = {}
 var is_game_paused: bool = false
 
 signal login_ready
@@ -21,12 +21,12 @@ signal ui_opened(open: bool)
 func _process(_delta: float) -> void:
 	pass
 
-	var curr_time := Time.get_ticks_msec()
-	for entityId: String in entities:
-		#If we dont get an update in 15s we consider that player disconnected and delete it
-		if curr_time - entities[entityId].last_update > MILISECONDS_UNTIL_DISCONNECT:
-			entities[entityId].queue_free()
-			entities.erase(entityId)
+	# var curr_time := Time.get_ticks_msec()
+	# for entityId: String in entities:
+	# 	#If we dont get an update in 15s we consider that player disconnected and delete it
+	# 	if curr_time - entities[entityId].last_update > MILISECONDS_UNTIL_DISCONNECT:
+	# 		entities[entityId].queue_free()
+	# 		entities.erase(entityId)
 
 
 func _on_server_consumer_user_init_ready(
@@ -58,25 +58,7 @@ func _on_server_consumer_user_init_ready(
 func _on_server_consumer_update_entity_state(
 	entityId: String, entityPosition: Vector2, entityVelocity: Vector2, equipment: Equipment
 ) -> void:
-	if SceneManager.is_loading_scene:
-		await SceneManager.transition_finished
-	if entities.has(entityId):
-		var entity: Node = entities[entityId]
-		entity.last_update = Time.get_ticks_msec()
-		entity.add_movement_update(entityPosition, entityVelocity)
-		# TODO handle all player updates inside of the player
-		#If equipment is the same we dont need to update it
-		if !Equipment.compare_equipment(entity.equipment, equipment):
-			entity.set_equipment(equipment)
-	else:
-		var entity := EntityScene.instantiate()
-		entity.id = entityId
-		entity.position = entityPosition
-		entity.velocity = entityVelocity
-		entity.player_name = entityId
-		entity.set_equipment(equipment)
-		entities[entityId] = entity
-		get_tree().current_scene.add_child(entity)
+	EntityManager.update_entity_state(entityId, entityPosition, entityVelocity, equipment)
 
 
 func _on_pause_unpaused() -> void:
