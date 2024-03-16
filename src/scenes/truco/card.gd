@@ -2,6 +2,9 @@ extends Sprite2D
 
 class_name Card
 
+signal get_selected(card: Card)
+signal get_unselected
+
 var selected := false
 var rest_nodes := []
 var current_rest_point: DropZone = null
@@ -26,7 +29,8 @@ func set_current_rest_point(dropzone: DropZone) -> void:
 func _on_area_2d_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
 	print("Selected:", number)
 	if Input.is_action_just_pressed("left_click"):
-		selected = true
+		#selected = true
+		get_selected.emit(self)
 
 
 func _physics_process(delta: float) -> void:
@@ -40,7 +44,8 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and selected:
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-			selected = false
+			#selected = false
+			get_unselected.emit()
 			var shortest_dist := 300
 			for child: Node2D in rest_nodes:
 				if !child.has_card:

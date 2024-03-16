@@ -6,13 +6,13 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_271wt"]
 radius = 94.0053
 
-[node name="Card" type="Sprite2D"]
+[node name="Card" type="Sprite2D" groups=["cards"]]
 texture = ExtResource("1_hggm4")
 script = ExtResource("2_k7j1e")
 
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["card"]]
 shape = SubResource("CircleShape2D_271wt")
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
