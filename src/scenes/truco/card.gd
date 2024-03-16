@@ -8,7 +8,6 @@ signal get_unselected
 var selected := false
 var rest_nodes := []
 var current_rest_point: DropZone = null
-var number := 0
 
 
 func _ready() -> void:
@@ -23,7 +22,6 @@ func set_current_rest_point(dropzone: DropZone) -> void:
 
 
 func _on_area_2d_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
-	print("Selected:", number)
 	if Input.is_action_just_pressed("left_click"):
 		get_selected.emit(self)
 

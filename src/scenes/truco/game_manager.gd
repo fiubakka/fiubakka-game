@@ -12,7 +12,6 @@ func _ready() -> void:
 		var card := card_scene.instantiate()
 		card.get_selected.connect(self._on_card_get_selected)
 		card.get_unselected.connect(self._on_card_get_unselected)
-		card.number = i
 		hand.add_cards(card)
 		add_child(card)
 
