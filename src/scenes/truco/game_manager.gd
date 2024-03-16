@@ -18,14 +18,6 @@ func _ready() -> void:
 
 
 func _on_card_get_selected(card: Card) -> void:
-	self.handle_select_card(card)
-
-
-func _on_card_get_unselected() -> void:
-	self.handle_unselect_card()
-
-
-func handle_select_card(card: Card) -> void:
 	if !selected_card:
 		selected_card = card
 		card.selected = true
@@ -39,6 +31,8 @@ func handle_select_card(card: Card) -> void:
 			selected_card.selected = true
 
 
-func handle_unselect_card() -> void:
+func _on_card_get_unselected() -> void:
 	selected_card.selected = false
 	selected_card = null
+
+
