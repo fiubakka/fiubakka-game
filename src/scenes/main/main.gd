@@ -17,15 +17,9 @@ signal paused
 signal unpaused
 signal ui_opened(open: bool)
 
+
 func _process(_delta: float) -> void:
 	pass
-
-	# var curr_time := Time.get_ticks_msec()
-	# for entityId: String in entities:
-	# 	#If we dont get an update in 15s we consider that player disconnected and delete it
-	# 	if curr_time - entities[entityId].last_update > MILISECONDS_UNTIL_DISCONNECT:
-	# 		entities[entityId].queue_free()
-	# 		entities.erase(entityId)
 
 
 func _on_server_consumer_user_init_ready(
@@ -91,9 +85,3 @@ func _on_register_return_to_menu() -> void:
 
 func _on_gui_manager_ui_opened(open: bool) -> void:
 	ui_opened.emit(open)
-
-func empty_entities() -> void:
-	entities = {}
-
-func remove_entity(other_player_id: String) -> void:
-	entities.erase(other_player_id)

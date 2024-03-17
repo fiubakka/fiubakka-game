@@ -11,7 +11,7 @@ var entities: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	delete_entities_timer = Timer.new()  # Timer to send init message until we get a response
+	delete_entities_timer = Timer.new()
 	delete_entities_timer.timeout.connect(Callable(self, "_delete_entities"))
 	add_child(delete_entities_timer)
 	delete_entities_timer.set_wait_time(10.0)
@@ -23,7 +23,6 @@ func _delete_entities() -> void:
 	for entityId: String in entities:
 		#If we dont get an update in 15s we consider that player disconnected and delete it
 		if curr_time - entities[entityId].last_update > MILISECONDS_UNTIL_DISCONNECT:
-			print("SHOULD DELETE ", entityId)
 			entities[entityId].queue_free()
 			entities.erase(entityId)
 
@@ -49,3 +48,11 @@ func update_entity_state(
 		entity.set_equipment(equipment)
 		entities[entityId] = entity
 		get_tree().current_scene.add_child(entity)
+
+
+func empty_entities() -> void:
+	entities = {}
+
+
+func remove_entity(other_player_id: String) -> void:
+	entities.erase(other_player_id)
