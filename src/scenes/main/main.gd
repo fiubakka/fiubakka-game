@@ -28,8 +28,13 @@ func _on_server_consumer_user_init_ready(
 	# like signals for example?
 	await SceneManager.transition_finished
 	var player: Player = get_tree().current_scene.get_node("Player")
-	player.update_movement.connect($ServerConnection/ServerProducer._on_player_movement)
+	var producer_movement_signal_handler: Callable = (
+		$ServerConnection/ServerProducer._on_player_movement
+	)
+	if !player.update_movement.is_connected(producer_movement_signal_handler):
+		player.update_movement.connect(producer_movement_signal_handler)
 	player.set_equipment(equipment)
+	player.position = _position
 	var current_level := get_tree().current_scene
 	current_level.data["player_equipment"] = equipment
 	current_level.enter_level()

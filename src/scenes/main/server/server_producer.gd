@@ -21,6 +21,11 @@ const PBPlayerChangeMap = (
 	preload("res://addons/protocol/compiled/client/map/change_map.gd").PBPlayerChangeMap
 )
 
+const PBPlayerUpdateEquipment = (
+	preload("res://addons/protocol/compiled/client/inventory/update_equipment.gd")
+	. PBPlayerUpdateEquipment
+)
+
 var _producer: Producer
 
 
@@ -74,3 +79,15 @@ func _on_player_changes_level(level_id: int) -> void:
 	var level_change := PBPlayerChangeMap.new()
 	level_change.set_new_map_id(level_id)
 	_producer.send(level_change)
+
+
+func _on_inventory_update_equipment(equipment: Equipment) -> void:
+	var new_equipment := PBPlayerUpdateEquipment.new()
+	new_equipment.set_hat(equipment.hat)
+	new_equipment.set_hair(equipment.hair)
+	new_equipment.set_glasses(equipment.glasses)
+	new_equipment.set_facial_hair(equipment.facial_hair)
+	new_equipment.set_outfit(equipment.outfit)
+	new_equipment.set_body(equipment.body)
+	new_equipment.set_eyes(equipment.eyes)
+	_producer.send(new_equipment)

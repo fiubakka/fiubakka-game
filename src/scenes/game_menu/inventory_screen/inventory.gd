@@ -8,6 +8,8 @@ var selected_slot: InventorySlot = null
 var sprite: Node2D = null
 var can_equip := false
 
+signal update_equipment(equipment: Equipment)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,7 +30,17 @@ func get_inventory() -> void:
 	Inventory.append(ic.items_catalogue["miscellaneous"][0])
 	Inventory.append(ic.items_catalogue["hats"][1])
 	Inventory.append(ic.items_catalogue["hats"][2])
+	Inventory.append(ic.items_catalogue["hats"][7])
+	Inventory.append(ic.items_catalogue["hats"][3])
 	Inventory.append(ic.items_catalogue["outfits"][2])
+	Inventory.append(ic.items_catalogue["outfits"][3])
+	Inventory.append(ic.items_catalogue["hairs"][1])
+	Inventory.append(ic.items_catalogue["hairs"][2])
+	Inventory.append(ic.items_catalogue["glasses"][3])
+	Inventory.append(ic.items_catalogue["glasses"][2])
+	Inventory.append(ic.items_catalogue["glasses"][2])
+	Inventory.append(ic.items_catalogue["facial hair"][2])
+	Inventory.append(ic.items_catalogue["facial hair"][4])
 
 
 func handle_equip_button_availability() -> void:
@@ -67,7 +79,6 @@ func _on_Slot_Pressed(slot: InventorySlot, item: InventoryItemData) -> void:
 			selected_slot.set_focus(false)
 		selected_slot = slot
 		selected_slot.set_focus(true)
-		selected_slot = selected_slot
 		handle_equip_button_availability()
 		handle_equip_button_text()
 		var name: RichTextLabel = $HBoxContainer/VBoxContainer/Description/VBoxContainer/Name
@@ -79,21 +90,43 @@ func _on_Slot_Pressed(slot: InventorySlot, item: InventoryItemData) -> void:
 
 
 func _on_button_pressed() -> void:
+	var player: Player = get_tree().current_scene.get_node("Player")
+	var newEquipment := Equipment.new()
+	(
+		newEquipment
+		. set_equipment(
+			player.equipment.hat,
+			player.equipment.hair,
+			player.equipment.eyes,
+			player.equipment.glasses,
+			player.equipment.facial_hair,
+			player.equipment.body,
+			player.equipment.outfit,
+		)
+	)
+
 	if selected_slot and selected_slot.item.equippable:
 		var selected_item_texture := selected_slot.item.texture
+		var selected_item_id := selected_slot.item.id
 		match selected_slot.item.type:
 			"hat":
 				change_equipment(sprite.get_node("Hats"), selected_item_texture)
+				newEquipment.set_hat(selected_item_id if can_equip else 0)
 			"outfit":
 				change_equipment(sprite.get_node("Outfit"), selected_item_texture)
+				newEquipment.set_outfit(selected_item_id if can_equip else 0)
 			"facial hair":
 				change_equipment(sprite.get_node("FacialHair"), selected_item_texture)
+				newEquipment.set_facial_hair(selected_item_id if can_equip else 0)
 			"glasses":
 				change_equipment(sprite.get_node("Glasses"), selected_item_texture)
+				newEquipment.set_glasses(selected_item_id if can_equip else 0)
 			"hair":
 				change_equipment(sprite.get_node("Hair"), selected_item_texture)
+				newEquipment.set_hair(selected_item_id if can_equip else 0)
 	handle_equip_button_text()
-	#TODO: communication with the server
+	player.set_equipment(newEquipment)
+	update_equipment.emit(newEquipment)
 
 
 func change_equipment(body_part: Node2D, selected_item_texture: Texture) -> void:
@@ -101,6 +134,8 @@ func change_equipment(body_part: Node2D, selected_item_texture: Texture) -> void
 		body_part.texture = selected_item_texture.get_atlas()
 	else:
 		body_part.texture = null
+		#TODO: Ver caso del Outfit, para hacer que se le setee un outfit default
+		#en vez de quedar desnudo
 
 
 func _on_server_consumer_user_init_ready(
