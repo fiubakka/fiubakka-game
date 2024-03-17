@@ -15,6 +15,7 @@ signal paused
 signal unpaused
 signal ui_opened(open: bool)
 
+
 func _process(_delta: float) -> void:
 	pass
 
@@ -100,8 +101,10 @@ func _on_register_return_to_menu() -> void:
 func _on_gui_manager_ui_opened(open: bool) -> void:
 	ui_opened.emit(open)
 
+
 func empty_entities() -> void:
 	entities = {}
+
 
 func remove_entity(other_player_id: String) -> void:
 	entities.erase(other_player_id)
