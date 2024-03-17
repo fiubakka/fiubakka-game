@@ -486,12 +486,9 @@ text = "[center][b]You[/b][/center]"
 fit_content = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.5, 1.5)
 process_callback = 0
 limit_left = 0
 limit_top = 0
-limit_right = 674
-limit_bottom = 768
 limit_smoothed = true
 position_smoothing_enabled = true
 editor_draw_limits = true
