@@ -1,6 +1,6 @@
-extends Node2D
+class_name Entity extends Node2D
 
-@export var id := 1
+@export var id := ""
 var velocity := Vector2(0, 0)
 var prev_vel := Vector2(0, 0)
 var player_name := ""

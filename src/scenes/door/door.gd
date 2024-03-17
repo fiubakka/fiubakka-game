@@ -24,6 +24,12 @@ func _on_body_entered(body: Node2D) -> void:
 	timer.start()
 	timer.set_wait_time(2.0)
 
+func _on_area_entered(area: Area2D) -> void:
+	var entity := area.get_parent() as Node2D
+	if not entity is Entity:
+		return
+	get_node("/root/Main").remove_entity(entity.id)
+	entity.queue_free()
 
 func _on_timer_timeout(level_id: int) -> void:
 	# Server producer and consumer are nested in Main
