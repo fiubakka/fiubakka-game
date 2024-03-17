@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cyysqnwra020e"]
+[gd_scene load_steps=10 format=3 uid="uid://cyysqnwra020e"]
 
 [ext_resource type="Script" path="res://src/scenes/entity/entity.gd" id="1_2la61"]
 [ext_resource type="PackedScene" uid="uid://bj12r5t8p4dpp" path="res://src/scenes/character_sprite/character_sprite.tscn" id="2_0mjch"]
@@ -455,6 +455,9 @@ _data = {
 "right": SubResource("Animation_5hc27")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_81q6c"]
+size = Vector2(44, 14.5)
+
 [node name="Entity" type="Node2D"]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_2la61")
@@ -477,3 +480,11 @@ theme_override_font_sizes/bold_font_size = 32
 bbcode_enabled = true
 text = "[center]Me[/center]"
 fit_content = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 38)
+shape = SubResource("RectangleShape2D_81q6c")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
