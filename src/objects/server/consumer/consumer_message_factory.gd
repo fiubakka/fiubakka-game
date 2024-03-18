@@ -15,12 +15,17 @@ const PBPlayerInitSuccess = (
 const PBPlayerChangeMapReady = (
 	preload("res://addons/protocol/compiled/server/map/change_map_ready.gd").PBPlayerChangeMapReady
 )
+const PBGameEntityDisconnect = (
+	preload("res://addons/protocol/compiled/server/state/game_entity_disconnect.gd")
+	. PBGameEntityDisconnect
+)
 
 static var _MESSAGE_MAP := {
 	PBServerMessageType.PBGameEntityState: PBGameEntityState,
 	PBServerMessageType.PBPlayerMessage: PBPlayerMessage,
 	PBServerMessageType.PBPlayerInitSuccess: PBPlayerInitSuccess,
 	PBServerMessageType.PBPlayerChangeMapReady: PBPlayerChangeMapReady,
+	PBServerMessageType.PBGameEntityDisconnect: PBGameEntityDisconnect,
 }
 
 

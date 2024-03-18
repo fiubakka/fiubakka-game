@@ -29,7 +29,7 @@ func _on_area_entered(area: Area2D) -> void:
 	var entity := area.get_parent() as Node2D
 	if not entity is Entity:
 		return
-	get_node("/root/Main").remove_entity(entity.id)
+	EntityManager.remove_entity(entity.id)
 	entity.queue_free()
 
 

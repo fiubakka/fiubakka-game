@@ -80,7 +80,7 @@ func _on_content_finished_loading(new_scene: Node) -> void:
 
 	get_tree().root.call_deferred("add_child", new_scene)
 	get_tree().set_deferred("current_scene", new_scene)
-	get_node("/root/Main").empty_entities()
+	EntityManager.empty_entities()
 
 	if loading_screen != null:
 		loading_screen.finish_transition()
