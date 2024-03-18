@@ -7,7 +7,6 @@ const main_hall_path = "res://src/scenes/maps/main_hall/main_hall.tscn"
 
 const MILISECONDS_UNTIL_DISCONNECT = 15000
 
-# var entities: Dictionary = {}
 var is_game_paused: bool = false
 
 signal login_ready
@@ -46,12 +45,6 @@ func _on_server_consumer_user_init_ready(
 
 	$GUI/GuiManager.set_process(true)
 	ui_opened.connect(player._on_main_ui_opened)
-
-
-func _on_server_consumer_update_entity_state(
-	entityId: String, entityPosition: Vector2, entityVelocity: Vector2, equipment: Equipment
-) -> void:
-	EntityManager.update_entity_state(entityId, entityPosition, entityVelocity, equipment)
 
 
 func _on_pause_unpaused() -> void:

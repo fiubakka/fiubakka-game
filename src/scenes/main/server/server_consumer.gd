@@ -1,9 +1,6 @@
 extends Node
 
 signal user_init_ready(position: Vector2, equipment: Equipment, mapId: int)
-signal update_entity_state(
-	entityId: String, position: Vector2, velocity: Vector2, equipment: Equipment
-)
 signal update_content(entityId: String, content: String)
 signal player_changed_map
 
@@ -105,7 +102,7 @@ func _handle_game_entity_state(msg: PBGameEntityState) -> void:
 			msg.get_equipment().get_outfit(),
 		)
 	)
-	update_entity_state.emit(
+	EntityManager.update_entity_state(
 		msg.get_entityId(),
 		Vector2(msg.get_position().get_x(), msg.get_position().get_y()),
 		Vector2(msg.get_velocity().get_x(), msg.get_velocity().get_y()),
