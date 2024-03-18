@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://btk0mejic855k"]
+
+[ext_resource type="PackedScene" uid="uid://44gpne03ucab" path="res://src/scenes/truco/card.tscn" id="1_kvobq"]
+[ext_resource type="PackedScene" uid="uid://b8ea56gusfb6g" path="res://src/scenes/truco/hand.tscn" id="1_tajr1"]
+[ext_resource type="PackedScene" uid="uid://bt8psjtejdr3q" path="res://src/scenes/truco/drop_zone.tscn" id="2_70d4q"]
+
+[node name="GameBoard" type="Node2D"]
+
+[node name="Hand" parent="." instance=ExtResource("1_tajr1")]
+
+[node name="DropZone" parent="." instance=ExtResource("2_70d4q")]
+position = Vector2(723, 344)
+
+[node name="Card" parent="." instance=ExtResource("1_kvobq")]

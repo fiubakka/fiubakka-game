@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ck13xfuh3kxji"]
+
+[ext_resource type="PackedScene" uid="uid://bt8psjtejdr3q" path="res://src/scenes/truco/drop_zone.tscn" id="1_ohhig"]
+
+[node name="Board" type="Node2D"]
+
+[node name="DropZone" parent="." instance=ExtResource("1_ohhig")]
+position = Vector2(93, 161)
+
+[node name="DropZone2" parent="." instance=ExtResource("1_ohhig")]
+position = Vector2(141, 117)
