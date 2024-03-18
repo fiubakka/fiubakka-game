@@ -23,6 +23,10 @@ const PBPlayerMessage = (
 const PBPlayerChangeMapReady = (
 	preload("res://addons/protocol/compiled/server/map/change_map_ready.gd").PBPlayerChangeMapReady
 )
+const PBGameEntityDisconnect = (
+	preload("res://addons/protocol/compiled/server/state/game_entity_disconnect.gd")
+	. PBGameEntityDisconnect
+)
 
 var _thread: Thread
 var _consumer: Consumer
@@ -60,6 +64,8 @@ func _handle_message(message: Object) -> void:
 		handler = "_handle_player_message"
 	elif message is PBPlayerChangeMapReady:
 		handler = "_handle_player_change_map_ready"
+	elif message is PBGameEntityDisconnect:
+		handler = "_handle_game_entity_disconnect"
 
 	call_deferred(handler, message)
 
@@ -121,3 +127,8 @@ func _handle_player_change_map_ready(msg: PBPlayerChangeMapReady) -> void:
 	var new_map_id := msg.get_new_map_id()
 	SceneManager.player_change_map_ready(new_map_id)
 	player_changed_map.emit()
+
+
+func _handle_game_entity_disconnect(msg: PBGameEntityDisconnect) -> void:
+	var entityId := msg.get_entityId()
+	EntityManager.remove_entity(entityId)
