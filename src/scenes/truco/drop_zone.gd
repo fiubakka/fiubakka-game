@@ -17,3 +17,4 @@ func deselect() -> void:
 	has_card = false
 	modulate = Color.WHITE
 
+

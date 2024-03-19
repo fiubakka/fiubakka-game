@@ -39,12 +39,14 @@ func _input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 			get_unselected.emit()
 			var shortest_dist := 300
+			var next_rest_point: Node2D = current_rest_point
 			for child: Node2D in rest_nodes:
 				if !child.has_card:
 					var mouse_position: Vector2 = event.global_position
 					var distance := mouse_position.distance_to(child.global_position)
 					if distance < shortest_dist:
-						current_rest_point.deselect()
-						current_rest_point = child
-						current_rest_point.select()
+						next_rest_point = child
 						shortest_dist = distance
+			current_rest_point.deselect()
+			current_rest_point = next_rest_point
+			current_rest_point.select()
