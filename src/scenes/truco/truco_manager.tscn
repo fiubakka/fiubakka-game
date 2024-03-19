@@ -2,15 +2,12 @@
 
 [ext_resource type="Script" path="res://src/scenes/truco/truco_manager.gd" id="1_rogtf"]
 [ext_resource type="PackedScene" uid="uid://44gpne03ucab" path="res://src/scenes/truco/card.tscn" id="2_p2aov"]
-[ext_resource type="PackedScene" uid="uid://ck13xfuh3kxji" path="res://src/scenes/truco/board.tscn" id="3_elw7y"]
+[ext_resource type="PackedScene" uid="uid://ck13xfuh3kxji" path="res://src/scenes/truco/Table/board.tscn" id="3_elw7y"]
 [ext_resource type="PackedScene" uid="uid://b8ea56gusfb6g" path="res://src/scenes/truco/hand.tscn" id="4_ri81m"]
 
 [node name="TrucoManager" type="Node2D"]
 script = ExtResource("1_rogtf")
 card_scene = ExtResource("2_p2aov")
-
-[node name="Board" parent="." instance=ExtResource("3_elw7y")]
-position = Vector2(114, 89)
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = 333.0
@@ -23,3 +20,11 @@ metadata/_edit_group_ = true
 layout_mode = 1
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Board" parent="." instance=ExtResource("3_elw7y")]
+offset_left = 500.0
+offset_top = 100.0
+offset_right = 500.0
+offset_bottom = 100.0
+
+[connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
