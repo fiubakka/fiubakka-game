@@ -1,11 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://ck13xfuh3kxji"]
+[gd_scene load_steps=3 format=3 uid="uid://ck13xfuh3kxji"]
 
-[ext_resource type="PackedScene" uid="uid://bt8psjtejdr3q" path="res://src/scenes/truco/drop_zone.tscn" id="1_ohhig"]
+[ext_resource type="PackedScene" uid="uid://bu71vgikuqaep" path="res://src/scenes/truco/DropZones/player_drop_zone.tscn" id="1_b3vnn"]
+[ext_resource type="PackedScene" uid="uid://c0d06mgfyvafi" path="res://src/scenes/truco/DropZones/opponent_drop_zone.tscn" id="2_l2o11"]
 
 [node name="Board" type="Node2D"]
 
-[node name="DropZone" parent="." instance=ExtResource("1_ohhig")]
-position = Vector2(93, 161)
+[node name="PlayerDropZone" parent="." instance=ExtResource("1_b3vnn")]
+position = Vector2(214, 212)
 
-[node name="DropZone2" parent="." instance=ExtResource("1_ohhig")]
-position = Vector2(141, 117)
+[node name="OpponentDropZone" parent="." instance=ExtResource("2_l2o11")]
+position = Vector2(281, 129)

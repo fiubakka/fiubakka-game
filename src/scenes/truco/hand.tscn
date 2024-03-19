@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b8ea56gusfb6g"]
 
-[ext_resource type="PackedScene" uid="uid://bt8psjtejdr3q" path="res://src/scenes/truco/drop_zone.tscn" id="1_uy3bu"]
+[ext_resource type="PackedScene" uid="uid://bt8psjtejdr3q" path="res://src/scenes/truco/DropZones/drop_zone.tscn" id="1_uy3bu"]
 [ext_resource type="Script" path="res://src/scenes/truco/hand.gd" id="1_ynx0y"]
 [ext_resource type="PackedScene" uid="uid://44gpne03ucab" path="res://src/scenes/truco/card.tscn" id="2_fl0kr"]
 

@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func set_current_rest_point(dropzone: DropZone) -> void:
 	current_rest_point = dropzone
-	current_rest_point.select()
+	current_rest_point.select(self)
 	var current_rest_point_pos := current_rest_point.global_position
 	global_position = lerp(global_position, current_rest_point_pos, 0)
 
@@ -49,4 +49,4 @@ func _input(event: InputEvent) -> void:
 						shortest_dist = distance
 			current_rest_point.deselect()
 			current_rest_point = next_rest_point
-			current_rest_point.select()
+			current_rest_point.select(self)
