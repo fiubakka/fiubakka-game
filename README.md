@@ -47,6 +47,17 @@ Finally, choose a destination directory (for example `/exported`), name your exe
 **Note** the `Export with Debug` checkbox. When checked, the project will be exported with an output console which helps with debugging. In most cases, it should be unchecked
 
 
+### CLI
+You can also export the project if you previously setup both the Godot CLI and the export presets. Simply run the `build.sh` bash script from your terminal like so:
+```bash
+$ build.sh <preset> <exported_name> <version>
+```
+`preset` is the name of your installed export presets, and should be either "Linux/X11" or "Windows"
+
+`exported_name` is an optional argument which defined the executable file name. If not provided, it will be exported as `fiubakka`
+
+`version` is an optional value which will be appended to the executable file name. For example if you run `build.sh Linux/X11 fiubakka 3` you will generate the executable `exported/fiubakka-3`
+
 ## Localization
 
 Localized text is kept in `translations/translations.csv`. It has the following structure:
