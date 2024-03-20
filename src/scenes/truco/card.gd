@@ -6,6 +6,7 @@ signal get_selected(card: Card)
 signal get_unselected
 
 var selected := false
+var played := false
 var rest_nodes := []
 var current_rest_point: DropZone = null
 
@@ -22,12 +23,12 @@ func set_current_rest_point(dropzone: DropZone) -> void:
 
 
 func _on_area_2d_input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
-	if Input.is_action_just_pressed("left_click"):
+	if Input.is_action_just_pressed("left_click") and not played:
 		get_selected.emit(self)
 
 
 func _physics_process(delta: float) -> void:
-	if selected:
+	if selected and not played:
 		global_position = lerp(global_position, get_global_mouse_position(), delta * 25)
 	else:
 		var current_rest_point_pos := current_rest_point.global_position
@@ -35,7 +36,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and selected:
+	if event is InputEventMouseButton and selected and not played:
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 			get_unselected.emit()
 			var shortest_dist := 300
