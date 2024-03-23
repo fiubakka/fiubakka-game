@@ -3913,6 +3913,7 @@ size = Vector2(39.5, 383.5)
 size = Vector2(671.5, 23)
 
 [node name="MainHall" type="Node2D" node_paths=PackedStringArray("player", "doors")]
+y_sort_enabled = true
 script = ExtResource("1_lqlib")
 player = NodePath("Player")
 doors = [NodePath("RightDoor")]
@@ -3930,6 +3931,7 @@ position = Vector2(1.5, 181)
 shape = SubResource("RectangleShape2D_wdqbm")
 
 [node name="Top" type="CollisionShape2D" parent="Walls"]
+y_sort_enabled = true
 position = Vector2(326.5, -0.5)
 shape = SubResource("RectangleShape2D_crl5l")
 

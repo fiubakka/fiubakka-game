@@ -3913,6 +3913,7 @@ size = Vector2(39.5, 383.5)
 size = Vector2(671.5, 23)
 
 [node name="BaseLevel" type="Node2D" node_paths=PackedStringArray("player", "doors")]
+y_sort_enabled = true
 script = ExtResource("1_lqlib")
 player = NodePath("Player")
 doors = [NodePath("RightDoor")]
