@@ -4,6 +4,7 @@ class_name DropZone
 
 var has_card := false
 
+
 func _draw() -> void:
 	draw_circle(Vector2.ZERO, 75, Color.BLANCHED_ALMOND)
 
@@ -16,4 +17,3 @@ func select() -> void:
 func deselect() -> void:
 	has_card = false
 	modulate = Color.WHITE
-

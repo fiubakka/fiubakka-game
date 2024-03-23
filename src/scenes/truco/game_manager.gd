@@ -2,8 +2,9 @@ extends Node2D
 
 @export var card_scene: PackedScene
 
-var hand: Hand = null;
+var hand: Hand = null
 var selected_card: Card = null
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,5 +34,3 @@ func _on_card_get_selected(card: Card) -> void:
 func _on_card_get_unselected() -> void:
 	selected_card.selected = false
 	selected_card = null
-
-
