@@ -32827,6 +32827,15 @@ texture = ExtResource("1_a8y23")
 33:80/0 = 0
 33:80/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 33:80/0/physics_layer_0/angular_velocity = 0.0
+46:83/0 = 0
+46:83/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+46:83/0/physics_layer_0/angular_velocity = 0.0
+47:82/0 = 0
+47:82/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+47:82/0/physics_layer_0/angular_velocity = 0.0
+48:81/0 = 0
+48:81/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+48:81/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gyoru"]
 texture = ExtResource("2_hcpi0")
