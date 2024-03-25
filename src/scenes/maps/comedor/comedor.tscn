@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dbuu8vw25y34b"]
+[gd_scene load_steps=12 format=3 uid="uid://dbuu8vw25y34b"]
 
 [ext_resource type="Script" path="res://src/scenes/level/level.gd" id="1_cla88"]
 [ext_resource type="TileSet" uid="uid://bl3doteiujli4" path="res://tilesets/classroom.tres" id="2_y0scn"]
@@ -21,7 +21,10 @@ size = Vector2(687.875, 19.5)
 size = Vector2(41.5, 88)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8vjti"]
-size = Vector2(112, 56)
+size = Vector2(64, 104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g31vh"]
+size = Vector2(38, 24)
 
 [node name="BaseLevel" type="Node2D" node_paths=PackedStringArray("player", "doors")]
 y_sort_enabled = true
@@ -64,16 +67,144 @@ position = Vector2(8, 584)
 scale = Vector2(3.45267, 7.46071)
 
 [node name="Mesa" type="StaticBody2D" parent="."]
-position = Vector2(144, 176)
+position = Vector2(120, 168)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mesa"]
-position = Vector2(8, 12)
+position = Vector2(0, 14)
+scale = Vector2(0.75, 0.75)
 shape = SubResource("RectangleShape2D_8vjti")
 
 [node name="TileMap" type="TileMap" parent="Mesa"]
+scale = Vector2(0.75, 0.75)
 tile_set = ExtResource("2_y0scn")
 format = 2
-layer_0/tile_data = PackedInt32Array(-65540, 983046, 19, -4, 983046, 20, 65532, 983046, 21, 131068, 983046, 22, -65539, 1048582, 19, -3, 1048582, 20, 65533, 1048582, 21, 131069, 1048582, 22, 196605, 1048582, 23, -65538, 1114118, 19, -2, 1114118, 20, 65534, 1114118, 21, 131070, 1114118, 22, 196606, 1114118, 23, -65537, 1179654, 19, -1, 1179654, 20, 65535, 1179654, 21, 131071, 1179654, 22, -131072, 1245190, 19, -65536, 1245190, 20, 0, 1245190, 21, 65536, 1245190, 22, -131071, 1310726, 19, -65535, 1310726, 20, 1, 1310726, 21, 65537, 1310726, 22, -131070, 1376262, 19, -65534, 1376262, 20, 2, 1376262, 21, 65538, 1376262, 22, 131074, 1376262, 23, -131069, 1441798, 19, -65533, 1441798, 20, 3, 1441798, 21, 65539, 1441798, 22, 131075, 1441798, 23, -131068, 1507334, 19, -65532, 1507334, 20, 4, 1507334, 21, 65540, 1507334, 22)
+layer_0/tile_data = PackedInt32Array(-131073, 1179654, 19, -196608, 1179654, 19, -65537, 1179654, 20, -1, 1179654, 20, 65535, 1179654, 20, 131071, 1179654, 20, 196607, 1179654, 20, -131072, 1179654, 20, -65536, 1179654, 20, 0, 1179654, 20, 65536, 1179654, 20, 131072, 1179654, 20, 262143, 1179654, 22, 196608, 1179654, 22, 262142, 1048582, 22, -131074, 1048582, 19, -65538, 1048582, 20, -2, 1048582, 20, 65534, 1048582, 20, 131070, 1048582, 20, 196606, 1048582, 20, -131071, 1441798, 20, -196607, 1441798, 19, -65535, 1441798, 20, 1, 1441798, 20, 65537, 1441798, 20, 131073, 1441798, 20, 196609, 1441798, 22, 262145, 1441798, 23, 327678, 1048582, 23, 327679, 1114118, 23, 262144, 1376262, 23)
+
+[node name="Mesa2" type="StaticBody2D" parent="."]
+position = Vector2(296, 176)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mesa2"]
+position = Vector2(0, 14)
+scale = Vector2(0.75, 0.75)
+shape = SubResource("RectangleShape2D_8vjti")
+
+[node name="TileMap" type="TileMap" parent="Mesa2"]
+scale = Vector2(0.75, 0.75)
+tile_set = ExtResource("2_y0scn")
+format = 2
+layer_0/tile_data = PackedInt32Array(-131073, 1179654, 19, -196608, 1179654, 19, -65537, 1179654, 20, -1, 1179654, 20, 65535, 1179654, 20, 131071, 1179654, 20, 196607, 1179654, 20, -131072, 1179654, 20, -65536, 1179654, 20, 0, 1179654, 20, 65536, 1179654, 20, 131072, 1179654, 20, 262143, 1179654, 22, 196608, 1179654, 22, 262142, 1048582, 22, -131074, 1048582, 19, -65538, 1048582, 20, -2, 1048582, 20, 65534, 1048582, 20, 131070, 1048582, 20, 196606, 1048582, 20, -131071, 1441798, 20, -196607, 1441798, 19, -65535, 1441798, 20, 1, 1441798, 20, 65537, 1441798, 20, 131073, 1441798, 20, 196609, 1441798, 22, 262145, 1441798, 23, 327678, 1048582, 23, 327679, 1114118, 23, 262144, 1376262, 23)
+
+[node name="Silla" type="StaticBody2D" parent="."]
+position = Vector2(72, 152)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Silla"]
+position = Vector2(5, 11)
+scale = Vector2(0.75, 0.75)
+shape = SubResource("RectangleShape2D_g31vh")
+
+[node name="TileMap" type="TileMap" parent="Silla"]
+scale = Vector2(0.75, 0.75)
+tile_set = ExtResource("2_y0scn")
+format = 2
+layer_0/tile_data = PackedInt32Array(-1, 6, 53, 65535, 6, 54, 131071, 6, 55, -65536, 65542, 53, 0, 65542, 54, 65536, 65542, 55, -65535, 131078, 53, 1, 131078, 54, 65537, 131078, 55)
+
+[node name="Silla2" type="StaticBody2D" parent="."]
+position = Vector2(248, 152)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Silla2"]
+position = Vector2(7, 15)
+scale = Vector2(0.75, 0.75)
+shape = SubResource("RectangleShape2D_g31vh")
+
+[node name="TileMap" type="TileMap" parent="Silla2"]
+scale = Vector2(0.75, 0.75)
+tile_set = ExtResource("2_y0scn")
+format = 2
+layer_0/tile_data = PackedInt32Array(-1, 6, 53, 65535, 6, 54, 131071, 6, 55, -65536, 65542, 53, 0, 65542, 54, 65536, 65542, 55, -65535, 131078, 53, 1, 131078, 54, 65537, 131078, 55)
 
 [node name="Player" parent="." instance=ExtResource("3_jvm7e")]
 position = Vector2(80, 592)
+
+[node name="Silla3" type="StaticBody2D" parent="."]
+position = Vector2(72, 192)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Silla3"]
+position = Vector2(7, 15)
+scale = Vector2(0.75, 0.75)
+shape = SubResource("RectangleShape2D_g31vh")
+
+[node name="TileMap" type="TileMap" parent="Silla3"]
+scale = Vector2(0.75, 0.75)
+tile_set = ExtResource("2_y0scn")
+format = 2
+layer_0/tile_data = PackedInt32Array(-1, 6, 53, 65535, 6, 54, 131071, 6, 55, -65536, 65542, 53, 0, 65542, 54, 65536, 65542, 55, -65535, 131078, 53, 1, 131078, 54, 65537, 131078, 55)
+
+[node name="Silla4" type="StaticBody2D" parent="."]
+position = Vector2(160, 152)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Silla4"]
+position = Vector2(7, 15)
+scale = Vector2(0.75, 0.75)
+shape = SubResource("RectangleShape2D_g31vh")
+
+[node name="TileMap" type="TileMap" parent="Silla4"]
+scale = Vector2(0.75, 0.75)
+tile_set = ExtResource("2_y0scn")
+format = 2
+layer_0/tile_data = PackedInt32Array(-1, 6, 53, 65535, 6, 54, 131071, 6, 55, -65536, 65542, 53, 0, 65542, 54, 65536, 65542, 55, -65535, 131078, 53, 1, 131078, 54, 65537, 131078, 55)
+
+[node name="Silla5" type="StaticBody2D" parent="."]
+position = Vector2(160, 192)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Silla5"]
+position = Vector2(7, 15)
+scale = Vector2(0.75, 0.75)
+shape = SubResource("RectangleShape2D_g31vh")
+
+[node name="TileMap" type="TileMap" parent="Silla5"]
+scale = Vector2(0.75, 0.75)
+tile_set = ExtResource("2_y0scn")
+format = 2
+layer_0/tile_data = PackedInt32Array(-1, 6, 53, 65535, 6, 54, 131071, 6, 55, -65536, 65542, 53, 0, 65542, 54, 65536, 65542, 55, -65535, 131078, 53, 1, 131078, 54, 65537, 131078, 55)
+
+[node name="Silla6" type="StaticBody2D" parent="."]
+position = Vector2(336, 192)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Silla6"]
+position = Vector2(7, 15)
+scale = Vector2(0.75, 0.75)
+shape = SubResource("RectangleShape2D_g31vh")
+
+[node name="TileMap" type="TileMap" parent="Silla6"]
+scale = Vector2(0.75, 0.75)
+tile_set = ExtResource("2_y0scn")
+format = 2
+layer_0/tile_data = PackedInt32Array(-1, 6, 53, 65535, 6, 54, 131071, 6, 55, -65536, 65542, 53, 0, 65542, 54, 65536, 65542, 55, -65535, 131078, 53, 1, 131078, 54, 65537, 131078, 55)
+
+[node name="Silla7" type="StaticBody2D" parent="."]
+position = Vector2(248, 192)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Silla7"]
+position = Vector2(7, 15)
+scale = Vector2(0.75, 0.75)
+shape = SubResource("RectangleShape2D_g31vh")
+
+[node name="TileMap" type="TileMap" parent="Silla7"]
+scale = Vector2(0.75, 0.75)
+tile_set = ExtResource("2_y0scn")
+format = 2
+layer_0/tile_data = PackedInt32Array(-1, 6, 53, 65535, 6, 54, 131071, 6, 55, -65536, 65542, 53, 0, 65542, 54, 65536, 65542, 55, -65535, 131078, 53, 1, 131078, 54, 65537, 131078, 55)
+
+[node name="Silla8" type="StaticBody2D" parent="."]
+position = Vector2(336, 152)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Silla8"]
+position = Vector2(7, 15)
+scale = Vector2(0.75, 0.75)
+shape = SubResource("RectangleShape2D_g31vh")
+
+[node name="TileMap" type="TileMap" parent="Silla8"]
+scale = Vector2(0.75, 0.75)
+tile_set = ExtResource("2_y0scn")
+format = 2
+layer_0/tile_data = PackedInt32Array(-1, 6, 53, 65535, 6, 54, 131071, 6, 55, -65536, 65542, 53, 0, 65542, 54, 65536, 65542, 55, -65535, 131078, 53, 1, 131078, 54, 65537, 131078, 55)
