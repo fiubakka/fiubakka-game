@@ -4,7 +4,7 @@ class_name Hand
 
 @export var card_scene: PackedScene
 
-var cards := []
+var hand := []
 var drop_zones := []
 
 
@@ -16,8 +16,18 @@ func _ready() -> void:
 
 
 func add_cards(card: Card) -> void:
-	card.set_current_rest_point(drop_zones[len(cards) % len(drop_zones)])
-	cards.append(card)
+	card.set_current_rest_point(drop_zones[len(hand) % len(drop_zones)])
+	hand.append(card)
 	add_child(card)
-	print(get_child_count())
+
+
+func clean() -> void:
+	for card: Card in hand:
+		remove_child(card)
+		card.queue_free()
+	hand = []
+	
+	for drop_zone: DropZone in drop_zones:
+		drop_zone.deselect()
+	
 

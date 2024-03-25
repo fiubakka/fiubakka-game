@@ -3,17 +3,23 @@ extends Node2D
 @export var card_scene: PackedScene
 
 var hand: Hand = null;
+var board: Board = null;
 var selected_card: Card = null
+var next_turn := 0
 
 
 func _ready() -> void:
 	hand = $Panel/Hand
+	board = $Board
 	for i: int in range(0, 3):
 		var card := card_scene.instantiate()
 		card.get_selected.connect(self._on_card_get_selected)
 		card.get_unselected.connect(self._on_card_get_unselected)
 		hand.add_cards(card)
 
+func clean() -> void:
+	hand.clean()
+	board.clean()
 
 func _on_card_get_selected(card: Card) -> void:
 	if !selected_card:
@@ -38,3 +44,7 @@ func _on_board_player_card_played(card: Card) -> void:
 	card.played = true
 	print("Carta jugada!")
 
+
+# TODO: REMOVE
+func _on_button_pressed() -> void:
+	clean()

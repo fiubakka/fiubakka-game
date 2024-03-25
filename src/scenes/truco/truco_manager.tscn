@@ -39,4 +39,12 @@ offset_bottom = 532.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Button" type="Button" parent="."]
+offset_left = 825.0
+offset_top = 216.0
+offset_right = 933.0
+offset_bottom = 247.0
+text = "Debug: clean"
+
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
