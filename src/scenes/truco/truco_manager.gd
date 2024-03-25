@@ -5,7 +5,7 @@ extends Node2D
 var hand: Hand = null;
 var selected_card: Card = null
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	hand = $Panel/Hand
 	for i: int in range(0, 3):
@@ -13,7 +13,6 @@ func _ready() -> void:
 		card.get_selected.connect(self._on_card_get_selected)
 		card.get_unselected.connect(self._on_card_get_unselected)
 		hand.add_cards(card)
-		add_child(card)
 
 
 func _on_card_get_selected(card: Card) -> void:
@@ -35,7 +34,7 @@ func _on_card_get_unselected() -> void:
 	selected_card = null
 
 
-
 func _on_board_player_card_played(card: Card) -> void:
 	card.played = true
 	print("Carta jugada!")
+

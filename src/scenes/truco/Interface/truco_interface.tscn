@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://donkthw4ayky2"]
 
-[ext_resource type="PackedScene" uid="uid://kpbsuln7x2le" path="res://src/scenes/truco/Interface/button.tscn" id="1_nnu7q"]
 [ext_resource type="Script" path="res://src/scenes/truco/Interface/truco_interface.gd" id="1_vx2qw"]
+[ext_resource type="PackedScene" uid="uid://dgbtyukekq1cs" path="res://src/scenes/truco/Interface/options.tscn" id="3_65ap6"]
 [ext_resource type="PackedScene" uid="uid://bm21taqs8t7lg" path="res://src/scenes/truco/Interface/OtherPlayerCard.tscn" id="3_snakr"]
 
 [node name="TrucoInterface" type="Control"]
@@ -13,83 +13,47 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vx2qw")
 
-[node name="Buttons" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -144.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+theme_override_constants/separation = 310
 
-[node name="CenterContainer2" type="CenterContainer" parent="Buttons"]
+[node name="OtherPlayerCards" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Buttons/CenterContainer2"]
-layout_mode = 2
-
-[node name="Button" parent="Buttons/CenterContainer2/HBoxContainer" instance=ExtResource("1_nnu7q")]
-layout_mode = 2
-text = "Alternative 1"
-
-[node name="Button2" parent="Buttons/CenterContainer2/HBoxContainer" instance=ExtResource("1_nnu7q")]
-layout_mode = 2
-text = "Alternative 2"
-
-[node name="CenterContainer" type="CenterContainer" parent="Buttons"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Buttons/CenterContainer"]
-layout_mode = 2
-
-[node name="Button" parent="Buttons/CenterContainer/HBoxContainer" instance=ExtResource("1_nnu7q")]
-layout_mode = 2
-text = "Truco"
-
-[node name="Button2" parent="Buttons/CenterContainer/HBoxContainer" instance=ExtResource("1_nnu7q")]
-layout_mode = 2
-text = "Envido"
-
-[node name="Button3" parent="Buttons/CenterContainer/HBoxContainer" instance=ExtResource("1_nnu7q")]
-layout_mode = 2
-text = "Flor"
-
-[node name="Button4" parent="Buttons/CenterContainer/HBoxContainer" instance=ExtResource("1_nnu7q")]
-layout_mode = 2
-text = "Envido"
-
-[node name="OtherPlayerCards" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 76.0
-grow_horizontal = 2
+size_flags_horizontal = 4
 alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="OtherPlayerCards"]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/OtherPlayerCards"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="OtherPlayerCards/CenterContainer"]
+[node name="Panel" type="Panel" parent="VBoxContainer/OtherPlayerCards/CenterContainer"]
 layout_mode = 2
 
-[node name="OtherPlayerCard" parent="OtherPlayerCards/CenterContainer/Panel" instance=ExtResource("3_snakr")]
+[node name="OtherPlayerCard" parent="VBoxContainer/OtherPlayerCards/CenterContainer/Panel" instance=ExtResource("3_snakr")]
 
-[node name="CenterContainer2" type="CenterContainer" parent="OtherPlayerCards"]
+[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer/OtherPlayerCards"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="OtherPlayerCards/CenterContainer2"]
+[node name="Panel" type="Panel" parent="VBoxContainer/OtherPlayerCards/CenterContainer2"]
 layout_mode = 2
 
-[node name="OtherPlayerCard" parent="OtherPlayerCards/CenterContainer2/Panel" instance=ExtResource("3_snakr")]
+[node name="OtherPlayerCard" parent="VBoxContainer/OtherPlayerCards/CenterContainer2/Panel" instance=ExtResource("3_snakr")]
 
-[node name="CenterContainer3" type="CenterContainer" parent="OtherPlayerCards"]
+[node name="CenterContainer3" type="CenterContainer" parent="VBoxContainer/OtherPlayerCards"]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="OtherPlayerCards/CenterContainer3"]
+[node name="Panel" type="Panel" parent="VBoxContainer/OtherPlayerCards/CenterContainer3"]
 layout_mode = 2
 
-[node name="OtherPlayerCard" parent="OtherPlayerCards/CenterContainer3/Panel" instance=ExtResource("3_snakr")]
+[node name="OtherPlayerCard" parent="VBoxContainer/OtherPlayerCards/CenterContainer3/Panel" instance=ExtResource("3_snakr")]
+
+[node name="Buttons" parent="VBoxContainer" instance=ExtResource("3_65ap6")]
+layout_mode = 2

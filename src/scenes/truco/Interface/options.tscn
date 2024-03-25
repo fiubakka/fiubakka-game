@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgbtyukekq1cs"]
+
+[ext_resource type="PackedScene" uid="uid://kpbsuln7x2le" path="res://src/scenes/truco/Interface/button.tscn" id="1_dbp7u"]
+
+[node name="Buttons" type="VBoxContainer"]
+size_flags_horizontal = 4
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer2"]
+layout_mode = 2
+
+[node name="Button" parent="CenterContainer2/HBoxContainer" instance=ExtResource("1_dbp7u")]
+layout_mode = 2
+text = "Alternative 1"
+
+[node name="Button2" parent="CenterContainer2/HBoxContainer" instance=ExtResource("1_dbp7u")]
+layout_mode = 2
+text = "Alternative 2"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Button" parent="CenterContainer/HBoxContainer" instance=ExtResource("1_dbp7u")]
+layout_mode = 2
+text = "Truco"
+
+[node name="Button2" parent="CenterContainer/HBoxContainer" instance=ExtResource("1_dbp7u")]
+layout_mode = 2
+text = "Envido"
+
+[node name="Button3" parent="CenterContainer/HBoxContainer" instance=ExtResource("1_dbp7u")]
+layout_mode = 2
+text = "Flor"
+
+[node name="Button4" parent="CenterContainer/HBoxContainer" instance=ExtResource("1_dbp7u")]
+layout_mode = 2
+text = "Envido"
