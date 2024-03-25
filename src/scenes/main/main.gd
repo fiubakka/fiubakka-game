@@ -5,7 +5,8 @@ const CharCreationScene = preload("res://src/scenes/character_creation/character
 const EntityScene = preload("res://src/scenes/entity/entity.tscn")
 const main_hall_path = "res://src/scenes/maps/main_hall/main_hall.tscn"
 
-var entities: Dictionary = {}
+const MILISECONDS_UNTIL_DISCONNECT = 15000
+
 var is_game_paused: bool = false
 
 signal login_ready
@@ -14,6 +15,7 @@ signal chat_closed
 signal paused
 signal unpaused
 signal ui_opened(open: bool)
+
 
 func _process(_delta: float) -> void:
 	pass
@@ -43,29 +45,6 @@ func _on_server_consumer_user_init_ready(
 
 	$GUI/GuiManager.set_process(true)
 	ui_opened.connect(player._on_main_ui_opened)
-
-
-func _on_server_consumer_update_entity_state(
-	entityId: String, entityPosition: Vector2, entityVelocity: Vector2, equipment: Equipment
-) -> void:
-	if SceneManager.is_loading_scene:
-		await SceneManager.transition_finished
-	if entities.has(entityId):
-		var entity: Node = entities[entityId]
-		entity.add_movement_update(entityPosition, entityVelocity)
-		# TODO handle all player updates inside of the player
-		#If equipment is the same we dont need to update it
-		if !Equipment.compare_equipment(entity.equipment, equipment):
-			entity.set_equipment(equipment)
-	else:
-		var entity := EntityScene.instantiate()
-		entity.id = entityId
-		entity.position = entityPosition
-		entity.velocity = entityVelocity
-		entity.player_name = entityId
-		entity.set_equipment(equipment)
-		entities[entityId] = entity
-		get_tree().current_scene.add_child(entity)
 
 
 func _on_pause_unpaused() -> void:
@@ -99,9 +78,3 @@ func _on_register_return_to_menu() -> void:
 
 func _on_gui_manager_ui_opened(open: bool) -> void:
 	ui_opened.emit(open)
-
-func empty_entities() -> void:
-	entities = {}
-
-func remove_entity(other_player_id: String) -> void:
-	entities.erase(other_player_id)

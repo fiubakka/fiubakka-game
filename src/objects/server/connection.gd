@@ -20,7 +20,12 @@ func start() -> Result:
 	if r != OK:
 		printerr("Error connecting to server at " + HOST + ":" + str(PORT))
 		return Result.err(r)
-	r = _conn.poll()
+	while _conn.get_status() != StreamPeerTCP.STATUS_CONNECTED:
+		r = _conn.poll()
+		if _conn.get_status() == StreamPeerTCP.STATUS_ERROR:
+			printerr("Error polling server connection at " + HOST + ":" + str(PORT))
+			return Result.err(1)
+
 	if r != OK:
 		printerr("Error polling server connection at " + HOST + ":" + str(PORT))
 		return Result.err(r)
