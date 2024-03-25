@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://kpbsuln7x2le" path="res://src/scenes/truco/Interface/button.tscn" id="1_dbp7u"]
 
-[node name="Buttons" type="VBoxContainer"]
+[node name="Options" type="VBoxContainer"]
 size_flags_horizontal = 4
 
 [node name="CenterContainer2" type="CenterContainer" parent="."]
