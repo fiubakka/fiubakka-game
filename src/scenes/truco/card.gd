@@ -7,13 +7,12 @@ signal get_unselected
 
 var selected := false
 var played := false
-var rest_nodes := []
 var current_rest_point: DropZone = null
 
 
 func _ready() -> void:
-	rest_nodes = get_tree().get_nodes_in_group("zone")
-
+	pass
+	
 
 func set_current_rest_point(dropzone: DropZone) -> void:
 	current_rest_point = dropzone
@@ -42,6 +41,7 @@ func _input(event: InputEvent) -> void:
 			get_unselected.emit()
 			var shortest_dist := 300
 			var next_rest_point: Node2D = current_rest_point
+			var rest_nodes := get_tree().get_nodes_in_group("zone")
 			for child: Node2D in rest_nodes:
 				if !child.has_card:
 					var mouse_position: Vector2 = event.global_position

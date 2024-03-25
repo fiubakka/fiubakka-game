@@ -18,7 +18,6 @@ func _ready() -> void:
 	turns_pos.append(turn_pos2)
 	var turn_pos3 := $HBoxContainer/CenterContainer3/Control
 	turns_pos.append(turn_pos3)
-	add_play()
 
 
 func clean() -> void:
@@ -26,7 +25,7 @@ func clean() -> void:
 		turn.clean()
 
 
-func add_play() -> void:
+func next_turn() -> void:
 	if next_play_number < len(turns_pos):
 		var next_turn_pos: Control = turns_pos[next_play_number]
 		var turn_drop_zone := play_drop_zone_scene.instantiate()

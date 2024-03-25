@@ -46,5 +46,13 @@ offset_right = 933.0
 offset_bottom = 247.0
 text = "Debug: clean"
 
+[node name="Button2" type="Button" parent="."]
+offset_left = 813.0
+offset_top = 178.0
+offset_right = 952.0
+offset_bottom = 209.0
+text = "Debug: next turn"
+
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

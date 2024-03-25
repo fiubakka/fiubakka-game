@@ -22,10 +22,11 @@ func add_cards(card: Card) -> void:
 
 
 func clean() -> void:
-	for card: Card in hand:
-		remove_child(card)
-		card.queue_free()
-	hand = []
+	#for card: Card in hand:
+		#remove_child(card)
+		#card.queue_free()
+	#hand = []
+	pass
 	
 	for drop_zone: DropZone in drop_zones:
 		drop_zone.deselect()
