@@ -5,26 +5,25 @@ extends Node2D
 var hand: Hand = null;
 var board: Board = null;
 var selected_card: Card = null
-var next_turn_number := 0
+#var next_turn_number := 0
 
 
 func _ready() -> void:
 	hand = $Panel/Hand
 	board = $Board
-	#for i: int in range(0, 3):
-		#var card := card_scene.instantiate()
-		#card.get_selected.connect(self._on_card_get_selected)
-		#card.get_unselected.connect(self._on_card_get_unselected)
-		#hand.add_cards(card)
 
 
-func next_turn() -> void:
-	#clean()
+func start_round() -> void:
+	clean()
 	for i: int in range(0, 3):
 			var card := card_scene.instantiate()
 			card.get_selected.connect(self._on_card_get_selected)
 			card.get_unselected.connect(self._on_card_get_unselected)
 			hand.add_cards(card)
+	board.next_turn()
+
+
+func next_turn() -> void:
 	board.next_turn()
 
 
@@ -58,9 +57,10 @@ func _on_board_player_card_played(card: Card) -> void:
 
 
 # TODO: REMOVE
-func _on_button_pressed() -> void:
-	clean()
-
-
 func _on_button_2_pressed() -> void:
 	next_turn()
+
+
+# TODO: REMOVE
+func _on_button_3_pressed() -> void:
+	start_round()

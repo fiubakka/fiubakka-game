@@ -8,7 +8,6 @@ var hand := []
 var drop_zones := []
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	drop_zones.append($HBoxContainer/CenterContainer/Control/DropZone)
 	drop_zones.append($HBoxContainer/CenterContainer2/Control/DropZone)
@@ -22,13 +21,10 @@ func add_cards(card: Card) -> void:
 
 
 func clean() -> void:
-	#for card: Card in hand:
-		#remove_child(card)
-		#card.queue_free()
-	#hand = []
-	pass
-	
-	for drop_zone: DropZone in drop_zones:
-		drop_zone.deselect()
-	
+	for card: Card in hand:
+		remove_child(card)
+		card.queue_free()
+	hand = []
+
+
 

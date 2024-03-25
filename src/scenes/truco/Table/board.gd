@@ -21,8 +21,13 @@ func _ready() -> void:
 
 
 func clean() -> void:
+	#for turn: TurnDropZones in turns:
+		#turn.clean()
 	for turn: TurnDropZones in turns:
-		turn.clean()
+		remove_child(turn)
+		turn.queue_free()
+	turns = []
+	next_play_number = 0
 
 
 func next_turn() -> void:
@@ -33,6 +38,7 @@ func next_turn() -> void:
 		turn_drop_zone.player_card_played.connect(self._on_play_drop_zone_player_card_played)
 		next_turn_pos.add_child(turn_drop_zone)
 		next_play_number += 1
+
 
 func _on_play_drop_zone_player_card_played(card: Card) -> void:
 	player_card_played.emit(card)
