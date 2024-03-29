@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ck13xfuh3kxji"]
 
 [ext_resource type="Script" path="res://src/scenes/truco/Table/board.gd" id="1_k6vvi"]
-[ext_resource type="PackedScene" uid="uid://ba73pg5sdya2c" path="res://src/scenes/truco/Table/turn_drop_zones.tscn" id="1_xabjm"]
+[ext_resource type="PackedScene" uid="uid://b5lyylxrkh4x5" path="res://src/scenes/truco/Table/turn_drop_zones.tscn" id="1_xabjm"]
 
 [node name="Board" type="Control"]
 layout_mode = 3

@@ -1,16 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://ba73pg5sdya2c"]
+[gd_scene load_steps=3 format=3 uid="uid://b5lyylxrkh4x5"]
 
 [ext_resource type="Script" path="res://src/scenes/truco/Table/turn_drop_zones.gd" id="1_ci5dw"]
-[ext_resource type="PackedScene" uid="uid://c0d06mgfyvafi" path="res://src/scenes/truco/DropZones/opponent_drop_zone.tscn" id="2_lp1at"]
-[ext_resource type="PackedScene" uid="uid://bu71vgikuqaep" path="res://src/scenes/truco/DropZones/player_drop_zone.tscn" id="3_t4alj"]
+[ext_resource type="PackedScene" uid="uid://bt8psjtejdr3q" path="res://src/scenes/truco/DropZones/drop_zone.tscn" id="2_jwdgb"]
 
 [node name="TurnDropZones" type="Node2D"]
 script = ExtResource("1_ci5dw")
 
-[node name="OpponentDropZone" parent="." instance=ExtResource("2_lp1at")]
-position = Vector2(111, 56)
+[node name="OpponentDropZone" type="Node2D" parent="."]
 
-[node name="PlayerDropZone" parent="." instance=ExtResource("3_t4alj")]
-position = Vector2(66, 109)
+[node name="PlayerDropZone" parent="." groups=["table"] instance=ExtResource("2_jwdgb")]
 
 [connection signal="player_card_played" from="PlayerDropZone" to="." method="_on_player_drop_zone_player_card_played"]
