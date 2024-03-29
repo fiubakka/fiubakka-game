@@ -8,7 +8,7 @@ func _draw() -> void:
 	draw_circle(Vector2.ZERO, 75, Color.BLANCHED_ALMOND)
 
 
-func select() -> void:
+func select(card: Card) -> void:
 	has_card = true
 	modulate = Color.WEB_MAROON
 
@@ -16,4 +16,5 @@ func select() -> void:
 func deselect() -> void:
 	has_card = false
 	modulate = Color.WHITE
+
 
