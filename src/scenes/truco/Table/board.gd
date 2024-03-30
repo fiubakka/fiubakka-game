@@ -24,7 +24,7 @@ func clean() -> void:
 	#for turn: TurnDropZones in turns:
 		#turn.clean()
 	for turn: TurnDropZones in turns:
-		remove_child(turn)
+		#remove_child(turn)
 		turn.queue_free()
 	turns = []
 	next_play_number = 0

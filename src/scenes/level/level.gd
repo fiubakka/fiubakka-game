@@ -32,7 +32,6 @@ func enter_level() -> void:
 func _on_player_entered_door(player_from_prev_level: Player) -> void:
 	disconnect_doors()
 	player.disable()
-	player.queue_free()
 	data = {"player_equipment": player_from_prev_level.equipment}
 	set_process(false)
 

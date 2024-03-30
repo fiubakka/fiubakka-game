@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bu71vgikuqaep"]
-
-[ext_resource type="Script" path="res://src/scenes/truco/DropZones/player_drop_zone.gd" id="1_x0u7o"]
-
-[node name="PlayerDropZone" type="Node2D" groups=["zone"]]
-script = ExtResource("1_x0u7o")
