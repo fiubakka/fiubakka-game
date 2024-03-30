@@ -34,3 +34,8 @@ func _on_card_get_selected(card: Card) -> void:
 func _on_card_get_unselected() -> void:
 	selected_card.selected = false
 	selected_card = null
+
+
+func _on_board_player_card_played(card: Card) -> void:
+	card.played = true
+	print("Carta jugada!")

@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://ck13xfuh3kxji"]
+
+[ext_resource type="Script" path="res://src/scenes/truco/Table/board.gd" id="1_k6vvi"]
+[ext_resource type="PackedScene" uid="uid://ba73pg5sdya2c" path="res://src/scenes/truco/Table/play_drop_zones.tscn" id="1_xabjm"]
+
+[node name="Board" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k6vvi")
+play_drop_zone_scene = ExtResource("1_xabjm")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HBoxContainer/CenterContainer2"]
+layout_mode = 2
+
+[node name="CenterContainer3" type="CenterContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HBoxContainer/CenterContainer3"]
+layout_mode = 2
