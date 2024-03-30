@@ -75,7 +75,7 @@ size = Vector2(64, 19)
 y_sort_enabled = true
 script = ExtResource("1_lqlib")
 player = NodePath("Player")
-doors = [NodePath("RightDoor")]
+doors = [NodePath("Upstairs")]
 
 [node name="Base" type="TileMap" parent="."]
 tile_set = ExtResource("2_fbur0")
@@ -241,14 +241,15 @@ shape = SubResource("RectangleShape2D_lw2ax")
 [node name="Ladders" type="StaticBody2D" parent="."]
 
 [node name="Left" type="CollisionPolygon2D" parent="Ladders"]
-polygon = PackedVector2Array(504, 1391, 528, 1391, 530, 1685, 47, 1685, 49, 1583, 501, 1583)
+polygon = PackedVector2Array(504, 1391, 530, 1391, 530, 1685, 47, 1685, 49, 1583, 504, 1583)
 
 [node name="Right" type="CollisionPolygon2D" parent="Ladders"]
-polygon = PackedVector2Array(1152, 1391, 1178, 1391, 1177, 1582, 1633, 1579, 1636, 1682, 1149, 1682)
+polygon = PackedVector2Array(1152, 1392, 1177, 1391, 1177, 1582, 1633, 1579, 1636, 1682, 1151, 1681)
 
 [node name="Player" parent="." instance=ExtResource("1_qea2s")]
 position = Vector2(1197, 482)
 
-[node name="RightDoor" parent="." instance=ExtResource("4_wkeiq")]
+[node name="Upstairs" parent="." instance=ExtResource("4_wkeiq")]
 position = Vector2(1728, 17)
 scale = Vector2(9, 9)
+path_to_new_scene = "res://src/scenes/maps/main_hall/main_hall.tscn"
