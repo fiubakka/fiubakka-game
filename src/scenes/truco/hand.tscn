@@ -33,7 +33,7 @@ size_flags_vertical = 4
 [node name="Control" type="Control" parent="HBoxContainer/CenterContainer"]
 layout_mode = 2
 
-[node name="DropZone" parent="HBoxContainer/CenterContainer/Control" instance=ExtResource("1_uy3bu")]
+[node name="DropZone" parent="HBoxContainer/CenterContainer/Control" groups=["hand"] instance=ExtResource("1_uy3bu")]
 
 [node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer"]
 custom_minimum_size = Vector2(50, 70)
@@ -44,7 +44,7 @@ size_flags_vertical = 4
 [node name="Control" type="Control" parent="HBoxContainer/CenterContainer2"]
 layout_mode = 2
 
-[node name="DropZone" parent="HBoxContainer/CenterContainer2/Control" instance=ExtResource("1_uy3bu")]
+[node name="DropZone" parent="HBoxContainer/CenterContainer2/Control" groups=["hand"] instance=ExtResource("1_uy3bu")]
 
 [node name="CenterContainer3" type="CenterContainer" parent="HBoxContainer"]
 custom_minimum_size = Vector2(50, 70)
@@ -55,4 +55,4 @@ size_flags_vertical = 4
 [node name="Control" type="Control" parent="HBoxContainer/CenterContainer3"]
 layout_mode = 2
 
-[node name="DropZone" parent="HBoxContainer/CenterContainer3/Control" instance=ExtResource("1_uy3bu")]
+[node name="DropZone" parent="HBoxContainer/CenterContainer3/Control" groups=["hand"] instance=ExtResource("1_uy3bu")]

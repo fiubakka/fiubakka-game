@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://donkthw4ayky2"]
+
+[ext_resource type="Script" path="res://src/scenes/truco/Interface/truco_interface.gd" id="1_vx2qw"]
+[ext_resource type="PackedScene" uid="uid://dgbtyukekq1cs" path="res://src/scenes/truco/Interface/options.tscn" id="3_65ap6"]
+[ext_resource type="PackedScene" uid="uid://bm21taqs8t7lg" path="res://src/scenes/truco/Interface/OtherPlayerCard.tscn" id="3_snakr"]
+
+[node name="TrucoInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vx2qw")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 310
+
+[node name="OtherPlayerCards" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/OtherPlayerCards"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer/OtherPlayerCards/CenterContainer"]
+layout_mode = 2
+
+[node name="OtherPlayerCard" parent="VBoxContainer/OtherPlayerCards/CenterContainer/Panel" instance=ExtResource("3_snakr")]
+
+[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer/OtherPlayerCards"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer/OtherPlayerCards/CenterContainer2"]
+layout_mode = 2
+
+[node name="OtherPlayerCard" parent="VBoxContainer/OtherPlayerCards/CenterContainer2/Panel" instance=ExtResource("3_snakr")]
+
+[node name="CenterContainer3" type="CenterContainer" parent="VBoxContainer/OtherPlayerCards"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer/OtherPlayerCards/CenterContainer3"]
+layout_mode = 2
+
+[node name="OtherPlayerCard" parent="VBoxContainer/OtherPlayerCards/CenterContainer3/Panel" instance=ExtResource("3_snakr")]
+
+[node name="Buttons" parent="VBoxContainer" instance=ExtResource("3_65ap6")]
+layout_mode = 2
