@@ -37,6 +37,9 @@ func _on_timer_timeout(level_id: int) -> void:
 	# Server producer and consumer are nested in Main
 	# TODO: change them to a singleton (autoload) to avoid fetching a node like this
 	var producer := get_node("/root/Main/ServerConnection/ServerProducer")
+	# TODO: start SceneManager transition here
+	
+	SceneManager.load_new_scene(MapsDictionary.id_to_content_path(level_id))
 	producer._on_player_changes_level(level_id)
 
 

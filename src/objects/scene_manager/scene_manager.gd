@@ -24,7 +24,7 @@ func load_new_scene(content_path: String) -> void:
 	loading_screen = loading_screen_scene.instantiate()
 	get_tree().root.add_child(loading_screen)
 	loading_screen.start_transition()
-	_load_content(content_path)
+	#_load_content(content_path)
 
 
 func _load_content(content_path: String) -> void:
@@ -95,4 +95,7 @@ func _on_content_finished_loading(new_scene: Node) -> void:
 
 func player_change_map_ready(new_map_id: int) -> void:
 	var map_content_path := MapsDictionary.id_to_content_path(new_map_id)
-	load_new_scene(map_content_path)
+
+	# TODO: change for _load_content()
+	_load_content(map_content_path)
+	#load_new_scene(map_content_path)
