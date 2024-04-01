@@ -121,3 +121,5 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_g4hy0")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_g4hy0")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_uui05")
 text = "Equip"
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Panel/EquipButton" to="." method="_on_button_pressed"]
