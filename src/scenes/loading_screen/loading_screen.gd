@@ -14,7 +14,6 @@ var starting_animation: String
 func _ready() -> void:
 	loading_message.text = Utils.center_text(tr("LOADING_SERVER"))
 	progress_bar.visible = false
-	spin_logo.emit()
 
 
 func start_transition() -> void:

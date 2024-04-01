@@ -8,5 +8,4 @@ func _ready() -> void:
 
 
 func _on_timer_timeout() -> void:
-	print("(UP) elevator change")
 	elevator.position.y = -elevator.position.y
