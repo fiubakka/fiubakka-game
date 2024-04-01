@@ -3,5 +3,5 @@
 [ext_resource type="Texture2D" uid="uid://xcc7nhh2584b" path="res://src/scenes/truco/card_back.png" id="1_eksjl"]
 
 [node name="OtherPlayerCard" type="Sprite2D"]
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_eksjl")
