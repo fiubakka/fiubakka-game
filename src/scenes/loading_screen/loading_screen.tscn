@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cvu15htrnd5gc"]
+[gd_scene load_steps=14 format=3 uid="uid://cvu15htrnd5gc"]
 
 [ext_resource type="Script" path="res://src/scenes/loading_screen/loading_screen.gd" id="1_nlgno"]
+[ext_resource type="PackedScene" uid="uid://b0p7dfwi0wbed" path="res://src/scenes/loading_screen/elevator/elevator.tscn" id="2_emb2g"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_mmqya"]
+[ext_resource type="Script" path="res://src/scenes/loading_screen/ElevatorAnimation.gd" id="2_wk8mr"]
 [ext_resource type="Script" path="res://src/scenes/loading_screen/logo.gd" id="3_6p0eo"]
 [ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="4_ay2k5"]
 
@@ -91,11 +93,25 @@ offset_right = 710.0
 offset_bottom = 542.0
 alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="Control/VBoxContainer"]
+[node name="ElevatorAnimation" type="CenterContainer" parent="Control/VBoxContainer"]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+use_top_left = true
+script = ExtResource("2_wk8mr")
+
+[node name="Elevator" parent="Control/VBoxContainer/ElevatorAnimation" instance=ExtResource("2_emb2g")]
+position = Vector2(40, 2)
+
+[node name="Timer" type="Timer" parent="Control/VBoxContainer/ElevatorAnimation"]
+wait_time = 0.525
+autostart = true
+
+[node name="SpinningLogo" type="CenterContainer" parent="Control/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(450, 200)
 layout_mode = 2
 
-[node name="Logo2" type="NinePatchRect" parent="Control/VBoxContainer/CenterContainer"]
+[node name="Logo2" type="NinePatchRect" parent="Control/VBoxContainer/SpinningLogo"]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 texture = ExtResource("2_mmqya")
@@ -104,7 +120,7 @@ script = ExtResource("3_6p0eo")
 default_rot_speed = 0.05
 offset = 75
 
-[node name="Logo" type="NinePatchRect" parent="Control/VBoxContainer/CenterContainer"]
+[node name="Logo" type="NinePatchRect" parent="Control/VBoxContainer/SpinningLogo"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 texture = ExtResource("2_mmqya")
@@ -137,6 +153,7 @@ libraries = {
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
 
-[connection signal="spin_logo" from="." to="Control/VBoxContainer/CenterContainer/Logo2" method="_on_loading_screen_spin_logo"]
-[connection signal="spin_logo" from="." to="Control/VBoxContainer/CenterContainer/Logo" method="_on_loading_screen_spin_logo"]
+[connection signal="spin_logo" from="." to="Control/VBoxContainer/SpinningLogo/Logo2" method="_on_loading_screen_spin_logo"]
+[connection signal="spin_logo" from="." to="Control/VBoxContainer/SpinningLogo/Logo" method="_on_loading_screen_spin_logo"]
+[connection signal="timeout" from="Control/VBoxContainer/ElevatorAnimation/Timer" to="Control/VBoxContainer/ElevatorAnimation" method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
