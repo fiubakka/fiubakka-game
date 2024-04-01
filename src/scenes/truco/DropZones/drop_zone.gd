@@ -6,6 +6,7 @@ var has_card := false
 
 signal player_card_played(card: Card)
 
+
 func _draw() -> void:
 	draw_circle(Vector2.ZERO, 75, Color.BLANCHED_ALMOND)
 
@@ -21,5 +22,3 @@ func select(card: Card) -> void:
 func deselect() -> void:
 	has_card = false
 	modulate = Color.WHITE
-
-

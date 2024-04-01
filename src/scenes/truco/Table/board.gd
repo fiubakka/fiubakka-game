@@ -22,7 +22,7 @@ func _ready() -> void:
 
 func clean() -> void:
 	#for turn: TurnDropZones in turns:
-		#turn.clean()
+	#turn.clean()
 	for turn: TurnDropZones in turns:
 		#remove_child(turn)
 		turn.queue_free()
