@@ -1,37 +1,38 @@
 [gd_scene load_steps=2 format=3 uid="uid://d1osyi5ag2uxg"]
 
-[ext_resource type="PackedScene" uid="uid://bm21taqs8t7lg" path="res://src/scenes/truco/Interface/OtherPlayerCard.tscn" id="1_8agru"]
+[ext_resource type="PackedScene" uid="uid://bm21taqs8t7lg" path="res://src/scenes/truco/Interface/other_player_card.tscn" id="1_ly4ky"]
 
 [node name="OtherPlayerCards" type="HBoxContainer"]
 custom_minimum_size = Vector2(0, 80)
-offset_right = 218.0
+offset_right = 86.0
 offset_bottom = 80.0
 size_flags_horizontal = 4
 alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-custom_minimum_size = Vector2(70, 0)
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
 [node name="Panel" type="Panel" parent="CenterContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 
-[node name="OtherPlayerCard" parent="CenterContainer/Panel" instance=ExtResource("1_8agru")]
+[node name="OtherPlayerCard" parent="CenterContainer/Panel" instance=ExtResource("1_ly4ky")]
 
 [node name="CenterContainer2" type="CenterContainer" parent="."]
-custom_minimum_size = Vector2(70, 0)
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
 [node name="Panel" type="Panel" parent="CenterContainer2"]
 layout_mode = 2
 
-[node name="OtherPlayerCard" parent="CenterContainer2/Panel" instance=ExtResource("1_8agru")]
+[node name="OtherPlayerCard" parent="CenterContainer2/Panel" instance=ExtResource("1_ly4ky")]
 
 [node name="CenterContainer3" type="CenterContainer" parent="."]
-custom_minimum_size = Vector2(70, 0)
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
 [node name="Panel" type="Panel" parent="CenterContainer3"]
 layout_mode = 2
 
-[node name="OtherPlayerCard" parent="CenterContainer3/Panel" instance=ExtResource("1_8agru")]
+[node name="OtherPlayerCard" parent="CenterContainer3/Panel" instance=ExtResource("1_ly4ky")]
