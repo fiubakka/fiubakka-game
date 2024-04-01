@@ -12,9 +12,9 @@ card_scene = ExtResource("2_p2aov")
 
 [node name="Board" parent="." instance=ExtResource("3_elw7y")]
 offset_left = 500.0
-offset_top = 100.0
+offset_top = 150.0
 offset_right = 500.0
-offset_bottom = 100.0
+offset_bottom = 150.0
 
 [node name="Button2" type="Button" parent="."]
 offset_left = 813.0
