@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhw67fd6dh0n0"]
+[gd_scene load_steps=7 format=3 uid="uid://bhw67fd6dh0n0"]
 
 [ext_resource type="Script" path="res://src/scenes/truco/truco_manager.gd" id="1_rogtf"]
 [ext_resource type="PackedScene" uid="uid://44gpne03ucab" path="res://src/scenes/truco/card.tscn" id="2_p2aov"]
@@ -6,14 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://b8ea56gusfb6g" path="res://src/scenes/truco/hand.tscn" id="4_ri81m"]
 [ext_resource type="PackedScene" uid="uid://dgbtyukekq1cs" path="res://src/scenes/truco/Interface/options.tscn" id="5_wx3mx"]
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_yminj"]
+
 [node name="TrucoManager" type="Node2D"]
 script = ExtResource("1_rogtf")
 card_scene = ExtResource("2_p2aov")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+modulate = Color(0.101961, 0.360784, 0.27451, 1)
 offset_right = 960.0
 offset_bottom = 540.0
-color = Color(0.0784314, 0.34902, 0.231373, 1)
+texture = SubResource("CanvasTexture_yminj")
 
 [node name="Board" parent="." instance=ExtResource("3_elw7y")]
 offset_left = 500.0
