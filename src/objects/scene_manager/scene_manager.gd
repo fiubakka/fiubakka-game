@@ -31,6 +31,7 @@ func _load_content(content_path: String) -> void:
 	# Load new scene in another thread.
 	# This lets us place a loading screen, a progress bar
 	# and even handle data sent and received from the Server
+	loading_screen.loading_level_message()
 	var loader := ResourceLoader.load_threaded_request(content_path)
 	if not ResourceLoader.exists(content_path) or loader == null:
 		push_error("Error loading scene %s" % content_path)
