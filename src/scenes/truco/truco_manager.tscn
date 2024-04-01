@@ -16,29 +16,6 @@ offset_top = 100.0
 offset_right = 500.0
 offset_bottom = 100.0
 
-[node name="Panel" type="Panel" parent="."]
-offset_left = 333.0
-offset_top = 390.0
-offset_right = 684.0
-offset_bottom = 486.0
-metadata/_edit_group_ = true
-
-[node name="Hand" parent="Panel" instance=ExtResource("4_ri81m")]
-layout_mode = 1
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Options" parent="." instance=ExtResource("5_wx3mx")]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 190.0
-offset_top = 388.0
-offset_right = 802.0
-offset_bottom = 532.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="Button2" type="Button" parent="."]
 offset_left = 813.0
 offset_top = 178.0
@@ -52,6 +29,25 @@ offset_top = 140.0
 offset_right = 957.0
 offset_bottom = 171.0
 text = "Debug: start round"
+
+[node name="Hand" parent="." instance=ExtResource("4_ri81m")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 480.0
+offset_top = 370.0
+offset_right = 480.0
+offset_bottom = 370.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Options" parent="." instance=ExtResource("5_wx3mx")]
+offset_left = 190.0
+offset_top = 388.0
+offset_right = 802.0
+offset_bottom = 532.0
 
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

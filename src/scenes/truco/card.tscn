@@ -1,18 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://44gpne03ucab"]
+[gd_scene load_steps=5 format=3 uid="uid://44gpne03ucab"]
 
-[ext_resource type="Texture2D" uid="uid://b0gh2y4yrips4" path="res://src/scenes/truco/joker.png" id="1_hggm4"]
+[ext_resource type="Texture2D" uid="uid://7di06f6858md" path="res://art/cards/naipes.png" id="1_hn12b"]
 [ext_resource type="Script" path="res://src/scenes/truco/card.gd" id="2_k7j1e"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_271wt"]
-radius = 94.0053
+[sub_resource type="AtlasTexture" id="AtlasTexture_hywjt"]
+atlas = ExtResource("1_hn12b")
+region = Rect2(16, 16, 64, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eoujh"]
+size = Vector2(64, 96)
 
 [node name="Card" type="Sprite2D" groups=["cards"]]
-texture = ExtResource("1_hggm4")
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_hywjt")
 script = ExtResource("2_k7j1e")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["card"]]
-shape = SubResource("CircleShape2D_271wt")
+shape = SubResource("RectangleShape2D_eoujh")
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

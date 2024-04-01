@@ -9,7 +9,7 @@ var selected_card: Card = null
 
 
 func _ready() -> void:
-	hand = $Panel/Hand
+	hand = $Hand
 	board = $Board
 
 
