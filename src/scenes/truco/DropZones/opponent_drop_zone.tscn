@@ -1,3 +1,0 @@
-[gd_scene format=3 uid="uid://c0d06mgfyvafi"]
-
-[node name="OpponentDropZone" type="Node2D" groups=["opponent_drop_zone"]]

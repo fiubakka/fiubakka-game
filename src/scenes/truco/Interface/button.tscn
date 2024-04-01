@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://kpbsuln7x2le"]
+
+[ext_resource type="FontFile" uid="uid://cv2bywsa6irhc" path="res://fonts/Xolonium-Regular.ttf" id="1_6wxyl"]
+[ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_dqjeo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jgxe"]
+atlas = ExtResource("2_dqjeo")
+region = Rect2(32, 1104, 80, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g4hy0"]
+texture = SubResource("AtlasTexture_5jgxe")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 10.0
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sipvw"]
+texture = SubResource("AtlasTexture_5jgxe")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 10.0
+expand_margin_left = 10.0
+expand_margin_right = 10.0
+modulate_color = Color(0.839216, 0.839216, 0.839216, 1)
+
+[node name="Button" type="Button"]
+custom_minimum_size = Vector2(150, 70)
+offset_right = 78.0
+offset_bottom = 40.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_colors/font_pressed_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_colors/font_hover_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_colors/font_focus_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_fonts/font = ExtResource("1_6wxyl")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxTexture_g4hy0")
+theme_override_styles/hover = SubResource("StyleBoxTexture_sipvw")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_sipvw")
+action_mode = 0
+text = "Text"

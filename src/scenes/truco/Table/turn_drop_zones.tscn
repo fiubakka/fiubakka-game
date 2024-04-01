@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5lyylxrkh4x5"]
+
+[ext_resource type="Script" path="res://src/scenes/truco/Table/turn_drop_zones.gd" id="1_ci5dw"]
+[ext_resource type="PackedScene" uid="uid://bt8psjtejdr3q" path="res://src/scenes/truco/DropZones/drop_zone.tscn" id="2_jwdgb"]
+
+[node name="TurnDropZones" type="Node2D"]
+script = ExtResource("1_ci5dw")
+
+[node name="OpponentDropZone" type="Node2D" parent="."]
+
+[node name="PlayerDropZone" parent="." groups=["table"] instance=ExtResource("2_jwdgb")]
+
+[connection signal="player_card_played" from="PlayerDropZone" to="." method="_on_player_drop_zone_player_card_played"]
