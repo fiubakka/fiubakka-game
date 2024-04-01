@@ -9,9 +9,9 @@ var drop_zones := []
 
 
 func _ready() -> void:
-	drop_zones.append($HBoxContainer/CenterContainer/Control/DropZone)
-	drop_zones.append($HBoxContainer/CenterContainer2/Control/DropZone)
-	drop_zones.append($HBoxContainer/CenterContainer3/Control/DropZone)
+	drop_zones.append($HBoxContainer/Control/DropZone)
+	drop_zones.append($HBoxContainer/Control2/DropZone)
+	drop_zones.append($HBoxContainer/Control3/DropZone)
 
 
 func add_cards(card: Card) -> void:
