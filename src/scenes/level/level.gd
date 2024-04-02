@@ -25,7 +25,8 @@ func enter_level() -> void:
 	)
 	if !player.update_movement.is_connected(producer_movement_signal_handler):
 		player.update_movement.connect(producer_movement_signal_handler)
-	$Player/Camera2D.limit_right = 800  #TODO: Setear limites en base al nivel
+	$Player/Camera2D.limit_right = 2200  #TODO: Setear limites en base al nivel
+	$Player/Camera2D.limit_bottom = 880  #TODO: Setear limites en base al nivel
 	player.enable()
 	connect_doors()
 
