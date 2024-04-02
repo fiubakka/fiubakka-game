@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7x2mulktsi07"]
+
+[ext_resource type="Script" path="res://src/scenes/truco/deck/deck.gd" id="1_0dsif"]
+[ext_resource type="Texture2D" uid="uid://7di06f6858md" path="res://art/cards/naipes.png" id="2_tb3vc"]
+
+[node name="Deck" type="Node2D"]
+script = ExtResource("1_0dsif")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(490, 252)
+scale = Vector2(0.876, 0.876)
+texture = ExtResource("2_tb3vc")
+region_rect = Rect2(16, 16, 64, 96)
