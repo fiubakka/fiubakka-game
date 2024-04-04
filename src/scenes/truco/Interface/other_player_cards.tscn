@@ -7,7 +7,7 @@ custom_minimum_size = Vector2(0, 80)
 offset_right = 86.0
 offset_bottom = 80.0
 size_flags_horizontal = 4
-alignment = 1
+alignment = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 custom_minimum_size = Vector2(20, 0)

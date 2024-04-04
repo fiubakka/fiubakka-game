@@ -22,9 +22,9 @@ texture = SubResource("CanvasTexture_yminj")
 
 [node name="Board" parent="." instance=ExtResource("3_elw7y")]
 offset_left = 500.0
-offset_top = 150.0
+offset_top = 180.0
 offset_right = 500.0
-offset_bottom = 150.0
+offset_bottom = 180.0
 
 [node name="Button2" type="Button" parent="."]
 offset_left = 813.0
@@ -71,9 +71,9 @@ bbcode_enabled = true
 text = "[right]Opponent[/right]"
 
 [node name="OtherPlayerCards" parent="." instance=ExtResource("6_x3d1k")]
-offset_left = 871.0
+offset_left = 860.0
 offset_top = 25.0
-offset_right = 963.0
+offset_right = 952.0
 offset_bottom = 105.0
 
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
