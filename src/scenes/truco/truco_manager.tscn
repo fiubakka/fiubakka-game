@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhw67fd6dh0n0"]
+[gd_scene load_steps=10 format=3 uid="uid://bhw67fd6dh0n0"]
 
 [ext_resource type="Script" path="res://src/scenes/truco/truco_manager.gd" id="1_rogtf"]
 [ext_resource type="PackedScene" uid="uid://44gpne03ucab" path="res://src/scenes/truco/card.tscn" id="2_p2aov"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dgbtyukekq1cs" path="res://src/scenes/truco/Interface/options.tscn" id="5_wx3mx"]
 [ext_resource type="FontFile" uid="uid://cv2bywsa6irhc" path="res://fonts/Xolonium-Regular.ttf" id="6_ap5yy"]
 [ext_resource type="PackedScene" uid="uid://d1osyi5ag2uxg" path="res://src/scenes/truco/Interface/other_player_cards.tscn" id="6_x3d1k"]
+[ext_resource type="PackedScene" uid="uid://cfr15ra2rtx2x" path="res://src/scenes/truco/DialogueBubble/dialogue_bubble.tscn" id="8_fm6nn"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yminj"]
 
@@ -59,7 +60,7 @@ offset_top = 388.0
 offset_right = 802.0
 offset_bottom = 532.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="OpponentName" type="RichTextLabel" parent="."]
 custom_minimum_size = Vector2(0, 50)
 offset_left = 734.0
 offset_top = 5.0
@@ -75,6 +76,12 @@ offset_left = 860.0
 offset_top = 25.0
 offset_right = 952.0
 offset_bottom = 105.0
+
+[node name="DialogueBubble" parent="." instance=ExtResource("8_fm6nn")]
+offset_left = 311.0
+offset_top = 1.0
+offset_right = 664.0
+offset_bottom = 62.0
 
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
