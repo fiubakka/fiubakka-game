@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dgbtyukekq1cs" path="res://src/scenes/truco/Interface/options.tscn" id="5_wx3mx"]
 [ext_resource type="FontFile" uid="uid://cv2bywsa6irhc" path="res://fonts/Xolonium-Regular.ttf" id="6_ap5yy"]
 [ext_resource type="PackedScene" uid="uid://d1osyi5ag2uxg" path="res://src/scenes/truco/Interface/other_player_cards.tscn" id="6_x3d1k"]
-[ext_resource type="PackedScene" uid="uid://cfr15ra2rtx2x" path="res://src/scenes/truco/DialogueBubble/dialogue_bubble.tscn" id="8_fm6nn"]
+[ext_resource type="PackedScene" uid="uid://douueoffhqq2a" path="res://src/scenes/truco/DialogueBubble/dialogue_bubble_controller.tscn" id="8_smc8a"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yminj"]
 
@@ -40,6 +40,14 @@ offset_top = 140.0
 offset_right = 957.0
 offset_bottom = 171.0
 text = "Debug: start round"
+
+[node name="Button4" type="Button" parent="."]
+offset_left = 811.0
+offset_top = 219.0
+offset_right = 953.0
+offset_bottom = 273.0
+text = "Debug: opponent
+say Truco!"
 
 [node name="Hand" parent="." instance=ExtResource("4_ri81m")]
 anchors_preset = 0
@@ -77,12 +85,13 @@ offset_top = 25.0
 offset_right = 952.0
 offset_bottom = 105.0
 
-[node name="DialogueBubble" parent="." instance=ExtResource("8_fm6nn")]
-offset_left = 311.0
-offset_top = 1.0
-offset_right = 664.0
-offset_bottom = 62.0
+[node name="DialogueBubbleController" parent="." instance=ExtResource("8_smc8a")]
+offset_left = 487.0
+offset_top = 34.0
+offset_right = 487.0
+offset_bottom = 34.0
 
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="Button4" to="." method="_on_button_4_pressed"]

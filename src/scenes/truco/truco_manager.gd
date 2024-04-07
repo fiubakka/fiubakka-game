@@ -64,3 +64,8 @@ func _on_button_2_pressed() -> void:
 # TODO: REMOVE
 func _on_button_3_pressed() -> void:
 	start_round()
+
+
+# TODO: REMOVE
+func _on_button_4_pressed() -> void:
+	$DialogueBubbleController.show_dialogue("Truco!")
