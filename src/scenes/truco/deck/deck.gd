@@ -8,12 +8,14 @@ enum Ranks {
 }
 
 enum Suits {
-	GOLD, SWORDS, CLUBS, CUPS 
+	GOLD, SWORDS, CLUBS, CUPS, BACK
 }
 
-const CARD_W = 64
-const CARD_H = 96
+const CARD_W := 64
+const CARD_H := 96
 const GAP := 16
+const BACK_X := 944
+const BACK_Y := 128
 
 func _ready() -> void:
 	# Deck could be just a script file, but we add
@@ -34,6 +36,10 @@ func create() -> void:
 			x += CARD_W + GAP
 		y += CARD_H + GAP
 		x = GAP
+	deck_map[Suits.BACK] = Rect2(BACK_X, BACK_Y, CARD_W, CARD_H)
+	
 
 func deal(rank: Ranks, suit: Suits) -> Rect2:
+	if suit == Suits.BACK:
+		return deck_map[suit]
 	return deck_map[suit][rank]
