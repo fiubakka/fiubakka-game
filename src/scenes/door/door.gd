@@ -17,8 +17,6 @@ func _on_body_entered(body: Node2D) -> void:
 	if not body is Player:
 		return
 	player_entered_door.emit(body)
-	# TODO: start SceneManager transition here
-	
 	SceneManager.load_new_scene(path_to_new_scene)
 	
 	timer = Timer.new()  #This timer is to send the change map message until we get a response from the server
