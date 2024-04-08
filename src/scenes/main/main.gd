@@ -26,6 +26,7 @@ func _on_server_consumer_user_init_ready(
 ) -> void:
 	var map_content_path := MapsDictionary.id_to_content_path(mapId)
 	SceneManager.load_new_scene(map_content_path)
+	SceneManager._load_content(map_content_path)
 	#TODO: Is it okay to change the initial position of the player like this or should we use something else
 	# like signals for example?
 	await SceneManager.transition_finished
