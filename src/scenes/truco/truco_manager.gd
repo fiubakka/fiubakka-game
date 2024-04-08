@@ -6,11 +6,13 @@ var hand: Hand = null
 var board: Board = null
 var selected_card: Card = null
 #var next_turn_number := 0
+var deck: Deck = null
 
 
 func _ready() -> void:
 	hand = $Panel/Hand
 	board = $Board
+	deck = preload("res://src/scenes/truco/deck/deck.gd").new()
 
 
 func start_round() -> void:
@@ -19,6 +21,8 @@ func start_round() -> void:
 		var card := card_scene.instantiate()
 		card.get_selected.connect(self._on_card_get_selected)
 		card.get_unselected.connect(self._on_card_get_unselected)
+		card.texture = deck.deck_file
+		card.region_rect = deck.deal(i, i)
 		hand.add_cards(card)
 	board.next_turn()
 

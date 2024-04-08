@@ -7,10 +7,13 @@
 radius = 94.0053
 
 [node name="Card" type="Sprite2D" groups=["cards"]]
+scale = Vector2(2, 2)
 texture = ExtResource("1_hggm4")
+region_enabled = true
 script = ExtResource("2_k7j1e")
 
 [node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["card"]]
 shape = SubResource("CircleShape2D_271wt")
