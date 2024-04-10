@@ -78,7 +78,7 @@ size = Vector2(64, 19)
 y_sort_enabled = true
 script = ExtResource("1_lqlib")
 player = NodePath("Player")
-doors = [NodePath("Comedor")]
+doors = [NodePath("Upstairs2"), NodePath("Comedor")]
 
 [node name="Base" type="TileMap" parent="."]
 tile_set = ExtResource("2_fbur0")
