@@ -3,6 +3,9 @@
 [ext_resource type="Script" path="res://src/scenes/truco/DialogueBubble/dialogue_bubble_controller.gd" id="1_7hdom"]
 [ext_resource type="PackedScene" uid="uid://cfr15ra2rtx2x" path="res://src/scenes/truco/DialogueBubble/dialogue_bubble.tscn" id="2_lptqi"]
 
+[sub_resource type="Animation" id="Animation_3wlol"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_57fry"]
 resource_name = "fade_out"
 length = 3.0
@@ -18,9 +21,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-
-[sub_resource type="Animation" id="Animation_3wlol"]
-length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p4d0e"]
 _data = {

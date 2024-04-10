@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bhw67fd6dh0n0"]
+[gd_scene load_steps=11 format=3 uid="uid://bhw67fd6dh0n0"]
 
 [ext_resource type="Script" path="res://src/scenes/truco/truco_manager.gd" id="1_rogtf"]
 [ext_resource type="PackedScene" uid="uid://44gpne03ucab" path="res://src/scenes/truco/card.tscn" id="2_p2aov"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://cv2bywsa6irhc" path="res://fonts/Xolonium-Regular.ttf" id="6_ap5yy"]
 [ext_resource type="PackedScene" uid="uid://d1osyi5ag2uxg" path="res://src/scenes/truco/Interface/other_player_cards.tscn" id="6_x3d1k"]
 [ext_resource type="PackedScene" uid="uid://douueoffhqq2a" path="res://src/scenes/truco/DialogueBubble/dialogue_bubble_controller.tscn" id="8_smc8a"]
+[ext_resource type="AudioStream" uid="uid://brvleluoctdlp" path="res://audio/music/truco.mp3" id="9_pmsl7"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yminj"]
 
@@ -90,6 +91,10 @@ offset_left = 487.0
 offset_top = 34.0
 offset_right = 487.0
 offset_bottom = 34.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_pmsl7")
+autoplay = true
 
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
