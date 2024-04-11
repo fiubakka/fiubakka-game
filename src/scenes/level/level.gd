@@ -20,11 +20,11 @@ func _ready() -> void:
 func enter_level() -> void:
 	if data.has("player_equipment"):
 		$Player.set_equipment(data["player_equipment"])
-	#var producer_movement_signal_handler: Callable = (
-	#	get_node("/root/Main/ServerConnection/ServerProducer")._on_player_movement
-	#)
-	#if !player.update_movement.is_connected(producer_movement_signal_handler):
-	#	player.update_movement.connect(producer_movement_signal_handler)
+	var producer_movement_signal_handler: Callable = (
+		get_node("/root/Main/ServerConnection/ServerProducer")._on_player_movement
+	)
+	if !player.update_movement.is_connected(producer_movement_signal_handler):
+		player.update_movement.connect(producer_movement_signal_handler)
 	var gui_show_npc_tip_signal_handler: Callable = (
 		get_node("/root/Main/GUI/GuiManager")._on_npc_tip
 	)
