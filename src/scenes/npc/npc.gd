@@ -39,6 +39,8 @@ func _on_area_2d_body_exited(player: Node2D) -> void:
 		return
 	$Icon.visible = false
 	actionable = false
+	if player.npc == self:
+		player.npc = null
 
 func show_message() -> void:
 	if actionable:

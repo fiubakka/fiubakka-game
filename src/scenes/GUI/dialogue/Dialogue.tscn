@@ -47,3 +47,9 @@ theme_override_constants/shadow_outline_size = 2
 theme_override_fonts/normal_font = ExtResource("2_1543l")
 theme_override_font_sizes/normal_font_size = 30
 text = "Bienvenido a Fiubakka!"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
