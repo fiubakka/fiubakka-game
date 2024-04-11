@@ -501,13 +501,5 @@ texture = ExtResource("3_6vjvj")
 region_enabled = true
 region_rect = Rect2(1200, 192, 48, 48)
 
-[node name="TipMessage" type="RichTextLabel" parent="."]
-visible = false
-offset_left = -67.0
-offset_top = -140.0
-offset_right = 68.0
-offset_bottom = -72.0
-bbcode_enabled = true
-
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
