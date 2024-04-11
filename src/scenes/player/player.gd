@@ -1,8 +1,10 @@
 class_name Player extends CharacterBody2D
 
 signal update_movement(velocity: Vector2, position: Vector2)
+signal show_tip(message: String)
 
 @export var idle: bool = false
+@export var npc: NPC
 var prev_vel := Vector2.ZERO
 var equipment: Equipment
 
@@ -73,6 +75,9 @@ func _physics_process(_delta: float) -> void:
 	if velocity != prev_vel:
 		play_move_animation()
 		prev_vel = velocity
+		
+	if Input.is_action_just_pressed("talk_to_npc") and npc:
+		show_tip.emit(npc.message)
 
 
 func play_move_animation() -> void:

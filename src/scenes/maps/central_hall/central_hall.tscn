@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://dh5kwcipvs4wg"]
+[gd_scene load_steps=28 format=3 uid="uid://dh5kwcipvs4wg"]
 
 [ext_resource type="Script" path="res://src/scenes/level/level.gd" id="1_lqlib"]
 [ext_resource type="PackedScene" uid="uid://b0ckgcsol4ucx" path="res://src/scenes/player/player.tscn" id="1_qea2s"]
 [ext_resource type="TileSet" uid="uid://bl3doteiujli4" path="res://tilesets/classroom.tres" id="2_fbur0"]
 [ext_resource type="PackedScene" uid="uid://dwpwkdnm1106l" path="res://src/scenes/door/door.tscn" id="4_wkeiq"]
+[ext_resource type="PackedScene" uid="uid://u4867656s0ug" path="res://src/scenes/npc/npc.tscn" id="5_l1hrv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n1cgp"]
 size = Vector2(100, 217)
@@ -71,11 +72,10 @@ size = Vector2(902, 21)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lw2ax"]
 size = Vector2(64, 19)
 
-[node name="CentralHall" type="Node2D" node_paths=PackedStringArray("player", "doors")]
+[node name="CentralHall" type="Node2D" node_paths=PackedStringArray("player")]
 y_sort_enabled = true
 script = ExtResource("1_lqlib")
 player = NodePath("Player")
-doors = [NodePath("Upstairs")]
 
 [node name="Base" type="TileMap" parent="."]
 tile_set = ExtResource("2_fbur0")
@@ -253,3 +253,7 @@ position = Vector2(1197, 482)
 position = Vector2(1728, 17)
 scale = Vector2(9, 9)
 path_to_new_scene = "res://src/scenes/maps/main_hall/main_hall.tscn"
+
+[node name="NPC" parent="." instance=ExtResource("5_l1hrv")]
+position = Vector2(1104, 390)
+scale = Vector2(0.5, 0.5)

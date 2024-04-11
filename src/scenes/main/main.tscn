@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bwgonn6l2afs6"]
+[gd_scene load_steps=13 format=3 uid="uid://bwgonn6l2afs6"]
 
 [ext_resource type="Script" path="res://src/scenes/main/main.gd" id="1_kecny"]
 [ext_resource type="PackedScene" uid="uid://b6kg7qutp1h00" path="res://src/scenes/login/login.tscn" id="3_2am71"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dpkjmhxodrn0l" path="res://src/scenes/main_menu/main_menu.tscn" id="9_hsq23"]
 [ext_resource type="PackedScene" uid="uid://bjdyuheqlnwho" path="res://src/scenes/GUI/GUIManager/GuiManager.tscn" id="10_2hml5"]
 [ext_resource type="PackedScene" uid="uid://nqpqnx1lgim3" path="res://src/scenes/game_menu/GameMenu.tscn" id="10_8b4g2"]
+[ext_resource type="PackedScene" uid="uid://ci2j6myp2y3u3" path="res://src/scenes/GUI/dialogue/Dialogue.tscn" id="11_bkedh"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(0, 3)
@@ -70,6 +71,9 @@ offset_left = 2.0
 offset_top = -3.0
 offset_right = 42.0
 offset_bottom = 37.0
+
+[node name="NpcTip" parent="GUI/GuiManager" instance=ExtResource("11_bkedh")]
+layout_mode = 1
 
 [node name="MainMenu" parent="." instance=ExtResource("9_hsq23")]
 offset_left = 1.0
