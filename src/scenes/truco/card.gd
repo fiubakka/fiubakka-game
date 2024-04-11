@@ -12,7 +12,7 @@ var current_rest_point: DropZone = null
 
 func _ready() -> void:
 	pass
-	
+
 
 func set_current_rest_point(dropzone: DropZone) -> void:
 	current_rest_point = dropzone

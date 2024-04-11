@@ -25,6 +25,3 @@ func clean() -> void:
 		remove_child(card)
 		card.queue_free()
 	hand = []
-
-
-

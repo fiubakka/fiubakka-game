@@ -2,24 +2,28 @@ extends Node2D
 
 @export var card_scene: PackedScene
 
-var hand: Hand = null;
-var board: Board = null;
+var hand: Hand = null
+var board: Board = null
 var selected_card: Card = null
 #var next_turn_number := 0
+var deck: Deck = null
 
 
 func _ready() -> void:
 	hand = $Hand
 	board = $Board
+	deck = preload("res://src/scenes/truco/deck/deck.gd").new()
 
 
 func start_round() -> void:
 	clean()
 	for i: int in range(0, 3):
-			var card := card_scene.instantiate()
-			card.get_selected.connect(self._on_card_get_selected)
-			card.get_unselected.connect(self._on_card_get_unselected)
-			hand.add_cards(card)
+		var card := card_scene.instantiate()
+		card.get_selected.connect(self._on_card_get_selected)
+		card.get_unselected.connect(self._on_card_get_unselected)
+		card.texture = deck.deck_file
+		card.region_rect = deck.deal(i, i)
+		hand.add_cards(card)
 	board.next_turn()
 
 

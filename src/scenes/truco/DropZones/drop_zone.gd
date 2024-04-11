@@ -15,4 +15,3 @@ func select(card: Card) -> void:
 
 func deselect() -> void:
 	has_card = false
-

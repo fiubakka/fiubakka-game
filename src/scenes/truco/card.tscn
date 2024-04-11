@@ -13,6 +13,7 @@ size = Vector2(64, 96)
 [node name="Card" type="Sprite2D" groups=["cards"]]
 scale = Vector2(1.5, 1.5)
 texture = SubResource("AtlasTexture_hywjt")
+region_enabled = true
 script = ExtResource("2_k7j1e")
 
 [node name="Area2D" type="Area2D" parent="."]
