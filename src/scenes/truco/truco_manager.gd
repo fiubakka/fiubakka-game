@@ -7,13 +7,14 @@ var board: Board = null
 var selected_card: Card = null
 #var next_turn_number := 0
 var deck: Deck = null
+var opponentController: OpponentController = null
 
 
 func _ready() -> void:
 	hand = $Hand
 	board = $Board
 	deck = preload("res://src/scenes/truco/deck/deck.gd").new()
-
+	opponentController = $OpponentController
 
 func start_round() -> void:
 	clean()
@@ -34,7 +35,7 @@ func next_turn() -> void:
 func clean() -> void:
 	hand.clean()
 	board.clean()
-
+	opponentController.clean()
 
 func _on_card_get_selected(card: Card) -> void:
 	if !selected_card:
@@ -60,6 +61,7 @@ func _on_board_player_card_played(card: Card) -> void:
 	print("Carta jugada!")
 
 
+
 # TODO: REMOVE
 func _on_button_2_pressed() -> void:
 	next_turn()
@@ -73,3 +75,13 @@ func _on_button_3_pressed() -> void:
 # TODO: REMOVE
 func _on_button_4_pressed() -> void:
 	$DialogueBubbleController.show_dialogue("Truco!")
+
+
+func _on_button_5_pressed() -> void:
+	var opponent_controller := $OpponentController
+	opponent_controller.set_hand(0, 0)
+	var drop_zones := get_tree().get_nodes_in_group("opponent_table")
+	for drop_zone: DropZone in get_tree().get_nodes_in_group("opponent_table"):
+		if !drop_zone.has_card:
+			opponent_controller.play_card(drop_zone)
+			break

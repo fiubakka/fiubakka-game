@@ -8,7 +8,7 @@
 [ext_resource type="FontFile" uid="uid://cv2bywsa6irhc" path="res://fonts/Xolonium-Regular.ttf" id="6_ap5yy"]
 [ext_resource type="PackedScene" uid="uid://d1osyi5ag2uxg" path="res://src/scenes/truco/Interface/other_player_cards.tscn" id="6_x3d1k"]
 [ext_resource type="PackedScene" uid="uid://douueoffhqq2a" path="res://src/scenes/truco/DialogueBubble/dialogue_bubble_controller.tscn" id="8_smc8a"]
-[ext_resource type="AudioStream" uid="uid://brvleluoctdlp" path="res://audio/music/truco.mp3" id="9_pmsl7"]
+[ext_resource type="PackedScene" uid="uid://cr4msasw6v4l2" path="res://src/scenes/truco/OpponentController/opponent_controller.tscn" id="9_0spk6"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yminj"]
 
@@ -49,6 +49,14 @@ offset_right = 953.0
 offset_bottom = 273.0
 text = "Debug: opponent
 say Truco!"
+
+[node name="Button5" type="Button" parent="."]
+offset_left = 810.0
+offset_top = 280.0
+offset_right = 952.0
+offset_bottom = 334.0
+text = "Debug: opponent
+play card"
 
 [node name="Hand" parent="." instance=ExtResource("4_ri81m")]
 anchors_preset = 0
@@ -92,11 +100,11 @@ offset_top = 34.0
 offset_right = 487.0
 offset_bottom = 34.0
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_pmsl7")
-autoplay = true
+[node name="OpponentController" parent="." instance=ExtResource("9_0spk6")]
+position = Vector2(137, 103)
 
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="Button5" to="." method="_on_button_5_pressed"]
