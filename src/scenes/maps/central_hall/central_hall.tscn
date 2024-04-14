@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dh5kwcipvs4wg"]
+[gd_scene load_steps=29 format=3 uid="uid://dh5kwcipvs4wg"]
 
 [ext_resource type="Script" path="res://src/scenes/level/level.gd" id="1_lqlib"]
 [ext_resource type="PackedScene" uid="uid://b0ckgcsol4ucx" path="res://src/scenes/player/player.tscn" id="1_qea2s"]
@@ -75,7 +75,7 @@ size = Vector2(902, 21)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lw2ax"]
 size = Vector2(64, 19)
 
-[node name="CentralHall" type="Node2D" node_paths=PackedStringArray("player")]
+[node name="CentralHall" type="Node2D" node_paths=PackedStringArray("player", "doors")]
 y_sort_enabled = true
 script = ExtResource("1_lqlib")
 player = NodePath("Player")
@@ -260,11 +260,12 @@ position = Vector2(1728, 152)
 [node name="NPC" parent="." instance=ExtResource("5_l1hrv")]
 position = Vector2(651, 367)
 scale = Vector2(0.5, 0.5)
+message = "NPC_WELCOME_1"
 
 [node name="NPC2" parent="." instance=ExtResource("5_l1hrv")]
 position = Vector2(785, 364)
 scale = Vector2(0.5, 0.5)
-message = "Podes tomar las escaleras o bajar al comedor"
+message = "NPC_WELCOME_2"
 hair = 2
 hat = 2
 eyes = 2

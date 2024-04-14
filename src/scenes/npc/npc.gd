@@ -16,7 +16,6 @@ class_name NPC extends Node2D
 var _cs := CompositeSprites
 
 func _ready() -> void:
-	$TipMessage.text = message
 	$NpcSprite/Body.texture = _cs.body_spritesheet[body]
 	$NpcSprite/Hair.texture = _cs.hair_spritesheet[hair]
 	$NpcSprite/Hats.texture = _cs.hats_spritesheet[hat]
@@ -42,7 +41,3 @@ func _on_area_2d_body_exited(player: Node2D) -> void:
 	if player.npc == self:
 		player.npc = null
 
-func show_message() -> void:
-	if actionable:
-		$Icon.visible = false
-		$TipMessage.visible = true
