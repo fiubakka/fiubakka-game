@@ -232,6 +232,7 @@ layer_0/tile_data = PackedInt32Array(-131073, 1179654, 19, -196608, 1179654, 19,
 position = Vector2(109, 602)
 scale = Vector2(0.5, 0.5)
 message = "NPC_KIOSK"
+facing = 3
 hair = 2
 hat = 2
 eyes = 2
@@ -244,3 +245,4 @@ position = Vector2(-2, -86)
 scale = Vector2(1.5, 2)
 
 [editable path="NPC"]
+[editable path="NPC/NpcSprite"]

@@ -1,7 +1,15 @@
 class_name NPC extends Node2D
 
+enum Facing {
+	FRONT,
+	LEFT,
+	RIGHT,
+	BACK
+}
+
 @export var actionable: bool = false
 @export var message: String
+@export var facing: Facing = Facing.FRONT
 
 @export var body: int
 @export var hair: int
@@ -24,6 +32,16 @@ func _ready() -> void:
 	$NpcSprite/FacialHair.texture = _cs.facial_hair_spritesheet[facial_hair]
 	$NpcSprite/Glasses.texture = _cs.glasses_spritesheet[glasses]
 
+
+func _physics_process(delta: float) -> void:
+	if facing == Facing.FRONT:
+		$AnimationPlayer.play('front')
+	if facing == Facing.LEFT:
+		$AnimationPlayer.play('left')
+	if facing == Facing.BACK:
+		$AnimationPlayer.play('back')
+	if facing == Facing.RIGHT:
+		$AnimationPlayer.play('right')
 
 func _on_area_2d_body_entered(player: Node2D) -> void:
 	if not player is Player:
