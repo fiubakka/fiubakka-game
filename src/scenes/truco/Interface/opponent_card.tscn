@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bm21taqs8t7lg"]
+[gd_scene load_steps=3 format=3 uid="uid://bm21taqs8t7lg"]
 
-[ext_resource type="Texture2D" uid="uid://xcc7nhh2584b" path="res://src/scenes/truco/card_back.png" id="1_ed43k"]
+[ext_resource type="Texture2D" uid="uid://7di06f6858md" path="res://art/cards/naipes.png" id="1_daery"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmtg8"]
+atlas = ExtResource("1_daery")
+region = Rect2(944, 128, 64, 96)
 
 [node name="OpponentCard" type="Sprite2D"]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_ed43k")
+scale = Vector2(0.6, 0.6)
+texture = SubResource("AtlasTexture_qmtg8")

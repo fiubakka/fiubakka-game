@@ -7,6 +7,7 @@ var board: Board = null
 var selected_card: Card = null
 var deck: Deck = null
 var opponent_controller: OpponentController = null
+var opponent_hand: OpponentCards = null
 
 
 func _ready() -> void:
@@ -14,6 +15,7 @@ func _ready() -> void:
 	board = $Board
 	deck = preload("res://src/scenes/truco/deck/deck.gd").new()
 	opponent_controller = $OpponentController
+	opponent_hand = $OpponentHand
 
 func start_round() -> void:
 	clean()
@@ -37,6 +39,7 @@ func clean() -> void:
 	hand.clean()
 	board.clean()
 	opponent_controller.clean()
+	opponent_hand.clean()
 
 func _on_card_get_selected(card: Card) -> void:
 	if !selected_card:
@@ -61,6 +64,9 @@ func _on_board_player_card_played(card: Card) -> void:
 	card.played = true
 	print("Carta jugada!")
 
+
+func _on_opponent_controller_remove_card_from_hand() -> void:
+	opponent_hand.play_card()
 
 
 # TODO: REMOVE
@@ -94,3 +100,5 @@ func _on_button_6_pressed() -> void:
 # TODO: REMOVE
 func _on_button_7_pressed() -> void:
 	$Board.player_wins(false)
+
+

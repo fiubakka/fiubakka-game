@@ -9,6 +9,8 @@ var drop_zone: DropZone = null
 var card: Card = null
 var opponent_hand: DropZone = null
 
+signal remove_card_from_hand
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	deck = preload("res://src/scenes/truco/deck/deck.gd").new()
@@ -33,6 +35,7 @@ func play_card(_drop_zone: DropZone) -> void:
 	drop_zone = _drop_zone
 	drop_zone.select(card)
 	card.set_current_rest_point(drop_zone)
+	remove_card_from_hand.emit()
 
 func next_turn() -> void:
 	card = null

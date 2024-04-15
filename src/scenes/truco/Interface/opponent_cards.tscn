@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1osyi5ag2uxg"]
+[gd_scene load_steps=3 format=3 uid="uid://d1osyi5ag2uxg"]
 
 [ext_resource type="PackedScene" uid="uid://bm21taqs8t7lg" path="res://src/scenes/truco/Interface/opponent_card.tscn" id="1_b6jvs"]
+[ext_resource type="Script" path="res://src/scenes/truco/Interface/opponent_cards.gd" id="1_pr4fs"]
 
 [node name="OpponentCards" type="HBoxContainer"]
 custom_minimum_size = Vector2(0, 80)
@@ -8,6 +9,7 @@ offset_right = 86.0
 offset_bottom = 80.0
 size_flags_horizontal = 4
 alignment = 2
+script = ExtResource("1_pr4fs")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 custom_minimum_size = Vector2(20, 0)
