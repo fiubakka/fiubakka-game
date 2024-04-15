@@ -187,7 +187,7 @@ position = Vector2(1784, 430)
 shape = SubResource("RectangleShape2D_3shjr")
 
 [node name="Player" parent="." instance=ExtResource("1_qea2s")]
-position = Vector2(696, 240)
+position = Vector2(1130, 755)
 
 [node name="ToRoom200" parent="." instance=ExtResource("4_wkeiq")]
 position = Vector2(1126, 841)
