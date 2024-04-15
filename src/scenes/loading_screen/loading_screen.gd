@@ -42,7 +42,8 @@ func update_bar(val: float) -> void:
 
 func _on_timer_timeout() -> void:
 	progress_bar.visible = true
-	
+
+
 func loading_level_message() -> void:
 	timer.start()
 	loading_message.text = Utils.center_text(tr("LOADING_LEVEL"))
