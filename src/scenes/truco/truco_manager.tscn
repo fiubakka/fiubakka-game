@@ -101,7 +101,7 @@ offset_right = 487.0
 offset_bottom = 34.0
 
 [node name="OpponentController" parent="." instance=ExtResource("9_0spk6")]
-position = Vector2(137, 103)
+position = Vector2(487, -79)
 
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

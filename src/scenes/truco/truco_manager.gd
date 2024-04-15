@@ -7,14 +7,14 @@ var board: Board = null
 var selected_card: Card = null
 #var next_turn_number := 0
 var deck: Deck = null
-var opponentController: OpponentController = null
+var opponent_controller: OpponentController = null
 
 
 func _ready() -> void:
 	hand = $Hand
 	board = $Board
 	deck = preload("res://src/scenes/truco/deck/deck.gd").new()
-	opponentController = $OpponentController
+	opponent_controller = $OpponentController
 
 func start_round() -> void:
 	clean()
@@ -26,16 +26,18 @@ func start_round() -> void:
 		card.region_rect = deck.deal(i, i)
 		hand.add_cards(card)
 	board.next_turn()
+	opponent_controller.next_turn()
 
 
 func next_turn() -> void:
 	board.next_turn()
+	opponent_controller.next_turn()
 
 
 func clean() -> void:
 	hand.clean()
 	board.clean()
-	opponentController.clean()
+	opponent_controller.clean()
 
 func _on_card_get_selected(card: Card) -> void:
 	if !selected_card:
@@ -78,8 +80,7 @@ func _on_button_4_pressed() -> void:
 
 
 func _on_button_5_pressed() -> void:
-	var opponent_controller := $OpponentController
-	opponent_controller.set_hand(0, 0)
+	#opponent_controller.set_hand(0, 0)
 	var drop_zones := get_tree().get_nodes_in_group("opponent_table")
 	for drop_zone: DropZone in get_tree().get_nodes_in_group("opponent_table"):
 		if !drop_zone.has_card:

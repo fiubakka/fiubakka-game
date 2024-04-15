@@ -7,21 +7,21 @@ class_name OpponentController
 var deck: Deck = null
 var drop_zone: DropZone = null
 var card: Card = null
+var opponent_hand: DropZone = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	deck = preload("res://src/scenes/truco/deck/deck.gd").new()
+	opponent_hand = $OpponentHand
 
-
-func _physics_process(delta: float) -> void:
-	if drop_zone:
-		card.global_position = lerp(card.global_position, 
-			drop_zone.global_position, 10 * delta)
+#func _physics_process(delta: float) -> void:
+	#if drop_zone:
+		#card.global_position = lerp(card.global_position, 
+			#drop_zone.global_position, 10 * delta)
 
 
 func set_hand(rank: int, suit: int) -> void:
 	card = card_scene.instantiate()
-	var opponent_hand := $OpponentHand
 	card.texture = deck.deck_file
 	card.region_rect = deck.deal(rank, suit)
 	card.set_current_rest_point(opponent_hand)
@@ -32,6 +32,18 @@ func set_hand(rank: int, suit: int) -> void:
 func play_card(_drop_zone: DropZone) -> void:
 	drop_zone = _drop_zone
 	drop_zone.select(card)
+	card.set_current_rest_point(drop_zone)
+
+func next_turn() -> void:
+	card = null
+	drop_zone = null
+	opponent_hand.deselect()
+	set_hand(0, 0)
+	#var drop_zones := get_tree().get_nodes_in_group("opponent_table")
+	#for zone: DropZone in get_tree().get_nodes_in_group("opponent_table"):
+		#if !zone.has_card:
+			#play_card(zone)
+			#break
 
 
 func clean() -> void:

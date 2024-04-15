@@ -7,6 +7,10 @@ var has_card := false
 signal player_card_played(card: Card)
 
 
+#func _draw() -> void:
+	#draw_circle(Vector2.ZERO, 75, Color.BLANCHED_ALMOND)
+
+
 func select(card: Card) -> void:
 	has_card = true
 	if self in get_tree().get_nodes_in_group("table"):
