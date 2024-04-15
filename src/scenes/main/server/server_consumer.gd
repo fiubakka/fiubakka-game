@@ -12,6 +12,9 @@ const PBGameEntityState = (
 const PBPlayerInitSuccess = (
 	preload("res://addons/protocol/compiled/server/init/player_init.gd").PBPlayerInitSuccess
 )
+const PBPlayerInitError = (
+	preload("res://addons/protocol/compiled/server/init/player_init.gd").PBPlayerInitError
+)
 
 const PBPlayerMessage = (
 	preload("res://addons/protocol/compiled/server/chat/message.gd").PBPlayerMessage
@@ -57,6 +60,8 @@ func _handle_message(message: Object) -> void:
 		handler = "_handle_game_entity_state"
 	elif message is PBPlayerInitSuccess:
 		handler = "_handle_player_init_ready"
+	elif message is PBPlayerInitError:
+		handler = "_handle_player_init_failure"
 	elif message is PBPlayerMessage:
 		handler = "_handle_player_message"
 	elif message is PBPlayerChangeMapReady:
@@ -65,6 +70,10 @@ func _handle_message(message: Object) -> void:
 		handler = "_handle_game_entity_disconnect"
 
 	call_deferred(handler, message)
+
+
+func _handle_player_init_failure(msg: PBPlayerInitError) -> void:
+	print("Error CODE: ", msg.get_error_code())
 
 
 func _handle_player_init_ready(msg: PBPlayerInitSuccess) -> void:

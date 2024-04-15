@@ -12,6 +12,9 @@ const PBPlayerMessage = (
 const PBPlayerInitSuccess = (
 	preload("res://addons/protocol/compiled/server/init/player_init.gd").PBPlayerInitSuccess
 )
+const PBPlayerInitError = (
+	preload("res://addons/protocol/compiled/server/init/player_init.gd").PBPlayerInitError
+)
 const PBPlayerChangeMapReady = (
 	preload("res://addons/protocol/compiled/server/map/change_map_ready.gd").PBPlayerChangeMapReady
 )
@@ -24,6 +27,7 @@ static var _MESSAGE_MAP := {
 	PBServerMessageType.PBGameEntityState: PBGameEntityState,
 	PBServerMessageType.PBPlayerMessage: PBPlayerMessage,
 	PBServerMessageType.PBPlayerInitSuccess: PBPlayerInitSuccess,
+	PBServerMessageType.PBPlayerInitError: PBPlayerInitError,
 	PBServerMessageType.PBPlayerChangeMapReady: PBPlayerChangeMapReady,
 	PBServerMessageType.PBGameEntityDisconnect: PBGameEntityDisconnect,
 }
