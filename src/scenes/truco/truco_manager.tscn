@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b8ea56gusfb6g" path="res://src/scenes/truco/hand.tscn" id="4_ri81m"]
 [ext_resource type="PackedScene" uid="uid://dgbtyukekq1cs" path="res://src/scenes/truco/Interface/options.tscn" id="5_wx3mx"]
 [ext_resource type="FontFile" uid="uid://cv2bywsa6irhc" path="res://fonts/Xolonium-Regular.ttf" id="6_ap5yy"]
-[ext_resource type="PackedScene" uid="uid://d1osyi5ag2uxg" path="res://src/scenes/truco/Interface/other_player_cards.tscn" id="6_x3d1k"]
+[ext_resource type="PackedScene" uid="uid://d1osyi5ag2uxg" path="res://src/scenes/truco/Interface/opponent_cards.tscn" id="6_x3d1k"]
 [ext_resource type="PackedScene" uid="uid://douueoffhqq2a" path="res://src/scenes/truco/DialogueBubble/dialogue_bubble_controller.tscn" id="8_smc8a"]
 [ext_resource type="PackedScene" uid="uid://cr4msasw6v4l2" path="res://src/scenes/truco/OpponentController/opponent_controller.tscn" id="9_0spk6"]
 
