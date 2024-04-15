@@ -5,7 +5,6 @@ extends Node2D
 var hand: Hand = null
 var board: Board = null
 var selected_card: Card = null
-#var next_turn_number := 0
 var deck: Deck = null
 var opponent_controller: OpponentController = null
 
@@ -79,10 +78,19 @@ func _on_button_4_pressed() -> void:
 	$DialogueBubbleController.show_dialogue("Truco!")
 
 
+# TODO: REMOVE
 func _on_button_5_pressed() -> void:
-	#opponent_controller.set_hand(0, 0)
 	var drop_zones := get_tree().get_nodes_in_group("opponent_table")
 	for drop_zone: DropZone in get_tree().get_nodes_in_group("opponent_table"):
 		if !drop_zone.has_card:
 			opponent_controller.play_card(drop_zone)
 			break
+
+# TODO: REMOVE
+func _on_button_6_pressed() -> void:
+	$Board.player_wins(true)
+	
+
+# TODO: REMOVE
+func _on_button_7_pressed() -> void:
+	$Board.player_wins(false)

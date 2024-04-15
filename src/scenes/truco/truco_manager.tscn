@@ -24,9 +24,9 @@ texture = SubResource("CanvasTexture_yminj")
 
 [node name="Board" parent="." instance=ExtResource("3_elw7y")]
 offset_left = 500.0
-offset_top = 180.0
+offset_top = 200.0
 offset_right = 500.0
-offset_bottom = 180.0
+offset_bottom = 200.0
 
 [node name="Button2" type="Button" parent="."]
 offset_left = 813.0
@@ -57,6 +57,20 @@ offset_right = 952.0
 offset_bottom = 334.0
 text = "Debug: opponent
 play card"
+
+[node name="Button6" type="Button" parent="."]
+offset_left = 820.0
+offset_top = 340.0
+offset_right = 916.0
+offset_bottom = 371.0
+text = "Player wins"
+
+[node name="Button7" type="Button" parent="."]
+offset_left = 820.0
+offset_top = 380.0
+offset_right = 946.0
+offset_bottom = 411.0
+text = "Opponent wins"
 
 [node name="Hand" parent="." instance=ExtResource("4_ri81m")]
 anchors_preset = 0
@@ -108,3 +122,5 @@ position = Vector2(487, -79)
 [connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="Button4" to="." method="_on_button_4_pressed"]
 [connection signal="pressed" from="Button5" to="." method="_on_button_5_pressed"]
+[connection signal="pressed" from="Button6" to="." method="_on_button_6_pressed"]
+[connection signal="pressed" from="Button7" to="." method="_on_button_7_pressed"]
