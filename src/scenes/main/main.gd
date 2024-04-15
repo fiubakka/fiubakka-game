@@ -10,10 +10,6 @@ const MILISECONDS_UNTIL_DISCONNECT = 15000
 var is_game_paused: bool = false
 
 signal login_ready
-signal chat_opened
-signal chat_closed
-signal paused
-signal unpaused
 signal ui_opened(open: bool)
 
 
@@ -49,8 +45,7 @@ func _on_server_consumer_user_init_ready(
 
 
 func _on_pause_unpaused() -> void:
-	is_game_paused = false
-	unpaused.emit()
+	$GUI/GuiManager.handle_pause_open()
 
 
 func _on_register_save_character() -> void:
