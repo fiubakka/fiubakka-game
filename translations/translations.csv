@@ -2,6 +2,7 @@ keys,es,en
 LOGIN,Login,Login
 REGISTER,Registrar,Register
 USER_PLACEHOLDER,"Usuario...","Username..."
+PASSWORD_PLACEHOLDER,"Contraseña...","Password..."
 CHAR_CREATION_TITLE,Cree su personaje,Create your character
 HATS,Sombreros,Hats
 HAIR,Cabello,Hair
