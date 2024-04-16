@@ -6,4 +6,4 @@ func _ready() -> void:
 	text = $RichTextLabel
 
 func set_text(_text: String) -> void:
-	text.set_text("[center]" + _text + "[/center]")
+	text.set_text(Utils.center_text(_text))
