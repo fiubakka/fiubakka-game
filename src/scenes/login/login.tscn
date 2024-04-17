@@ -139,7 +139,7 @@ offset_bottom = 80.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_ktkbl")
-volume_db = -5.0
+volume_db = -63.003
 autoplay = true
 
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_text_changed"]

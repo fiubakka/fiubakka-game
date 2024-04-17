@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://dbuu8vw25y34b"]
+[gd_scene load_steps=14 format=3 uid="uid://dbuu8vw25y34b"]
 
 [ext_resource type="Script" path="res://src/scenes/level/level.gd" id="1_cla88"]
 [ext_resource type="TileSet" uid="uid://bl3doteiujli4" path="res://tilesets/classroom.tres" id="2_y0scn"]
 [ext_resource type="PackedScene" uid="uid://b0ckgcsol4ucx" path="res://src/scenes/player/player.tscn" id="3_jvm7e"]
 [ext_resource type="PackedScene" uid="uid://dwpwkdnm1106l" path="res://src/scenes/door/door.tscn" id="4_pvp43"]
+[ext_resource type="PackedScene" uid="uid://u4867656s0ug" path="res://src/scenes/npc/npc.tscn" id="5_0nskk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wdqbm"]
 size = Vector2(48.5, 324)
@@ -226,3 +227,22 @@ scale = Vector2(0.75, 0.75)
 tile_set = ExtResource("2_y0scn")
 format = 2
 layer_0/tile_data = PackedInt32Array(-131073, 1179654, 19, -196608, 1179654, 19, -65537, 1179654, 20, -1, 1179654, 20, 65535, 1179654, 20, 131071, 1179654, 20, 196607, 1179654, 20, -131072, 1179654, 20, -65536, 1179654, 20, 0, 1179654, 20, 65536, 1179654, 20, 131072, 1179654, 20, 262143, 1179654, 22, 196608, 1179654, 22, 262142, 1048582, 22, -131074, 1048582, 19, -65538, 1048582, 20, -2, 1048582, 20, 65534, 1048582, 20, 131070, 1048582, 20, 196606, 1048582, 20, -131071, 1441798, 20, -196607, 1441798, 19, -65535, 1441798, 20, 1, 1441798, 20, 65537, 1441798, 20, 131073, 1441798, 20, 196609, 1441798, 22, 262145, 1441798, 23, 327678, 1048582, 23, 327679, 1114118, 23, 262144, 1376262, 23, -131070, 196614, 53, -65534, 196614, 54, 2, 196614, 55, -131069, 262150, 53, -65533, 262150, 54, 3, 262150, 55, -131068, 327686, 53, -65532, 327686, 54, 4, 327686, 55, 65538, 196614, 53, 131074, 196614, 54, 196610, 196614, 55, 65539, 262150, 53, 131075, 262150, 54, 196611, 262150, 55, 65540, 327686, 53, 131076, 327686, 54, 196612, 327686, 55, 131067, 196614, 53, 196603, 196614, 54, 262139, 196614, 55, 131068, 262150, 53, 196604, 262150, 54, 262140, 262150, 55, 131069, 327686, 53, 196605, 327686, 54, 262141, 327686, 55, -65541, 196614, 53, -5, 196614, 54, 65531, 196614, 55, -65540, 262150, 53, -4, 262150, 54, 65532, 262150, 55, -65539, 327686, 53, -3, 327686, 54, 65533, 327686, 55)
+
+[node name="NPC" parent="." instance=ExtResource("5_0nskk")]
+position = Vector2(109, 602)
+scale = Vector2(0.5, 0.5)
+message = "NPC_KIOSK"
+facing = 3
+hair = 2
+hat = 2
+eyes = 2
+outfit = 2
+facial_hair = 2
+glasses = 2
+
+[node name="CollisionShape2D" parent="NPC/Area2D" index="0"]
+position = Vector2(-2, -86)
+scale = Vector2(1.5, 2)
+
+[editable path="NPC"]
+[editable path="NPC/NpcSprite"]

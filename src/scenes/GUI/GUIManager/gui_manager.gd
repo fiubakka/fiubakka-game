@@ -8,6 +8,7 @@ var chat_focus: bool = false
 var chat: Control
 var menu: Control
 var pause: Control
+var npc_tip: Control
 
 
 func _ready() -> void:
@@ -15,6 +16,7 @@ func _ready() -> void:
 	chat = $Chatbox
 	menu = $GameMenu
 	pause = $Pause
+	npc_tip = $NpcTip
 
 
 func _process(delta: float) -> void:
@@ -48,3 +50,6 @@ func handle_pause_open() -> void:
 
 func _on_chatbox_is_focused(focus: bool) -> void:
 	chat_focus = focus
+
+func _on_npc_tip(message: String) -> void:
+	npc_tip.show_tip(message)

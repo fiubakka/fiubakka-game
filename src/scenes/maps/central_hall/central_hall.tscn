@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dh5kwcipvs4wg"]
+[gd_scene load_steps=29 format=3 uid="uid://dh5kwcipvs4wg"]
 
 [ext_resource type="Script" path="res://src/scenes/level/level.gd" id="1_lqlib"]
 [ext_resource type="PackedScene" uid="uid://b0ckgcsol4ucx" path="res://src/scenes/player/player.tscn" id="1_qea2s"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://duca83vgkgi61" path="res://src/scenes/maps/central_hall/railings.tscn" id="3_aefde"]
 [ext_resource type="PackedScene" uid="uid://bkr6lq4yo0vgk" path="res://src/scenes/maps/central_hall/bicicletero.tscn" id="3_bvufc"]
 [ext_resource type="PackedScene" uid="uid://dwpwkdnm1106l" path="res://src/scenes/door/door.tscn" id="4_wkeiq"]
+[ext_resource type="PackedScene" uid="uid://u4867656s0ug" path="res://src/scenes/npc/npc.tscn" id="5_l1hrv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_slcuv"]
 size = Vector2(38, 253)
@@ -289,6 +290,22 @@ position = Vector2(1394, 1618)
 
 [node name="Player" parent="." instance=ExtResource("1_qea2s")]
 position = Vector2(1497, 1356)
+
+[node name="NPC" parent="." instance=ExtResource("5_l1hrv")]
+position = Vector2(651, 367)
+scale = Vector2(0.5, 0.5)
+message = "NPC_WELCOME_1"
+
+[node name="NPC2" parent="." instance=ExtResource("5_l1hrv")]
+position = Vector2(785, 364)
+scale = Vector2(0.5, 0.5)
+message = "NPC_WELCOME_2"
+hair = 2
+hat = 2
+eyes = 2
+outfit = 2
+facial_hair = 2
+glasses = 2
 
 [node name="Upstairs2" parent="." instance=ExtResource("4_wkeiq")]
 position = Vector2(1728, 17)

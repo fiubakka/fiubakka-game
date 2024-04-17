@@ -17,3 +17,6 @@ CHAT_PLACEHOLDER,"Diga algo...","Say something..."
 CHAT_SEND,Enviar,Send
 LOADING_SERVER,"Esperando servidor...","Waiting for server..."
 LOADING_LEVEL,"Cargando nivel...","Loading level..."
+NPC_WELCOME_1,"¡Bienvenido a Fiubakka!","Welcome to Fiubakka!"
+NPC_WELCOME_2,"Podes tomar las escaleras o bajar al comedor","You can go uptairs or downstairs"
+NPC_KIOSK,"Bienvenido al Comedor. ¿En qué te puedo ayudar?","Weclome to the Kiosk. How can I help you?"
