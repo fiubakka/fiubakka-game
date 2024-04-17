@@ -4,7 +4,7 @@ var timer: Timer
 
 signal save_character
 signal return_to_menu
-signal user_logged_in(username: String, equipment: Equipment)
+signal user_logged_in(username: String, password: String, equipment: Equipment)
 
 
 func _ready() -> void:
@@ -40,7 +40,7 @@ func _on_timer_timeout(username: String) -> void:
 		customization.outfit
 	)
 	save_character.emit()  #TODO: Esto creo que se puede borrar
-	user_logged_in.emit(username, equipment)
+	user_logged_in.emit(username, "password", equipment)
 
 
 func _on_return_return_to_menu() -> void:

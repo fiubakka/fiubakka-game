@@ -48,7 +48,7 @@ func _on_player_movement(velocity: Vector2, position: Vector2) -> void:
 	_producer.send(player_movement)
 
 
-func _on_user_logged_in(username: String, equipment: Equipment) -> void:
+func _on_user_logged_in(username: String, password: String, equipment: Equipment) -> void:
 	if equipment:
 		var player_register := PBPlayerRegister.new()
 		player_register.set_username(username)
@@ -65,7 +65,7 @@ func _on_user_logged_in(username: String, equipment: Equipment) -> void:
 	else:
 		var player_login := PBPlayerLogin.new()
 		player_login.set_username(username)
-		player_login.set_password("password")
+		player_login.set_password(password)
 		_producer.send(player_login)
 
 
