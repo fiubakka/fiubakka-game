@@ -126,6 +126,7 @@ func _on_button_pressed() -> void:
 				newEquipment.set_hair(selected_item_id if can_equip else 0)
 	handle_equip_button_text()
 	player.set_equipment(newEquipment)
+	PlayerInfo.player_customization = PlayerInfo.from_equipment(newEquipment)
 	update_equipment.emit(newEquipment)
 
 
