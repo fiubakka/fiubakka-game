@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5n5u1w3qh0ct"]
+
+[ext_resource type="Script" path="res://src/scenes/truco/Points/points.gd" id="1_b8un5"]
+[ext_resource type="PackedScene" uid="uid://c6g4t2nxvvfih" path="res://src/scenes/truco/Points/matches.tscn" id="2_3f5nk"]
+
+[node name="Points" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b8un5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 242.0
+offset_bottom = 37.0
+
+[node name="Panel" type="Panel" parent="HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(37, 37)
+layout_mode = 2
+
+[node name="Matches" parent="HBoxContainer/Panel" instance=ExtResource("2_3f5nk")]
+
+[node name="Panel2" type="Panel" parent="HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(37, 37)
+layout_mode = 2
+
+[node name="Matches" parent="HBoxContainer/Panel2" instance=ExtResource("2_3f5nk")]
+
+[node name="Panel3" type="Panel" parent="HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(37, 37)
+layout_mode = 2
+
+[node name="Matches" parent="HBoxContainer/Panel3" instance=ExtResource("2_3f5nk")]
+
+[node name="Panel4" type="Panel" parent="HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(37, 37)
+layout_mode = 2
+
+[node name="Matches" parent="HBoxContainer/Panel4" instance=ExtResource("2_3f5nk")]
+
+[node name="Panel5" type="Panel" parent="HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(37, 37)
+layout_mode = 2
+
+[node name="Matches" parent="HBoxContainer/Panel5" instance=ExtResource("2_3f5nk")]
+
+[node name="Panel6" type="Panel" parent="HBoxContainer"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(37, 37)
+layout_mode = 2
+
+[node name="Matches" parent="HBoxContainer/Panel6" instance=ExtResource("2_3f5nk")]
