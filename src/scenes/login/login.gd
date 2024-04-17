@@ -18,12 +18,16 @@ func _on_login_username_text_submitted(username: String) -> void:
 
 
 func _on_button_pressed() -> void:
+	$NinePatchRect/VBoxContainer/Username/UsernameErrorText.visible = false
+	$NinePatchRect/VBoxContainer/Password/PasswordErrorText.visible = false
 	var username: String = $NinePatchRect/VBoxContainer/Username/LoginUsername.text
 	if username.is_empty():
+		$NinePatchRect/VBoxContainer/Username/UsernameErrorText.visible = true
 		return
 
 	var password: String = $NinePatchRect/VBoxContainer/Password/LoginPassword.text
 	if password.is_empty():
+		$NinePatchRect/VBoxContainer/Password/PasswordErrorText.visible = true
 		return
 
 	#TODO: Show error if there is no username or password
