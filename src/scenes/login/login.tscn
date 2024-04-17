@@ -274,5 +274,6 @@ autoplay = true
 
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_text_changed"]
 [connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="." method="_on_login_username_text_submitted"]
+[connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Password/LoginPassword" to="." method="_on_login_password_text_submitted"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/LoginButtonBorder/LoginButton" to="." method="_on_button_pressed"]
 [connection signal="return_to_menu" from="Return" to="." method="_on_return_return_to_menu"]

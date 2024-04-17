@@ -74,6 +74,7 @@ func _handle_message(message: Object) -> void:
 
 func _handle_player_init_failure(msg: PBPlayerInitError) -> void:
 	print("Error CODE: ", msg.get_error_code())
+	#TODO: Show error on login screen
 
 
 func _handle_player_init_ready(msg: PBPlayerInitSuccess) -> void:

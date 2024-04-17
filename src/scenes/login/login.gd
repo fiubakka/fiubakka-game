@@ -7,14 +7,11 @@ signal return_to_menu
 
 
 func _on_login_username_text_submitted(username: String) -> void:
-	#TODO: Apply same behavior when clicking button or pressing Enter
-	if username.is_empty():
-		return
-	timer = Timer.new()  #This timer is to send the init message until we get a response from the server
-	timer.timeout.connect(Callable(self, "_on_timer_timeout").bind(username))
-	add_child(timer)
-	timer.start()
-	timer.set_wait_time(2.0)
+	self._on_button_pressed()
+
+
+func _on_login_password_text_submitted(password: String) -> void:
+	self._on_button_pressed()
 
 
 func _on_button_pressed() -> void:
@@ -29,8 +26,6 @@ func _on_button_pressed() -> void:
 	if password.is_empty():
 		$NinePatchRect/VBoxContainer/Password/PasswordErrorText.visible = true
 		return
-
-	#TODO: Show error if there is no username or password
 
 	timer = Timer.new()  # Timer to send init message until we get a response
 	timer.timeout.connect(Callable(self, "_on_timer_timeout").bind(username, password))
