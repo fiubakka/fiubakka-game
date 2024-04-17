@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkr6lq4yo0vgk"]
+
+[ext_resource type="TileSet" uid="uid://bl3doteiujli4" path="res://tilesets/classroom.tres" id="1_1nxbx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5w0vw"]
+size = Vector2(100, 14)
+
+[node name="Bicicletero" type="Node2D"]
+metadata/_edit_group_ = true
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(0, 6)
+tile_set = ExtResource("1_1nxbx")
+format = 2
+layer_0/tile_data = PackedInt32Array(-3, 393222, 189, 65533, 393222, 190, -2, 458758, 189, -1, 524294, 189, -65536, 589830, 189, -65535, 655366, 189, -65534, 720902, 189, 2, 720902, 190)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_5w0vw")
