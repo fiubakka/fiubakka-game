@@ -4,6 +4,7 @@ const MAPS_LIST := [
 	"res://src/scenes/maps/main_hall/main_hall.tscn",
 	"res://src/scenes/maps/room_200/room_200.tscn",
 	"res://src/scenes/maps/central_hall/central_hall.tscn",
+	"res://src/scenes/maps/comedor/comedor.tscn"
 ]
 
 

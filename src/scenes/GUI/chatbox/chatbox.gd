@@ -29,6 +29,7 @@ func _process(_delta: float) -> void:
 
 
 func focus_chat() -> void:
+	#TODO: A pesar de estar focuseado el player se mueve al tocar wasd
 	$LineEdit.grab_focus()
 
 
