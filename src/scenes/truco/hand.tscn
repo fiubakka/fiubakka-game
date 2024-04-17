@@ -21,38 +21,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 70
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(50, 70)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Control" type="Control" parent="HBoxContainer/CenterContainer"]
+[node name="Control" type="Control" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="DropZone" parent="HBoxContainer/CenterContainer/Control" groups=["hand"] instance=ExtResource("1_uy3bu")]
+[node name="DropZone" parent="HBoxContainer/Control" groups=["hand"] instance=ExtResource("1_uy3bu")]
 
-[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(50, 70)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Control" type="Control" parent="HBoxContainer/CenterContainer2"]
+[node name="Control2" type="Control" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="DropZone" parent="HBoxContainer/CenterContainer2/Control" groups=["hand"] instance=ExtResource("1_uy3bu")]
+[node name="DropZone" parent="HBoxContainer/Control2" groups=["hand"] instance=ExtResource("1_uy3bu")]
 
-[node name="CenterContainer3" type="CenterContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(50, 70)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="Control" type="Control" parent="HBoxContainer/CenterContainer3"]
+[node name="Control3" type="Control" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="DropZone" parent="HBoxContainer/CenterContainer3/Control" groups=["hand"] instance=ExtResource("1_uy3bu")]
+[node name="DropZone" parent="HBoxContainer/Control3" groups=["hand"] instance=ExtResource("1_uy3bu")]

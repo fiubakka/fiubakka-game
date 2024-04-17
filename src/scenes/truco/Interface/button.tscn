@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://kpbsuln7x2le"]
+[gd_scene load_steps=8 format=3 uid="uid://kpbsuln7x2le"]
 
 [ext_resource type="FontFile" uid="uid://cv2bywsa6irhc" path="res://fonts/Xolonium-Regular.ttf" id="1_6wxyl"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_dqjeo"]
+[ext_resource type="Script" path="res://src/scenes/truco/Interface/button.gd" id="3_h06nr"]
+[ext_resource type="AudioStream" uid="uid://nnxqgu1vmxfw" path="res://audio/sounds/button.mp3" id="4_fo1tg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5jgxe"]
 atlas = ExtResource("2_dqjeo")
@@ -15,6 +17,7 @@ texture_margin_right = 20.0
 texture_margin_bottom = 10.0
 expand_margin_left = 10.0
 expand_margin_right = 10.0
+modulate_color = Color(0.887129, 0.886786, 0.880211, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sipvw"]
 texture = SubResource("AtlasTexture_5jgxe")
@@ -42,3 +45,9 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_sipvw")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_sipvw")
 action_mode = 0
 text = "Text"
+script = ExtResource("3_h06nr")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_fo1tg")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
