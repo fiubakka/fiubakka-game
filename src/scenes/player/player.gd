@@ -2,6 +2,7 @@ class_name Player extends CharacterBody2D
 
 signal update_movement(velocity: Vector2, position: Vector2)
 signal show_tip(message: String)
+signal start_truco(id: String)
 
 @export var idle: bool = false
 @export var npc: NPC
@@ -16,6 +17,12 @@ func _ready() -> void:
 	# Set idle front animation when spawning player
 	set_idle_region()
 	$AnimationPlayer.play("front")
+	
+	var producer_start_truco_handler: Callable = (
+		get_node("/root/Main/ServerConnection/ServerProducer")._on_player_start_truco
+	)
+	if !start_truco.is_connected(producer_start_truco_handler):
+		start_truco.connect(producer_start_truco_handler)
 
 
 func set_equipment(_equipment: Equipment) -> void:
@@ -33,6 +40,15 @@ func set_equipment(_equipment: Equipment) -> void:
 func _physics_process(_delta: float) -> void:
 	if idle:
 		return
+		
+	if Input.is_action_just_pressed("start_truco") and not EntityManager.entities.is_empty():
+		var opponent: Entity = EntityManager.entities.get(EntityManager.entities.keys()[0])
+		var key: String = EntityManager.entities.keys()[0]
+		var opp_id := opponent.id
+		start_truco.emit(opp_id)
+		SceneManager.load_new_scene("res://src/scenes/truco/truco_manager.tscn")
+		# TODO: load content only when we get an accepted match confirmation from the server
+		SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
 
 	velocity = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):

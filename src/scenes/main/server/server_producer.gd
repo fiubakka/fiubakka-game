@@ -26,6 +26,10 @@ const PBPlayerUpdateEquipment = (
 	. PBPlayerUpdateEquipment
 )
 
+const PBTrucoMatchChallenge = (
+	preload("res://addons/protocol/compiled/client/truco/match_challenge.gd").PBTrucoMatchChallenge
+)
+
 var _producer: Producer
 
 
@@ -91,3 +95,8 @@ func _on_inventory_update_equipment(equipment: Equipment) -> void:
 	new_equipment.set_body(equipment.body)
 	new_equipment.set_eyes(equipment.eyes)
 	_producer.send(new_equipment)
+	
+func _on_player_start_truco(opponent_id: String) -> void:
+	var truco_match_challenge := PBTrucoMatchChallenge.new()
+	truco_match_challenge.set_opponent_username(opponent_id)
+	_producer.send(truco_match_challenge)

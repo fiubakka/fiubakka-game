@@ -25,6 +25,11 @@ const PBGameEntityDisconnect = (
 	. PBGameEntityDisconnect
 )
 
+const PBTrucoMatchChallengeRequest = (
+	preload("res://addons/protocol/compiled/server/truco/match_challenge_request.gd")
+	. PBTrucoMatchChallengeRequest
+)
+
 var _thread: Thread
 var _consumer: Consumer
 var _keep_running := true
@@ -63,6 +68,8 @@ func _handle_message(message: Object) -> void:
 		handler = "_handle_player_change_map_ready"
 	elif message is PBGameEntityDisconnect:
 		handler = "_handle_game_entity_disconnect"
+	elif message is PBTrucoMatchChallengeRequest:
+		handler = "_handle_truco_match_challenge_request"
 
 	call_deferred(handler, message)
 
@@ -129,3 +136,6 @@ func _handle_player_change_map_ready(msg: PBPlayerChangeMapReady) -> void:
 func _handle_game_entity_disconnect(msg: PBGameEntityDisconnect) -> void:
 	var entityId := msg.get_entityId()
 	EntityManager.remove_entity(entityId)
+
+func _handle_truco_match_challenge_request(msg: PBTrucoMatchChallengeRequest) -> void:
+	pass #TODO: handle match request properly

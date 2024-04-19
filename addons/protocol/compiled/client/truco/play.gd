@@ -661,39 +661,67 @@ class PBPacker:
 ############### USER DATA BEGIN ################
 
 
-class PBServerMetadata:
+class PBTrucoPlay:
 	func _init():
 		var service
 		
-		_length = PBField.new("length", PB_DATA_TYPE.UINT32, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.UINT32])
+		_playId = PBField.new("playId", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
 		service = PBServiceField.new()
-		service.field = _length
-		data[_length.tag] = service
+		service.field = _playId
+		data[_playId.tag] = service
 		
-		_type = PBField.new("type", PB_DATA_TYPE.ENUM, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
+		_playType = PBField.new("playType", PB_DATA_TYPE.ENUM, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
 		service = PBServiceField.new()
-		service.field = _type
-		data[_type.tag] = service
+		service.field = _playType
+		data[_playType.tag] = service
+		
+		_card = PBField.new("card", PB_DATA_TYPE.INT32, PB_RULE.OPTIONAL, 3, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
+		service = PBServiceField.new()
+		service.field = _card
+		data[_card.tag] = service
+		
+		_shout = PBField.new("shout", PB_DATA_TYPE.ENUM, PB_RULE.OPTIONAL, 4, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
+		service = PBServiceField.new()
+		service.field = _shout
+		data[_shout.tag] = service
 		
 	var data = {}
 	
-	var _length: PBField
-	func get_length() -> int:
-		return _length.value
-	func clear_length() -> void:
+	var _playId: PBField
+	func get_playId() -> int:
+		return _playId.value
+	func clear_playId() -> void:
 		data[1].state = PB_SERVICE_STATE.UNFILLED
-		_length.value = DEFAULT_VALUES_2[PB_DATA_TYPE.UINT32]
-	func set_length(value : int) -> void:
-		_length.value = value
+		_playId.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
+	func set_playId(value : int) -> void:
+		_playId.value = value
 	
-	var _type: PBField
-	func get_type():
-		return _type.value
-	func clear_type() -> void:
+	var _playType: PBField
+	func get_playType():
+		return _playType.value
+	func clear_playType() -> void:
 		data[2].state = PB_SERVICE_STATE.UNFILLED
-		_type.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
-	func set_type(value) -> void:
-		_type.value = value
+		_playType.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
+	func set_playType(value) -> void:
+		_playType.value = value
+	
+	var _card: PBField
+	func get_card() -> int:
+		return _card.value
+	func clear_card() -> void:
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		_card.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
+	func set_card(value : int) -> void:
+		_card.value = value
+	
+	var _shout: PBField
+	func get_shout():
+		return _shout.value
+	func clear_shout() -> void:
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		_shout.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
+	func set_shout(value) -> void:
+		_shout.value = value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)
@@ -716,15 +744,20 @@ class PBServerMetadata:
 			return PB_ERR.PARSE_INCOMPLETE
 		return result
 	
-enum PBServerMessageType {
-	PBGameEntityState = 0,
-	PBPlayerMessage = 1,
-	PBPlayerInitError = 2,
-	PBPlayerInitSuccess = 3,
-	PBPlayerChangeMapReady = 4,
-	PBGameEntityDisconnect = 5,
-	PBTrucoMatchChallengeRequest = 6,
-	PBTrucoMatchChallengeDenied = 7
+enum PBTrucoPlayType {
+	CARD = 0,
+	SHOUT = 1
+}
+
+enum PBTrucoShout {
+	ENVIDO = 0,
+	REAL_ENVIDO = 1,
+	FALTA_ENVIDO = 2,
+	TRUCO = 3,
+	RETRUCO = 4,
+	VALE_CUATRO = 5,
+	QUIERO = 6,
+	NO_QUIERO = 7
 }
 
 ################ USER DATA END #################
