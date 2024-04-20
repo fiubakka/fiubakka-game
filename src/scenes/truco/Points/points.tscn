@@ -37,24 +37,3 @@ custom_minimum_size = Vector2(37, 37)
 layout_mode = 2
 
 [node name="Matches" parent="HBoxContainer/Panel3" instance=ExtResource("2_3f5nk")]
-
-[node name="Panel4" type="Panel" parent="HBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(37, 37)
-layout_mode = 2
-
-[node name="Matches" parent="HBoxContainer/Panel4" instance=ExtResource("2_3f5nk")]
-
-[node name="Panel5" type="Panel" parent="HBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(37, 37)
-layout_mode = 2
-
-[node name="Matches" parent="HBoxContainer/Panel5" instance=ExtResource("2_3f5nk")]
-
-[node name="Panel6" type="Panel" parent="HBoxContainer"]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(37, 37)
-layout_mode = 2
-
-[node name="Matches" parent="HBoxContainer/Panel6" instance=ExtResource("2_3f5nk")]
