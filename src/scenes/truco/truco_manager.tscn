@@ -108,10 +108,10 @@ bbcode_enabled = true
 text = "[right]Opponent[/right]"
 
 [node name="OpponentHand" parent="." instance=ExtResource("6_x3d1k")]
-offset_left = 860.0
-offset_top = 25.0
-offset_right = 952.0
-offset_bottom = 105.0
+offset_left = 855.0
+offset_top = 37.0
+offset_right = 947.0
+offset_bottom = 117.0
 
 [node name="DialogueBubbleController" parent="." instance=ExtResource("8_smc8a")]
 offset_left = 487.0
@@ -123,10 +123,16 @@ offset_bottom = 34.0
 position = Vector2(487, -79)
 
 [node name="Points" parent="." instance=ExtResource("11_upv27")]
-offset_left = 14.0
-offset_top = 15.0
-offset_right = 14.0
-offset_bottom = 15.0
+offset_left = 10.0
+offset_top = 479.0
+offset_right = 10.0
+offset_bottom = 479.0
+
+[node name="OpponentPoints" parent="." instance=ExtResource("11_upv27")]
+offset_left = 10.0
+offset_top = 18.0
+offset_right = 10.0
+offset_bottom = 18.0
 
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

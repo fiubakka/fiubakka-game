@@ -13,22 +13,6 @@ func _ready() -> void:
 func set_points(n: int) -> void:
 	if n < 0 or n > 30:
 		return
-
-	#var full_sets: int = n / 5
-	#var remainder_points := n % 5
-	#
-	#for i in range(len(matches_set)):
-		#var match_node: Matches = matches_set[i]
-		#
-		#if i < full_sets:
-			#match_node.set_points(5)
-			#print("llenos ", i)
-		#elif i == full_sets and remainder_points > 0:
-			#match_node.set_points(remainder_points)
-			#print("sobrantes ", i)
-		#else:
-			#match_node.set_points(0)
-			#print("a zero ", i)
 	
 	if n <= 15:
 		var full_sets: int =  n / 5
@@ -47,18 +31,13 @@ func set_points(n: int) -> void:
 	else:
 		var full_sets: int = (n - 15) / 5
 		var remainder_points := (n - 15) % 5
-		print("fs: ", full_sets)
-		print("rp: ", remainder_points)
 		
 		for i in range(len(matches_set)):
 			var match_node: Matches = matches_set[i]
 			
 			if i < full_sets:
 				match_node.set_points(5, true)
-				print("todos dorados")
 			elif i == full_sets and remainder_points > 0:
 				match_node.set_points(remainder_points, true)
-				print("algunos dorados")
 			else:
 				match_node.set_points(5, false)
-				print("ninguno dorados")
