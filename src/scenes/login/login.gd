@@ -6,12 +6,21 @@ signal user_logged_in(username: String, password: String)
 signal return_to_menu
 
 
-func _on_login_username_text_submitted(username: String) -> void:
+func _on_login_username_text_submitted(_username: String) -> void:
 	self._on_button_pressed()
 
 
-func _on_login_password_text_submitted(password: String) -> void:
+func _on_login_password_text_submitted(_password: String) -> void:
 	self._on_button_pressed()
+
+
+func show_error_message(errorCode: String) -> void:
+	timer.stop()
+	var errorMessage: String = PlayerInitErrorMessageMap.error_code_to_msg(errorCode)
+	$NinePatchRect/VBoxContainer/LoginButtonBorder/LoginErrorText.text = (
+		"[center]" + errorMessage + "[/center]"
+	)
+	$NinePatchRect/VBoxContainer/LoginButtonBorder/LoginErrorText.visible = true
 
 
 func _on_button_pressed() -> void:

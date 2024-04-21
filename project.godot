@@ -23,6 +23,7 @@ EntityManager="*res://src/objects/entity_manager/entity_manager.gd"
 ItemsCatalogue="*res://src/scenes/game_menu/inventory_screen/items/items_catalogue.gd"
 Utils="*res://src/objects/utils/utils.gd"
 MapsDictionary="*res://src/objects/maps_dictionary/maps_dictionary.gd"
+PlayerInitErrorMessageMap="*res://src/objects/utils/player_init_error_message_map.gd"
 
 [debug]
 

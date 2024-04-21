@@ -1,5 +1,7 @@
 extends Node
 
+const LoginScene = preload("res://src/scenes/login/login.tscn")
+
 signal user_init_ready(position: Vector2, equipment: Equipment, mapId: int)
 signal update_content(entityId: String, content: String)
 signal player_changed_map
@@ -73,8 +75,8 @@ func _handle_message(message: Object) -> void:
 
 
 func _handle_player_init_failure(msg: PBPlayerInitError) -> void:
-	print("Error CODE: ", msg.get_error_code())
-	#TODO: Show error on login screen
+	var login := get_tree().current_scene.get_node("Login")
+	login.show_error_message(msg.get_error_code())
 
 
 func _handle_player_init_ready(msg: PBPlayerInitSuccess) -> void:
