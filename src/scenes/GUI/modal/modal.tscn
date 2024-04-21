@@ -1,0 +1,155 @@
+[gd_scene load_steps=14 format=3 uid="uid://dj80f5e6d1tsp"]
+
+[ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="1_4w5g8"]
+[ext_resource type="Script" path="res://src/scenes/GUI/modal/modal.gd" id="1_pkbvg"]
+[ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="3_at88q"]
+[ext_resource type="AudioStream" uid="uid://d4mhscmsnaxux" path="res://audio/sounds/pop-fx.mp3" id="4_3vrc3"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cutft"]
+texture = ExtResource("1_4w5g8")
+region_rect = Rect2(2160, 1000, 48, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xdism"]
+texture = ExtResource("1_4w5g8")
+region_rect = Rect2(2208, 1000, 48, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gyfvr"]
+texture = ExtResource("1_4w5g8")
+region_rect = Rect2(2256, 1000, 48, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g4nt5"]
+texture = ExtResource("1_4w5g8")
+region_rect = Rect2(2304, 1000, 48, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8nv0l"]
+texture = ExtResource("1_4w5g8")
+region_rect = Rect2(2352, 1000, 48, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_564xb"]
+texture = ExtResource("1_4w5g8")
+region_rect = Rect2(2400, 1000, 48, 56)
+
+[sub_resource type="Animation" id="Animation_g0w67"]
+resource_name = "drop_from_top"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -200), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ycwbg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -200)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_svyjx"]
+_data = {
+"RESET": SubResource("Animation_ycwbg"),
+"drop_from_top": SubResource("Animation_g0w67")
+}
+
+[node name="Modal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pkbvg")
+
+[node name="Left" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(32, 200)
+layout_mode = 2
+offset_right = 16.0
+offset_bottom = 200.0
+texture = ExtResource("1_4w5g8")
+region_rect = Rect2(176, 752, 16, 80)
+
+[node name="Center" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+offset_left = 32.0
+offset_right = 432.0
+offset_bottom = 200.0
+texture = ExtResource("1_4w5g8")
+region_rect = Rect2(192, 752, 48, 80)
+
+[node name="Right" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(32, 200)
+layout_mode = 2
+offset_left = 432.0
+offset_right = 464.0
+offset_bottom = 200.0
+texture = ExtResource("1_4w5g8")
+region_rect = Rect2(240, 752, 16, 80)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 25.0
+offset_right = 436.0
+offset_bottom = 177.0
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(400, 80)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_at88q")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+scroll_active = false
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 95
+alignment = 1
+
+[node name="Accept" type="Button" parent="VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(48, 56)
+layout_mode = 2
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 0)
+theme_override_styles/normal = SubResource("StyleBoxTexture_cutft")
+theme_override_styles/hover = SubResource("StyleBoxTexture_xdism")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_gyfvr")
+
+[node name="Reject" type="Button" parent="VBoxContainer/ButtonsContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_g4nt5")
+theme_override_styles/hover = SubResource("StyleBoxTexture_8nv0l")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_564xb")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_3vrc3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_svyjx")
+}
+
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/Accept" to="." method="_on_accept_pressed"]
+[connection signal="pressed" from="VBoxContainer/ButtonsContainer/Reject" to="." method="_on_reject_pressed"]

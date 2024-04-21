@@ -661,7 +661,7 @@ class PBPacker:
 ############### USER DATA BEGIN ################
 
 
-class PBTrucoPlay:
+class PBTrucoAllowPlay:
 	func _init():
 		var service
 		
@@ -669,21 +669,6 @@ class PBTrucoPlay:
 		service = PBServiceField.new()
 		service.field = _playId
 		data[_playId.tag] = service
-		
-		_playType = PBField.new("playType", PB_DATA_TYPE.ENUM, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
-		service = PBServiceField.new()
-		service.field = _playType
-		data[_playType.tag] = service
-		
-		_card = PBField.new("card", PB_DATA_TYPE.INT32, PB_RULE.OPTIONAL, 3, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
-		service = PBServiceField.new()
-		service.field = _card
-		data[_card.tag] = service
-		
-		_shout = PBField.new("shout", PB_DATA_TYPE.ENUM, PB_RULE.OPTIONAL, 4, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
-		service = PBServiceField.new()
-		service.field = _shout
-		data[_shout.tag] = service
 		
 	var data = {}
 	
@@ -695,33 +680,6 @@ class PBTrucoPlay:
 		_playId.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
 	func set_playId(value : int) -> void:
 		_playId.value = value
-	
-	var _playType: PBField
-	func get_playType():
-		return _playType.value
-	func clear_playType() -> void:
-		data[2].state = PB_SERVICE_STATE.UNFILLED
-		_playType.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
-	func set_playType(value) -> void:
-		_playType.value = value
-	
-	var _card: PBField
-	func get_card() -> int:
-		return _card.value
-	func clear_card() -> void:
-		data[3].state = PB_SERVICE_STATE.UNFILLED
-		_card.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
-	func set_card(value : int) -> void:
-		_card.value = value
-	
-	var _shout: PBField
-	func get_shout():
-		return _shout.value
-	func clear_shout() -> void:
-		data[4].state = PB_SERVICE_STATE.UNFILLED
-		_shout.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
-	func set_shout(value) -> void:
-		_shout.value = value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)
@@ -744,22 +702,4 @@ class PBTrucoPlay:
 			return PB_ERR.PARSE_INCOMPLETE
 		return result
 	
-enum PBTrucoPlayType {
-	CARD = 0,
-	SHOUT = 1
-}
-
-enum PBTrucoShout {
-	ENVIDO = 0,
-	REAL_ENVIDO = 1,
-	FALTA_ENVIDO = 2,
-	ENVIDO_QUIERO = 3,
-	ENVIDO_NO_QUIERO = 4,
-	TRUCO = 5,
-	RETRUCO = 6,
-	VALE_CUATRO = 7,
-	TRUCO_QUIERO = 8,
-	TRUCO_NO_QUIERO = 9
-}
-
 ################ USER DATA END #################

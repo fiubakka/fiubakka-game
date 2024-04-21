@@ -20,12 +20,25 @@ const PBGameEntityDisconnect = (
 	. PBGameEntityDisconnect
 )
 
+const PBTrucoMatchChallengeRequest = (
+	preload("res://addons/protocol/compiled/server/truco/match_challenge_request.gd")
+	. PBTrucoMatchChallengeRequest
+)
+
+const PBTrucoMatchChallengeDenied = (
+	preload("res://addons/protocol/compiled/server/truco/match_challenge_denied.gd")
+	. PBTrucoMatchChallengeDenied
+)
+
+
 static var _MESSAGE_MAP := {
 	PBServerMessageType.PBGameEntityState: PBGameEntityState,
 	PBServerMessageType.PBPlayerMessage: PBPlayerMessage,
 	PBServerMessageType.PBPlayerInitSuccess: PBPlayerInitSuccess,
 	PBServerMessageType.PBPlayerChangeMapReady: PBPlayerChangeMapReady,
 	PBServerMessageType.PBGameEntityDisconnect: PBGameEntityDisconnect,
+	PBServerMessageType.PBTrucoMatchChallengeRequest: PBTrucoMatchChallengeRequest,
+	PBServerMessageType.PBTrucoMatchChallengeDenied: PBTrucoMatchChallengeDenied,
 }
 
 

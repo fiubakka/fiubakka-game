@@ -30,6 +30,18 @@ const PBTrucoMatchChallenge = (
 	preload("res://addons/protocol/compiled/client/truco/match_challenge.gd").PBTrucoMatchChallenge
 )
 
+const PBTrucoMatchChallengeReply = (
+	preload("res://addons/protocol/compiled/client/truco/match_challenge_reply.gd")
+	.
+	PBTrucoMatchChallengeReply
+)
+
+const PBTrucoMatchChallengeReplyEnum = (
+	preload("res://addons/protocol/compiled/client/truco/match_challenge_reply.gd")
+	.
+	PBTrucoMatchChallengeReplyEnum
+)
+
 var _producer: Producer
 
 
@@ -100,3 +112,22 @@ func _on_player_start_truco(opponent_id: String) -> void:
 	var truco_match_challenge := PBTrucoMatchChallenge.new()
 	truco_match_challenge.set_opponent_username(opponent_id)
 	_producer.send(truco_match_challenge)
+
+func _on_modal_match_accepted(opponent_id: String) -> void:
+	_reply_truco_match(opponent_id, PBTrucoMatchChallengeReplyEnum.ACCEPTED)
+	# TODO: temporarily load the truco scene right now
+	# this should be removed when we properly receive the very first TrucoPlay
+	# message after accepting the match
+	SceneManager.load_new_scene("res://src/scenes/truco/truco_manager.tscn")
+	# TODO: load content only when we get an accepted match confirmation from the server
+	SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
+
+func _on_modal_match_rejected(opponent_id: String) -> void:
+	_reply_truco_match(opponent_id, PBTrucoMatchChallengeReplyEnum.REJECTED)
+
+func _reply_truco_match(opponent_id: String, status: PBTrucoMatchChallengeReplyEnum) -> void:
+	var truco_match_reply := PBTrucoMatchChallengeReply.new()
+	truco_match_reply.set_opponent_username(opponent_id)
+	truco_match_reply.set_status(status)
+	_producer.send(truco_match_reply)
+	

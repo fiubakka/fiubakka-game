@@ -26,6 +26,20 @@ const PBPlayerUpdateEquipment = (
 	. PBPlayerUpdateEquipment
 )
 
+const PBTrucoMatchChallenge = (
+	preload("res://addons/protocol/compiled/client/truco/match_challenge.gd").PBTrucoMatchChallenge
+)
+
+const PBTrucoMatchChallengeReply = (
+	preload("res://addons/protocol/compiled/client/truco/match_challenge_reply.gd")
+	. PBTrucoMatchChallengeReply
+)
+
+const PBTrucoPlay = (
+	preload("res://addons/protocol/compiled/client/truco/play.gd")
+	. PBTrucoPlay
+)
+
 
 static func from(message: Object) -> Result:
 	var type: PBClientMessageType = -1
@@ -41,6 +55,12 @@ static func from(message: Object) -> Result:
 		type = PBClientMessageType.PBPlayerChangeMap
 	elif message is PBPlayerUpdateEquipment:
 		type = PBClientMessageType.PBPlayerUpdateEquipment
+	elif message is PBTrucoMatchChallenge:
+		type = PBClientMessageType.PBTrucoMatchChallenge
+	elif message is PBTrucoMatchChallengeReply:
+		type = PBClientMessageType.PBTrucoMatchChallengeReply
+	elif message is PBTrucoPlay:
+		type = PBClientMessageType.PBTrucoPlay
 
 	if type < 0:
 		printerr("Unknown message type for message class: " + message.get_class())

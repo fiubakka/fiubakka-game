@@ -3,6 +3,7 @@ extends Node
 signal user_init_ready(position: Vector2, equipment: Equipment, mapId: int)
 signal update_content(entityId: String, content: String)
 signal player_changed_map
+signal truco_challenge_received(opponentId: String)
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 
@@ -28,6 +29,15 @@ const PBGameEntityDisconnect = (
 const PBTrucoMatchChallengeRequest = (
 	preload("res://addons/protocol/compiled/server/truco/match_challenge_request.gd")
 	. PBTrucoMatchChallengeRequest
+)
+
+const PBTrucoMatchChallengeDenied = (
+	preload("res://addons/protocol/compiled/server/truco/match_challenge_denied.gd")
+	. PBTrucoMatchChallengeDenied
+)
+
+const PBTrucoPlay = (
+	preload("res://addons/protocol/compiled/client/truco/play.gd").PBTrucoPlay
 )
 
 var _thread: Thread
@@ -70,6 +80,10 @@ func _handle_message(message: Object) -> void:
 		handler = "_handle_game_entity_disconnect"
 	elif message is PBTrucoMatchChallengeRequest:
 		handler = "_handle_truco_match_challenge_request"
+	elif message is PBTrucoMatchChallengeDenied:
+		handler = "_handle_truco_match_challenge_denied"
+	elif message is PBTrucoPlay:
+		handler=  "_handle_truco_play"
 
 	call_deferred(handler, message)
 
@@ -138,4 +152,13 @@ func _handle_game_entity_disconnect(msg: PBGameEntityDisconnect) -> void:
 	EntityManager.remove_entity(entityId)
 
 func _handle_truco_match_challenge_request(msg: PBTrucoMatchChallengeRequest) -> void:
-	pass #TODO: handle match request properly
+	print("Received truco match challenge request")
+	truco_challenge_received.emit(msg.get_opponent_username())
+	
+func _handle_truco_match_challenge_denied(msg: PBTrucoMatchChallengeDenied) -> void:
+	print("Truco match was denied")
+	pass #TODO: handle match denied properly
+	
+func _handle_truco_play(msg: PBTrucoPlay) -> void:
+	print("Truco play:", msg)
+	pass # TODO: handle play properly

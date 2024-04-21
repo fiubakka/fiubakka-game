@@ -724,7 +724,8 @@ enum PBServerMessageType {
 	PBPlayerChangeMapReady = 4,
 	PBGameEntityDisconnect = 5,
 	PBTrucoMatchChallengeRequest = 6,
-	PBTrucoMatchChallengeDenied = 7
+	PBTrucoMatchChallengeDenied = 7,
+	PBTrucoPlay = 8
 }
 
 ################ USER DATA END #################

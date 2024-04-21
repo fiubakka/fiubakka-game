@@ -40,15 +40,6 @@ func set_equipment(_equipment: Equipment) -> void:
 func _physics_process(_delta: float) -> void:
 	if idle:
 		return
-		
-	if Input.is_action_just_pressed("start_truco") and not EntityManager.entities.is_empty():
-		var opponent: Entity = EntityManager.entities.get(EntityManager.entities.keys()[0])
-		var key: String = EntityManager.entities.keys()[0]
-		var opp_id := opponent.id
-		start_truco.emit(opp_id)
-		SceneManager.load_new_scene("res://src/scenes/truco/truco_manager.tscn")
-		# TODO: load content only when we get an accepted match confirmation from the server
-		SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
 
 	velocity = Vector2.ZERO
 	if Input.is_action_pressed("move_right"):
@@ -94,6 +85,14 @@ func _physics_process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed("talk_to_npc") and npc:
 		show_tip.emit(npc.message)
+		
+	if Input.is_action_just_pressed("start_truco") and not EntityManager.entities.is_empty():
+		var opponent: Entity = EntityManager.entities.get(EntityManager.entities.keys()[0])
+		var opp_id := opponent.id
+		start_truco.emit(opp_id)
+		SceneManager.load_new_scene("res://src/scenes/truco/truco_manager.tscn")
+		# TODO: load content only when we get an accepted match confirmation from the server
+		SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
 
 
 func play_move_animation() -> void:
