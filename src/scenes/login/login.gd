@@ -15,7 +15,8 @@ func _on_login_password_text_submitted(_password: String) -> void:
 
 
 func show_error_message(errorCode: String) -> void:
-	timer.stop()
+	if timer:
+		timer.stop()
 	var errorMessage: String = PlayerInitErrorMessageMap.error_code_to_msg(errorCode)
 	$NinePatchRect/VBoxContainer/LoginButtonBorder/LoginErrorText.text = (
 		"[center]" + errorMessage + "[/center]"
@@ -27,20 +28,12 @@ func _on_button_pressed() -> void:
 	$NinePatchRect/VBoxContainer/LoginButtonBorder/LoginErrorText.visible = false
 	var username: String = $NinePatchRect/VBoxContainer/Username/LoginUsername.text
 	if username.is_empty():
-		var errorMessage: String = PlayerInitErrorMessageMap.error_code_to_msg("EMPTY_USERNAME")
-		$NinePatchRect/VBoxContainer/LoginButtonBorder/LoginErrorText.text = (
-			"[center]" + errorMessage + "[/center]"
-		)
-		$NinePatchRect/VBoxContainer/LoginButtonBorder/LoginErrorText.visible = true
+		self.show_error_message("EMPTY_USERNAME")
 		return
 
 	var password: String = $NinePatchRect/VBoxContainer/Password/LoginPassword.text
 	if password.is_empty():
-		var errorMessage: String = PlayerInitErrorMessageMap.error_code_to_msg("EMPTY_PASSWORD")
-		$NinePatchRect/VBoxContainer/LoginButtonBorder/LoginErrorText.text = (
-			"[center]" + errorMessage + "[/center]"
-		)
-		$NinePatchRect/VBoxContainer/LoginButtonBorder/LoginErrorText.visible = true
+		self.show_error_message("EMPTY_PASSWORD")
 		return
 
 	timer = Timer.new()  # Timer to send init message until we get a response

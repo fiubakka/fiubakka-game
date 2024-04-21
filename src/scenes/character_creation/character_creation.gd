@@ -16,10 +16,28 @@ func _ready() -> void:
 	)
 
 
+func show_error_message(errorCode: String) -> void:
+	if timer:
+		timer.stop()
+	var errorMessage: String = PlayerInitErrorMessageMap.error_code_to_msg(errorCode)
+	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.text = (
+		"[center]" + errorMessage + "[/center]"
+	)
+	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.visible = true
+
+
 func _on_button_pressed() -> void:
+	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.visible = false
 	var username: String = $NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername.text
 	if username.is_empty():
+		self.show_error_message("EMPTY_USERNAME")
 		return
+
+	var password: String = $NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword.text
+	if password.is_empty():
+		self.show_error_message("EMPTY_PASSWORD")
+		return
+
 	timer = Timer.new()  # Timer to send init message until we get a response
 	timer.timeout.connect(Callable(self, "_on_timer_timeout").bind(username))
 	add_child(timer)
@@ -44,5 +62,15 @@ func _on_timer_timeout(username: String) -> void:
 
 
 func _on_return_return_to_menu() -> void:
+	timer.stop()
 	$NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername.clear()
+	$NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword.clear()
 	return_to_menu.emit()
+
+
+func _on_login_username_text_submitted(_new_text: String) -> void:
+	self._on_button_pressed()
+
+
+func _on_login_password_text_submitted(_new_text: String) -> void:
+	self._on_button_pressed()
