@@ -36,8 +36,8 @@ const PBTrucoMatchChallengeDenied = (
 	. PBTrucoMatchChallengeDenied
 )
 
-const PBTrucoPlay = (
-	preload("res://addons/protocol/compiled/client/truco/play.gd").PBTrucoPlay
+const PBTrucoAllowPlay = (
+	preload("res://addons/protocol/compiled/server/truco/allow_play.gd").PBTrucoAllowPlay
 )
 
 var _thread: Thread
@@ -82,8 +82,8 @@ func _handle_message(message: Object) -> void:
 		handler = "_handle_truco_match_challenge_request"
 	elif message is PBTrucoMatchChallengeDenied:
 		handler = "_handle_truco_match_challenge_denied"
-	elif message is PBTrucoPlay:
-		handler=  "_handle_truco_play"
+	elif message is PBTrucoAllowPlay:
+		handler=  "_handle_truco_allow_play"
 
 	call_deferred(handler, message)
 
@@ -159,6 +159,6 @@ func _handle_truco_match_challenge_denied(msg: PBTrucoMatchChallengeDenied) -> v
 	print("Truco match was denied")
 	pass #TODO: handle match denied properly
 	
-func _handle_truco_play(msg: PBTrucoPlay) -> void:
+func _handle_truco_allow_play(msg: PBTrucoAllowPlay) -> void:
 	print("Truco play:", msg)
 	pass # TODO: handle play properly
