@@ -18,7 +18,7 @@ func toggle_popup() -> void:
 	
 func _on_button_pressed() -> void:
 	start_truco.emit(id)
-
+	visible = false
 
 func _on_timer_timeout() -> void:
 	visible = false

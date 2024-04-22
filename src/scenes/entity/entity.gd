@@ -98,5 +98,4 @@ func set_walk_region() -> void:
 
 func _on_interact_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
-		print("you clicked on " + id)
-		$EntityPopup.visible = !$EntityPopup.visible
+		$EntityPopup.toggle_popup()
