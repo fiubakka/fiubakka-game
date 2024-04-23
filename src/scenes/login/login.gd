@@ -50,5 +50,6 @@ func _on_timer_timeout(username: String, password: String) -> void:
 func _on_return_return_to_menu() -> void:
 	$NinePatchRect/VBoxContainer/Username/LoginUsername.clear()
 	$NinePatchRect/VBoxContainer/Password/LoginPassword.clear()
-	timer.stop()
+	if timer:
+		timer.stop()
 	return_to_menu.emit()
