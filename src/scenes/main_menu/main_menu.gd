@@ -19,3 +19,7 @@ func _on_login_button_pressed() -> void:
 
 func _on_register_button_pressed() -> void:
 	go_to_register.emit()
+
+
+func _on_language_select_go_to_main_menu() -> void:
+	visible = true
