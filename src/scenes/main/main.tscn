@@ -82,7 +82,6 @@ offset_bottom = 537.0
 [connection signal="return_to_menu" from="Login" to="." method="_on_login_return_to_menu"]
 [connection signal="user_logged_in" from="Login" to="ServerConnection/ServerProducer" method="_on_user_logged_in"]
 [connection signal="return_to_menu" from="Register" to="." method="_on_register_return_to_menu"]
-[connection signal="save_character" from="Register" to="." method="_on_register_save_character"]
 [connection signal="user_logged_in" from="Register" to="ServerConnection/ServerProducer" method="_on_user_logged_in"]
 [connection signal="update_content" from="ServerConnection/ServerConsumer" to="GUI/GuiManager/Chatbox" method="_on_server_consumer_update_content"]
 [connection signal="user_init_ready" from="ServerConnection/ServerConsumer" to="." method="_on_server_consumer_user_init_ready"]

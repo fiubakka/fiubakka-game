@@ -73,9 +73,12 @@ func _handle_message(message: Object) -> void:
 
 
 func _handle_player_init_failure(msg: PBPlayerInitError) -> void:
-	#TODO: En realidad hay que ver si fue login o register
 	var login := get_tree().current_scene.get_node("Login")
-	login.show_error_message(msg.get_error_code())
+	if login.visible:
+		login.show_error_message(msg.get_error_code())
+	else:
+		var register := get_tree().current_scene.get_node("Register")
+		register.show_error_message(msg.get_error_code())
 
 
 func _handle_player_init_ready(msg: PBPlayerInitSuccess) -> void:
