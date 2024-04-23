@@ -21,7 +21,5 @@ func _create_lang_button(locale: String) -> Button:
 func _on_button_pressed(button: Button) -> void:
 	var locale: String = button.text.to_lower()
 	TranslationServer.set_locale(locale)
-	print("locale set: " + locale)
-	# TODO: change to Main scene
 	go_to_main_menu.emit()
 	queue_free()
