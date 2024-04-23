@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfu6w2rhghpa5"]
+[gd_scene load_steps=7 format=3 uid="uid://cfu6w2rhghpa5"]
 
+[ext_resource type="Script" path="res://src/scenes/truco/GameOver/game_over.gd" id="1_twgal"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="1_x7o6k"]
 [ext_resource type="PackedScene" uid="uid://beaduwccf1n4o" path="res://src/scenes/truco/GameOver/confetti.tscn" id="2_bbb55"]
+[ext_resource type="FontFile" uid="uid://cv2bywsa6irhc" path="res://fonts/Xolonium-Regular.ttf" id="4_rycie"]
+[ext_resource type="PackedScene" uid="uid://kpbsuln7x2le" path="res://src/scenes/truco/Interface/button.tscn" id="6_myyix"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_akxnd"]
 atlas = ExtResource("1_x7o6k")
@@ -14,6 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_twgal")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -28,12 +32,38 @@ layout_mode = 2
 
 [node name="Confetti" parent="CenterContainer/Panel" instance=ExtResource("2_bbb55")]
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-layout_mode = 0
-offset_right = 506.0
-offset_bottom = 215.0
+[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 2
 texture = SubResource("AtlasTexture_akxnd")
 patch_margin_left = 24
 patch_margin_top = 27
 patch_margin_right = 24
 patch_margin_bottom = 27
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = 18.0
+offset_right = -19.0
+offset_bottom = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_fonts/normal_font = ExtResource("4_rycie")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "Text"
+
+[node name="Button" parent="CenterContainer/NinePatchRect/VBoxContainer" instance=ExtResource("6_myyix")]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+text = "Continue"
