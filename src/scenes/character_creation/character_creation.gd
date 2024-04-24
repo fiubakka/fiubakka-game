@@ -19,9 +19,8 @@ func _ready() -> void:
 func show_error_message(errorCode: String) -> void:
 	if timer:
 		timer.stop()
-	var errorMessage: String = PlayerInitErrorMessageMap.error_code_to_msg(errorCode)
-	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.text = (
-		"[center]" + errorMessage + "[/center]"
+	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.text = Utils.center_text(
+		tr(errorCode)
 	)
 	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.visible = true
 
@@ -39,13 +38,13 @@ func _on_button_pressed() -> void:
 		return
 
 	timer = Timer.new()  # Timer to send init message until we get a response
-	timer.timeout.connect(Callable(self, "_on_timer_timeout").bind(username))
+	timer.timeout.connect(Callable(self, "_on_timer_timeout").bind(username, password))
 	add_child(timer)
 	timer.set_wait_time(2.0)
 	timer.start()
 
 
-func _on_timer_timeout(username: String) -> void:
+func _on_timer_timeout(username: String, password: String) -> void:
 	var customization := PlayerInfo.player_customization
 	var equipment := Equipment.new()
 	equipment.set_equipment(
@@ -57,8 +56,8 @@ func _on_timer_timeout(username: String) -> void:
 		customization.body,
 		customization.outfit
 	)
-	save_character.emit()  #TODO: Esto creo que se puede borrar
-	user_logged_in.emit(username, "password", equipment)
+	save_character.emit()
+	user_logged_in.emit(username, password, equipment)
 
 
 func _on_return_return_to_menu() -> void:
