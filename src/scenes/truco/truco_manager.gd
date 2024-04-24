@@ -10,7 +10,7 @@ var deck: Deck = null
 
 
 func _ready() -> void:
-	hand = $Panel/Hand
+	hand = $Hand
 	board = $Board
 	deck = preload("res://src/scenes/truco/deck/deck.gd").new()
 
@@ -68,3 +68,8 @@ func _on_button_2_pressed() -> void:
 # TODO: REMOVE
 func _on_button_3_pressed() -> void:
 	start_round()
+
+
+# TODO: REMOVE
+func _on_button_4_pressed() -> void:
+	$DialogueBubbleController.show_dialogue("Truco!")

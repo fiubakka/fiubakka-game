@@ -25,6 +25,11 @@ func enter_level() -> void:
 	)
 	if !player.update_movement.is_connected(producer_movement_signal_handler):
 		player.update_movement.connect(producer_movement_signal_handler)
+	var gui_show_npc_tip_signal_handler: Callable = (
+		get_node("/root/Main/GUI/GuiManager")._on_npc_tip
+	)
+	if !player.show_tip.is_connected(gui_show_npc_tip_signal_handler):
+		player.show_tip.connect(gui_show_npc_tip_signal_handler)
 	$Player/Camera2D.limit_right = 2200  #TODO: Setear limites en base al nivel
 	$Player/Camera2D.limit_bottom = 1880  #TODO: Setear limites en base al nivel
 	#TODO: Setear posicion del player dependiendo desde que puerta esta entrando al mapa

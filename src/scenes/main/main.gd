@@ -34,6 +34,7 @@ func _on_server_consumer_user_init_ready(
 		player.update_movement.connect(producer_movement_signal_handler)
 	player.set_equipment(equipment)
 	player.position = _position
+	PlayerInfo.player_customization = PlayerInfo.from_equipment(equipment)
 	var current_level := get_tree().current_scene
 	current_level.data["player_equipment"] = equipment
 	current_level.enter_level()
