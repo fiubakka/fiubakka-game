@@ -1,5 +1,5 @@
 keys,es,en
-LOGIN,Login,Login
+LOGIN,Ingresar,Login
 REGISTER,Registrar,Register
 USER_PLACEHOLDER,"Usuario...","Username..."
 PASSWORD_PLACEHOLDER,"Contraseña...","Password..."
@@ -18,3 +18,8 @@ CHAT_PLACEHOLDER,"Diga algo...","Say something..."
 CHAT_SEND,Enviar,Send
 LOADING_SERVER,"Esperando servidor...","Waiting for server..."
 LOADING_LEVEL,"Cargando nivel...","Loading level..."
+EMPTY_USERNAME, "Ingrese un nombre", "Enter a username"
+EMPTY_PASSWORD, "Ingrese una contraseña", "Enter a password"
+UNKNOWN, "Error desconocido", "Unknown Error"
+INVALID_PLAYER_CREDENTIALS, "Credenciales inválidas", "Invalid credentials"
+PLAYER_ALREADY_EXISTS, "Nombre no disponible", "Unavailable Username"
