@@ -21,10 +21,7 @@ func _ready() -> void:
 
 
 func clean() -> void:
-	#for turn: TurnDropZones in turns:
-	#turn.clean()
 	for turn: TurnDropZones in turns:
-		#remove_child(turn)
 		turn.queue_free()
 	turns = []
 	next_play_number = 0
@@ -42,3 +39,9 @@ func next_turn() -> void:
 
 func _on_play_drop_zone_player_card_played(card: Card) -> void:
 	player_card_played.emit(card)
+
+
+func player_wins(wins: bool) -> void:
+	var last_turn := len(turns) - 1
+	turns[last_turn].player_wins(wins)
+

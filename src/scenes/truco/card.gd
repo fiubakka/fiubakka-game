@@ -42,7 +42,7 @@ func _input(event: InputEvent) -> void:
 			var next_rest_point: Node2D = current_rest_point
 			var rest_nodes := get_tree().get_nodes_in_group("zone")
 			for child: Node2D in rest_nodes:
-				if !child.has_card:
+				if !child.has_card and (child.is_in_group("table") or child.is_in_group("hand")):
 					var mouse_position: Vector2 = event.global_position
 					var distance := mouse_position.distance_to(child.global_position)
 					if distance < shortest_dist:
