@@ -63,6 +63,7 @@ func _on_timer_timeout(username: String, password: String) -> void:
 func _on_return_return_to_menu() -> void:
 	if timer:
 		timer.stop()
+	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.visible = false
 	$NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername.clear()
 	$NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword.clear()
 	return_to_menu.emit()
