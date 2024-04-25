@@ -24,7 +24,7 @@ func load_new_scene(content_path: String) -> void:
 	get_tree().root.add_child(loading_screen)
 	loading_screen.start_transition()
 
-
+	
 func _load_content(content_path: String) -> void:
 	# Load new scene in another thread.
 	# This lets us place a loading screen, a progress bar

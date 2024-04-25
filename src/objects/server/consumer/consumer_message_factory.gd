@@ -34,6 +34,10 @@ const PBTrucoAllowPlay = (
 	preload("res://addons/protocol/compiled/server/truco/allow_play.gd").PBTrucoAllowPlay
 )
 
+const PBTrucoPlay = (
+	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoPlay
+)
+
 
 static var _MESSAGE_MAP := {
 	PBServerMessageType.PBGameEntityState: PBGameEntityState,
@@ -43,7 +47,8 @@ static var _MESSAGE_MAP := {
 	PBServerMessageType.PBGameEntityDisconnect: PBGameEntityDisconnect,
 	PBServerMessageType.PBTrucoMatchChallengeRequest: PBTrucoMatchChallengeRequest,
 	PBServerMessageType.PBTrucoMatchChallengeDenied: PBTrucoMatchChallengeDenied,
-	PBServerMessageType.PBTrucoPlay: PBTrucoAllowPlay
+	PBServerMessageType.PBTrucoAllowPlay: PBTrucoAllowPlay,
+	PBServerMessageType.PBTrucoPlay: PBTrucoPlay
 }
 
 

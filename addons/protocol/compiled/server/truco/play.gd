@@ -675,44 +675,55 @@ class PBTrucoPlay:
 		service.field = _playType
 		data[_playType.tag] = service
 		
-		_isGameOver = PBField.new("isGameOver", PB_DATA_TYPE.BOOL, PB_RULE.REQUIRED, 3, false, DEFAULT_VALUES_2[PB_DATA_TYPE.BOOL])
+		_playerCards = PBField.new("playerCards", PB_DATA_TYPE.MESSAGE, PB_RULE.REPEATED, 3, false, [])
 		service = PBServiceField.new()
-		service.field = _isGameOver
-		data[_isGameOver.tag] = service
+		service.field = _playerCards
+		service.func_ref = Callable(self, "add_playerCards")
+		data[_playerCards.tag] = service
 		
-		_isMatchOver = PBField.new("isMatchOver", PB_DATA_TYPE.BOOL, PB_RULE.REQUIRED, 4, false, DEFAULT_VALUES_2[PB_DATA_TYPE.BOOL])
+		_opponentCardAmount = PBField.new("opponentCardAmount", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 4, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
 		service = PBServiceField.new()
-		service.field = _isMatchOver
-		data[_isMatchOver.tag] = service
+		service.field = _opponentCardAmount
+		data[_opponentCardAmount.tag] = service
 		
-		_card = PBField.new("card", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 5, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
-		service = PBServiceField.new()
-		service.field = _card
-		service.func_ref = Callable(self, "new_card")
-		data[_card.tag] = service
-		
-		_shout = PBField.new("shout", PB_DATA_TYPE.ENUM, PB_RULE.OPTIONAL, 6, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
-		service = PBServiceField.new()
-		service.field = _shout
-		data[_shout.tag] = service
-		
-		_nextPlayInfo = PBField.new("nextPlayInfo", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 7, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
-		service = PBServiceField.new()
-		service.field = _nextPlayInfo
-		service.func_ref = Callable(self, "new_nextPlayInfo")
-		data[_nextPlayInfo.tag] = service
-		
-		_firstPlayerPoints = PBField.new("firstPlayerPoints", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 8, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
+		_firstPlayerPoints = PBField.new("firstPlayerPoints", PB_DATA_TYPE.MESSAGE, PB_RULE.REQUIRED, 5, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
 		service = PBServiceField.new()
 		service.field = _firstPlayerPoints
 		service.func_ref = Callable(self, "new_firstPlayerPoints")
 		data[_firstPlayerPoints.tag] = service
 		
-		_secondPlayerPoints = PBField.new("secondPlayerPoints", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 9, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
+		_secondPlayerPoints = PBField.new("secondPlayerPoints", PB_DATA_TYPE.MESSAGE, PB_RULE.REQUIRED, 6, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
 		service = PBServiceField.new()
 		service.field = _secondPlayerPoints
 		service.func_ref = Callable(self, "new_secondPlayerPoints")
 		data[_secondPlayerPoints.tag] = service
+		
+		_isGameOver = PBField.new("isGameOver", PB_DATA_TYPE.BOOL, PB_RULE.REQUIRED, 7, false, DEFAULT_VALUES_2[PB_DATA_TYPE.BOOL])
+		service = PBServiceField.new()
+		service.field = _isGameOver
+		data[_isGameOver.tag] = service
+		
+		_isMatchOver = PBField.new("isMatchOver", PB_DATA_TYPE.BOOL, PB_RULE.REQUIRED, 8, false, DEFAULT_VALUES_2[PB_DATA_TYPE.BOOL])
+		service = PBServiceField.new()
+		service.field = _isMatchOver
+		data[_isMatchOver.tag] = service
+		
+		_card = PBField.new("card", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 9, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = _card
+		service.func_ref = Callable(self, "new_card")
+		data[_card.tag] = service
+		
+		_shout = PBField.new("shout", PB_DATA_TYPE.ENUM, PB_RULE.OPTIONAL, 10, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
+		service = PBServiceField.new()
+		service.field = _shout
+		data[_shout.tag] = service
+		
+		_nextPlayInfo = PBField.new("nextPlayInfo", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 11, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = _nextPlayInfo
+		service.func_ref = Callable(self, "new_nextPlayInfo")
+		data[_nextPlayInfo.tag] = service
 		
 	var data = {}
 	
@@ -734,58 +745,31 @@ class PBTrucoPlay:
 	func set_playType(value) -> void:
 		_playType.value = value
 	
-	var _isGameOver: PBField
-	func get_isGameOver() -> bool:
-		return _isGameOver.value
-	func clear_isGameOver() -> void:
+	var _playerCards: PBField
+	func get_playerCards() -> Array:
+		return _playerCards.value
+	func clear_playerCards() -> void:
 		data[3].state = PB_SERVICE_STATE.UNFILLED
-		_isGameOver.value = DEFAULT_VALUES_2[PB_DATA_TYPE.BOOL]
-	func set_isGameOver(value : bool) -> void:
-		_isGameOver.value = value
+		_playerCards.value = []
+	func add_playerCards() -> PBTrucoCard:
+		var element = PBTrucoCard.new()
+		_playerCards.value.append(element)
+		return element
 	
-	var _isMatchOver: PBField
-	func get_isMatchOver() -> bool:
-		return _isMatchOver.value
-	func clear_isMatchOver() -> void:
+	var _opponentCardAmount: PBField
+	func get_opponentCardAmount() -> int:
+		return _opponentCardAmount.value
+	func clear_opponentCardAmount() -> void:
 		data[4].state = PB_SERVICE_STATE.UNFILLED
-		_isMatchOver.value = DEFAULT_VALUES_2[PB_DATA_TYPE.BOOL]
-	func set_isMatchOver(value : bool) -> void:
-		_isMatchOver.value = value
-	
-	var _card: PBField
-	func get_card() -> PBTrucoCard:
-		return _card.value
-	func clear_card() -> void:
-		data[5].state = PB_SERVICE_STATE.UNFILLED
-		_card.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
-	func new_card() -> PBTrucoCard:
-		_card.value = PBTrucoCard.new()
-		return _card.value
-	
-	var _shout: PBField
-	func get_shout():
-		return _shout.value
-	func clear_shout() -> void:
-		data[6].state = PB_SERVICE_STATE.UNFILLED
-		_shout.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
-	func set_shout(value) -> void:
-		_shout.value = value
-	
-	var _nextPlayInfo: PBField
-	func get_nextPlayInfo() -> PBTrucoNextPlay:
-		return _nextPlayInfo.value
-	func clear_nextPlayInfo() -> void:
-		data[7].state = PB_SERVICE_STATE.UNFILLED
-		_nextPlayInfo.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
-	func new_nextPlayInfo() -> PBTrucoNextPlay:
-		_nextPlayInfo.value = PBTrucoNextPlay.new()
-		return _nextPlayInfo.value
+		_opponentCardAmount.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
+	func set_opponentCardAmount(value : int) -> void:
+		_opponentCardAmount.value = value
 	
 	var _firstPlayerPoints: PBField
 	func get_firstPlayerPoints() -> PBTrucoPoints:
 		return _firstPlayerPoints.value
 	func clear_firstPlayerPoints() -> void:
-		data[8].state = PB_SERVICE_STATE.UNFILLED
+		data[5].state = PB_SERVICE_STATE.UNFILLED
 		_firstPlayerPoints.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
 	func new_firstPlayerPoints() -> PBTrucoPoints:
 		_firstPlayerPoints.value = PBTrucoPoints.new()
@@ -795,11 +779,58 @@ class PBTrucoPlay:
 	func get_secondPlayerPoints() -> PBTrucoPoints:
 		return _secondPlayerPoints.value
 	func clear_secondPlayerPoints() -> void:
-		data[9].state = PB_SERVICE_STATE.UNFILLED
+		data[6].state = PB_SERVICE_STATE.UNFILLED
 		_secondPlayerPoints.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
 	func new_secondPlayerPoints() -> PBTrucoPoints:
 		_secondPlayerPoints.value = PBTrucoPoints.new()
 		return _secondPlayerPoints.value
+	
+	var _isGameOver: PBField
+	func get_isGameOver() -> bool:
+		return _isGameOver.value
+	func clear_isGameOver() -> void:
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		_isGameOver.value = DEFAULT_VALUES_2[PB_DATA_TYPE.BOOL]
+	func set_isGameOver(value : bool) -> void:
+		_isGameOver.value = value
+	
+	var _isMatchOver: PBField
+	func get_isMatchOver() -> bool:
+		return _isMatchOver.value
+	func clear_isMatchOver() -> void:
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		_isMatchOver.value = DEFAULT_VALUES_2[PB_DATA_TYPE.BOOL]
+	func set_isMatchOver(value : bool) -> void:
+		_isMatchOver.value = value
+	
+	var _card: PBField
+	func get_card() -> PBTrucoCard:
+		return _card.value
+	func clear_card() -> void:
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		_card.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
+	func new_card() -> PBTrucoCard:
+		_card.value = PBTrucoCard.new()
+		return _card.value
+	
+	var _shout: PBField
+	func get_shout():
+		return _shout.value
+	func clear_shout() -> void:
+		data[10].state = PB_SERVICE_STATE.UNFILLED
+		_shout.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
+	func set_shout(value) -> void:
+		_shout.value = value
+	
+	var _nextPlayInfo: PBField
+	func get_nextPlayInfo() -> PBTrucoNextPlay:
+		return _nextPlayInfo.value
+	func clear_nextPlayInfo() -> void:
+		data[11].state = PB_SERVICE_STATE.UNFILLED
+		_nextPlayInfo.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
+	func new_nextPlayInfo() -> PBTrucoNextPlay:
+		_nextPlayInfo.value = PBTrucoNextPlay.new()
+		return _nextPlayInfo.value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)
@@ -893,39 +924,61 @@ class PBTrucoNextPlay:
 	
 enum PBTrucoPlayType {
 	CARD = 0,
-	SHOUT = 1
+	SHOUT = 1,
+	UPDATE = 2
+}
+
+enum PBTrucoCardSuit {
+	CUPS = 0,
+	SWORDS = 1,
+	COINS = 2,
+	CLUBS = 3
 }
 
 class PBTrucoCard:
 	func _init():
 		var service
 		
-		_suit = PBField.new("suit", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
+		_cardId = PBField.new("cardId", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
+		service = PBServiceField.new()
+		service.field = _cardId
+		data[_cardId.tag] = service
+		
+		_suit = PBField.new("suit", PB_DATA_TYPE.ENUM, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
 		service = PBServiceField.new()
 		service.field = _suit
 		data[_suit.tag] = service
 		
-		_number = PBField.new("number", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
+		_number = PBField.new("number", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 3, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
 		service = PBServiceField.new()
 		service.field = _number
 		data[_number.tag] = service
 		
 	var data = {}
 	
+	var _cardId: PBField
+	func get_cardId() -> int:
+		return _cardId.value
+	func clear_cardId() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		_cardId.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
+	func set_cardId(value : int) -> void:
+		_cardId.value = value
+	
 	var _suit: PBField
-	func get_suit() -> int:
+	func get_suit():
 		return _suit.value
 	func clear_suit() -> void:
-		data[1].state = PB_SERVICE_STATE.UNFILLED
-		_suit.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
-	func set_suit(value : int) -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		_suit.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
+	func set_suit(value) -> void:
 		_suit.value = value
 	
 	var _number: PBField
 	func get_number() -> int:
 		return _number.value
 	func clear_number() -> void:
-		data[2].state = PB_SERVICE_STATE.UNFILLED
+		data[3].state = PB_SERVICE_STATE.UNFILLED
 		_number.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
 	func set_number(value : int) -> void:
 		_number.value = value
@@ -968,7 +1021,7 @@ class PBTrucoPoints:
 	func _init():
 		var service
 		
-		_playerName = PBField.new("playerName", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
+		_playerName = PBField.new("playerName", PB_DATA_TYPE.STRING, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.STRING])
 		service = PBServiceField.new()
 		service.field = _playerName
 		data[_playerName.tag] = service
@@ -981,12 +1034,12 @@ class PBTrucoPoints:
 	var data = {}
 	
 	var _playerName: PBField
-	func get_playerName() -> int:
+	func get_playerName() -> String:
 		return _playerName.value
 	func clear_playerName() -> void:
 		data[1].state = PB_SERVICE_STATE.UNFILLED
-		_playerName.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
-	func set_playerName(value : int) -> void:
+		_playerName.value = DEFAULT_VALUES_2[PB_DATA_TYPE.STRING]
+	func set_playerName(value : String) -> void:
 		_playerName.value = value
 	
 	var _points: PBField

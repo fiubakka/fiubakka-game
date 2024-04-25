@@ -40,6 +40,10 @@ const PBTrucoPlay = (
 	. PBTrucoPlay
 )
 
+const PBTrucoAckPlay = (
+	preload("res://addons/protocol/compiled/client/truco/ack_play.gd").PBTrucoAckPlay
+)
+
 
 static func from(message: Object) -> Result:
 	var type: PBClientMessageType = -1
@@ -61,6 +65,8 @@ static func from(message: Object) -> Result:
 		type = PBClientMessageType.PBTrucoMatchChallengeReply
 	elif message is PBTrucoPlay:
 		type = PBClientMessageType.PBTrucoPlay
+	elif message is PBTrucoAckPlay:
+		type = PBClientMessageType.PBTrucoPlayAck
 
 	if type < 0:
 		printerr("Unknown message type for message class: " + message.get_class())

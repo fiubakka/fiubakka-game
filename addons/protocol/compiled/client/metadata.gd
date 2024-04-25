@@ -725,7 +725,8 @@ enum PBClientMessageType {
 	PBPlayerUpdateEquipment = 5,
 	PBTrucoMatchChallenge = 6,
 	PBTrucoMatchChallengeReply = 7,
-	PBTrucoPlay = 8
+	PBTrucoPlay = 8,
+	PBTrucoPlayAck = 9
 }
 
 ################ USER DATA END #################

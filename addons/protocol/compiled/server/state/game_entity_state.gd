@@ -688,6 +688,12 @@ class PBGameEntityState:
 		service.func_ref = Callable(self, "new_equipment")
 		data[_equipment.tag] = service
 		
+		_metrics = PBField.new("metrics", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 5, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = _metrics
+		service.func_ref = Callable(self, "new_metrics")
+		data[_metrics.tag] = service
+		
 	var data = {}
 	
 	var _entityId: PBField
@@ -728,6 +734,16 @@ class PBGameEntityState:
 	func new_equipment() -> PBGameEntityEquipment:
 		_equipment.value = PBGameEntityEquipment.new()
 		return _equipment.value
+	
+	var _metrics: PBField
+	func get_metrics() -> PBGameEntityMetrics:
+		return _metrics.value
+	func clear_metrics() -> void:
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		_metrics.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
+	func new_metrics() -> PBGameEntityMetrics:
+		_metrics.value = PBGameEntityMetrics.new()
+		return _metrics.value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)
@@ -963,6 +979,61 @@ class PBGameEntityEquipment:
 		_outfit.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
 	func set_outfit(value : int) -> void:
 		_outfit.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+class PBGameEntityMetrics:
+	func _init():
+		var service
+		
+		_nodeId = PBField.new("nodeId", PB_DATA_TYPE.STRING, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.STRING])
+		service = PBServiceField.new()
+		service.field = _nodeId
+		data[_nodeId.tag] = service
+		
+		_messageRatePerSecond = PBField.new("messageRatePerSecond", PB_DATA_TYPE.FLOAT, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT])
+		service = PBServiceField.new()
+		service.field = _messageRatePerSecond
+		data[_messageRatePerSecond.tag] = service
+		
+	var data = {}
+	
+	var _nodeId: PBField
+	func get_nodeId() -> String:
+		return _nodeId.value
+	func clear_nodeId() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		_nodeId.value = DEFAULT_VALUES_2[PB_DATA_TYPE.STRING]
+	func set_nodeId(value : String) -> void:
+		_nodeId.value = value
+	
+	var _messageRatePerSecond: PBField
+	func get_messageRatePerSecond() -> float:
+		return _messageRatePerSecond.value
+	func clear_messageRatePerSecond() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		_messageRatePerSecond.value = DEFAULT_VALUES_2[PB_DATA_TYPE.FLOAT]
+	func set_messageRatePerSecond(value : float) -> void:
+		_messageRatePerSecond.value = value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)

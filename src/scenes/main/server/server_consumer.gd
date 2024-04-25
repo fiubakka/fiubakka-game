@@ -4,6 +4,7 @@ signal user_init_ready(position: Vector2, equipment: Equipment, mapId: int)
 signal update_content(entityId: String, content: String)
 signal player_changed_map
 signal truco_challenge_received(opponentId: String)
+signal truco_play(playId: int)
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 
@@ -38,6 +39,10 @@ const PBTrucoMatchChallengeDenied = (
 
 const PBTrucoAllowPlay = (
 	preload("res://addons/protocol/compiled/server/truco/allow_play.gd").PBTrucoAllowPlay
+)
+
+const PBTrucoPlay = (
+	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoPlay
 )
 
 var _thread: Thread
@@ -83,7 +88,9 @@ func _handle_message(message: Object) -> void:
 	elif message is PBTrucoMatchChallengeDenied:
 		handler = "_handle_truco_match_challenge_denied"
 	elif message is PBTrucoAllowPlay:
-		handler=  "_handle_truco_allow_play"
+		handler = "_handle_truco_allow_play"
+	elif message is PBTrucoPlay:
+		handler = "_handle_truco_play"
 
 	call_deferred(handler, message)
 
@@ -160,5 +167,23 @@ func _handle_truco_match_challenge_denied(msg: PBTrucoMatchChallengeDenied) -> v
 	pass #TODO: handle match denied properly
 	
 func _handle_truco_allow_play(msg: PBTrucoAllowPlay) -> void:
-	print("Truco play:", msg)
-	pass # TODO: handle play properly
+	print("Truco allow play:", msg)
+	pass # TODO: handle play alloed properly
+
+func _handle_truco_play(msg: PBTrucoPlay) -> void:
+	print("Truco play")
+	var play_id := msg.get_playId()
+	var truco_manager := get_node("/root/TrucoManager")
+	if (play_id == 0 and not truco_manager):
+		print("gonna create TrucoManager: ")
+		print(play_id)
+		print(truco_manager)
+		# If we are already loading the Truco scene, ignore new play_id 0 messages
+		if (SceneManager.is_loading_scene):
+			print("is loading truco")
+			return
+		SceneManager.load_new_scene("res://src/scenes/truco/truco_manager.tscn")
+		SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
+		await SceneManager.transition_finished
+		
+	truco_play.emit(play_id)
