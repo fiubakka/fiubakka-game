@@ -85,7 +85,7 @@ func _physics_process(_delta: float) -> void:
 		
 	if Input.is_action_just_pressed("talk_to_npc") and npc:
 		show_tip.emit(npc.message)
-		
+
 
 func play_move_animation() -> void:
 	set_walk_region()
