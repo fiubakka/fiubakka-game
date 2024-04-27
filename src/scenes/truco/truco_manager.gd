@@ -1,10 +1,13 @@
 extends Node2D
 
+signal play_ack(play_id: int)
+
 @export var card_scene: PackedScene
 
 var hand: Hand = null
 var board: Board = null
 var selected_card: Card = null
+var current_play_id := -1
 var deck: Deck = null
 var opponent_controller: OpponentController = null
 var opponent_hand: OpponentCards = null
@@ -13,9 +16,18 @@ var opponent_hand: OpponentCards = null
 func _ready() -> void:
 	hand = $Hand
 	board = $Board
-	deck = preload("res://src/scenes/truco/deck/deck.gd").new()
 	opponent_controller = $OpponentController
 	opponent_hand = $OpponentHand
+	deck = preload("res://src/scenes/truco/deck/deck.gd").new()
+
+	get_node("/root/Main/ServerConnection/ServerConsumer").truco_play.connect(
+		self._on_truco_play
+	)
+	var producer_truco_ack_handler: Callable = (
+		get_node("/root/Main/ServerConnection/ServerProducer")._on_truco_manager_ack
+	)
+	if !play_ack.is_connected(producer_truco_ack_handler):
+		play_ack.connect(producer_truco_ack_handler)
 
 func start_round() -> void:
 	clean()
@@ -102,3 +114,10 @@ func _on_button_7_pressed() -> void:
 	$Board.player_wins(false)
 
 
+func _on_truco_play(play_id: int) -> void:
+	# Ignore plays that are previous or the same as the current one
+	if (play_id <= current_play_id):
+		return
+	current_play_id = play_id
+	
+	play_ack.emit(play_id)

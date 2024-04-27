@@ -20,12 +20,35 @@ const PBGameEntityDisconnect = (
 	. PBGameEntityDisconnect
 )
 
+const PBTrucoMatchChallengeRequest = (
+	preload("res://addons/protocol/compiled/server/truco/match_challenge_request.gd")
+	. PBTrucoMatchChallengeRequest
+)
+
+const PBTrucoMatchChallengeDenied = (
+	preload("res://addons/protocol/compiled/server/truco/match_challenge_denied.gd")
+	. PBTrucoMatchChallengeDenied
+)
+
+const PBTrucoAllowPlay = (
+	preload("res://addons/protocol/compiled/server/truco/allow_play.gd").PBTrucoAllowPlay
+)
+
+const PBTrucoPlay = (
+	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoPlay
+)
+
+
 static var _MESSAGE_MAP := {
 	PBServerMessageType.PBGameEntityState: PBGameEntityState,
 	PBServerMessageType.PBPlayerMessage: PBPlayerMessage,
 	PBServerMessageType.PBPlayerInitSuccess: PBPlayerInitSuccess,
 	PBServerMessageType.PBPlayerChangeMapReady: PBPlayerChangeMapReady,
 	PBServerMessageType.PBGameEntityDisconnect: PBGameEntityDisconnect,
+	PBServerMessageType.PBTrucoMatchChallengeRequest: PBTrucoMatchChallengeRequest,
+	PBServerMessageType.PBTrucoMatchChallengeDenied: PBTrucoMatchChallengeDenied,
+	PBServerMessageType.PBTrucoAllowPlay: PBTrucoAllowPlay,
+	PBServerMessageType.PBTrucoPlay: PBTrucoPlay
 }
 
 

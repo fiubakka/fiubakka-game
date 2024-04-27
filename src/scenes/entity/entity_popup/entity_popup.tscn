@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://b886c3afoscbl"]
+
+[ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="1_8ct6s"]
+[ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="2_8knu0"]
+[ext_resource type="Script" path="res://src/scenes/entity/entity_popup/entity_popup.gd" id="2_y4h0q"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_elpii"]
+texture = ExtResource("1_8ct6s")
+region_rect = Rect2(1376, 0, 80, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s5hj7"]
+texture = ExtResource("1_8ct6s")
+region_rect = Rect2(1376, 0, 80, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yuyas"]
+texture = ExtResource("1_8ct6s")
+region_rect = Rect2(1376, 0, 80, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x2cih"]
+texture = ExtResource("1_8ct6s")
+region_rect = Rect2(1376, 0, 80, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xwrcg"]
+texture = ExtResource("1_8ct6s")
+region_rect = Rect2(1376, 0, 80, 48)
+
+[node name="EntityPopup" type="NinePatchRect"]
+offset_right = 158.0
+offset_bottom = 92.0
+texture = ExtResource("1_8ct6s")
+region_rect = Rect2(40, 184, 64, 64)
+script = ExtResource("2_y4h0q")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 9.0
+offset_right = 149.0
+offset_bottom = 79.0
+theme_override_fonts/font = ExtResource("2_8knu0")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxTexture_elpii")
+theme_override_styles/hover = SubResource("StyleBoxTexture_s5hj7")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_yuyas")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_x2cih")
+theme_override_styles/focus = SubResource("StyleBoxTexture_xwrcg")
+text = "TRUCO_BUTTON"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
