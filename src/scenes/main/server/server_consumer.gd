@@ -159,7 +159,6 @@ func _handle_game_entity_disconnect(msg: PBGameEntityDisconnect) -> void:
 	EntityManager.remove_entity(entityId)
 
 func _handle_truco_match_challenge_request(msg: PBTrucoMatchChallengeRequest) -> void:
-	print("Received truco match challenge request")
 	truco_challenge_received.emit(msg.get_opponent_username())
 	
 func _handle_truco_match_challenge_denied(msg: PBTrucoMatchChallengeDenied) -> void:
