@@ -136,7 +136,6 @@ func _reply_truco_match(opponent_id: String, status: PBTrucoMatchChallengeReplyE
 	_producer.send(truco_match_reply)
 	
 func _on_truco_manager_ack(play_id: int) -> void:
-	print("send ack for: " + str(play_id))
 	var truco_play_ack := PBTrucoAckPlay.new()
 	truco_play_ack.set_playId(play_id)
 	_producer.send(truco_play_ack)
