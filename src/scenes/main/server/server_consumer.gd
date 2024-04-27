@@ -170,16 +170,11 @@ func _handle_truco_allow_play(msg: PBTrucoAllowPlay) -> void:
 	pass # TODO: handle play alloed properly
 
 func _handle_truco_play(msg: PBTrucoPlay) -> void:
-	print("Truco play")
 	var play_id := msg.get_playId()
 	var truco_manager := get_node("/root/TrucoManager")
 	if (play_id == 0 and not truco_manager):
-		print("gonna create TrucoManager: ")
-		print(play_id)
-		print(truco_manager)
 		# If we are already loading the Truco scene, ignore new play_id 0 messages
 		if (SceneManager.is_loading_scene):
-			print("is loading truco")
 			return
 		SceneManager.load_new_scene("res://src/scenes/truco/truco_manager.tscn")
 		SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
