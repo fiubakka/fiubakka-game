@@ -60,7 +60,6 @@ func clean() -> void:
 	opponent_hand.clean()
 
 func _on_card_get_selected(card: Card) -> void:
-	print("on card get selected")
 	if !selected_card:
 		selected_card = card
 		card.selected = true
@@ -75,7 +74,6 @@ func _on_card_get_selected(card: Card) -> void:
 
 
 func _on_card_get_unselected() -> void:
-	print("on card get unselected")
 	selected_card.selected = false
 	selected_card = null
 
