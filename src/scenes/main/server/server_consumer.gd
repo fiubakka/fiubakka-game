@@ -4,8 +4,10 @@ signal user_init_ready(position: Vector2, equipment: Equipment, mapId: int)
 signal update_content(entityId: String, content: String)
 signal player_changed_map
 signal truco_challenge_received(opponentId: String)
-signal allow_truco_play(playId: int)
-signal truco_play(playId: int)
+signal allow_truco_play(playId: int, type: PBTrucoPlayTypeEnum)
+signal truco_play_card
+signal truco_play_shout
+signal truco_play_update(playId: int, cards: Array[Card])
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 
@@ -44,6 +46,18 @@ const PBTrucoAllowPlay = (
 
 const PBTrucoPlay = (
 	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoPlay
+)
+
+const PBTrucoPlayTypeEnum = (
+	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoPlayType
+)
+
+const PBTrucoCard = (
+	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoCard
+)
+
+const PBTrucoCardSuit = (
+	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoCardSuit
 )
 
 var _thread: Thread
@@ -180,5 +194,28 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 		SceneManager.load_new_scene("res://src/scenes/truco/truco_manager.tscn")
 		SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
 		await SceneManager.transition_finished
-		
-	truco_play.emit(play_id)
+	
+	var play_type: PBTrucoPlayTypeEnum = msg.get_playType()
+	
+	match play_type:
+		PBTrucoPlayTypeEnum.CARD:
+			print("got card")
+		PBTrucoPlayTypeEnum.SHOUT:
+			print("got shout")
+		PBTrucoPlayTypeEnum.UPDATE:
+			print("got update")
+			var cards: Array = msg.get_playerCards()
+			var player_cards: Array[Card] = []
+			var deck := Deck.new()
+			for card: PBTrucoCard in cards:
+				var card_id := card.get_cardId()
+				var rank := card.get_number()
+				var suit: PBTrucoCardSuit = card.get_suit()
+				
+				var player_card := Card.new()
+				player_card.texture = deck.deck_file
+				player_card.region_enabled = true
+				player_card.region_rect = deck.deal(rank, suit as Deck.Suits)
+				player_cards.append(player_card)
+				
+			truco_play_update.emit(play_id, player_cards)

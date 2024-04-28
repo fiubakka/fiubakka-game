@@ -22,7 +22,9 @@ func _ready() -> void:
 	deck = preload("res://src/scenes/truco/deck/deck.gd").new()
 
 	var consumer := get_node("/root/Main/ServerConnection/ServerConsumer")
-	consumer.truco_play.connect(self._on_truco_play)
+	#consumer.truco_play_card.connect(self._on_truco_play_card)
+	#consumer.truco_play_shout.connect(self._on_truco_play_shout)
+	consumer.truco_play_update.connect(self._on_truco_play_update)
 	consumer.allow_truco_play.connect(self._on_allow_truco_play)
 		
 	var producer := get_node("/root/Main/ServerConnection/ServerProducer")
@@ -34,17 +36,16 @@ func _ready() -> void:
 	if !play_card.is_connected(producer_truco_play_handler):
 		play_card.connect(producer_truco_play_handler)
 
-func start_round() -> void:
+func start_round(cards: Array[Card]) -> void:
 	clean()
-	for i: int in range(0, 3):
-		var card := card_scene.instantiate()
-		card.get_selected.connect(self._on_card_get_selected)
-		card.get_unselected.connect(self._on_card_get_unselected)
-		card.texture = deck.deck_file
-		card.region_rect = deck.deal(i, i)
-		hand.add_cards(card)
-	board.next_turn()
-	opponent_controller.next_turn()
+	for card in cards:
+		var new_card := card_scene.instantiate()
+		new_card.get_selected.connect(self._on_card_get_selected)
+		new_card.get_unselected.connect(self._on_card_get_unselected)
+		new_card.texture = card.texture
+		new_card.region_rect = card.region_rect
+		hand.add_cards(new_card)
+	next_turn()
 
 
 func next_turn() -> void:
@@ -59,6 +60,7 @@ func clean() -> void:
 	opponent_hand.clean()
 
 func _on_card_get_selected(card: Card) -> void:
+	print("on card get selected")
 	if !selected_card:
 		selected_card = card
 		card.selected = true
@@ -73,6 +75,7 @@ func _on_card_get_selected(card: Card) -> void:
 
 
 func _on_card_get_unselected() -> void:
+	print("on card get unselected")
 	selected_card.selected = false
 	selected_card = null
 
@@ -94,7 +97,7 @@ func _on_button_2_pressed() -> void:
 
 # TODO: REMOVE
 func _on_button_3_pressed() -> void:
-	start_round()
+	start_round([])
 
 
 # TODO: REMOVE
@@ -119,15 +122,13 @@ func _on_button_6_pressed() -> void:
 func _on_button_7_pressed() -> void:
 	$Board.player_wins(false)
 
-
-func _on_truco_play(play_id: int) -> void:
+	
+func _on_truco_play_update(play_id: int, cards: Array[Card]) -> void:
 	# Ignore plays that are previous or the same as the current one
 	if (play_id <= current_play_id):
 		return
 	current_play_id = play_id
-	
-	# TODO: logic to handle opponent plays
-	
+	start_round(cards)
 	play_ack.emit(play_id)
 	
 func _on_allow_truco_play(play_id: int) -> void:

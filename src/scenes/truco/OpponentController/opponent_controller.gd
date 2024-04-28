@@ -41,7 +41,7 @@ func next_turn() -> void:
 	card = null
 	drop_zone = null
 	opponent_hand.deselect()
-	set_hand(0, 0)
+	#set_hand(0, 0) # TODO: mostar la parte de atras de la carta?
 	#var drop_zones := get_tree().get_nodes_in_group("opponent_table")
 	#for zone: DropZone in get_tree().get_nodes_in_group("opponent_table"):
 		#if !zone.has_card:
