@@ -1,7 +1,6 @@
 extends Node2D
 
 signal play_ack(play_id: int)
-signal play_card(play_id: int)
 
 @export var card_scene: PackedScene
 
@@ -21,18 +20,14 @@ func _ready() -> void:
 	opponent_hand = $OpponentHand
 	deck = preload("res://src/scenes/truco/deck/deck.gd").new()
 
-	var consumer := get_node("/root/Main/ServerConnection/ServerConsumer")
-	consumer.truco_play.connect(self._on_truco_play)
-	consumer.allow_truco_play.connect(self._on_allow_truco_play)
-		
-	var producer := get_node("/root/Main/ServerConnection/ServerProducer")
-	var producer_truco_ack_handler: Callable = (producer._on_truco_manager_ack)
+	get_node("/root/Main/ServerConnection/ServerConsumer").truco_play.connect(
+		self._on_truco_play
+	)
+	var producer_truco_ack_handler: Callable = (
+		get_node("/root/Main/ServerConnection/ServerProducer")._on_truco_manager_ack
+	)
 	if !play_ack.is_connected(producer_truco_ack_handler):
 		play_ack.connect(producer_truco_ack_handler)
-		
-	var producer_truco_play_handler: Callable = (producer._on_truco_manager_play)
-	if !play_card.is_connected(producer_truco_play_handler):
-		play_card.connect(producer_truco_play_handler)
 
 func start_round() -> void:
 	clean()
@@ -79,7 +74,6 @@ func _on_card_get_unselected() -> void:
 
 func _on_board_player_card_played(card: Card) -> void:
 	card.played = true
-	
 	print("Carta jugada!")
 
 
@@ -126,15 +120,4 @@ func _on_truco_play(play_id: int) -> void:
 		return
 	current_play_id = play_id
 	
-	# TODO: logic to handle opponent plays
-	
 	play_ack.emit(play_id)
-	
-func _on_allow_truco_play(play_id: int) -> void:
-	# Ignore plays that are previous or the same as the current one
-	# Should never happen here, but we check just in case
-	if (play_id <= current_play_id):
-		return
-	current_play_id = play_id
-	
-	# TODO: add logic to enable cards drag and drop
