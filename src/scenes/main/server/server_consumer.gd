@@ -4,7 +4,6 @@ signal user_init_ready(position: Vector2, equipment: Equipment, mapId: int)
 signal update_content(entityId: String, content: String)
 signal player_changed_map
 signal truco_challenge_received(opponentId: String)
-signal allow_truco_play(playId: int)
 signal truco_play(playId: int)
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
@@ -167,8 +166,8 @@ func _handle_truco_match_challenge_denied(msg: PBTrucoMatchChallengeDenied) -> v
 	pass #TODO: handle match denied properly
 	
 func _handle_truco_allow_play(msg: PBTrucoAllowPlay) -> void:
-	var play_id := msg.get_playId()
-	allow_truco_play.emit(play_id)
+	print("Truco allow play:", msg)
+	pass # TODO: handle play alloed properly
 
 func _handle_truco_play(msg: PBTrucoPlay) -> void:
 	var play_id := msg.get_playId()
