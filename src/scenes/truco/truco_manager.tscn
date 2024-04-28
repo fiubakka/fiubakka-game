@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhw67fd6dh0n0"]
+[gd_scene load_steps=14 format=3 uid="uid://bhw67fd6dh0n0"]
 
 [ext_resource type="Script" path="res://src/scenes/truco/truco_manager.gd" id="1_rogtf"]
 [ext_resource type="PackedScene" uid="uid://44gpne03ucab" path="res://src/scenes/truco/card.tscn" id="2_p2aov"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://d1osyi5ag2uxg" path="res://src/scenes/truco/Interface/opponent_cards.tscn" id="6_x3d1k"]
 [ext_resource type="PackedScene" uid="uid://douueoffhqq2a" path="res://src/scenes/truco/DialogueBubble/dialogue_bubble_controller.tscn" id="8_smc8a"]
 [ext_resource type="PackedScene" uid="uid://cr4msasw6v4l2" path="res://src/scenes/truco/OpponentController/opponent_controller.tscn" id="9_0spk6"]
+[ext_resource type="PackedScene" uid="uid://c5n5u1w3qh0ct" path="res://src/scenes/truco/Points/points.tscn" id="11_upv27"]
+[ext_resource type="PackedScene" uid="uid://cfu6w2rhghpa5" path="res://src/scenes/truco/GameOver/game_over.tscn" id="12_pymvi"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yminj"]
 
@@ -19,7 +21,6 @@ card_scene = ExtResource("2_p2aov")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_tuu7r")
-autoplay = true
 
 [node name="Background" type="NinePatchRect" parent="."]
 modulate = Color(0.101961, 0.360784, 0.27451, 1)
@@ -108,10 +109,10 @@ bbcode_enabled = true
 text = "[right]Opponent[/right]"
 
 [node name="OpponentHand" parent="." instance=ExtResource("6_x3d1k")]
-offset_left = 860.0
-offset_top = 25.0
-offset_right = 952.0
-offset_bottom = 105.0
+offset_left = 855.0
+offset_top = 37.0
+offset_right = 947.0
+offset_bottom = 117.0
 
 [node name="DialogueBubbleController" parent="." instance=ExtResource("8_smc8a")]
 offset_left = 487.0
@@ -121,6 +122,25 @@ offset_bottom = 34.0
 
 [node name="OpponentController" parent="." instance=ExtResource("9_0spk6")]
 position = Vector2(487, -79)
+
+[node name="Points" parent="." instance=ExtResource("11_upv27")]
+offset_left = 10.0
+offset_top = 479.0
+offset_right = 10.0
+offset_bottom = 479.0
+
+[node name="OpponentPoints" parent="." instance=ExtResource("11_upv27")]
+offset_left = 10.0
+offset_top = 18.0
+offset_right = 10.0
+offset_bottom = 18.0
+
+[node name="GameOver" parent="." instance=ExtResource("12_pymvi")]
+visible = false
+offset_left = 484.0
+offset_top = 257.0
+offset_right = 484.0
+offset_bottom = 257.0
 
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
 [connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
