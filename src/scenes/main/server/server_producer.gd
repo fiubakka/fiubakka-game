@@ -26,6 +26,24 @@ const PBPlayerUpdateEquipment = (
 	. PBPlayerUpdateEquipment
 )
 
+const PBTrucoMatchChallenge = (
+	preload("res://addons/protocol/compiled/client/truco/match_challenge.gd").PBTrucoMatchChallenge
+)
+
+const PBTrucoMatchChallengeReply = (
+	preload("res://addons/protocol/compiled/client/truco/match_challenge_reply.gd")
+	. PBTrucoMatchChallengeReply
+)
+
+const PBTrucoMatchChallengeReplyEnum = (
+	preload("res://addons/protocol/compiled/client/truco/match_challenge_reply.gd")
+	. PBTrucoMatchChallengeReplyEnum
+)
+
+const PBTrucoAckPlay = (
+	preload("res://addons/protocol/compiled/client/truco/ack_play.gd").PBTrucoAckPlay
+)
+
 var _producer: Producer
 
 
@@ -48,7 +66,7 @@ func _on_player_movement(velocity: Vector2, position: Vector2) -> void:
 	_producer.send(player_movement)
 
 
-func _on_user_logged_in(username: String, equipment: Equipment) -> void:
+func _on_user_logged_in(username: String, password: String, equipment: Equipment) -> void:
 	if equipment:
 		var player_register := PBPlayerRegister.new()
 		player_register.set_username(username)
@@ -65,7 +83,7 @@ func _on_user_logged_in(username: String, equipment: Equipment) -> void:
 	else:
 		var player_login := PBPlayerLogin.new()
 		player_login.set_username(username)
-		player_login.set_password("password")
+		player_login.set_password(password)
 		_producer.send(player_login)
 
 
@@ -91,3 +109,36 @@ func _on_inventory_update_equipment(equipment: Equipment) -> void:
 	new_equipment.set_body(equipment.body)
 	new_equipment.set_eyes(equipment.eyes)
 	_producer.send(new_equipment)
+
+
+func _on_player_start_truco(opponent_id: String) -> void:
+	var truco_match_challenge := PBTrucoMatchChallenge.new()
+	truco_match_challenge.set_opponent_username(opponent_id)
+	_producer.send(truco_match_challenge)
+
+
+func _on_modal_match_accepted(opponent_id: String) -> void:
+	_reply_truco_match(opponent_id, PBTrucoMatchChallengeReplyEnum.ACCEPTED)
+	# TODO: temporarily load the truco scene right now
+	# this should be removed when we properly receive the very first TrucoPlay
+	# message after accepting the match
+	SceneManager.load_new_scene("res://src/scenes/truco/truco_manager.tscn")
+	# TODO: load content only when we get an accepted match confirmation from the server
+	SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
+
+
+func _on_modal_match_rejected(opponent_id: String) -> void:
+	_reply_truco_match(opponent_id, PBTrucoMatchChallengeReplyEnum.REJECTED)
+
+
+func _reply_truco_match(opponent_id: String, status: PBTrucoMatchChallengeReplyEnum) -> void:
+	var truco_match_reply := PBTrucoMatchChallengeReply.new()
+	truco_match_reply.set_opponent_username(opponent_id)
+	truco_match_reply.set_status(status)
+	_producer.send(truco_match_reply)
+
+
+func _on_truco_manager_ack(play_id: int) -> void:
+	var truco_play_ack := PBTrucoAckPlay.new()
+	truco_play_ack.set_playId(play_id)
+	_producer.send(truco_play_ack)

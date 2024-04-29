@@ -11,6 +11,7 @@ extends Node2D
 var cs := CompositeSprites
 var pc := PlayerInfo.player_customization
 
+
 func _ready() -> void:
 	body_sprite.texture = cs.body_spritesheet[pc["body"]]
 	hair_sprite.texture = cs.hair_spritesheet[pc["hair"]]

@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://nqpqnx1lgim3" path="res://src/scenes/game_menu/GameMenu.tscn" id="10_8b4g2"]
 [ext_resource type="PackedScene" uid="uid://ci2j6myp2y3u3" path="res://src/scenes/GUI/dialogue/Dialogue.tscn" id="11_bkedh"]
 [ext_resource type="PackedScene" uid="uid://btx655wwmsnrl" path="res://src/scenes/language_select/language_select.tscn" id="13_geu0e"]
+[ext_resource type="PackedScene" uid="uid://dj80f5e6d1tsp" path="res://src/scenes/GUI/modal/modal.tscn" id="12_3el8v"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(0, 3)
@@ -81,6 +82,10 @@ offset_top = 446.0
 offset_right = 1.0
 offset_bottom = 446.0
 
+[node name="Modal" parent="GUI/GuiManager" instance=ExtResource("12_3el8v")]
+visible = false
+layout_mode = 1
+
 [node name="MainMenu" parent="." instance=ExtResource("9_hsq23")]
 visible = false
 offset_left = 1.0
@@ -101,12 +106,12 @@ grow_vertical = 1
 [connection signal="chat_closed" from="." to="GUI/GuiManager/Chatbox" method="_on_main_chat_closed"]
 [connection signal="chat_opened" from="." to="GUI/GuiManager/Chatbox" method="_on_main_chat_opened"]
 [connection signal="login_ready" from="." to="GUI/GuiManager/Chatbox" method="_on_main_login_ready"]
-[connection signal="paused" from="." to="GUI/GuiManager/Chatbox" method="_on_main_paused"]
+[connection signal="login_ready" from="." to="GUI/GuiManager/Pause" method="_on_main_login_ready"]
 [connection signal="return_to_menu" from="Login" to="." method="_on_login_return_to_menu"]
 [connection signal="user_logged_in" from="Login" to="ServerConnection/ServerProducer" method="_on_user_logged_in"]
 [connection signal="return_to_menu" from="Register" to="." method="_on_register_return_to_menu"]
-[connection signal="save_character" from="Register" to="." method="_on_register_save_character"]
 [connection signal="user_logged_in" from="Register" to="ServerConnection/ServerProducer" method="_on_user_logged_in"]
+[connection signal="truco_challenge_received" from="ServerConnection/ServerConsumer" to="GUI/GuiManager/Modal" method="_on_server_consumer_truco_challenge_received"]
 [connection signal="update_content" from="ServerConnection/ServerConsumer" to="GUI/GuiManager/Chatbox" method="_on_server_consumer_update_content"]
 [connection signal="user_init_ready" from="ServerConnection/ServerConsumer" to="." method="_on_server_consumer_user_init_ready"]
 [connection signal="user_init_ready" from="ServerConnection/ServerConsumer" to="GUI/GuiManager/GameMenu/HBoxContainer/NinePatchRect/CenterContainer/Panel/Inventory" method="_on_server_consumer_user_init_ready"]
@@ -114,6 +119,9 @@ grow_vertical = 1
 [connection signal="is_focused" from="GUI/GuiManager/Chatbox" to="GUI/GuiManager" method="_on_chatbox_is_focused"]
 [connection signal="send_message" from="GUI/GuiManager/Chatbox" to="ServerConnection/ServerProducer" method="_on_chatbox_send_message"]
 [connection signal="update_equipment" from="GUI/GuiManager/GameMenu/HBoxContainer/NinePatchRect/CenterContainer/Panel/Inventory" to="ServerConnection/ServerProducer" method="_on_inventory_update_equipment"]
+[connection signal="unpaused" from="GUI/GuiManager/Pause" to="." method="_on_pause_unpaused"]
+[connection signal="match_accepted" from="GUI/GuiManager/Modal" to="ServerConnection/ServerProducer" method="_on_modal_match_accepted"]
+[connection signal="match_rejected" from="GUI/GuiManager/Modal" to="ServerConnection/ServerProducer" method="_on_modal_match_rejected"]
 [connection signal="go_to_login" from="MainMenu" to="." method="_on_main_menu_go_to_login"]
 [connection signal="go_to_register" from="MainMenu" to="." method="_on_main_menu_go_to_register"]
 [connection signal="go_to_main_menu" from="LanguageSelect" to="MainMenu" method="_on_language_select_go_to_main_menu"]

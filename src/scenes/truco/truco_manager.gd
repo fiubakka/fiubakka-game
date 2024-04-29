@@ -1,18 +1,31 @@
 extends Node2D
 
+signal play_ack(play_id: int)
+
 @export var card_scene: PackedScene
 
 var hand: Hand = null
 var board: Board = null
 var selected_card: Card = null
-#var next_turn_number := 0
+var current_play_id := -1
 var deck: Deck = null
+var opponent_controller: OpponentController = null
+var opponent_hand: OpponentCards = null
 
 
 func _ready() -> void:
 	hand = $Hand
 	board = $Board
+	opponent_controller = $OpponentController
+	opponent_hand = $OpponentHand
 	deck = preload("res://src/scenes/truco/deck/deck.gd").new()
+
+	get_node("/root/Main/ServerConnection/ServerConsumer").truco_play.connect(self._on_truco_play)
+	var producer_truco_ack_handler: Callable = (
+		get_node("/root/Main/ServerConnection/ServerProducer")._on_truco_manager_ack
+	)
+	if !play_ack.is_connected(producer_truco_ack_handler):
+		play_ack.connect(producer_truco_ack_handler)
 
 
 func start_round() -> void:
@@ -25,15 +38,19 @@ func start_round() -> void:
 		card.region_rect = deck.deal(i, i)
 		hand.add_cards(card)
 	board.next_turn()
+	opponent_controller.next_turn()
 
 
 func next_turn() -> void:
 	board.next_turn()
+	opponent_controller.next_turn()
 
 
 func clean() -> void:
 	hand.clean()
 	board.clean()
+	opponent_controller.clean()
+	opponent_hand.clean()
 
 
 func _on_card_get_selected(card: Card) -> void:
@@ -60,6 +77,10 @@ func _on_board_player_card_played(card: Card) -> void:
 	print("Carta jugada!")
 
 
+func _on_opponent_controller_remove_card_from_hand() -> void:
+	opponent_hand.play_card()
+
+
 # TODO: REMOVE
 func _on_button_2_pressed() -> void:
 	next_turn()
@@ -73,3 +94,31 @@ func _on_button_3_pressed() -> void:
 # TODO: REMOVE
 func _on_button_4_pressed() -> void:
 	$DialogueBubbleController.show_dialogue("Truco!")
+
+
+# TODO: REMOVE
+func _on_button_5_pressed() -> void:
+	var drop_zones := get_tree().get_nodes_in_group("opponent_table")
+	for drop_zone: DropZone in get_tree().get_nodes_in_group("opponent_table"):
+		if !drop_zone.has_card:
+			opponent_controller.play_card(drop_zone)
+			break
+
+
+# TODO: REMOVE
+func _on_button_6_pressed() -> void:
+	$Board.player_wins(true)
+
+
+# TODO: REMOVE
+func _on_button_7_pressed() -> void:
+	$Board.player_wins(false)
+
+
+func _on_truco_play(play_id: int) -> void:
+	# Ignore plays that are previous or the same as the current one
+	if play_id <= current_play_id:
+		return
+	current_play_id = play_id
+
+	play_ack.emit(play_id)

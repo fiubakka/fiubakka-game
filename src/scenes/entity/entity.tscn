@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cyysqnwra020e"]
+[gd_scene load_steps=12 format=3 uid="uid://cyysqnwra020e"]
 
 [ext_resource type="Script" path="res://src/scenes/entity/entity.gd" id="1_2la61"]
 [ext_resource type="PackedScene" uid="uid://bj12r5t8p4dpp" path="res://src/scenes/character_sprite/character_sprite.tscn" id="2_0mjch"]
+[ext_resource type="PackedScene" uid="uid://b886c3afoscbl" path="res://src/scenes/entity/entity_popup/entity_popup.tscn" id="3_rxs40"]
 
 [sub_resource type="Animation" id="Animation_1oepq"]
 length = 0.001
@@ -458,6 +459,10 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_81q6c"]
 size = Vector2(44, 14.5)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xq0wm"]
+radius = 30.0
+height = 100.0
+
 [node name="Entity" type="Node2D"]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_2la61")
@@ -487,4 +492,20 @@ fit_content = true
 position = Vector2(0, 38)
 shape = SubResource("RectangleShape2D_81q6c")
 
+[node name="InteractArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="ClickArea" type="CollisionShape2D" parent="InteractArea"]
+position = Vector2(0, -4)
+shape = SubResource("CapsuleShape2D_xq0wm")
+
+[node name="EntityPopup" parent="." instance=ExtResource("3_rxs40")]
+visible = false
+offset_left = 36.0
+offset_top = -76.0
+offset_right = 192.0
+offset_bottom = 12.0
+
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="input_event" from="InteractArea" to="." method="_on_interact_area_input_event"]

@@ -722,7 +722,11 @@ enum PBServerMessageType {
 	PBPlayerInitError = 2,
 	PBPlayerInitSuccess = 3,
 	PBPlayerChangeMapReady = 4,
-	PBGameEntityDisconnect = 5
+	PBGameEntityDisconnect = 5,
+	PBTrucoMatchChallengeRequest = 6,
+	PBTrucoMatchChallengeDenied = 7,
+	PBTrucoPlay = 8,
+	PBTrucoAllowPlay = 9
 }
 
 ################ USER DATA END #################

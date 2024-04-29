@@ -2,6 +2,7 @@ class_name Player extends CharacterBody2D
 
 signal update_movement(velocity: Vector2, position: Vector2)
 signal show_tip(message: String)
+signal start_truco(id: String)
 
 @export var idle: bool = false
 @export var npc: NPC
@@ -16,6 +17,12 @@ func _ready() -> void:
 	# Set idle front animation when spawning player
 	set_idle_region()
 	$AnimationPlayer.play("front")
+
+	var producer_start_truco_handler: Callable = (
+		get_node("/root/Main/ServerConnection/ServerProducer")._on_player_start_truco
+	)
+	if !start_truco.is_connected(producer_start_truco_handler):
+		start_truco.connect(producer_start_truco_handler)
 
 
 func set_equipment(_equipment: Equipment) -> void:
@@ -75,7 +82,7 @@ func _physics_process(_delta: float) -> void:
 	if velocity != prev_vel:
 		play_move_animation()
 		prev_vel = velocity
-		
+
 	if Input.is_action_just_pressed("talk_to_npc") and npc:
 		show_tip.emit(npc.message)
 

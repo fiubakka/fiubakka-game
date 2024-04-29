@@ -19,6 +19,8 @@ func _ready() -> void:
 	set_idle_region()
 	$AnimationPlayer.play("front")
 
+	$EntityPopup.id = id
+
 
 func _process(_delta: float) -> void:
 	if prev_vel == velocity:
@@ -92,3 +94,12 @@ func set_walk_region() -> void:
 	$EntitySprite/FacialHair.region_rect = walk_region_rect
 	$EntitySprite/Glasses.region_rect = walk_region_rect
 	$EntitySprite/Hats.region_rect = Rect2(0, 190, 1152, 72)
+
+
+func _on_interact_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if (
+		event is InputEventMouseButton
+		and event.pressed
+		and event.button_index == MOUSE_BUTTON_RIGHT
+	):
+		$EntityPopup.toggle_popup()

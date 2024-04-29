@@ -19,7 +19,7 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	player_entered_door.emit(body)
 	SceneManager.load_new_scene(path_to_new_scene)
-	
+
 	timer = Timer.new()  #This timer is to send the change map message until we get a response from the server
 	var level_id := MapsDictionary.content_path_to_id(path_to_new_scene)
 	timer.timeout.connect(Callable(self, "_on_timer_timeout").bind(level_id))
