@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://cv2bywsa6irhc" path="res://fonts/Xolonium-Regular.ttf" id="1_6wxyl"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_dqjeo"]
 [ext_resource type="Script" path="res://src/scenes/truco/Interface/button.gd" id="3_h06nr"]
-[ext_resource type="AudioStream" uid="uid://nnxqgu1vmxfw" path="res://audio/sounds/button.mp3" id="4_fo1tg"]
+[ext_resource type="AudioStream" uid="uid://b7yp7usbygtwd" path="res://audio/sounds/button.ogg" id="4_5mnt2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5jgxe"]
 atlas = ExtResource("2_dqjeo")
@@ -48,6 +48,6 @@ text = "Text"
 script = ExtResource("3_h06nr")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_fo1tg")
+stream = ExtResource("4_5mnt2")
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

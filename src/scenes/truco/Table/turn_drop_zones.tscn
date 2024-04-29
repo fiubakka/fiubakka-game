@@ -6,7 +6,8 @@
 [node name="TurnDropZones" type="Node2D"]
 script = ExtResource("1_ci5dw")
 
-[node name="OpponentDropZone" type="Node2D" parent="."]
+[node name="OpponentDropZone" parent="." groups=["opponent_table"] instance=ExtResource("2_jwdgb")]
+position = Vector2(50, -50)
 
 [node name="PlayerDropZone" parent="." groups=["table"] instance=ExtResource("2_jwdgb")]
 

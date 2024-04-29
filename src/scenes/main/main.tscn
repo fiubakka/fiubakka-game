@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bwgonn6l2afs6"]
+[gd_scene load_steps=14 format=3 uid="uid://bwgonn6l2afs6"]
 
 [ext_resource type="Script" path="res://src/scenes/main/main.gd" id="1_kecny"]
 [ext_resource type="PackedScene" uid="uid://b6kg7qutp1h00" path="res://src/scenes/login/login.tscn" id="3_2am71"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bjdyuheqlnwho" path="res://src/scenes/GUI/GUIManager/GuiManager.tscn" id="10_2hml5"]
 [ext_resource type="PackedScene" uid="uid://nqpqnx1lgim3" path="res://src/scenes/game_menu/GameMenu.tscn" id="10_8b4g2"]
 [ext_resource type="PackedScene" uid="uid://ci2j6myp2y3u3" path="res://src/scenes/GUI/dialogue/Dialogue.tscn" id="11_bkedh"]
+[ext_resource type="PackedScene" uid="uid://dj80f5e6d1tsp" path="res://src/scenes/GUI/modal/modal.tscn" id="12_3el8v"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(0, 3)
@@ -80,6 +81,10 @@ offset_top = 446.0
 offset_right = 1.0
 offset_bottom = 446.0
 
+[node name="Modal" parent="GUI/GuiManager" instance=ExtResource("12_3el8v")]
+visible = false
+layout_mode = 1
+
 [node name="MainMenu" parent="." instance=ExtResource("9_hsq23")]
 offset_left = 1.0
 offset_top = -3.0
@@ -92,6 +97,7 @@ offset_bottom = 537.0
 [connection signal="user_logged_in" from="Login" to="ServerConnection/ServerProducer" method="_on_user_logged_in"]
 [connection signal="return_to_menu" from="Register" to="." method="_on_register_return_to_menu"]
 [connection signal="user_logged_in" from="Register" to="ServerConnection/ServerProducer" method="_on_user_logged_in"]
+[connection signal="truco_challenge_received" from="ServerConnection/ServerConsumer" to="GUI/GuiManager/Modal" method="_on_server_consumer_truco_challenge_received"]
 [connection signal="update_content" from="ServerConnection/ServerConsumer" to="GUI/GuiManager/Chatbox" method="_on_server_consumer_update_content"]
 [connection signal="user_init_ready" from="ServerConnection/ServerConsumer" to="." method="_on_server_consumer_user_init_ready"]
 [connection signal="user_init_ready" from="ServerConnection/ServerConsumer" to="GUI/GuiManager/GameMenu/HBoxContainer/NinePatchRect/CenterContainer/Panel/Inventory" method="_on_server_consumer_user_init_ready"]
@@ -100,6 +106,8 @@ offset_bottom = 537.0
 [connection signal="send_message" from="GUI/GuiManager/Chatbox" to="ServerConnection/ServerProducer" method="_on_chatbox_send_message"]
 [connection signal="update_equipment" from="GUI/GuiManager/GameMenu/HBoxContainer/NinePatchRect/CenterContainer/Panel/Inventory" to="ServerConnection/ServerProducer" method="_on_inventory_update_equipment"]
 [connection signal="unpaused" from="GUI/GuiManager/Pause" to="." method="_on_pause_unpaused"]
+[connection signal="match_accepted" from="GUI/GuiManager/Modal" to="ServerConnection/ServerProducer" method="_on_modal_match_accepted"]
+[connection signal="match_rejected" from="GUI/GuiManager/Modal" to="ServerConnection/ServerProducer" method="_on_modal_match_rejected"]
 [connection signal="go_to_login" from="MainMenu" to="." method="_on_main_menu_go_to_login"]
 [connection signal="go_to_register" from="MainMenu" to="." method="_on_main_menu_go_to_register"]
 

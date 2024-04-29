@@ -661,39 +661,176 @@ class PBPacker:
 ############### USER DATA BEGIN ################
 
 
-class PBServerMetadata:
+class PBTrucoPlay:
 	func _init():
 		var service
 		
-		_length = PBField.new("length", PB_DATA_TYPE.UINT32, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.UINT32])
+		_playId = PBField.new("playId", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
 		service = PBServiceField.new()
-		service.field = _length
-		data[_length.tag] = service
+		service.field = _playId
+		data[_playId.tag] = service
 		
-		_type = PBField.new("type", PB_DATA_TYPE.ENUM, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
+		_playType = PBField.new("playType", PB_DATA_TYPE.ENUM, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
 		service = PBServiceField.new()
-		service.field = _type
-		data[_type.tag] = service
+		service.field = _playType
+		data[_playType.tag] = service
+		
+		_playerCards = PBField.new("playerCards", PB_DATA_TYPE.MESSAGE, PB_RULE.REPEATED, 3, false, [])
+		service = PBServiceField.new()
+		service.field = _playerCards
+		service.func_ref = Callable(self, "add_playerCards")
+		data[_playerCards.tag] = service
+		
+		_opponentCardAmount = PBField.new("opponentCardAmount", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 4, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
+		service = PBServiceField.new()
+		service.field = _opponentCardAmount
+		data[_opponentCardAmount.tag] = service
+		
+		_firstPlayerPoints = PBField.new("firstPlayerPoints", PB_DATA_TYPE.MESSAGE, PB_RULE.REQUIRED, 5, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = _firstPlayerPoints
+		service.func_ref = Callable(self, "new_firstPlayerPoints")
+		data[_firstPlayerPoints.tag] = service
+		
+		_secondPlayerPoints = PBField.new("secondPlayerPoints", PB_DATA_TYPE.MESSAGE, PB_RULE.REQUIRED, 6, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = _secondPlayerPoints
+		service.func_ref = Callable(self, "new_secondPlayerPoints")
+		data[_secondPlayerPoints.tag] = service
+		
+		_isGameOver = PBField.new("isGameOver", PB_DATA_TYPE.BOOL, PB_RULE.REQUIRED, 7, false, DEFAULT_VALUES_2[PB_DATA_TYPE.BOOL])
+		service = PBServiceField.new()
+		service.field = _isGameOver
+		data[_isGameOver.tag] = service
+		
+		_isMatchOver = PBField.new("isMatchOver", PB_DATA_TYPE.BOOL, PB_RULE.REQUIRED, 8, false, DEFAULT_VALUES_2[PB_DATA_TYPE.BOOL])
+		service = PBServiceField.new()
+		service.field = _isMatchOver
+		data[_isMatchOver.tag] = service
+		
+		_card = PBField.new("card", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 9, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = _card
+		service.func_ref = Callable(self, "new_card")
+		data[_card.tag] = service
+		
+		_shout = PBField.new("shout", PB_DATA_TYPE.ENUM, PB_RULE.OPTIONAL, 10, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
+		service = PBServiceField.new()
+		service.field = _shout
+		data[_shout.tag] = service
+		
+		_nextPlayInfo = PBField.new("nextPlayInfo", PB_DATA_TYPE.MESSAGE, PB_RULE.OPTIONAL, 11, false, DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE])
+		service = PBServiceField.new()
+		service.field = _nextPlayInfo
+		service.func_ref = Callable(self, "new_nextPlayInfo")
+		data[_nextPlayInfo.tag] = service
 		
 	var data = {}
 	
-	var _length: PBField
-	func get_length() -> int:
-		return _length.value
-	func clear_length() -> void:
+	var _playId: PBField
+	func get_playId() -> int:
+		return _playId.value
+	func clear_playId() -> void:
 		data[1].state = PB_SERVICE_STATE.UNFILLED
-		_length.value = DEFAULT_VALUES_2[PB_DATA_TYPE.UINT32]
-	func set_length(value : int) -> void:
-		_length.value = value
+		_playId.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
+	func set_playId(value : int) -> void:
+		_playId.value = value
 	
-	var _type: PBField
-	func get_type():
-		return _type.value
-	func clear_type() -> void:
+	var _playType: PBField
+	func get_playType():
+		return _playType.value
+	func clear_playType() -> void:
 		data[2].state = PB_SERVICE_STATE.UNFILLED
-		_type.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
-	func set_type(value) -> void:
-		_type.value = value
+		_playType.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
+	func set_playType(value) -> void:
+		_playType.value = value
+	
+	var _playerCards: PBField
+	func get_playerCards() -> Array:
+		return _playerCards.value
+	func clear_playerCards() -> void:
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		_playerCards.value = []
+	func add_playerCards() -> PBTrucoCard:
+		var element = PBTrucoCard.new()
+		_playerCards.value.append(element)
+		return element
+	
+	var _opponentCardAmount: PBField
+	func get_opponentCardAmount() -> int:
+		return _opponentCardAmount.value
+	func clear_opponentCardAmount() -> void:
+		data[4].state = PB_SERVICE_STATE.UNFILLED
+		_opponentCardAmount.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
+	func set_opponentCardAmount(value : int) -> void:
+		_opponentCardAmount.value = value
+	
+	var _firstPlayerPoints: PBField
+	func get_firstPlayerPoints() -> PBTrucoPoints:
+		return _firstPlayerPoints.value
+	func clear_firstPlayerPoints() -> void:
+		data[5].state = PB_SERVICE_STATE.UNFILLED
+		_firstPlayerPoints.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
+	func new_firstPlayerPoints() -> PBTrucoPoints:
+		_firstPlayerPoints.value = PBTrucoPoints.new()
+		return _firstPlayerPoints.value
+	
+	var _secondPlayerPoints: PBField
+	func get_secondPlayerPoints() -> PBTrucoPoints:
+		return _secondPlayerPoints.value
+	func clear_secondPlayerPoints() -> void:
+		data[6].state = PB_SERVICE_STATE.UNFILLED
+		_secondPlayerPoints.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
+	func new_secondPlayerPoints() -> PBTrucoPoints:
+		_secondPlayerPoints.value = PBTrucoPoints.new()
+		return _secondPlayerPoints.value
+	
+	var _isGameOver: PBField
+	func get_isGameOver() -> bool:
+		return _isGameOver.value
+	func clear_isGameOver() -> void:
+		data[7].state = PB_SERVICE_STATE.UNFILLED
+		_isGameOver.value = DEFAULT_VALUES_2[PB_DATA_TYPE.BOOL]
+	func set_isGameOver(value : bool) -> void:
+		_isGameOver.value = value
+	
+	var _isMatchOver: PBField
+	func get_isMatchOver() -> bool:
+		return _isMatchOver.value
+	func clear_isMatchOver() -> void:
+		data[8].state = PB_SERVICE_STATE.UNFILLED
+		_isMatchOver.value = DEFAULT_VALUES_2[PB_DATA_TYPE.BOOL]
+	func set_isMatchOver(value : bool) -> void:
+		_isMatchOver.value = value
+	
+	var _card: PBField
+	func get_card() -> PBTrucoCard:
+		return _card.value
+	func clear_card() -> void:
+		data[9].state = PB_SERVICE_STATE.UNFILLED
+		_card.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
+	func new_card() -> PBTrucoCard:
+		_card.value = PBTrucoCard.new()
+		return _card.value
+	
+	var _shout: PBField
+	func get_shout():
+		return _shout.value
+	func clear_shout() -> void:
+		data[10].state = PB_SERVICE_STATE.UNFILLED
+		_shout.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
+	func set_shout(value) -> void:
+		_shout.value = value
+	
+	var _nextPlayInfo: PBField
+	func get_nextPlayInfo() -> PBTrucoNextPlay:
+		return _nextPlayInfo.value
+	func clear_nextPlayInfo() -> void:
+		data[11].state = PB_SERVICE_STATE.UNFILLED
+		_nextPlayInfo.value = DEFAULT_VALUES_2[PB_DATA_TYPE.MESSAGE]
+	func new_nextPlayInfo() -> PBTrucoNextPlay:
+		_nextPlayInfo.value = PBTrucoNextPlay.new()
+		return _nextPlayInfo.value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)
@@ -716,17 +853,223 @@ class PBServerMetadata:
 			return PB_ERR.PARSE_INCOMPLETE
 		return result
 	
-enum PBServerMessageType {
-	PBGameEntityState = 0,
-	PBPlayerMessage = 1,
-	PBPlayerInitError = 2,
-	PBPlayerInitSuccess = 3,
-	PBPlayerChangeMapReady = 4,
-	PBGameEntityDisconnect = 5,
-	PBTrucoMatchChallengeRequest = 6,
-	PBTrucoMatchChallengeDenied = 7,
-	PBTrucoPlay = 8,
-	PBTrucoAllowPlay = 9
+class PBTrucoNextPlay:
+	func _init():
+		var service
+		
+		_nextPlayer = PBField.new("nextPlayer", PB_DATA_TYPE.STRING, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.STRING])
+		service = PBServiceField.new()
+		service.field = _nextPlayer
+		data[_nextPlayer.tag] = service
+		
+		_isPlayCardAvailable = PBField.new("isPlayCardAvailable", PB_DATA_TYPE.BOOL, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.BOOL])
+		service = PBServiceField.new()
+		service.field = _isPlayCardAvailable
+		data[_isPlayCardAvailable.tag] = service
+		
+		_availableShouts = PBField.new("availableShouts", PB_DATA_TYPE.ENUM, PB_RULE.REPEATED, 3, false, [])
+		service = PBServiceField.new()
+		service.field = _availableShouts
+		data[_availableShouts.tag] = service
+		
+	var data = {}
+	
+	var _nextPlayer: PBField
+	func get_nextPlayer() -> String:
+		return _nextPlayer.value
+	func clear_nextPlayer() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		_nextPlayer.value = DEFAULT_VALUES_2[PB_DATA_TYPE.STRING]
+	func set_nextPlayer(value : String) -> void:
+		_nextPlayer.value = value
+	
+	var _isPlayCardAvailable: PBField
+	func get_isPlayCardAvailable() -> bool:
+		return _isPlayCardAvailable.value
+	func clear_isPlayCardAvailable() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		_isPlayCardAvailable.value = DEFAULT_VALUES_2[PB_DATA_TYPE.BOOL]
+	func set_isPlayCardAvailable(value : bool) -> void:
+		_isPlayCardAvailable.value = value
+	
+	var _availableShouts: PBField
+	func get_availableShouts() -> Array:
+		return _availableShouts.value
+	func clear_availableShouts() -> void:
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		_availableShouts.value = []
+	func add_availableShouts(value) -> void:
+		_availableShouts.value.append(value)
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+enum PBTrucoPlayType {
+	CARD = 0,
+	SHOUT = 1,
+	UPDATE = 2
 }
 
+enum PBTrucoCardSuit {
+	CUPS = 0,
+	SWORDS = 1,
+	COINS = 2,
+	CLUBS = 3
+}
+
+class PBTrucoCard:
+	func _init():
+		var service
+		
+		_cardId = PBField.new("cardId", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
+		service = PBServiceField.new()
+		service.field = _cardId
+		data[_cardId.tag] = service
+		
+		_suit = PBField.new("suit", PB_DATA_TYPE.ENUM, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
+		service = PBServiceField.new()
+		service.field = _suit
+		data[_suit.tag] = service
+		
+		_number = PBField.new("number", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 3, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
+		service = PBServiceField.new()
+		service.field = _number
+		data[_number.tag] = service
+		
+	var data = {}
+	
+	var _cardId: PBField
+	func get_cardId() -> int:
+		return _cardId.value
+	func clear_cardId() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		_cardId.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
+	func set_cardId(value : int) -> void:
+		_cardId.value = value
+	
+	var _suit: PBField
+	func get_suit():
+		return _suit.value
+	func clear_suit() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		_suit.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
+	func set_suit(value) -> void:
+		_suit.value = value
+	
+	var _number: PBField
+	func get_number() -> int:
+		return _number.value
+	func clear_number() -> void:
+		data[3].state = PB_SERVICE_STATE.UNFILLED
+		_number.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
+	func set_number(value : int) -> void:
+		_number.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
+enum PBTrucoShout {
+	ENVIDO = 0,
+	REAL_ENVIDO = 1,
+	FALTA_ENVIDO = 2,
+	ENVIDO_QUIERO = 3,
+	ENVIDO_NO_QUIERO = 4,
+	TRUCO = 5,
+	RETRUCO = 6,
+	VALE_CUATRO = 7,
+	TRUCO_QUIERO = 8,
+	TRUCO_NO_QUIERO = 9
+}
+
+class PBTrucoPoints:
+	func _init():
+		var service
+		
+		_playerName = PBField.new("playerName", PB_DATA_TYPE.STRING, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.STRING])
+		service = PBServiceField.new()
+		service.field = _playerName
+		data[_playerName.tag] = service
+		
+		_points = PBField.new("points", PB_DATA_TYPE.INT32, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.INT32])
+		service = PBServiceField.new()
+		service.field = _points
+		data[_points.tag] = service
+		
+	var data = {}
+	
+	var _playerName: PBField
+	func get_playerName() -> String:
+		return _playerName.value
+	func clear_playerName() -> void:
+		data[1].state = PB_SERVICE_STATE.UNFILLED
+		_playerName.value = DEFAULT_VALUES_2[PB_DATA_TYPE.STRING]
+	func set_playerName(value : String) -> void:
+		_playerName.value = value
+	
+	var _points: PBField
+	func get_points() -> int:
+		return _points.value
+	func clear_points() -> void:
+		data[2].state = PB_SERVICE_STATE.UNFILLED
+		_points.value = DEFAULT_VALUES_2[PB_DATA_TYPE.INT32]
+	func set_points(value : int) -> void:
+		_points.value = value
+	
+	func _to_string() -> String:
+		return PBPacker.message_to_string(data)
+		
+	func to_bytes() -> PackedByteArray:
+		return PBPacker.pack_message(data)
+		
+	func from_bytes(bytes : PackedByteArray, offset : int = 0, limit : int = -1) -> int:
+		var cur_limit = bytes.size()
+		if limit != -1:
+			cur_limit = limit
+		var result = PBPacker.unpack_message(data, bytes, offset, cur_limit)
+		if result == cur_limit:
+			if PBPacker.check_required(data):
+				if limit == -1:
+					return PB_ERR.NO_ERRORS
+			else:
+				return PB_ERR.REQUIRED_FIELDS
+		elif limit == -1 && result > 0:
+			return PB_ERR.PARSE_INCOMPLETE
+		return result
+	
 ################ USER DATA END #################

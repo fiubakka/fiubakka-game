@@ -661,39 +661,39 @@ class PBPacker:
 ############### USER DATA BEGIN ################
 
 
-class PBServerMetadata:
+class PBTrucoMatchChallengeReply:
 	func _init():
 		var service
 		
-		_length = PBField.new("length", PB_DATA_TYPE.UINT32, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.UINT32])
+		_opponent_username = PBField.new("opponent_username", PB_DATA_TYPE.STRING, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.STRING])
 		service = PBServiceField.new()
-		service.field = _length
-		data[_length.tag] = service
+		service.field = _opponent_username
+		data[_opponent_username.tag] = service
 		
-		_type = PBField.new("type", PB_DATA_TYPE.ENUM, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
+		_status = PBField.new("status", PB_DATA_TYPE.ENUM, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
 		service = PBServiceField.new()
-		service.field = _type
-		data[_type.tag] = service
+		service.field = _status
+		data[_status.tag] = service
 		
 	var data = {}
 	
-	var _length: PBField
-	func get_length() -> int:
-		return _length.value
-	func clear_length() -> void:
+	var _opponent_username: PBField
+	func get_opponent_username() -> String:
+		return _opponent_username.value
+	func clear_opponent_username() -> void:
 		data[1].state = PB_SERVICE_STATE.UNFILLED
-		_length.value = DEFAULT_VALUES_2[PB_DATA_TYPE.UINT32]
-	func set_length(value : int) -> void:
-		_length.value = value
+		_opponent_username.value = DEFAULT_VALUES_2[PB_DATA_TYPE.STRING]
+	func set_opponent_username(value : String) -> void:
+		_opponent_username.value = value
 	
-	var _type: PBField
-	func get_type():
-		return _type.value
-	func clear_type() -> void:
+	var _status: PBField
+	func get_status():
+		return _status.value
+	func clear_status() -> void:
 		data[2].state = PB_SERVICE_STATE.UNFILLED
-		_type.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
-	func set_type(value) -> void:
-		_type.value = value
+		_status.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
+	func set_status(value) -> void:
+		_status.value = value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)
@@ -716,17 +716,9 @@ class PBServerMetadata:
 			return PB_ERR.PARSE_INCOMPLETE
 		return result
 	
-enum PBServerMessageType {
-	PBGameEntityState = 0,
-	PBPlayerMessage = 1,
-	PBPlayerInitError = 2,
-	PBPlayerInitSuccess = 3,
-	PBPlayerChangeMapReady = 4,
-	PBGameEntityDisconnect = 5,
-	PBTrucoMatchChallengeRequest = 6,
-	PBTrucoMatchChallengeDenied = 7,
-	PBTrucoPlay = 8,
-	PBTrucoAllowPlay = 9
+enum PBTrucoMatchChallengeReplyEnum {
+	ACCEPTED = 0,
+	REJECTED = 1
 }
 
 ################ USER DATA END #################
