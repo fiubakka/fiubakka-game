@@ -2,6 +2,7 @@ extends Node2D
 
 class_name Confetti
 
+
 func start() -> void:
 	$Green.restart()
 	$Green.emitting = true

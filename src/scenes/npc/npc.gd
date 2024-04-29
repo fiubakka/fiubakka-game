@@ -1,11 +1,6 @@
 class_name NPC extends Node2D
 
-enum Facing {
-	FRONT,
-	LEFT,
-	RIGHT,
-	BACK
-}
+enum Facing { FRONT, LEFT, RIGHT, BACK }
 
 @export var actionable: bool = false
 @export var message: String
@@ -23,6 +18,7 @@ enum Facing {
 
 var _cs := CompositeSprites
 
+
 func _ready() -> void:
 	$NpcSprite/Body.texture = _cs.body_spritesheet[body]
 	$NpcSprite/Hair.texture = _cs.hair_spritesheet[hair]
@@ -35,13 +31,14 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if facing == Facing.FRONT:
-		$AnimationPlayer.play('front')
+		$AnimationPlayer.play("front")
 	if facing == Facing.LEFT:
-		$AnimationPlayer.play('left')
+		$AnimationPlayer.play("left")
 	if facing == Facing.BACK:
-		$AnimationPlayer.play('back')
+		$AnimationPlayer.play("back")
 	if facing == Facing.RIGHT:
-		$AnimationPlayer.play('right')
+		$AnimationPlayer.play("right")
+
 
 func _on_area_2d_body_entered(player: Node2D) -> void:
 	if not player is Player:
@@ -49,7 +46,7 @@ func _on_area_2d_body_entered(player: Node2D) -> void:
 	$Icon.visible = true
 	actionable = true
 	player.npc = self
-	
+
 
 func _on_area_2d_body_exited(player: Node2D) -> void:
 	if not player is Player:
@@ -58,4 +55,3 @@ func _on_area_2d_body_exited(player: Node2D) -> void:
 	actionable = false
 	if player.npc == self:
 		player.npc = null
-

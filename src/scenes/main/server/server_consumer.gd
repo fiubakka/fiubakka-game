@@ -14,6 +14,9 @@ const PBGameEntityState = (
 const PBPlayerInitSuccess = (
 	preload("res://addons/protocol/compiled/server/init/player_init.gd").PBPlayerInitSuccess
 )
+const PBPlayerInitError = (
+	preload("res://addons/protocol/compiled/server/init/player_init.gd").PBPlayerInitError
+)
 
 const PBPlayerMessage = (
 	preload("res://addons/protocol/compiled/server/chat/message.gd").PBPlayerMessage
@@ -41,9 +44,7 @@ const PBTrucoAllowPlay = (
 	preload("res://addons/protocol/compiled/server/truco/allow_play.gd").PBTrucoAllowPlay
 )
 
-const PBTrucoPlay = (
-	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoPlay
-)
+const PBTrucoPlay = preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoPlay
 
 var _thread: Thread
 var _consumer: Consumer
@@ -77,6 +78,8 @@ func _handle_message(message: Object) -> void:
 		handler = "_handle_game_entity_state"
 	elif message is PBPlayerInitSuccess:
 		handler = "_handle_player_init_ready"
+	elif message is PBPlayerInitError:
+		handler = "_handle_player_init_failure"
 	elif message is PBPlayerMessage:
 		handler = "_handle_player_message"
 	elif message is PBPlayerChangeMapReady:
@@ -93,6 +96,15 @@ func _handle_message(message: Object) -> void:
 		handler = "_handle_truco_play"
 
 	call_deferred(handler, message)
+
+
+func _handle_player_init_failure(msg: PBPlayerInitError) -> void:
+	var login := get_tree().current_scene.get_node("Login")
+	if login.visible:
+		login.show_error_message(msg.get_error_code())
+	else:
+		var register := get_tree().current_scene.get_node("Register")
+		register.show_error_message(msg.get_error_code())
 
 
 func _handle_player_init_ready(msg: PBPlayerInitSuccess) -> void:
@@ -158,26 +170,30 @@ func _handle_game_entity_disconnect(msg: PBGameEntityDisconnect) -> void:
 	var entityId := msg.get_entityId()
 	EntityManager.remove_entity(entityId)
 
+
 func _handle_truco_match_challenge_request(msg: PBTrucoMatchChallengeRequest) -> void:
 	truco_challenge_received.emit(msg.get_opponent_username())
-	
+
+
 func _handle_truco_match_challenge_denied(msg: PBTrucoMatchChallengeDenied) -> void:
 	print("Truco match was denied")
-	pass #TODO: handle match denied properly
-	
+	pass  #TODO: handle match denied properly
+
+
 func _handle_truco_allow_play(msg: PBTrucoAllowPlay) -> void:
 	print("Truco allow play:", msg)
-	pass # TODO: handle play alloed properly
+	pass  # TODO: handle play alloed properly
+
 
 func _handle_truco_play(msg: PBTrucoPlay) -> void:
 	var play_id := msg.get_playId()
 	var truco_manager := get_node("/root/TrucoManager")
-	if (play_id == 0 and not truco_manager):
+	if play_id == 0 and not truco_manager:
 		# If we are already loading the Truco scene, ignore new play_id 0 messages
-		if (SceneManager.is_loading_scene):
+		if SceneManager.is_loading_scene:
 			return
 		SceneManager.load_new_scene("res://src/scenes/truco/truco_manager.tscn")
 		SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
 		await SceneManager.transition_finished
-		
+
 	truco_play.emit(play_id)

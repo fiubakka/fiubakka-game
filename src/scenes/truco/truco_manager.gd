@@ -20,14 +20,13 @@ func _ready() -> void:
 	opponent_hand = $OpponentHand
 	deck = preload("res://src/scenes/truco/deck/deck.gd").new()
 
-	get_node("/root/Main/ServerConnection/ServerConsumer").truco_play.connect(
-		self._on_truco_play
-	)
+	get_node("/root/Main/ServerConnection/ServerConsumer").truco_play.connect(self._on_truco_play)
 	var producer_truco_ack_handler: Callable = (
 		get_node("/root/Main/ServerConnection/ServerProducer")._on_truco_manager_ack
 	)
 	if !play_ack.is_connected(producer_truco_ack_handler):
 		play_ack.connect(producer_truco_ack_handler)
+
 
 func start_round() -> void:
 	clean()
@@ -52,6 +51,7 @@ func clean() -> void:
 	board.clean()
 	opponent_controller.clean()
 	opponent_hand.clean()
+
 
 func _on_card_get_selected(card: Card) -> void:
 	if !selected_card:
@@ -104,10 +104,11 @@ func _on_button_5_pressed() -> void:
 			opponent_controller.play_card(drop_zone)
 			break
 
+
 # TODO: REMOVE
 func _on_button_6_pressed() -> void:
 	$Board.player_wins(true)
-	
+
 
 # TODO: REMOVE
 func _on_button_7_pressed() -> void:
@@ -116,8 +117,8 @@ func _on_button_7_pressed() -> void:
 
 func _on_truco_play(play_id: int) -> void:
 	# Ignore plays that are previous or the same as the current one
-	if (play_id <= current_play_id):
+	if play_id <= current_play_id:
 		return
 	current_play_id = play_id
-	
+
 	play_ack.emit(play_id)

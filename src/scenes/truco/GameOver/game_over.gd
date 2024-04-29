@@ -10,6 +10,7 @@ func _ready() -> void:
 	confetti = $CenterContainer/Panel/Confetti
 	set_victory()
 
+
 func set_victory() -> void:
 	text.set_text(Utils.center_text("Victory!"))
 	confetti.start()

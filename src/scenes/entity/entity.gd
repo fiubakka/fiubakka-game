@@ -18,7 +18,7 @@ func _ready() -> void:
 	# Set idle front animation when spawning player
 	set_idle_region()
 	$AnimationPlayer.play("front")
-	
+
 	$EntityPopup.id = id
 
 
@@ -97,5 +97,9 @@ func set_walk_region() -> void:
 
 
 func _on_interact_area_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+	if (
+		event is InputEventMouseButton
+		and event.pressed
+		and event.button_index == MOUSE_BUTTON_RIGHT
+	):
 		$EntityPopup.toggle_popup()

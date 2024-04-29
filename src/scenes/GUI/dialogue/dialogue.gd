@@ -4,6 +4,7 @@ extends Control
 @onready var timer := $Timer
 @onready var tween: Tween
 
+
 func show_tip(message: String) -> void:
 	tween = create_tween()
 	label.text = message

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://2focfqtvt576"]
+[gd_scene load_steps=14 format=3 uid="uid://2focfqtvt576"]
 
 [ext_resource type="Script" path="res://src/scenes/character_creation/character_creation.gd" id="1_7ub86"]
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_x5dhn"]
@@ -149,6 +149,10 @@ func _on_save_button_pressed() -> void:
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fvq1j"]
 
+[sub_resource type="Theme" id="Theme_o337u"]
+default_font = ExtResource("3_61440")
+default_font_size = 50
+
 [node name="CharacterCreation" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -171,7 +175,7 @@ offset_top = -46.0
 offset_right = 989.0
 offset_bottom = 550.0
 texture = ExtResource("2_nt0o2")
-region_rect = Rect2(24, 744, 88, 88)
+region_rect = Rect2(24.3245, 746.537, 87.6235, 71.3234)
 patch_margin_left = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
@@ -197,19 +201,18 @@ text = "[center]Cree su personaje[/center]"
 
 [node name="Character" type="HSplitContainer" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
-split_offset = 100
 
 [node name="Left" type="VSplitContainer" parent="NinePatchRect/VBoxContainer/Character"]
 layout_mode = 2
 
 [node name="Control" type="Control" parent="NinePatchRect/VBoxContainer/Character/Left"]
-custom_minimum_size = Vector2(300, 240)
+custom_minimum_size = Vector2(300, 170)
 layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="CharacterSprite" parent="NinePatchRect/VBoxContainer/Character/Left/Control" instance=ExtResource("5_4ix6j")]
-position = Vector2(150, 150)
-scale = Vector2(3, 3)
+position = Vector2(150, 125)
+scale = Vector2(2.5, 2.5)
 script = ExtResource("6_sxde8")
 
 [node name="CharacterSprite3" type="Node2D" parent="NinePatchRect/VBoxContainer/Character/Left/Control"]
@@ -286,9 +289,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -33.5312
+offset_left = -90.0
 offset_top = -15.5
-offset_right = 33.5312
+offset_right = 90.0
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -301,6 +304,74 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_fvq1j")
 placeholder_text = "USER_PLACEHOLDER"
 max_length = 12
 script = ExtResource("7_b50nj")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Character/Left/Username"]
+custom_minimum_size = Vector2(250, 70)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -126.0
+offset_top = 27.0003
+offset_right = 124.0
+offset_bottom = 97.0003
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -3.14159
+pivot_offset = Vector2(125, 35)
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 5.0
+texture = ExtResource("2_nt0o2")
+region_rect = Rect2(800, 1152, 80, 48)
+patch_margin_left = 5
+
+[node name="LoginPassword" type="LineEdit" parent="NinePatchRect/VBoxContainer/Character/Left/Username"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.9999
+offset_top = 46.5003
+offset_right = 89.0001
+offset_bottom = 77.5003
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.694118, 0.439216, 0.219608, 1)
+theme_override_colors/font_placeholder_color = Color(0.796078, 0.517647, 0.282353, 0.231373)
+theme_override_fonts/font = ExtResource("3_61440")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxEmpty_isp5o")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fvq1j")
+placeholder_text = "PASSWORD_PLACEHOLDER"
+max_length = 12
+secret = true
+
+[node name="RegisterErrorText" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/Character/Left/Username"]
+self_modulate = Color(0.819608, 0, 0.00784314, 1)
+clip_contents = false
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 413.0
+offset_top = 71.0
+offset_right = 424.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_o337u")
+bbcode_enabled = true
+text = "[center][/center]"
+scroll_active = false
 
 [node name="VSplitContainer" type="VSplitContainer" parent="NinePatchRect/VBoxContainer/Character"]
 layout_mode = 2
@@ -399,12 +470,14 @@ offset_bottom = 50.0
 
 [node name="Return" parent="NinePatchRect" instance=ExtResource("8_4gecp")]
 layout_mode = 1
-offset_left = 175.0
-offset_top = 118.0
-offset_right = -804.0
-offset_bottom = -422.0
+offset_left = 176.0
+offset_top = 127.0
+offset_right = -803.0
+offset_bottom = -413.0
 
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" method="_on_text_changed"]
+[connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" to="." method="_on_login_username_text_submitted"]
+[connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword" to="." method="_on_login_password_text_submitted"]
 [connection signal="next" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HatsSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hats_select_next"]
 [connection signal="prev" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HatsSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hats_select_prev"]
 [connection signal="next" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HairSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hair_select_next"]

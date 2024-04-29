@@ -4,7 +4,7 @@ var timer: Timer
 
 signal save_character
 signal return_to_menu
-signal user_logged_in(username: String, equipment: Equipment)
+signal user_logged_in(username: String, password: String, equipment: Equipment)
 
 
 func _ready() -> void:
@@ -16,18 +16,35 @@ func _ready() -> void:
 	)
 
 
+func show_error_message(errorCode: String) -> void:
+	if timer:
+		timer.stop()
+	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.text = Utils.center_text(
+		tr(errorCode)
+	)
+	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.visible = true
+
+
 func _on_button_pressed() -> void:
+	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.visible = false
 	var username: String = $NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername.text
 	if username.is_empty():
+		self.show_error_message("EMPTY_USERNAME")
 		return
+
+	var password: String = $NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword.text
+	if password.is_empty():
+		self.show_error_message("EMPTY_PASSWORD")
+		return
+
 	timer = Timer.new()  # Timer to send init message until we get a response
-	timer.timeout.connect(Callable(self, "_on_timer_timeout").bind(username))
+	timer.timeout.connect(Callable(self, "_on_timer_timeout").bind(username, password))
 	add_child(timer)
 	timer.set_wait_time(2.0)
 	timer.start()
 
 
-func _on_timer_timeout(username: String) -> void:
+func _on_timer_timeout(username: String, password: String) -> void:
 	var customization := PlayerInfo.player_customization
 	var equipment := Equipment.new()
 	equipment.set_equipment(
@@ -39,10 +56,22 @@ func _on_timer_timeout(username: String) -> void:
 		customization.body,
 		customization.outfit
 	)
-	save_character.emit()  #TODO: Esto creo que se puede borrar
-	user_logged_in.emit(username, equipment)
+	save_character.emit()
+	user_logged_in.emit(username, password, equipment)
 
 
 func _on_return_return_to_menu() -> void:
+	if timer:
+		timer.stop()
+	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.visible = false
 	$NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername.clear()
+	$NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword.clear()
 	return_to_menu.emit()
+
+
+func _on_login_username_text_submitted(_new_text: String) -> void:
+	self._on_button_pressed()
+
+
+func _on_login_password_text_submitted(_new_text: String) -> void:
+	self._on_button_pressed()

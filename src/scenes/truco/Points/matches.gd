@@ -21,7 +21,7 @@ func set_points(n: int, is_golden: bool) -> void:
 	for i in range(0, n):
 		children[i].visible = true
 		children[i].self_modulate = modulate_color
-	
+
 	for j in range(n, 5):
 		children[j].visible = (is_golden or j < n)
 		children[j].self_modulate = neutral

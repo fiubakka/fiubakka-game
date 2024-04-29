@@ -31,25 +31,26 @@ func _process(delta: float) -> void:
 func handle_chat_open() -> void:
 	if !menu.visible or !pause.visible:
 		chat.visible = !chat.visible
-		var visible: bool = chat.visible or menu.visible or pause.visible
-		ui_opened.emit(visible)
+		var isVisible: bool = chat.visible or menu.visible or pause.visible
+		ui_opened.emit(isVisible)
 
 
 func handle_inventory_open() -> void:
 	if !chat_focus and !pause.visible:
 		menu.visible = !menu.visible
-		var visible: bool = chat.visible or menu.visible or pause.visible
-		ui_opened.emit(visible)
+		var isVisible: bool = chat.visible or menu.visible or pause.visible
+		ui_opened.emit(isVisible)
 
 
 func handle_pause_open() -> void:
 	pause.visible = !pause.visible
-	var visible: bool = chat.visible or menu.visible or pause.visible
-	ui_opened.emit(visible)
+	var isVisible: bool = chat.visible or menu.visible or pause.visible
+	ui_opened.emit(isVisible)
 
 
 func _on_chatbox_is_focused(focus: bool) -> void:
 	chat_focus = focus
+
 
 func _on_npc_tip(message: String) -> void:
 	npc_tip.show_tip(message)

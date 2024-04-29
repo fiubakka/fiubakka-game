@@ -44,4 +44,3 @@ func _on_play_drop_zone_player_card_played(card: Card) -> void:
 func player_wins(wins: bool) -> void:
 	var last_turn := len(turns) - 1
 	turns[last_turn].player_wins(wins)
-
