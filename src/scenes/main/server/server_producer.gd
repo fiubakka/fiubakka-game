@@ -148,10 +148,10 @@ func _on_truco_manager_ack(play_id: int) -> void:
 	truco_play_ack.set_playId(play_id)
 	_producer.send(truco_play_ack)
 	
-func _on_truco_manager_play(play_id: int) -> void:
+func _on_truco_manager_play_card(play_id: int, card_id: int) -> void:
 	var truco_play := PBTrucoPlay.new()
 	truco_play.set_playId(play_id)
 	truco_play.set_playType(PBTrucoPlauTypeEnum.CARD)
-	# truco_play.set_card(card_number) # Este es el numero de carta que nos manda el server
+	truco_play.set_card(card_id)
 	_producer.send(truco_play)
 	

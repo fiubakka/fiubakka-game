@@ -6,7 +6,7 @@ class_name Board
 
 signal player_card_played(card: Card)
 
-var turns := []
+var turns: Array[TurnDropZones] = []
 var turns_pos := []
 var next_play_number := 0
 
@@ -45,3 +45,9 @@ func player_wins(wins: bool) -> void:
 	var last_turn := len(turns) - 1
 	turns[last_turn].player_wins(wins)
 
+func enable_play_zone() -> void:
+	for turn in turns:
+		if not turn.is_play_zone_enabled():
+			turn.enable_play_zone()
+			return
+	

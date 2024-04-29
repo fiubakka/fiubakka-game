@@ -1,7 +1,7 @@
 extends Node2D
 
 signal play_ack(play_id: int)
-signal play_card(play_id: int)
+signal play_card(play_id: int, card_id: int)
 
 @export var card_scene: PackedScene
 
@@ -9,7 +9,6 @@ var hand: Hand = null
 var board: Board = null
 var selected_card: Card = null
 var current_play_id := -1
-var deck: Deck = null
 var opponent_controller: OpponentController = null
 var opponent_hand: OpponentCards = null
 
@@ -19,10 +18,9 @@ func _ready() -> void:
 	board = $Board
 	opponent_controller = $OpponentController
 	opponent_hand = $OpponentHand
-	deck = preload("res://src/scenes/truco/deck/deck.gd").new()
 
 	var consumer := get_node("/root/Main/ServerConnection/ServerConsumer")
-	#consumer.truco_play_card.connect(self._on_truco_play_card)
+	consumer.truco_play_card.connect(self._on_truco_play_card)
 	#consumer.truco_play_shout.connect(self._on_truco_play_shout)
 	consumer.truco_play_update.connect(self._on_truco_play_update)
 	consumer.allow_truco_play.connect(self._on_allow_truco_play)
@@ -32,20 +30,38 @@ func _ready() -> void:
 	if !play_ack.is_connected(producer_truco_ack_handler):
 		play_ack.connect(producer_truco_ack_handler)
 		
-	var producer_truco_play_handler: Callable = (producer._on_truco_manager_play)
+	var producer_truco_play_handler: Callable = (producer._on_truco_manager_play_card)
 	if !play_card.is_connected(producer_truco_play_handler):
 		play_card.connect(producer_truco_play_handler)
 
-func start_round(cards: Array[Card]) -> void:
-	clean()
+func create_hand(cards: Array[Card]) -> void:
 	for card in cards:
 		var new_card := card_scene.instantiate()
 		new_card.get_selected.connect(self._on_card_get_selected)
 		new_card.get_unselected.connect(self._on_card_get_unselected)
+		new_card.id = card.id
 		new_card.texture = card.texture
 		new_card.region_rect = card.region_rect
 		hand.add_cards(new_card)
+		
 	next_turn()
+	next_turn()
+	next_turn()
+		
+	
+func start_round(cards: Array[Card]) -> void:
+	#hand.clean()
+	for card in cards:
+		'''
+		var new_card := card_scene.instantiate()
+		new_card.get_selected.connect(self._on_card_get_selected)
+		new_card.get_unselected.connect(self._on_card_get_unselected)
+		new_card.id = card.id
+		new_card.texture = card.texture
+		new_card.region_rect = card.region_rect
+		'''
+		#hand.add_cards(new_card)
+		hand.update_card_id(card)
 
 
 func next_turn() -> void:
@@ -54,10 +70,10 @@ func next_turn() -> void:
 
 
 func clean() -> void:
-	hand.clean()
-	board.clean()
-	opponent_controller.clean()
-	opponent_hand.clean()
+	hand.clean() # remueve las cartas de la mano
+	#board.clean() # remueve los dropzones del tablero (player y opponent)
+	#opponent_controller.clean()
+	#opponent_hand.clean() # remueve las cartas de la mano del oponente (esq sup. derecha)
 
 func _on_card_get_selected(card: Card) -> void:
 	if !selected_card:
@@ -80,7 +96,7 @@ func _on_card_get_unselected() -> void:
 
 func _on_board_player_card_played(card: Card) -> void:
 	card.played = true
-	
+	play_card.emit(current_play_id, card.id)
 	print("Carta jugada!")
 
 
@@ -88,52 +104,51 @@ func _on_opponent_controller_remove_card_from_hand() -> void:
 	opponent_hand.play_card()
 
 
-# TODO: REMOVE
-func _on_button_2_pressed() -> void:
-	next_turn()
-
-
-# TODO: REMOVE
-func _on_button_3_pressed() -> void:
-	start_round([])
-
-
-# TODO: REMOVE
-func _on_button_4_pressed() -> void:
-	$DialogueBubbleController.show_dialogue("Truco!")
-
-
-# TODO: REMOVE
-func _on_button_5_pressed() -> void:
+func play_enemy_card(suit: int, rank: int) -> void:
+	opponent_controller.set_hand(rank, suit)
 	var drop_zones := get_tree().get_nodes_in_group("opponent_table")
-	for drop_zone: DropZone in get_tree().get_nodes_in_group("opponent_table"):
+	print("play enemy card dropzones " + str(len(drop_zones)))
+	for drop_zone: DropZone in drop_zones:
 		if !drop_zone.has_card:
+			print("found dropzone to play")
+			print(drop_zone)
 			opponent_controller.play_card(drop_zone)
 			break
 
-# TODO: REMOVE
-func _on_button_6_pressed() -> void:
-	$Board.player_wins(true)
-	
 
-# TODO: REMOVE
-func _on_button_7_pressed() -> void:
-	$Board.player_wins(false)
+func _on_truco_play_card(play_id: int, suit: int, rank: int) -> void:
+	# Ignore plays that are previous to the current one
+	# Ignore plays with the same id too, since those are my own
+	if(play_id <= current_play_id):
+		print("dropped truco play card id " + str(play_id))
+		play_ack.emit(play_id)
+		return
+	print("processing truco play card id " + str(play_id))
+	current_play_id = play_id
+	play_enemy_card(suit, rank)
+	play_ack.emit(play_id)
 
-	
 func _on_truco_play_update(play_id: int, cards: Array[Card]) -> void:
 	# Ignore plays that are previous or the same as the current one
 	if (play_id <= current_play_id):
+		print("dropped truco play update id " + str(play_id))
+		play_ack.emit(play_id)
 		return
+	print("processing truco play update id " + str(play_id))
 	current_play_id = play_id
-	start_round(cards)
+	if current_play_id == 0:
+		create_hand(cards)
+	else:
+		start_round(cards)
 	play_ack.emit(play_id)
-	
+
 func _on_allow_truco_play(play_id: int) -> void:
 	# Ignore plays that are previous or the same as the current one
 	# Should never happen here, but we check just in case
 	if (play_id <= current_play_id):
 		return
 	current_play_id = play_id
+	#next_turn()
+	board.enable_play_zone()
 	
 	# TODO: add logic to enable cards drag and drop

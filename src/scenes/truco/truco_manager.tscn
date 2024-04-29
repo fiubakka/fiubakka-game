@@ -19,6 +19,7 @@ card_scene = ExtResource("2_p2aov")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_tuu7r")
+volume_db = -54.66
 autoplay = true
 
 [node name="Background" type="NinePatchRect" parent="."]
@@ -32,50 +33,6 @@ offset_left = 500.0
 offset_top = 200.0
 offset_right = 500.0
 offset_bottom = 200.0
-
-[node name="Button2" type="Button" parent="."]
-offset_left = 813.0
-offset_top = 178.0
-offset_right = 952.0
-offset_bottom = 209.0
-text = "Debug: next turn"
-
-[node name="Button3" type="Button" parent="."]
-offset_left = 802.0
-offset_top = 140.0
-offset_right = 957.0
-offset_bottom = 171.0
-text = "Debug: start round"
-
-[node name="Button4" type="Button" parent="."]
-offset_left = 811.0
-offset_top = 219.0
-offset_right = 953.0
-offset_bottom = 273.0
-text = "Debug: opponent
-say Truco!"
-
-[node name="Button5" type="Button" parent="."]
-offset_left = 810.0
-offset_top = 280.0
-offset_right = 952.0
-offset_bottom = 334.0
-text = "Debug: opponent
-play card"
-
-[node name="Button6" type="Button" parent="."]
-offset_left = 820.0
-offset_top = 340.0
-offset_right = 916.0
-offset_bottom = 371.0
-text = "Player wins"
-
-[node name="Button7" type="Button" parent="."]
-offset_left = 820.0
-offset_top = 380.0
-offset_right = 946.0
-offset_bottom = 411.0
-text = "Opponent wins"
 
 [node name="Hand" parent="." instance=ExtResource("4_ri81m")]
 anchors_preset = 0
@@ -123,10 +80,4 @@ offset_bottom = 34.0
 position = Vector2(487, -79)
 
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
-[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
-[connection signal="pressed" from="Button4" to="." method="_on_button_4_pressed"]
-[connection signal="pressed" from="Button5" to="." method="_on_button_5_pressed"]
-[connection signal="pressed" from="Button6" to="." method="_on_button_6_pressed"]
-[connection signal="pressed" from="Button7" to="." method="_on_button_7_pressed"]
 [connection signal="remove_card_from_hand" from="OpponentController" to="." method="_on_opponent_controller_remove_card_from_hand"]

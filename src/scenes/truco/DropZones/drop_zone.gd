@@ -4,6 +4,7 @@ class_name DropZone
 
 var has_card := false
 var card: Card = null
+var is_enabled := true
 
 signal player_card_played(card: Card)
 

@@ -5,7 +5,7 @@ signal update_content(entityId: String, content: String)
 signal player_changed_map
 signal truco_challenge_received(opponentId: String)
 signal allow_truco_play(playId: int, type: PBTrucoPlayTypeEnum)
-signal truco_play_card
+signal truco_play_card(play_id: int, suit: int, rank: int)
 signal truco_play_shout
 signal truco_play_update(playId: int, cards: Array[Card])
 
@@ -199,11 +199,15 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 	
 	match play_type:
 		PBTrucoPlayTypeEnum.CARD:
-			print("got card")
+			var card := msg.get_card()
+			var card_id := card.get_cardId()
+			var rank := card.get_number()
+			var suit: PBTrucoCardSuit = card.get_suit()
+			truco_play_card.emit(play_id, suit, rank)
+			
 		PBTrucoPlayTypeEnum.SHOUT:
 			print("got shout")
 		PBTrucoPlayTypeEnum.UPDATE:
-			print("got update")
 			var cards: Array = msg.get_playerCards()
 			var player_cards: Array[Card] = []
 			var deck := Deck.new()
@@ -213,9 +217,12 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 				var suit: PBTrucoCardSuit = card.get_suit()
 				
 				var player_card := Card.new()
+				player_card.id = card_id
 				player_card.texture = deck.deck_file
 				player_card.region_enabled = true
 				player_card.region_rect = deck.deal(rank, suit as Deck.Suits)
+				player_card.suit = suit
+				player_card.rank = rank
 				player_cards.append(player_card)
 				
 			truco_play_update.emit(play_id, player_cards)
