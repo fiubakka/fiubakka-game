@@ -4,6 +4,10 @@ class_name TurnDropZones
 
 signal player_card_played(card: Card)
 
+
+func _ready() -> void:
+	$OpponentDropZone.is_enabled = true
+
 func _on_player_drop_zone_player_card_played(card: Card) -> void:
 	if not $PlayerDropZone.is_enabled:
 		return
