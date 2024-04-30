@@ -5,7 +5,7 @@ signal update_content(entityId: String, content: String)
 signal player_changed_map
 signal truco_challenge_received(opponentId: String)
 signal allow_truco_play(playId: int, type: PBTrucoPlayTypeEnum)
-signal truco_play_card(play_id: int, suit: int, rank: int)
+signal truco_play_card(play_id: int, suit: int, rank: int, cards: Array[Card])
 signal truco_play_shout
 signal truco_play_update(playId: int, cards: Array[Card])
 
@@ -203,26 +203,33 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			var card_id := card.get_cardId()
 			var rank := card.get_number()
 			var suit: PBTrucoCardSuit = card.get_suit()
-			truco_play_card.emit(play_id, suit, rank)
-			
+			var player_cards := _parse_player_cards(msg)
+			truco_play_card.emit(play_id, suit, rank, player_cards)
 		PBTrucoPlayTypeEnum.SHOUT:
 			print("got shout")
-		PBTrucoPlayTypeEnum.UPDATE:
-			var cards: Array = msg.get_playerCards()
-			var player_cards: Array[Card] = []
-			var deck := Deck.new()
-			for card: PBTrucoCard in cards:
-				var card_id := card.get_cardId()
-				var rank := card.get_number()
-				var suit: PBTrucoCardSuit = card.get_suit()
-				
-				var player_card := Card.new()
-				player_card.id = card_id
-				player_card.texture = deck.deck_file
-				player_card.region_enabled = true
-				player_card.region_rect = deck.deal(rank, suit as Deck.Suits)
-				player_card.suit = suit
-				player_card.rank = rank
-				player_cards.append(player_card)
-				
+			var player_cards := _parse_player_cards(msg)
+			# do this for now but change signal later
 			truco_play_update.emit(play_id, player_cards)
+		PBTrucoPlayTypeEnum.UPDATE:
+			var player_cards := _parse_player_cards(msg)
+			truco_play_update.emit(play_id, player_cards)
+
+
+func _parse_player_cards(msg: PBTrucoPlay) -> Array[Card]:
+	var cards: Array = msg.get_playerCards()
+	var player_cards: Array[Card] = []
+	var deck := Deck.new()
+	for card: PBTrucoCard in cards:
+		var card_id := card.get_cardId()
+		var rank := card.get_number()
+		var suit: PBTrucoCardSuit = card.get_suit()
+		
+		var player_card := Card.new()
+		player_card.id = card_id
+		player_card.texture = deck.deck_file
+		player_card.region_enabled = true
+		player_card.region_rect = deck.deal(rank, suit as Deck.Suits)
+		player_card.suit = suit
+		player_card.rank = rank
+		player_cards.append(player_card)
+	return player_cards

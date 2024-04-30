@@ -49,7 +49,7 @@ func create_hand(cards: Array[Card]) -> void:
 	next_turn()
 		
 	
-func start_round(cards: Array[Card]) -> void:
+func update_hand(cards: Array[Card]) -> void:
 	#hand.clean()
 	for card in cards:
 		'''
@@ -97,7 +97,8 @@ func _on_card_get_unselected() -> void:
 func _on_board_player_card_played(card: Card) -> void:
 	card.played = true
 	play_card.emit(current_play_id, card.id)
-	print("Carta jugada!")
+	$YourTurn.visible = false
+	print("Carta jugada! id: " + str(card.id))
 
 
 func _on_opponent_controller_remove_card_from_hand() -> void:
@@ -116,7 +117,7 @@ func play_enemy_card(suit: int, rank: int) -> void:
 			break
 
 
-func _on_truco_play_card(play_id: int, suit: int, rank: int) -> void:
+func _on_truco_play_card(play_id: int, suit: int, rank: int, cards: Array[Card]) -> void:
 	# Ignore plays that are previous to the current one
 	# Ignore plays with the same id too, since those are my own
 	if(play_id <= current_play_id):
@@ -126,6 +127,8 @@ func _on_truco_play_card(play_id: int, suit: int, rank: int) -> void:
 	print("processing truco play card id " + str(play_id))
 	current_play_id = play_id
 	play_enemy_card(suit, rank)
+	update_hand(cards)
+	
 	play_ack.emit(play_id)
 
 func _on_truco_play_update(play_id: int, cards: Array[Card]) -> void:
@@ -139,7 +142,7 @@ func _on_truco_play_update(play_id: int, cards: Array[Card]) -> void:
 	if current_play_id == 0:
 		create_hand(cards)
 	else:
-		start_round(cards)
+		update_hand(cards)
 	play_ack.emit(play_id)
 
 func _on_allow_truco_play(play_id: int) -> void:
@@ -148,7 +151,5 @@ func _on_allow_truco_play(play_id: int) -> void:
 	if (play_id <= current_play_id):
 		return
 	current_play_id = play_id
-	#next_turn()
+	$YourTurn.visible = true
 	board.enable_play_zone()
-	
-	# TODO: add logic to enable cards drag and drop

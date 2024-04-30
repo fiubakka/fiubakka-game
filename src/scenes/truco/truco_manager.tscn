@@ -79,5 +79,13 @@ offset_bottom = 34.0
 [node name="OpponentController" parent="." instance=ExtResource("9_0spk6")]
 position = Vector2(487, -79)
 
+[node name="YourTurn" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 199.0
+offset_top = 9.0
+offset_right = 287.0
+offset_bottom = 39.0
+text = "Your turn"
+
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
 [connection signal="remove_card_from_hand" from="OpponentController" to="." method="_on_opponent_controller_remove_card_from_hand"]
