@@ -38,8 +38,6 @@ func next_turn() -> void:
 	card = null
 	drop_zone = null
 	opponent_hand.deselect()
-	set_hand(0, 0)
-
 
 func clean() -> void:
 	var childs := $OpponentHand.get_children()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bhw67fd6dh0n0"]
+[gd_scene load_steps=15 format=3 uid="uid://bhw67fd6dh0n0"]
 
 [ext_resource type="Script" path="res://src/scenes/truco/truco_manager.gd" id="1_rogtf"]
 [ext_resource type="PackedScene" uid="uid://44gpne03ucab" path="res://src/scenes/truco/card.tscn" id="2_p2aov"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://d1osyi5ag2uxg" path="res://src/scenes/truco/Interface/opponent_cards.tscn" id="6_x3d1k"]
 [ext_resource type="PackedScene" uid="uid://douueoffhqq2a" path="res://src/scenes/truco/DialogueBubble/dialogue_bubble_controller.tscn" id="8_smc8a"]
 [ext_resource type="PackedScene" uid="uid://cr4msasw6v4l2" path="res://src/scenes/truco/OpponentController/opponent_controller.tscn" id="9_0spk6"]
+[ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="11_g02iv"]
 [ext_resource type="PackedScene" uid="uid://c5n5u1w3qh0ct" path="res://src/scenes/truco/Points/points.tscn" id="11_upv27"]
 [ext_resource type="PackedScene" uid="uid://cfu6w2rhghpa5" path="res://src/scenes/truco/GameOver/game_over.tscn" id="12_pymvi"]
 
@@ -21,6 +22,8 @@ card_scene = ExtResource("2_p2aov")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_tuu7r")
+volume_db = -54.66
+autoplay = true
 
 [node name="Background" type="NinePatchRect" parent="."]
 modulate = Color(0.101961, 0.360784, 0.27451, 1)
@@ -33,50 +36,6 @@ offset_left = 500.0
 offset_top = 200.0
 offset_right = 500.0
 offset_bottom = 200.0
-
-[node name="Button2" type="Button" parent="."]
-offset_left = 813.0
-offset_top = 178.0
-offset_right = 952.0
-offset_bottom = 209.0
-text = "Debug: next turn"
-
-[node name="Button3" type="Button" parent="."]
-offset_left = 802.0
-offset_top = 140.0
-offset_right = 957.0
-offset_bottom = 171.0
-text = "Debug: start round"
-
-[node name="Button4" type="Button" parent="."]
-offset_left = 811.0
-offset_top = 219.0
-offset_right = 953.0
-offset_bottom = 273.0
-text = "Debug: opponent
-say Truco!"
-
-[node name="Button5" type="Button" parent="."]
-offset_left = 810.0
-offset_top = 280.0
-offset_right = 952.0
-offset_bottom = 334.0
-text = "Debug: opponent
-play card"
-
-[node name="Button6" type="Button" parent="."]
-offset_left = 820.0
-offset_top = 340.0
-offset_right = 916.0
-offset_bottom = 371.0
-text = "Player wins"
-
-[node name="Button7" type="Button" parent="."]
-offset_left = 820.0
-offset_top = 380.0
-offset_right = 946.0
-offset_bottom = 411.0
-text = "Opponent wins"
 
 [node name="Hand" parent="." instance=ExtResource("4_ri81m")]
 anchors_preset = 0
@@ -123,6 +82,24 @@ offset_bottom = 34.0
 [node name="OpponentController" parent="." instance=ExtResource("9_0spk6")]
 position = Vector2(487, -79)
 
+[node name="YourTurn" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 199.0
+offset_top = 9.0
+offset_right = 287.0
+offset_bottom = 39.0
+text = "Your turn"
+
+[node name="RoundOver" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 29.0
+offset_top = 275.0
+offset_right = 230.0
+offset_bottom = 392.0
+theme_override_fonts/normal_font = ExtResource("11_g02iv")
+theme_override_font_sizes/normal_font_size = 72
+text = "Round over!"
+
 [node name="Points" parent="." instance=ExtResource("11_upv27")]
 offset_left = 10.0
 offset_top = 479.0
@@ -143,10 +120,4 @@ offset_right = 484.0
 offset_bottom = 257.0
 
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
-[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
-[connection signal="pressed" from="Button4" to="." method="_on_button_4_pressed"]
-[connection signal="pressed" from="Button5" to="." method="_on_button_5_pressed"]
-[connection signal="pressed" from="Button6" to="." method="_on_button_6_pressed"]
-[connection signal="pressed" from="Button7" to="." method="_on_button_7_pressed"]
 [connection signal="remove_card_from_hand" from="OpponentController" to="." method="_on_opponent_controller_remove_card_from_hand"]

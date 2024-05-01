@@ -4,7 +4,26 @@ signal user_init_ready(position: Vector2, equipment: Equipment, mapId: int)
 signal update_content(entityId: String, content: String)
 signal player_changed_map
 signal truco_challenge_received(opponentId: String)
-signal truco_play(playId: int)
+signal allow_truco_play(playId: int, type: PBTrucoPlayTypeEnum)
+signal truco_play_card(
+	play_id: int,
+	suit: int,
+	rank: int,
+	cards: Array[Card],
+	game_over: bool,
+	match_over: bool,
+	first_points: int,
+	second_points: int
+)
+signal truco_play_shout
+signal truco_play_update(
+	playId: int,
+	cards: Array[Card],
+	game_over: bool,
+	match_over: bool,
+	first_points: int,
+	second_points: int
+)
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 
@@ -45,6 +64,19 @@ const PBTrucoAllowPlay = (
 )
 
 const PBTrucoPlay = preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoPlay
+
+const PBTrucoPlayTypeEnum = (
+	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoPlayType
+)
+
+const PBTrucoCard = (
+	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoCard
+)
+
+const PBTrucoCardSuit = (
+	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoCardSuit
+)
+
 
 var _thread: Thread
 var _consumer: Consumer
@@ -181,12 +213,15 @@ func _handle_truco_match_challenge_denied(msg: PBTrucoMatchChallengeDenied) -> v
 
 
 func _handle_truco_allow_play(msg: PBTrucoAllowPlay) -> void:
-	print("Truco allow play:", msg)
-	pass  # TODO: handle play alloed properly
+	var play_id := msg.get_playId()
+	allow_truco_play.emit(play_id)
 
 
 func _handle_truco_play(msg: PBTrucoPlay) -> void:
 	var play_id := msg.get_playId()
+	var first_points := msg.get_firstPlayerPoints().get_points()
+	var second_points := msg.get_secondPlayerPoints().get_points()
+
 	var truco_manager := get_node("/root/TrucoManager")
 	if play_id == 0 and not truco_manager:
 		# If we are already loading the Truco scene, ignore new play_id 0 messages
@@ -195,5 +230,48 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 		SceneManager.load_new_scene("res://src/scenes/truco/truco_manager.tscn")
 		SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
 		await SceneManager.transition_finished
+	
+	var play_type: PBTrucoPlayTypeEnum = msg.get_playType()
+	
+	match play_type:
+		PBTrucoPlayTypeEnum.CARD:
+			var card := msg.get_card()
+			var card_id := card.get_cardId()
+			var rank := card.get_number()
+			var suit: PBTrucoCardSuit = card.get_suit()
+			var game_over := msg.get_isGameOver()
+			var match_over := msg.get_isMatchOver()
+			var player_cards := _parse_player_cards(msg)
+			truco_play_card.emit(
+				play_id, suit, rank, player_cards, game_over, match_over, first_points, second_points
+			)
+		PBTrucoPlayTypeEnum.SHOUT:
+			print("got shout")
+			var player_cards := _parse_player_cards(msg)
+			# do this for now but change signal later
+			truco_play_update.emit(play_id, player_cards)
+		PBTrucoPlayTypeEnum.UPDATE:
+			var game_over := msg.get_isGameOver()
+			var match_over := msg.get_isMatchOver()
+			var player_cards := _parse_player_cards(msg)
+			truco_play_update.emit(play_id, player_cards, game_over, match_over, first_points, second_points)
 
-	truco_play.emit(play_id)
+
+func _parse_player_cards(msg: PBTrucoPlay) -> Array[Card]:
+	var cards: Array = msg.get_playerCards()
+	var player_cards: Array[Card] = []
+	var deck := Deck.new()
+	for card: PBTrucoCard in cards:
+		var card_id := card.get_cardId()
+		var rank := card.get_number()
+		var suit: PBTrucoCardSuit = card.get_suit()
+		
+		var player_card := Card.new()
+		player_card.id = card_id
+		player_card.texture = deck.deck_file
+		player_card.region_enabled = true
+		player_card.region_rect = deck.deal(rank, suit as Deck.Suits)
+		player_card.suit = suit
+		player_card.rank = rank
+		player_cards.append(player_card)
+	return player_cards
