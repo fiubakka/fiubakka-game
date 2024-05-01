@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhw67fd6dh0n0"]
+[gd_scene load_steps=13 format=3 uid="uid://bhw67fd6dh0n0"]
 
 [ext_resource type="Script" path="res://src/scenes/truco/truco_manager.gd" id="1_rogtf"]
 [ext_resource type="PackedScene" uid="uid://44gpne03ucab" path="res://src/scenes/truco/card.tscn" id="2_p2aov"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://d1osyi5ag2uxg" path="res://src/scenes/truco/Interface/opponent_cards.tscn" id="6_x3d1k"]
 [ext_resource type="PackedScene" uid="uid://douueoffhqq2a" path="res://src/scenes/truco/DialogueBubble/dialogue_bubble_controller.tscn" id="8_smc8a"]
 [ext_resource type="PackedScene" uid="uid://cr4msasw6v4l2" path="res://src/scenes/truco/OpponentController/opponent_controller.tscn" id="9_0spk6"]
+[ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="11_g02iv"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yminj"]
 
@@ -86,6 +87,16 @@ offset_top = 9.0
 offset_right = 287.0
 offset_bottom = 39.0
 text = "Your turn"
+
+[node name="MatchEnd" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 29.0
+offset_top = 275.0
+offset_right = 230.0
+offset_bottom = 392.0
+theme_override_fonts/normal_font = ExtResource("11_g02iv")
+theme_override_font_sizes/normal_font_size = 72
+text = "Match over"
 
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
 [connection signal="remove_card_from_hand" from="OpponentController" to="." method="_on_opponent_controller_remove_card_from_hand"]

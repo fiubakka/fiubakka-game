@@ -7,7 +7,7 @@ signal truco_challenge_received(opponentId: String)
 signal allow_truco_play(playId: int, type: PBTrucoPlayTypeEnum)
 signal truco_play_card(play_id: int, suit: int, rank: int, cards: Array[Card])
 signal truco_play_shout
-signal truco_play_update(playId: int, cards: Array[Card])
+signal truco_play_update(playId: int, cards: Array[Card], game_over: bool, match_over: bool)
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 
@@ -59,6 +59,7 @@ const PBTrucoCard = (
 const PBTrucoCardSuit = (
 	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoCardSuit
 )
+
 
 var _thread: Thread
 var _consumer: Consumer
@@ -211,8 +212,10 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			# do this for now but change signal later
 			truco_play_update.emit(play_id, player_cards)
 		PBTrucoPlayTypeEnum.UPDATE:
+			var game_over := msg.get_isGameOver()
+			var match_over := msg.get_isMatchOver()
 			var player_cards := _parse_player_cards(msg)
-			truco_play_update.emit(play_id, player_cards)
+			truco_play_update.emit(play_id, player_cards, game_over, match_over)
 
 
 func _parse_player_cards(msg: PBTrucoPlay) -> Array[Card]:

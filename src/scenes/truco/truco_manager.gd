@@ -44,36 +44,20 @@ func create_hand(cards: Array[Card]) -> void:
 		new_card.region_rect = card.region_rect
 		hand.add_cards(new_card)
 		
-	next_turn()
-	next_turn()
-	next_turn()
+	board.create_dropzones()
+	opponent_controller.next_turn()
 		
 	
 func update_hand(cards: Array[Card]) -> void:
-	#hand.clean()
 	for card in cards:
-		'''
-		var new_card := card_scene.instantiate()
-		new_card.get_selected.connect(self._on_card_get_selected)
-		new_card.get_unselected.connect(self._on_card_get_unselected)
-		new_card.id = card.id
-		new_card.texture = card.texture
-		new_card.region_rect = card.region_rect
-		'''
-		#hand.add_cards(new_card)
 		hand.update_card_id(card)
 
 
-func next_turn() -> void:
-	board.next_turn()
-	opponent_controller.next_turn()
-
-
 func clean() -> void:
-	hand.clean() # remueve las cartas de la mano
-	#board.clean() # remueve los dropzones del tablero (player y opponent)
-	#opponent_controller.clean()
-	#opponent_hand.clean() # remueve las cartas de la mano del oponente (esq sup. derecha)
+	hand.clean() # remueve las cartas de la mano (y por ende las jugadas)
+	board.clean() # remueve los dropzones del tablero (player y opponent)
+	opponent_controller.clean()
+	opponent_hand.clean() # remueve las cartas de la mano del oponente (esq sup. derecha)
 
 func _on_card_get_selected(card: Card) -> void:
 	if !selected_card:
@@ -98,7 +82,7 @@ func _on_board_player_card_played(card: Card) -> void:
 	card.played = true
 	play_card.emit(current_play_id, card.id)
 	$YourTurn.visible = false
-	print("Carta jugada! id: " + str(card.id))
+
 
 
 func _on_opponent_controller_remove_card_from_hand() -> void:
@@ -108,11 +92,8 @@ func _on_opponent_controller_remove_card_from_hand() -> void:
 func play_enemy_card(suit: int, rank: int) -> void:
 	opponent_controller.set_hand(rank, suit)
 	var drop_zones := get_tree().get_nodes_in_group("opponent_table")
-	print("play enemy card dropzones " + str(len(drop_zones)))
 	for drop_zone: DropZone in drop_zones:
 		if !drop_zone.has_card:
-			print("found dropzone to play")
-			print(drop_zone)
 			opponent_controller.play_card(drop_zone)
 			break
 
@@ -121,29 +102,46 @@ func _on_truco_play_card(play_id: int, suit: int, rank: int, cards: Array[Card])
 	# Ignore plays that are previous to the current one
 	# Ignore plays with the same id too, since those are my own
 	if(play_id <= current_play_id):
-		print("dropped truco play card id " + str(play_id))
 		play_ack.emit(play_id)
 		return
-	print("processing truco play card id " + str(play_id))
 	current_play_id = play_id
 	play_enemy_card(suit, rank)
 	update_hand(cards)
 	
 	play_ack.emit(play_id)
+	
 
-func _on_truco_play_update(play_id: int, cards: Array[Card]) -> void:
+
+func _on_truco_play_update(play_id: int, cards: Array[Card], game_over: bool, match_over: bool) -> void:
 	# Ignore plays that are previous or the same as the current one
 	if (play_id <= current_play_id):
-		print("dropped truco play update id " + str(play_id))
 		play_ack.emit(play_id)
 		return
-	print("processing truco play update id " + str(play_id))
 	current_play_id = play_id
+	
+	if game_over:
+		var timer := Timer.new()
+		timer.timeout.connect(Callable(self, "_on_timer_timeout").bind(play_id, cards, timer))
+		timer.one_shot = true
+		timer.set_wait_time(3.0)
+		add_child(timer)
+		timer.start()
+		return
 	if current_play_id == 0:
+		clean()
 		create_hand(cards)
-	else:
-		update_hand(cards)
+		play_ack.emit(play_id)
+		return
+	
+	update_hand(cards)
 	play_ack.emit(play_id)
+	
+func _on_timer_timeout(play_id: int, cards: Array[Card], timer: Timer) -> void:
+	clean()
+	create_hand(cards)
+	play_ack.emit(play_id)
+	timer.queue_free()
+	return
 
 func _on_allow_truco_play(play_id: int) -> void:
 	# Ignore plays that are previous or the same as the current one

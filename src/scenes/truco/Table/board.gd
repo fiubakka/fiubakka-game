@@ -26,6 +26,9 @@ func clean() -> void:
 	turns = []
 	next_play_number = 0
 
+func create_dropzones() -> void:
+	for i in range(0, 3):
+		next_turn()
 
 func next_turn() -> void:
 	if next_play_number < len(turns_pos):
