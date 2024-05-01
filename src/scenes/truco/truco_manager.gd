@@ -34,6 +34,7 @@ func _ready() -> void:
 	if !play_card.is_connected(producer_truco_play_handler):
 		play_card.connect(producer_truco_play_handler)
 
+
 func create_hand(cards: Array[Card]) -> void:
 	for card in cards:
 		var new_card := card_scene.instantiate()
@@ -59,6 +60,7 @@ func clean() -> void:
 	opponent_controller.clean()
 	opponent_hand.clean() # remueve las cartas de la mano del oponente (esq sup. derecha)
 
+
 func _on_card_get_selected(card: Card) -> void:
 	if !selected_card:
 		selected_card = card
@@ -82,7 +84,6 @@ func _on_board_player_card_played(card: Card) -> void:
 	card.played = true
 	play_card.emit(current_play_id, card.id)
 	$YourTurn.visible = false
-
 
 
 func _on_opponent_controller_remove_card_from_hand() -> void:

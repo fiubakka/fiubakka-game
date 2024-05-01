@@ -10,10 +10,6 @@ const MILISECONDS_UNTIL_DISCONNECT = 15000
 var is_game_paused: bool = false
 
 signal login_ready
-signal chat_opened
-signal chat_closed
-signal paused
-signal unpaused
 signal ui_opened(open: bool)
 
 
@@ -44,18 +40,14 @@ func _on_server_consumer_user_init_ready(
 	current_level.enter_level()
 	login_ready.emit()
 	$Login.queue_free()
+	$Register.queue_free()
 
 	$GUI/GuiManager.set_process(true)
 	ui_opened.connect(player._on_main_ui_opened)
 
 
 func _on_pause_unpaused() -> void:
-	is_game_paused = false
-	unpaused.emit()
-
-
-func _on_register_save_character() -> void:
-	$Register.queue_free()
+	$GUI/GuiManager.handle_pause_open()
 
 
 func _on_main_menu_go_to_login() -> void:

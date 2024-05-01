@@ -11,6 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://douueoffhqq2a" path="res://src/scenes/truco/DialogueBubble/dialogue_bubble_controller.tscn" id="8_smc8a"]
 [ext_resource type="PackedScene" uid="uid://cr4msasw6v4l2" path="res://src/scenes/truco/OpponentController/opponent_controller.tscn" id="9_0spk6"]
 [ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="11_g02iv"]
+[ext_resource type="PackedScene" uid="uid://c5n5u1w3qh0ct" path="res://src/scenes/truco/Points/points.tscn" id="11_upv27"]
+[ext_resource type="PackedScene" uid="uid://cfu6w2rhghpa5" path="res://src/scenes/truco/GameOver/game_over.tscn" id="12_pymvi"]
+
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yminj"]
 
@@ -66,10 +69,10 @@ bbcode_enabled = true
 text = "[right]Opponent[/right]"
 
 [node name="OpponentHand" parent="." instance=ExtResource("6_x3d1k")]
-offset_left = 860.0
-offset_top = 25.0
-offset_right = 952.0
-offset_bottom = 105.0
+offset_left = 855.0
+offset_top = 37.0
+offset_right = 947.0
+offset_bottom = 117.0
 
 [node name="DialogueBubbleController" parent="." instance=ExtResource("8_smc8a")]
 offset_left = 487.0
@@ -97,6 +100,25 @@ offset_bottom = 392.0
 theme_override_fonts/normal_font = ExtResource("11_g02iv")
 theme_override_font_sizes/normal_font_size = 72
 text = "Match over"
+
+[node name="Points" parent="." instance=ExtResource("11_upv27")]
+offset_left = 10.0
+offset_top = 479.0
+offset_right = 10.0
+offset_bottom = 479.0
+
+[node name="OpponentPoints" parent="." instance=ExtResource("11_upv27")]
+offset_left = 10.0
+offset_top = 18.0
+offset_right = 10.0
+offset_bottom = 18.0
+
+[node name="GameOver" parent="." instance=ExtResource("12_pymvi")]
+visible = false
+offset_left = 484.0
+offset_top = 257.0
+offset_right = 484.0
+offset_bottom = 257.0
 
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
 [connection signal="remove_card_from_hand" from="OpponentController" to="." method="_on_opponent_controller_remove_card_from_hand"]

@@ -1,13 +1,14 @@
 extends Control
 
 var dialogue_bubble: NinePatchRect = null
-var db_animation: AnimationPlayer= null
+var db_animation: AnimationPlayer = null
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	dialogue_bubble = $DialogueBubble
 	db_animation = $DialogueBubble/AnimationPlayer
-	
+
 	dialogue_bubble.modulate.a = 0
 
 

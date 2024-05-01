@@ -4,6 +4,7 @@ class_name OpponentCards
 
 var cards := 3
 
+
 func clean() -> void:
 	var children := get_children()
 	for child: CenterContainer in children:

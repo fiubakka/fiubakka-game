@@ -17,7 +17,7 @@ func _ready() -> void:
 	# Set idle front animation when spawning player
 	set_idle_region()
 	$AnimationPlayer.play("front")
-	
+
 	var producer_start_truco_handler: Callable = (
 		get_node("/root/Main/ServerConnection/ServerProducer")._on_player_start_truco
 	)
@@ -82,7 +82,7 @@ func _physics_process(_delta: float) -> void:
 	if velocity != prev_vel:
 		play_move_animation()
 		prev_vel = velocity
-		
+
 	if Input.is_action_just_pressed("talk_to_npc") and npc:
 		show_tip.emit(npc.message)
 

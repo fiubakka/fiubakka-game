@@ -35,10 +35,7 @@ const PBTrucoMatchChallengeReply = (
 	. PBTrucoMatchChallengeReply
 )
 
-const PBTrucoPlay = (
-	preload("res://addons/protocol/compiled/client/truco/play.gd")
-	. PBTrucoPlay
-)
+const PBTrucoPlay = preload("res://addons/protocol/compiled/client/truco/play.gd").PBTrucoPlay
 
 const PBTrucoAckPlay = (
 	preload("res://addons/protocol/compiled/client/truco/ack_play.gd").PBTrucoAckPlay

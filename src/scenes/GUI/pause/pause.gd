@@ -3,7 +3,6 @@ extends Node
 signal unpaused
 
 var waiting_for_login: bool = true
-var is_paused: bool = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -21,16 +20,8 @@ func _on_main_login_ready() -> void:
 	self.waiting_for_login = false
 
 
-func _on_main_paused() -> void:
-	if !waiting_for_login:
-		self.is_paused = true
-		self.visible = true
-
-
 func _on_continue_pressed() -> void:
 	if !waiting_for_login:
-		self.is_paused = false
-		self.visible = false
 		unpaused.emit()
 
 

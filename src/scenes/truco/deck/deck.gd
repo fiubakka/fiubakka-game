@@ -18,14 +18,17 @@ const GAP := 16
 const BACK_X := 944
 const BACK_Y := 128
 
+
 func _ready() -> void:
 	# Deck could be just a script file, but we add
 	# a node for debugging purposes
 	create()
 
+
 func _init() -> void:
 	create()
-	
+
+
 func create() -> void:
 	var x := GAP
 	var y := GAP
@@ -46,7 +49,7 @@ func create() -> void:
 		x += CARD_W + GAP
 		y = GAP
 	deck_map[Suits.BACK] = Rect2(BACK_X, BACK_Y, CARD_W, CARD_H)
-	
+
 
 func deal(rank: Ranks, suit: Suits) -> Rect2:
 	if suit == Suits.BACK:

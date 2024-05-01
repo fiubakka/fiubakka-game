@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6g4t2nxvvfih"]
+
+[ext_resource type="Script" path="res://src/scenes/truco/Points/matches.gd" id="1_a7bo3"]
+[ext_resource type="Texture2D" uid="uid://ii6851a61ky6" path="res://art/matches/match 00.png" id="1_n5otd"]
+[ext_resource type="Texture2D" uid="uid://cybhe0ahe1gtc" path="res://art/matches/match 01.png" id="2_ux3tc"]
+
+[node name="Matches" type="Node2D"]
+script = ExtResource("1_a7bo3")
+
+[node name="Match01" type="Sprite2D" parent="."]
+position = Vector2(16, 16)
+texture = ExtResource("1_n5otd")
+
+[node name="Match02" type="Sprite2D" parent="."]
+position = Vector2(21, 16)
+rotation = 1.5708
+texture = ExtResource("1_n5otd")
+
+[node name="Match03" type="Sprite2D" parent="."]
+position = Vector2(21, 20)
+rotation = 3.14159
+texture = ExtResource("1_n5otd")
+
+[node name="Match04" type="Sprite2D" parent="."]
+position = Vector2(16, 21)
+rotation = 4.71239
+texture = ExtResource("1_n5otd")
+
+[node name="Match05" type="Sprite2D" parent="."]
+position = Vector2(24, 13)
+texture = ExtResource("2_ux3tc")
