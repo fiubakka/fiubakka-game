@@ -19,7 +19,7 @@ func _ready() -> void:
 	var turn_pos3 := $HBoxContainer/CenterContainer3/Control
 	turns_pos.append(turn_pos3)
 
-
+# Removes TurnDropZones from the board (and also player and opponent DropZones
 func clean() -> void:
 	for turn: TurnDropZones in turns:
 		turn.queue_free()

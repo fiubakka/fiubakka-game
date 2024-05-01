@@ -21,7 +21,7 @@ func add_cards(card: Card) -> void:
 	hand.append(card)
 	add_child(card)
 
-
+# Removes Cards from hand (and from the DropZones too, if played)
 func clean() -> void:
 	for card: Card in hand:
 		remove_child(card)

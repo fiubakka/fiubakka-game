@@ -55,10 +55,10 @@ func update_hand(cards: Array[Card]) -> void:
 
 
 func clean() -> void:
-	hand.clean() # remueve las cartas de la mano (y por ende las jugadas)
-	board.clean() # remueve los dropzones del tablero (player y opponent)
+	hand.clean() 
+	board.clean()
 	opponent_controller.clean()
-	opponent_hand.clean() # remueve las cartas de la mano del oponente (esq sup. derecha)
+	opponent_hand.clean()
 
 
 func _on_card_get_selected(card: Card) -> void:
