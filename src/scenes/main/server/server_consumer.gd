@@ -5,9 +5,25 @@ signal update_content(entityId: String, content: String)
 signal player_changed_map
 signal truco_challenge_received(opponentId: String)
 signal allow_truco_play(playId: int, type: PBTrucoPlayTypeEnum)
-signal truco_play_card(play_id: int, suit: int, rank: int, cards: Array[Card], game_over: bool, match_over: bool)
+signal truco_play_card(
+	play_id: int,
+	suit: int,
+	rank: int,
+	cards: Array[Card],
+	game_over: bool,
+	match_over: bool,
+	first_points: int,
+	second_points: int
+)
 signal truco_play_shout
-signal truco_play_update(playId: int, cards: Array[Card], game_over: bool, match_over: bool)
+signal truco_play_update(
+	playId: int,
+	cards: Array[Card],
+	game_over: bool,
+	match_over: bool,
+	first_points: int,
+	second_points: int
+)
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 
@@ -203,6 +219,9 @@ func _handle_truco_allow_play(msg: PBTrucoAllowPlay) -> void:
 
 func _handle_truco_play(msg: PBTrucoPlay) -> void:
 	var play_id := msg.get_playId()
+	var first_points := msg.get_firstPlayerPoints().get_points()
+	var second_points := msg.get_secondPlayerPoints().get_points()
+
 	var truco_manager := get_node("/root/TrucoManager")
 	if play_id == 0 and not truco_manager:
 		# If we are already loading the Truco scene, ignore new play_id 0 messages
@@ -223,7 +242,9 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			var game_over := msg.get_isGameOver()
 			var match_over := msg.get_isMatchOver()
 			var player_cards := _parse_player_cards(msg)
-			truco_play_card.emit(play_id, suit, rank, player_cards, game_over, match_over)
+			truco_play_card.emit(
+				play_id, suit, rank, player_cards, game_over, match_over, first_points, second_points
+			)
 		PBTrucoPlayTypeEnum.SHOUT:
 			print("got shout")
 			var player_cards := _parse_player_cards(msg)
@@ -233,7 +254,7 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			var game_over := msg.get_isGameOver()
 			var match_over := msg.get_isMatchOver()
 			var player_cards := _parse_player_cards(msg)
-			truco_play_update.emit(play_id, player_cards, game_over, match_over)
+			truco_play_update.emit(play_id, player_cards, game_over, match_over, first_points, second_points)
 
 
 func _parse_player_cards(msg: PBTrucoPlay) -> Array[Card]:

@@ -133,6 +133,7 @@ func _on_modal_match_accepted(opponent_id: String) -> void:
 	SceneManager.load_new_scene("res://src/scenes/truco/truco_manager.tscn")
 	# TODO: load content only when we get an accepted match confirmation from the server
 	SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
+	SceneManager._truco_opponent_name = opponent_id
 
 
 func _on_modal_match_rejected(opponent_id: String) -> void:

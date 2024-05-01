@@ -100,8 +100,16 @@ func play_enemy_card(suit: int, rank: int) -> void:
 			opponent_controller.play_card(drop_zone)
 			break
 
+func update_points(first_points: int, second_points: int) -> void:
+	if SceneManager._truco_opponent_name != "":
+		$Points.set_points(first_points)
+		$OpponentPoints.set_points(second_points)
+	else:
+		$Points.set_points(second_points)
+		$OpponentPoints.set_points(first_points)
 
-func _on_truco_play_card(play_id: int, suit: int, rank: int, cards: Array[Card], game_over: bool, match_over: bool) -> void:
+
+func _on_truco_play_card(play_id: int, suit: int, rank: int, cards: Array[Card], game_over: bool, match_over: bool, first_points: int, second_points: int) -> void:
 	# Always save game/match over flags
 	is_game_over = game_over
 	is_match_over = match_over
@@ -114,7 +122,9 @@ func _on_truco_play_card(play_id: int, suit: int, rank: int, cards: Array[Card],
 	if(play_id <= current_play_id):
 		play_ack.emit(play_id)
 		return
-	current_play_id = play_id	
+	current_play_id = play_id
+	
+	update_points(first_points, second_points)
 	play_enemy_card(suit, rank)
 	update_hand(cards)
 	
@@ -122,7 +132,7 @@ func _on_truco_play_card(play_id: int, suit: int, rank: int, cards: Array[Card],
 	
 
 
-func _on_truco_play_update(play_id: int, cards: Array[Card], game_over: bool, match_over: bool) -> void:
+func _on_truco_play_update(play_id: int, cards: Array[Card], game_over: bool, match_over: bool, first_points: int, second_points: int) -> void:
 	# Ignore plays that are previous or the same as the current one
 	if (play_id <= current_play_id):
 		play_ack.emit(play_id)
@@ -134,6 +144,8 @@ func _on_truco_play_update(play_id: int, cards: Array[Card], game_over: bool, ma
 		create_hand(cards)
 		play_ack.emit(play_id)
 		return
+		
+	update_points(first_points, second_points)
 	
 	# Clear board and update hand when going from game_over to new game
 	if is_game_over and !game_over:
