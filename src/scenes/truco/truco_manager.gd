@@ -11,6 +11,8 @@ var selected_card: Card = null
 var current_play_id := -1
 var opponent_controller: OpponentController = null
 var opponent_hand: OpponentCards = null
+var is_game_over := false
+var is_match_over := false
 
 
 func _ready() -> void:
@@ -99,13 +101,20 @@ func play_enemy_card(suit: int, rank: int) -> void:
 			break
 
 
-func _on_truco_play_card(play_id: int, suit: int, rank: int, cards: Array[Card]) -> void:
+func _on_truco_play_card(play_id: int, suit: int, rank: int, cards: Array[Card], game_over: bool, match_over: bool) -> void:
+	# Always save game/match over flags
+	is_game_over = game_over
+	is_match_over = match_over
+	
+	if is_game_over:
+		$RoundOver.visible = true
+
 	# Ignore plays that are previous to the current one
 	# Ignore plays with the same id too, since those are my own
 	if(play_id <= current_play_id):
 		play_ack.emit(play_id)
 		return
-	current_play_id = play_id
+	current_play_id = play_id	
 	play_enemy_card(suit, rank)
 	update_hand(cards)
 	
@@ -120,24 +129,28 @@ func _on_truco_play_update(play_id: int, cards: Array[Card], game_over: bool, ma
 		return
 	current_play_id = play_id
 	
-	if game_over:
-		var timer := Timer.new()
-		timer.timeout.connect(Callable(self, "_on_timer_timeout").bind(play_id, cards, timer))
-		timer.one_shot = true
-		timer.set_wait_time(3.0)
-		add_child(timer)
-		timer.start()
-		return
 	if current_play_id == 0:
 		clean()
 		create_hand(cards)
 		play_ack.emit(play_id)
 		return
 	
+	# Clear board and update hand when going from game_over to new game
+	if is_game_over and !game_over:
+		is_game_over = game_over
+		var timer := Timer.new()
+		timer.timeout.connect(Callable(self, "_on_game_over_timer_timeout").bind(play_id, cards, timer))
+		timer.one_shot = true
+		timer.set_wait_time(3.0)
+		add_child(timer)
+		timer.start()
+		return
+	
 	update_hand(cards)
 	play_ack.emit(play_id)
 	
-func _on_timer_timeout(play_id: int, cards: Array[Card], timer: Timer) -> void:
+func _on_game_over_timer_timeout(play_id: int, cards: Array[Card], timer: Timer) -> void:
+	$RoundOver.visible = false
 	clean()
 	create_hand(cards)
 	play_ack.emit(play_id)

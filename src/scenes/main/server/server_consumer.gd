@@ -5,7 +5,7 @@ signal update_content(entityId: String, content: String)
 signal player_changed_map
 signal truco_challenge_received(opponentId: String)
 signal allow_truco_play(playId: int, type: PBTrucoPlayTypeEnum)
-signal truco_play_card(play_id: int, suit: int, rank: int, cards: Array[Card])
+signal truco_play_card(play_id: int, suit: int, rank: int, cards: Array[Card], game_over: bool, match_over: bool)
 signal truco_play_shout
 signal truco_play_update(playId: int, cards: Array[Card], game_over: bool, match_over: bool)
 
@@ -220,8 +220,10 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			var card_id := card.get_cardId()
 			var rank := card.get_number()
 			var suit: PBTrucoCardSuit = card.get_suit()
+			var game_over := msg.get_isGameOver()
+			var match_over := msg.get_isMatchOver()
 			var player_cards := _parse_player_cards(msg)
-			truco_play_card.emit(play_id, suit, rank, player_cards)
+			truco_play_card.emit(play_id, suit, rank, player_cards, game_over, match_over)
 		PBTrucoPlayTypeEnum.SHOUT:
 			print("got shout")
 			var player_cards := _parse_player_cards(msg)
