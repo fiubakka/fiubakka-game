@@ -24,6 +24,7 @@ func _ready() -> void:
 	var consumer := get_node("/root/Main/ServerConnection/ServerConsumer")
 	consumer.truco_play_card.connect(self._on_truco_play_card)
 	#consumer.truco_play_shout.connect(self._on_truco_play_shout)
+	consumer.truco_available_shouts.connect(self._on_consumer_truco_available_shouts)
 	consumer.truco_play_update.connect(self._on_truco_play_update)
 	consumer.allow_truco_play.connect(self._on_allow_truco_play)
 		
@@ -99,6 +100,11 @@ func play_enemy_card(suit: int, rank: int) -> void:
 		if !drop_zone.has_card:
 			opponent_controller.play_card(drop_zone)
 			break
+
+
+func _on_consumer_truco_available_shouts(shouts: Dictionary) -> void:
+	print(shouts)
+
 
 func update_points(first_points: int, second_points: int) -> void:
 	if SceneManager._truco_opponent_name != "":

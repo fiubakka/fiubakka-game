@@ -15,7 +15,6 @@ signal truco_play_card(
 	first_points: int,
 	second_points: int
 )
-signal truco_play_shout
 signal truco_play_update(
 	playId: int,
 	cards: Array[Card],
@@ -24,6 +23,7 @@ signal truco_play_update(
 	first_points: int,
 	second_points: int
 )
+signal truco_available_shouts(available_shouts: Dictionary)
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 
@@ -75,6 +75,14 @@ const PBTrucoCard = (
 
 const PBTrucoCardSuit = (
 	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoCardSuit
+)
+
+const PBTrucoNextPlay = (
+	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoNextPlay
+)
+
+const PBTrucoShout = (
+	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoShout
 )
 
 
@@ -233,6 +241,9 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 	
 	var play_type: PBTrucoPlayTypeEnum = msg.get_playType()
 	
+	var available_shouts := _parse_shouts(msg)
+	truco_available_shouts.emit(available_shouts)
+	
 	match play_type:
 		PBTrucoPlayTypeEnum.CARD:
 			var card := msg.get_card()
@@ -275,3 +286,42 @@ func _parse_player_cards(msg: PBTrucoPlay) -> Array[Card]:
 		player_card.rank = rank
 		player_cards.append(player_card)
 	return player_cards
+
+func _parse_shouts(msg: PBTrucoPlay) -> Dictionary:
+	var next_play_info: PBTrucoNextPlay = msg.get_nextPlayInfo()
+	var available_shouts: Array = next_play_info.get_availableShouts()
+	
+	const shouts_names = {
+		PBTrucoShout.ENVIDO: "ENVIDO",
+		PBTrucoShout.TRUCO: "TRUCO",
+	}
+	
+	const shouts_aswers_names = {
+		PBTrucoShout.REAL_ENVIDO: "REAL_ENVIDO",
+		PBTrucoShout.FALTA_ENVIDO: "FALTA_ENVIDO",
+		PBTrucoShout.ENVIDO_QUIERO: "ENVIDO_QUIERO",
+		PBTrucoShout.ENVIDO_NO_QUIERO: "ENVIDO_NO_QUIERO",
+		PBTrucoShout.RETRUCO: "RETRUCO",
+		PBTrucoShout.VALE_CUATRO: "VALE_CUATRO",
+		PBTrucoShout.TRUCO_QUIERO: "TRUCO_QUIERO",
+		PBTrucoShout.TRUCO_NO_QUIERO: "TRUCO_NO_QUIERO"
+	}
+	
+	var parsed_shouts := []
+	var parsed_shouts_answers := []
+	for shout: int in available_shouts:
+		print(shout)
+		print(shouts_names[PBTrucoShout.ENVIDO])
+		if shout in shouts_names:
+			print("entra aca")
+			parsed_shouts.append(shouts_names[shout])
+		elif shout in shouts_aswers_names:
+			parsed_shouts_answers.append(shouts_aswers_names[shout])
+	print(parsed_shouts)
+	print(parsed_shouts_answers)
+	var shouts := {
+		"shouts": parsed_shouts,
+		"shouts_answers": parsed_shouts_answers
+	}
+	
+	return shouts
