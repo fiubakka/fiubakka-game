@@ -197,8 +197,8 @@ func _handle_truco_match_challenge_denied(msg: PBTrucoMatchChallengeDenied) -> v
 
 
 func _handle_truco_allow_play(msg: PBTrucoAllowPlay) -> void:
-	print("Truco allow play:", msg)
-	pass  # TODO: handle play alloed properly
+	var play_id := msg.get_playId()
+	allow_truco_play.emit(play_id)
 
 
 func _handle_truco_play(msg: PBTrucoPlay) -> void:
