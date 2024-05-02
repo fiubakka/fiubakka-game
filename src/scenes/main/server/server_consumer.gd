@@ -23,7 +23,10 @@ signal truco_play_update(
 	first_points: int,
 	second_points: int
 )
-signal truco_available_shouts(available_shouts: Dictionary)
+signal truco_available_shouts(
+	isPlayCardAvailable: bool,
+	available_shouts: Dictionary
+)
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 
@@ -242,7 +245,10 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 	var play_type: PBTrucoPlayTypeEnum = msg.get_playType()
 	
 	var available_shouts := _parse_shouts(msg)
-	truco_available_shouts.emit(available_shouts)
+	truco_available_shouts.emit(
+		msg.get_nextPlayInfo().get_isPlayCardAvailable(),
+		available_shouts
+	)
 	
 	match play_type:
 		PBTrucoPlayTypeEnum.CARD:
@@ -308,20 +314,16 @@ func _parse_shouts(msg: PBTrucoPlay) -> Dictionary:
 	}
 	
 	var parsed_shouts := []
-	var parsed_shouts_answers := []
+	var parsed_shout_answers := []
 	for shout: int in available_shouts:
-		print(shout)
-		print(shouts_names[PBTrucoShout.ENVIDO])
 		if shout in shouts_names:
-			print("entra aca")
 			parsed_shouts.append(shouts_names[shout])
 		elif shout in shouts_aswers_names:
-			parsed_shouts_answers.append(shouts_aswers_names[shout])
-	print(parsed_shouts)
-	print(parsed_shouts_answers)
+			parsed_shout_answers.append(shouts_aswers_names[shout])
+
 	var shouts := {
 		"shouts": parsed_shouts,
-		"shouts_answers": parsed_shouts_answers
+		"shout_answers": parsed_shout_answers
 	}
 	
 	return shouts

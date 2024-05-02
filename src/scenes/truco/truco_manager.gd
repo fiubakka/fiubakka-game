@@ -102,8 +102,9 @@ func play_enemy_card(suit: int, rank: int) -> void:
 			break
 
 
-func _on_consumer_truco_available_shouts(shouts: Dictionary) -> void:
-	print(shouts)
+func _on_consumer_truco_available_shouts(
+	isPlayCardAvailable: bool, shouts: Dictionary) -> void:
+	$Options.set_available_shouts(isPlayCardAvailable, shouts)
 
 
 func update_points(first_points: int, second_points: int) -> void:
