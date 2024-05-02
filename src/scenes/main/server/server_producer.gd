@@ -75,6 +75,7 @@ func _on_player_movement(velocity: Vector2, position: Vector2) -> void:
 
 
 func _on_user_logged_in(username: String, password: String, equipment: Equipment) -> void:
+	PlayerInfo.player_name = username
 	if equipment:
 		var player_register := PBPlayerRegister.new()
 		player_register.set_username(username)
