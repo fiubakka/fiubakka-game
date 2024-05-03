@@ -62,6 +62,10 @@ func update_hand(cards: Array[Card]) -> void:
 		hand.update_card_id(card)
 
 
+func update_shouts(is_play_card_available: bool, available_shouts: Array) -> void:
+	options.set_available_shouts(is_play_card_available, available_shouts)
+
+
 func clean() -> void:
 	hand.clean() 
 	board.clean()
@@ -108,10 +112,14 @@ func play_enemy_card(suit: int, rank: int) -> void:
 
 
 func _on_consumer_truco_available_shouts(
-	isPlayCardAvailable: bool, shouts: Array) -> void:
+	play_id: int, isPlayCardAvailable: bool, shouts: Array) -> void:
 	print("truco manager: ", shouts)
-	$Options.set_available_shouts(isPlayCardAvailable, shouts)
-
+	if (play_id <= current_play_id):
+		play_ack.emit(play_id)
+		return
+	current_play_id = play_id
+	options.set_available_shouts(isPlayCardAvailable, shouts)
+	play_ack.emit(play_id)
 
 func update_points(first_points: int, second_points: int) -> void:
 	if SceneManager._truco_opponent_name != "":
@@ -127,6 +135,7 @@ func _on_truco_play_card(play_id: int, suit: int, rank: int, cards: Array[Card],
 	is_game_over = game_over
 	is_match_over = match_over
 	
+	print("play card")
 	if is_game_over:
 		$RoundOver.visible = true
 
@@ -144,12 +153,18 @@ func _on_truco_play_card(play_id: int, suit: int, rank: int, cards: Array[Card],
 	play_ack.emit(play_id)
 
 
-func _on_truco_play_update(play_id: int, cards: Array[Card], game_over: bool, match_over: bool, first_points: int, second_points: int) -> void:
+func _on_truco_play_update(play_id: int, cards: Array[Card],
+	game_over: bool, match_over: bool,
+	first_points: int, second_points: int,
+	is_play_card_available: bool,
+	available_shouts: Array
+) -> void:
 	# Ignore plays that are previous or the same as the current one
 	if (play_id <= current_play_id):
 		play_ack.emit(play_id)
 		return
 	current_play_id = play_id
+	update_shouts(is_play_card_available, available_shouts)
 	
 	if current_play_id == 0:
 		clean()
