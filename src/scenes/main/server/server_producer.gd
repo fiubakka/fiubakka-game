@@ -151,7 +151,8 @@ func _on_truco_manager_ack(play_id: int) -> void:
 	var truco_play_ack := PBTrucoAckPlay.new()
 	truco_play_ack.set_playId(play_id)
 	_producer.send(truco_play_ack)
-	
+
+
 func _on_truco_manager_play_card(play_id: int, card_id: int) -> void:
 	var truco_play := PBTrucoPlay.new()
 	truco_play.set_playId(play_id)
@@ -160,5 +161,9 @@ func _on_truco_manager_play_card(play_id: int, card_id: int) -> void:
 	_producer.send(truco_play)
 
 
-func _on_truco_manager_shout_played(play_id: int, shout: String) -> void:
-	pass
+func _on_truco_manager_shout_played(play_id: int, shout_id: int) -> void:
+	var truco_play := PBTrucoPlay.new()
+	truco_play.set_playId(play_id)
+	truco_play.set_playType(PBTrucoPlayTypeEnum.SHOUT)
+	truco_play.set_shout(shout_id)
+	_producer.send(truco_play)

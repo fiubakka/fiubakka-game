@@ -2,6 +2,7 @@ extends Node2D
 
 signal play_ack(play_id: int)
 signal play_card(play_id: int, card_id: int)
+signal shout_played(shout_id: int)
 
 @export var card_scene: PackedScene
 
@@ -22,6 +23,8 @@ func _ready() -> void:
 	opponent_controller = $OpponentController
 	opponent_hand = $OpponentHand
 
+	options.shout_played.connect(self._on_options_shout_played)
+	
 	var consumer := get_node("/root/Main/ServerConnection/ServerConsumer")
 	consumer.truco_play_card.connect(self._on_truco_play_card)
 	#consumer.truco_play_shout.connect(self._on_truco_play_shout)
@@ -38,7 +41,7 @@ func _ready() -> void:
 	if !play_card.is_connected(producer_truco_play_handler):
 		play_card.connect(producer_truco_play_handler)
 	
-	options.shout_played.connect(self._on_options_shout_played)
+	shout_played.connect(producer._on_truco_manager_shout_played)
 
 func create_hand(cards: Array[Card]) -> void:
 	for card in cards:
@@ -189,4 +192,4 @@ func _on_allow_truco_play(play_id: int) -> void:
 
 
 func _on_options_shout_played(shout_id: int) -> void:
-	print(shout_id)
+	shout_played.emit(current_play_id, shout_id)
