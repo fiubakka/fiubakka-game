@@ -105,7 +105,8 @@ func play_enemy_card(suit: int, rank: int) -> void:
 
 
 func _on_consumer_truco_available_shouts(
-	isPlayCardAvailable: bool, shouts: Dictionary) -> void:
+	isPlayCardAvailable: bool, shouts: Array) -> void:
+	print("truco manager: ", shouts)
 	$Options.set_available_shouts(isPlayCardAvailable, shouts)
 
 
@@ -138,7 +139,6 @@ func _on_truco_play_card(play_id: int, suit: int, rank: int, cards: Array[Card],
 	update_hand(cards)
 	
 	play_ack.emit(play_id)
-	
 
 
 func _on_truco_play_update(play_id: int, cards: Array[Card], game_over: bool, match_over: bool, first_points: int, second_points: int) -> void:
@@ -188,5 +188,5 @@ func _on_allow_truco_play(play_id: int) -> void:
 	board.enable_play_zone()
 
 
-func _on_options_shout_played(shout: String) -> void:
-	print(shout)
+func _on_options_shout_played(shout_id: int) -> void:
+	print(shout_id)

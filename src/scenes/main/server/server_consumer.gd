@@ -25,7 +25,7 @@ signal truco_play_update(
 )
 signal truco_available_shouts(
 	isPlayCardAvailable: bool,
-	available_shouts: Dictionary
+	available_shouts: Array
 )
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
@@ -244,7 +244,9 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 	
 	var play_type: PBTrucoPlayTypeEnum = msg.get_playType()
 	
-	var available_shouts := _parse_shouts(msg)
+	#var available_shouts := _parse_shouts(msg)
+	var next_play_info: PBTrucoNextPlay = msg.get_nextPlayInfo()
+	var available_shouts: Array = next_play_info.get_availableShouts()
 	truco_available_shouts.emit(
 		msg.get_nextPlayInfo().get_isPlayCardAvailable(),
 		available_shouts
@@ -292,6 +294,41 @@ func _parse_player_cards(msg: PBTrucoPlay) -> Array[Card]:
 		player_card.rank = rank
 		player_cards.append(player_card)
 	return player_cards
+
+#func _parse_shouts(msg: PBTrucoPlay) -> Dictionary:
+	#var next_play_info: PBTrucoNextPlay = msg.get_nextPlayInfo()
+	#var available_shouts: Array = next_play_info.get_availableShouts()
+	#
+	#const shouts_names = {
+		#PBTrucoShout.ENVIDO: "ENVIDO",
+		#PBTrucoShout.TRUCO: "TRUCO",
+	#}
+	#
+	#const shouts_aswers_names = {
+		#PBTrucoShout.REAL_ENVIDO: "REAL_ENVIDO",
+		#PBTrucoShout.FALTA_ENVIDO: "FALTA_ENVIDO",
+		#PBTrucoShout.ENVIDO_QUIERO: "ENVIDO_QUIERO",
+		#PBTrucoShout.ENVIDO_NO_QUIERO: "ENVIDO_NO_QUIERO",
+		#PBTrucoShout.RETRUCO: "RETRUCO",
+		#PBTrucoShout.VALE_CUATRO: "VALE_CUATRO",
+		#PBTrucoShout.TRUCO_QUIERO: "TRUCO_QUIERO",
+		#PBTrucoShout.TRUCO_NO_QUIERO: "TRUCO_NO_QUIERO"
+	#}
+	#
+	#var parsed_shouts := []
+	#var parsed_shout_answers := []
+	#for shout: int in available_shouts:
+		#if shout in shouts_names:
+			#parsed_shouts.append(shouts_names[shout])
+		#elif shout in shouts_aswers_names:
+			#parsed_shout_answers.append(shouts_aswers_names[shout])
+#
+	#var shouts := {
+		#"shouts": parsed_shouts,
+		#"shout_answers": parsed_shout_answers
+	#}
+	#
+	#return shouts
 
 func _parse_shouts(msg: PBTrucoPlay) -> Dictionary:
 	var next_play_info: PBTrucoNextPlay = msg.get_nextPlayInfo()

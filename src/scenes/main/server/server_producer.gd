@@ -160,4 +160,5 @@ func _on_truco_manager_play_card(play_id: int, card_id: int) -> void:
 	_producer.send(truco_play)
 
 
-
+func _on_truco_manager_shout_played(play_id: int, shout: String) -> void:
+	pass
