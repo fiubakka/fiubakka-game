@@ -13,6 +13,7 @@ var opponent_controller: OpponentController = null
 var opponent_hand: OpponentCards = null
 var is_game_over := false
 var is_match_over := false
+@onready var options : Options = $Options
 
 
 func _ready() -> void:
@@ -36,7 +37,8 @@ func _ready() -> void:
 	var producer_truco_play_handler: Callable = (producer._on_truco_manager_play_card)
 	if !play_card.is_connected(producer_truco_play_handler):
 		play_card.connect(producer_truco_play_handler)
-
+	
+	options.shout_played.connect(self._on_options_shout_played)
 
 func create_hand(cards: Array[Card]) -> void:
 	for card in cards:
@@ -184,3 +186,7 @@ func _on_allow_truco_play(play_id: int) -> void:
 	current_play_id = play_id
 	$YourTurn.visible = true
 	board.enable_play_zone()
+
+
+func _on_options_shout_played(shout: String) -> void:
+	print(shout)

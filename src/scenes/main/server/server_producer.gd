@@ -158,4 +158,6 @@ func _on_truco_manager_play_card(play_id: int, card_id: int) -> void:
 	truco_play.set_playType(PBTrucoPlayTypeEnum.CARD)
 	truco_play.set_card(card_id)
 	_producer.send(truco_play)
-	
+
+
+
