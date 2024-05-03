@@ -21,6 +21,8 @@ func _ready() -> void:
 	opponent_controller = $OpponentController
 	opponent_hand = $OpponentHand
 
+	$PlayerName.text = Utils.center_text(PlayerInfo.player_name)
+
 	var consumer := get_node("/root/Main/ServerConnection/ServerConsumer")
 	consumer.truco_play_card.connect(self._on_truco_play_card)
 	#consumer.truco_play_shout.connect(self._on_truco_play_shout)
@@ -85,7 +87,8 @@ func _on_card_get_unselected() -> void:
 func _on_board_player_card_played(card: Card) -> void:
 	card.played = true
 	play_card.emit(current_play_id, card.id)
-	$YourTurn.visible = false
+	$PlayerIcon.visible = false
+	$OpponentIcon.visible = true
 
 
 func _on_opponent_controller_remove_card_from_hand() -> void:
@@ -101,8 +104,15 @@ func play_enemy_card(suit: int, rank: int) -> void:
 			break
 
 
-func update_points(first_points: int, second_points: int) -> void:
-	if SceneManager._truco_opponent_name != "":
+func update_opponent_name(first_name: String, second_name: String) -> void:
+	var opponent_name := second_name if PlayerInfo.player_name == first_name else first_name
+	$OpponentName.text = Utils.center_text(opponent_name)
+
+
+func update_points(
+	first_points: int, first_name: String, second_points: int, second_name: String
+) -> void:
+	if PlayerInfo.player_name == first_name:
 		$Points.set_points(first_points)
 		$OpponentPoints.set_points(second_points)
 	else:
@@ -118,7 +128,9 @@ func _on_truco_play_card(
 	game_over: bool,
 	match_over: bool,
 	first_points: int,
-	second_points: int
+	first_name: String,
+	second_points: int,
+	second_name: String
 ) -> void:
 	# Always save game/match over flags
 	is_game_over = game_over
@@ -134,7 +146,7 @@ func _on_truco_play_card(
 		return
 	current_play_id = play_id
 
-	update_points(first_points, second_points)
+	update_points(first_points, first_name, second_points, second_name)
 	play_enemy_card(suit, rank)
 	update_hand(cards)
 
@@ -147,7 +159,9 @@ func _on_truco_play_update(
 	game_over: bool,
 	match_over: bool,
 	first_points: int,
-	second_points: int
+	first_name: String,
+	second_points: int,
+	second_name: String
 ) -> void:
 	# Ignore plays that are previous or the same as the current one
 	if play_id <= current_play_id:
@@ -156,12 +170,13 @@ func _on_truco_play_update(
 	current_play_id = play_id
 
 	if current_play_id == 0:
+		update_opponent_name(first_name, second_name)
 		clean()
 		create_hand(cards)
 		play_ack.emit(play_id)
 		return
 
-	update_points(first_points, second_points)
+	update_points(first_points, first_name, second_points, second_name)
 
 	# Clear board and update hand when going from game_over to new game
 	if is_game_over and !game_over:
@@ -195,5 +210,6 @@ func _on_allow_truco_play(play_id: int) -> void:
 	if play_id <= current_play_id:
 		return
 	current_play_id = play_id
-	$YourTurn.visible = true
+	$PlayerIcon.visible = true
+	$OpponentIcon.visible = false
 	board.enable_play_zone()

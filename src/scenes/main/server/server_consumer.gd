@@ -13,7 +13,9 @@ signal truco_play_card(
 	game_over: bool,
 	match_over: bool,
 	first_points: int,
-	second_points: int
+	first_name: String,
+	second_points: int,
+	second_name: String
 )
 signal truco_play_shout
 signal truco_play_update(
@@ -22,7 +24,9 @@ signal truco_play_update(
 	game_over: bool,
 	match_over: bool,
 	first_points: int,
-	second_points: int
+	first_name: String,
+	second_points: int,
+	second_name: String
 )
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
@@ -128,6 +132,7 @@ func _handle_message(message: Object) -> void:
 
 
 func _handle_player_init_failure(msg: PBPlayerInitError) -> void:
+	PlayerInfo.player_name = ""
 	var login := get_tree().current_scene.get_node("Login")
 	if login.visible:
 		login.show_error_message(msg.get_error_code())
@@ -216,8 +221,12 @@ func _handle_truco_allow_play(msg: PBTrucoAllowPlay) -> void:
 
 func _handle_truco_play(msg: PBTrucoPlay) -> void:
 	var play_id := msg.get_playId()
-	var first_points := msg.get_firstPlayerPoints().get_points()
-	var second_points := msg.get_secondPlayerPoints().get_points()
+	var first_player := msg.get_firstPlayerPoints()
+	var first_name := first_player.get_playerName()
+	var first_points := first_player.get_points()
+	var second_player := msg.get_secondPlayerPoints()
+	var second_name := second_player.get_playerName()
+	var second_points := second_player.get_points()
 
 	var truco_manager := get_node("/root/TrucoManager")
 	if play_id == 0 and not truco_manager:
@@ -247,7 +256,9 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 				game_over,
 				match_over,
 				first_points,
-				second_points
+				first_name,
+				second_points,
+				second_name
 			)
 		PBTrucoPlayTypeEnum.SHOUT:
 			print("got shout")
@@ -259,7 +270,14 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			var match_over := msg.get_isMatchOver()
 			var player_cards := _parse_player_cards(msg)
 			truco_play_update.emit(
-				play_id, player_cards, game_over, match_over, first_points, second_points
+				play_id,
+				player_cards,
+				game_over,
+				match_over,
+				first_points,
+				first_name,
+				second_points,
+				second_name
 			)
 
 
