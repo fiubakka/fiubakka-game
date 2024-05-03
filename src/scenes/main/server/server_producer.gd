@@ -44,9 +44,7 @@ const PBTrucoAckPlay = (
 	preload("res://addons/protocol/compiled/client/truco/ack_play.gd").PBTrucoAckPlay
 )
 
-const PBTrucoPlay = (
-	preload("res://addons/protocol/compiled/client/truco/play.gd").PBTrucoPlay
-)
+const PBTrucoPlay = preload("res://addons/protocol/compiled/client/truco/play.gd").PBTrucoPlay
 
 const PBTrucoPlayTypeEnum = (
 	preload("res://addons/protocol/compiled/client/truco/play.gd").PBTrucoPlayType
@@ -151,11 +149,11 @@ func _on_truco_manager_ack(play_id: int) -> void:
 	var truco_play_ack := PBTrucoAckPlay.new()
 	truco_play_ack.set_playId(play_id)
 	_producer.send(truco_play_ack)
-	
+
+
 func _on_truco_manager_play_card(play_id: int, card_id: int) -> void:
 	var truco_play := PBTrucoPlay.new()
 	truco_play.set_playId(play_id)
 	truco_play.set_playType(PBTrucoPlayTypeEnum.CARD)
 	truco_play.set_card(card_id)
 	_producer.send(truco_play)
-	

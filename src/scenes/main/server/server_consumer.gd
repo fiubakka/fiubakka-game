@@ -69,14 +69,11 @@ const PBTrucoPlayTypeEnum = (
 	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoPlayType
 )
 
-const PBTrucoCard = (
-	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoCard
-)
+const PBTrucoCard = preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoCard
 
 const PBTrucoCardSuit = (
 	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoCardSuit
 )
-
 
 var _thread: Thread
 var _consumer: Consumer
@@ -230,9 +227,9 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 		SceneManager.load_new_scene("res://src/scenes/truco/truco_manager.tscn")
 		SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
 		await SceneManager.transition_finished
-	
+
 	var play_type: PBTrucoPlayTypeEnum = msg.get_playType()
-	
+
 	match play_type:
 		PBTrucoPlayTypeEnum.CARD:
 			var card := msg.get_card()
@@ -243,7 +240,14 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			var match_over := msg.get_isMatchOver()
 			var player_cards := _parse_player_cards(msg)
 			truco_play_card.emit(
-				play_id, suit, rank, player_cards, game_over, match_over, first_points, second_points
+				play_id,
+				suit,
+				rank,
+				player_cards,
+				game_over,
+				match_over,
+				first_points,
+				second_points
 			)
 		PBTrucoPlayTypeEnum.SHOUT:
 			print("got shout")
@@ -254,7 +258,9 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			var game_over := msg.get_isGameOver()
 			var match_over := msg.get_isMatchOver()
 			var player_cards := _parse_player_cards(msg)
-			truco_play_update.emit(play_id, player_cards, game_over, match_over, first_points, second_points)
+			truco_play_update.emit(
+				play_id, player_cards, game_over, match_over, first_points, second_points
+			)
 
 
 func _parse_player_cards(msg: PBTrucoPlay) -> Array[Card]:
@@ -265,7 +271,7 @@ func _parse_player_cards(msg: PBTrucoPlay) -> Array[Card]:
 		var card_id := card.get_cardId()
 		var rank := card.get_number()
 		var suit: PBTrucoCardSuit = card.get_suit()
-		
+
 		var player_card := Card.new()
 		player_card.id = card_id
 		player_card.texture = deck.deck_file
