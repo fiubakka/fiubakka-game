@@ -14,6 +14,8 @@ signal truco_play_card(
 	match_over: bool,
 	first_points: int,
 	second_points: int,
+	is_play_card_available: bool,
+	available_shouts: Array
 )
 signal truco_play_update(
 	playId: int,
@@ -261,7 +263,11 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			var match_over := msg.get_isMatchOver()
 			var player_cards := _parse_player_cards(msg)
 			truco_play_card.emit(
-				play_id, suit, rank, player_cards, game_over, match_over, first_points, second_points
+				play_id, suit, rank,
+				player_cards, game_over, match_over,
+				first_points, second_points,
+				is_play_card_available,
+				available_shouts
 			)
 		PBTrucoPlayTypeEnum.SHOUT:
 			truco_available_shouts.emit(play_id, is_play_card_available, available_shouts)

@@ -18,14 +18,14 @@ const shouts_names = {
 }
 	
 const shouts_aswers_names = {
-	PBTrucoShout.REAL_ENVIDO: "REAL_ENVIDO",
-	PBTrucoShout.FALTA_ENVIDO: "FALTA_ENVIDO",
-	PBTrucoShout.ENVIDO_QUIERO: "ENVIDO_QUIERO",
-	PBTrucoShout.ENVIDO_NO_QUIERO: "ENVIDO_NO_QUIERO",
+	PBTrucoShout.REAL_ENVIDO: "REAL ENVIDO",
+	PBTrucoShout.FALTA_ENVIDO: "FALTA ENVIDO",
+	PBTrucoShout.ENVIDO_QUIERO: "ENVIDO QUIERO",
+	PBTrucoShout.ENVIDO_NO_QUIERO: "ENVIDO NO QUIERO",
 	PBTrucoShout.RETRUCO: "RETRUCO",
-	PBTrucoShout.VALE_CUATRO: "VALE_CUATRO",
-	PBTrucoShout.TRUCO_QUIERO: "TRUCO_QUIERO",
-	PBTrucoShout.TRUCO_NO_QUIERO: "TRUCO_NO_QUIERO"
+	PBTrucoShout.VALE_CUATRO: "VALE CUATRO",
+	PBTrucoShout.TRUCO_QUIERO: "TRUCO QUIERO",
+	PBTrucoShout.TRUCO_NO_QUIERO: "TRUCO NO QUIERO"
 }
 
 func _ready() -> void:
@@ -37,17 +37,19 @@ func set_available_shouts(
 	_shouts: Array
 ) -> void:
 	clean()
-	print(shouts_names)
+	
 	for shout: int in _shouts:
 		if shout not in shouts_names and shout not in shouts_aswers_names:
 			continue
 		var shout_name := ""
 		var button: TrucoButton = TrucoButtonScn.instantiate()
 		if shout in shouts_names:
+			available_shots.append(button)
 			shout_name = shouts_names[shout]
 			button.disabled = !_isPlayCardAvailable
 			$AvailableShouts.add_child(button)
 		else:
+			available_answers_shots.append(button)
 			shout_name = shouts_aswers_names[shout]
 			$AvailableShoutAnswers.add_child(button)
 		button.text = shout_name
@@ -59,8 +61,12 @@ func _on_button_truco_pressed(shout_id: int) -> void:
 
 
 func clean() -> void:
-	for button: TrucoButton in available_shots:
+	var shots_copy := available_shots.duplicate()
+	for button: TrucoButton in shots_copy:
 		button.queue_free()
+		available_shots.erase(button)
 	
-	for button: TrucoButton in available_answers_shots:
+	var available_shots_copy := available_answers_shots.duplicate()
+	for button: TrucoButton in available_shots_copy:
 		button.queue_free()
+		available_answers_shots.erase(button)

@@ -113,7 +113,6 @@ func play_enemy_card(suit: int, rank: int) -> void:
 
 func _on_consumer_truco_available_shouts(
 	play_id: int, isPlayCardAvailable: bool, shouts: Array) -> void:
-	print("truco manager: ", shouts)
 	if (play_id <= current_play_id):
 		play_ack.emit(play_id)
 		return
@@ -130,12 +129,18 @@ func update_points(first_points: int, second_points: int) -> void:
 		$OpponentPoints.set_points(first_points)
 
 
-func _on_truco_play_card(play_id: int, suit: int, rank: int, cards: Array[Card], game_over: bool, match_over: bool, first_points: int, second_points: int) -> void:
+func _on_truco_play_card(play_id: int, suit: int, rank: int,
+	cards: Array[Card], game_over: bool, match_over: bool,
+	first_points: int, second_points: int,
+	is_play_card_available: bool,
+	available_shouts: Array
+) -> void:
 	# Always save game/match over flags
 	is_game_over = game_over
 	is_match_over = match_over
 	
-	print("play card")
+	update_shouts(is_play_card_available, available_shouts)
+	
 	if is_game_over:
 		$RoundOver.visible = true
 
