@@ -759,7 +759,8 @@ enum PBTrucoShout {
 	RETRUCO = 6,
 	VALE_CUATRO = 7,
 	TRUCO_QUIERO = 8,
-	TRUCO_NO_QUIERO = 9
+	TRUCO_NO_QUIERO = 9,
+	MAZO = 10
 }
 
 ################ USER DATA END #################
