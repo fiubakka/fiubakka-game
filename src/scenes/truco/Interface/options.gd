@@ -61,12 +61,10 @@ func _on_button_truco_pressed(shout_id: int) -> void:
 
 
 func clean() -> void:
-	var shots_copy := available_shots.duplicate()
-	for button: TrucoButton in shots_copy:
+	for button: TrucoButton in available_shots:
 		button.queue_free()
-		available_shots.erase(button)
+	available_shots = []
 	
-	var available_shots_copy := available_answers_shots.duplicate()
-	for button: TrucoButton in available_shots_copy:
+	for button: TrucoButton in available_answers_shots:
 		button.queue_free()
-		available_answers_shots.erase(button)
+	available_answers_shots = []

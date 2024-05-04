@@ -271,6 +271,7 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			)
 		PBTrucoPlayTypeEnum.SHOUT:
 			truco_available_shouts.emit(play_id, is_play_card_available, available_shouts)
+			print(available_shouts)
 		PBTrucoPlayTypeEnum.UPDATE:
 			var game_over := msg.get_isGameOver()
 			var match_over := msg.get_isMatchOver()
