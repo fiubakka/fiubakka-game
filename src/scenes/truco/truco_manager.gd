@@ -119,6 +119,8 @@ func _on_consumer_truco_available_shouts(
 	if (play_id <= current_play_id):
 		play_ack.emit(play_id)
 		return
+	$PlayerIcon.visible = true
+	$OpponentIcon.visible = false
 	current_play_id = play_id
 	options.set_available_shouts(isPlayCardAvailable, shouts)
 	play_ack.emit(play_id)
@@ -229,4 +231,6 @@ func _on_allow_truco_play(play_id: int) -> void:
 
 
 func _on_options_shout_played(shout_id: int) -> void:
+	$PlayerIcon.visible = false
+	$OpponentIcon.visible = true
 	shout_played.emit(current_play_id, shout_id)
