@@ -69,3 +69,11 @@ func clean() -> void:
 	for button: TrucoButton in available_answers_shots:
 		button.queue_free()
 	available_answers_shots = []
+
+
+func disable_buttons(is_disable: bool) -> void:
+	for button: TrucoButton in available_shots:
+		button.disabled = is_disable
+	
+	for button: TrucoButton in available_answers_shots:
+		button.disabled = is_disable

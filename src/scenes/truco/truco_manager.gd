@@ -152,11 +152,9 @@ func _on_truco_play_card(play_id: int, suit: int, rank: int,
 	is_game_over = game_over
 	is_match_over = match_over
 	
-	update_shouts(is_play_card_available, available_shouts)
-	
 	if is_game_over:
 		$RoundOver.visible = true
-
+	
 	# Ignore plays that are previous to the current one
 	# Ignore plays with the same id too, since those are my own
 	if play_id <= current_play_id:
@@ -164,9 +162,11 @@ func _on_truco_play_card(play_id: int, suit: int, rank: int,
 		return
 	current_play_id = play_id
 
+	update_shouts(is_play_card_available, available_shouts)
 	update_points(first_points, first_name, second_points, second_name)
 	play_enemy_card(suit, rank)
 	update_hand(cards)
+	options.disable_buttons(true)
 
 	play_ack.emit(play_id)
 
@@ -188,6 +188,7 @@ func _on_truco_play_update(play_id: int, cards: Array[Card],
 		update_opponent_name(first_name, second_name)
 		clean()
 		create_hand(cards)
+		options.disable_buttons(true)
 		play_ack.emit(play_id)
 		return
 
@@ -228,9 +229,11 @@ func _on_allow_truco_play(play_id: int) -> void:
 	$PlayerIcon.visible = true
 	$OpponentIcon.visible = false
 	board.enable_play_zone()
+	options.disable_buttons(false)
 
 
 func _on_options_shout_played(shout_id: int) -> void:
 	$PlayerIcon.visible = false
 	$OpponentIcon.visible = true
 	shout_played.emit(current_play_id, shout_id)
+	options.disable_buttons(true)
