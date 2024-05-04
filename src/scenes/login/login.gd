@@ -4,10 +4,18 @@ var timer: Timer
 
 signal user_logged_in(username: String, password: String)
 signal return_to_menu
+signal login_error(errorCode: String)
+
+var username: String = ""
+var password: String = ""
 
 
-func _ready() -> void:
-	$NinePatchRect/VBoxContainer/LoginButtonBorder/LoginText.text = Utils.center_text(tr("LOGIN"))
+func _on_login_username_text_changed(_username: String) -> void:
+	username = _username
+
+
+func _on_login_password_text_changed(_password: String) -> void:
+	password = _password
 
 
 func _on_login_username_text_submitted(_username: String) -> void:
@@ -18,42 +26,35 @@ func _on_login_password_text_submitted(_password: String) -> void:
 	self._on_button_pressed()
 
 
-func show_error_message(errorCode: String) -> void:
+func _on_login_error(_errorCode: String) -> void:
 	if timer:
 		timer.stop()
-	$NinePatchRect/VBoxContainer/LoginButtonBorder/LoginErrorText.text = Utils.center_text(
-		tr(errorCode)
-	)
-	$NinePatchRect/VBoxContainer/LoginButtonBorder/LoginErrorText.visible = true
 
 
 func _on_button_pressed() -> void:
-	$NinePatchRect/VBoxContainer/LoginButtonBorder/LoginErrorText.visible = false
-	var username: String = $NinePatchRect/VBoxContainer/Username/LoginUsername.text
+	# $NinePatchRect/VBoxContainer/LoginButtonBorder/LoginErrorText.visible = false
 	if username.is_empty():
-		self.show_error_message("EMPTY_USERNAME")
+		login_error.emit("EMPTY_USERNAME")
 		return
 
-	var password: String = $NinePatchRect/VBoxContainer/Password/LoginPassword.text
 	if password.is_empty():
-		self.show_error_message("EMPTY_PASSWORD")
+		login_error.emit("EMPTY_PASSWORD")
 		return
 
 	timer = Timer.new()  # Timer to send init message until we get a response
-	timer.timeout.connect(Callable(self, "_on_timer_timeout").bind(username, password))
+	timer.timeout.connect(Callable(self, "_on_timer_timeout"))
 	add_child(timer)
 	timer.set_wait_time(2.0)
 	timer.start()
 
 
-func _on_timer_timeout(username: String, password: String) -> void:
+func _on_timer_timeout() -> void:
 	user_logged_in.emit(username, password, null)
 
 
-func _on_return_return_to_menu() -> void:
-	$NinePatchRect/VBoxContainer/LoginButtonBorder/LoginErrorText.visible = false
-	$NinePatchRect/VBoxContainer/Username/LoginUsername.clear()
-	$NinePatchRect/VBoxContainer/Password/LoginPassword.clear()
+func _on_return_to_menu() -> void:
+	username = ""
+	password = ""
 	if timer:
 		timer.stop()
 	return_to_menu.emit()

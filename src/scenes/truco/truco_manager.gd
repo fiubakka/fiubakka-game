@@ -25,19 +25,21 @@ func _ready() -> void:
 
 	options.shout_played.connect(self._on_options_shout_played)
 	
+	$PlayerName.text = Utils.center_text(PlayerInfo.player_name)
+
 	var consumer := get_node("/root/Main/ServerConnection/ServerConsumer")
 	consumer.truco_play_card.connect(self._on_truco_play_card)
 	#consumer.truco_play_shout.connect(self._on_truco_play_shout)
 	consumer.truco_available_shouts.connect(self._on_consumer_truco_available_shouts)
 	consumer.truco_play_update.connect(self._on_truco_play_update)
 	consumer.allow_truco_play.connect(self._on_allow_truco_play)
-		
+
 	var producer := get_node("/root/Main/ServerConnection/ServerProducer")
-	var producer_truco_ack_handler: Callable = (producer._on_truco_manager_ack)
+	var producer_truco_ack_handler: Callable = producer._on_truco_manager_ack
 	if !play_ack.is_connected(producer_truco_ack_handler):
 		play_ack.connect(producer_truco_ack_handler)
-		
-	var producer_truco_play_handler: Callable = (producer._on_truco_manager_play_card)
+
+	var producer_truco_play_handler: Callable = producer._on_truco_manager_play_card
 	if !play_card.is_connected(producer_truco_play_handler):
 		play_card.connect(producer_truco_play_handler)
 	
@@ -52,11 +54,11 @@ func create_hand(cards: Array[Card]) -> void:
 		new_card.texture = card.texture
 		new_card.region_rect = card.region_rect
 		hand.add_cards(new_card)
-		
+
 	board.create_dropzones()
 	opponent_controller.next_turn()
-		
-	
+
+
 func update_hand(cards: Array[Card]) -> void:
 	for card in cards:
 		hand.update_card_id(card)
@@ -67,7 +69,7 @@ func update_shouts(is_play_card_available: bool, available_shouts: Array) -> voi
 
 
 func clean() -> void:
-	hand.clean() 
+	hand.clean()
 	board.clean()
 	opponent_controller.clean()
 	opponent_hand.clean()
@@ -95,7 +97,8 @@ func _on_card_get_unselected() -> void:
 func _on_board_player_card_played(card: Card) -> void:
 	card.played = true
 	play_card.emit(current_play_id, card.id)
-	$YourTurn.visible = false
+	$PlayerIcon.visible = false
+	$OpponentIcon.visible = true
 
 
 func _on_opponent_controller_remove_card_from_hand() -> void:
@@ -120,8 +123,16 @@ func _on_consumer_truco_available_shouts(
 	options.set_available_shouts(isPlayCardAvailable, shouts)
 	play_ack.emit(play_id)
 
-func update_points(first_points: int, second_points: int) -> void:
-	if SceneManager._truco_opponent_name != "":
+
+func update_opponent_name(first_name: String, second_name: String) -> void:
+	var opponent_name := second_name if PlayerInfo.player_name == first_name else first_name
+	$OpponentName.text = Utils.center_text(opponent_name)
+
+
+func update_points(
+	first_points: int, first_name: String, second_points: int, second_name: String
+) -> void:
+	if PlayerInfo.player_name == first_name:
 		$Points.set_points(first_points)
 		$OpponentPoints.set_points(second_points)
 	else:
@@ -131,7 +142,7 @@ func update_points(first_points: int, second_points: int) -> void:
 
 func _on_truco_play_card(play_id: int, suit: int, rank: int,
 	cards: Array[Card], game_over: bool, match_over: bool,
-	first_points: int, second_points: int,
+	first_points: int, first_name: String, second_points: int, second_name: String,
 	is_play_card_available: bool,
 	available_shouts: Array
 ) -> void:
@@ -146,53 +157,57 @@ func _on_truco_play_card(play_id: int, suit: int, rank: int,
 
 	# Ignore plays that are previous to the current one
 	# Ignore plays with the same id too, since those are my own
-	if(play_id <= current_play_id):
+	if play_id <= current_play_id:
 		play_ack.emit(play_id)
 		return
 	current_play_id = play_id
-	
-	update_points(first_points, second_points)
+
+	update_points(first_points, first_name, second_points, second_name)
 	play_enemy_card(suit, rank)
 	update_hand(cards)
-	
+
 	play_ack.emit(play_id)
 
 
 func _on_truco_play_update(play_id: int, cards: Array[Card],
 	game_over: bool, match_over: bool,
-	first_points: int, second_points: int,
+	first_points: int, first_name: String, second_points: int, second_name: String,
 	is_play_card_available: bool,
 	available_shouts: Array
 ) -> void:
 	# Ignore plays that are previous or the same as the current one
-	if (play_id <= current_play_id):
+	if play_id <= current_play_id:
 		play_ack.emit(play_id)
 		return
 	current_play_id = play_id
 	update_shouts(is_play_card_available, available_shouts)
 	
 	if current_play_id == 0:
+		update_opponent_name(first_name, second_name)
 		clean()
 		create_hand(cards)
 		play_ack.emit(play_id)
 		return
-		
-	update_points(first_points, second_points)
-	
+
+	update_points(first_points, first_name, second_points, second_name)
+
 	# Clear board and update hand when going from game_over to new game
 	if is_game_over and !game_over:
 		is_game_over = game_over
 		var timer := Timer.new()
-		timer.timeout.connect(Callable(self, "_on_game_over_timer_timeout").bind(play_id, cards, timer))
+		timer.timeout.connect(
+			Callable(self, "_on_game_over_timer_timeout").bind(play_id, cards, timer)
+		)
 		timer.one_shot = true
 		timer.set_wait_time(3.0)
 		add_child(timer)
 		timer.start()
 		return
-	
+
 	update_hand(cards)
 	play_ack.emit(play_id)
-	
+
+
 func _on_game_over_timer_timeout(play_id: int, cards: Array[Card], timer: Timer) -> void:
 	$RoundOver.visible = false
 	clean()
@@ -201,13 +216,15 @@ func _on_game_over_timer_timeout(play_id: int, cards: Array[Card], timer: Timer)
 	timer.queue_free()
 	return
 
+
 func _on_allow_truco_play(play_id: int) -> void:
 	# Ignore plays that are previous or the same as the current one
 	# Should never happen here, but we check just in case
-	if (play_id <= current_play_id):
+	if play_id <= current_play_id:
 		return
 	current_play_id = play_id
-	$YourTurn.visible = true
+	$PlayerIcon.visible = true
+	$OpponentIcon.visible = false
 	board.enable_play_zone()
 
 

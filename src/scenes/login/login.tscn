@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b6kg7qutp1h00"]
+[gd_scene load_steps=15 format=3 uid="uid://b6kg7qutp1h00"]
 
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_f447j"]
 [ext_resource type="Script" path="res://src/scenes/login/login.gd" id="1_mxn2w"]
@@ -6,8 +6,10 @@
 [ext_resource type="Script" path="res://src/scenes/login/title.gd" id="2_wof1i"]
 [ext_resource type="PackedScene" uid="uid://dl2ppg848l7il" path="res://src/scenes/GUI/return/return.tscn" id="3_ke864"]
 [ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="3_v6w8k"]
-[ext_resource type="Script" path="res://src/scenes/login/login_username_box.gd" id="4_m2urp"]
+[ext_resource type="Script" path="res://src/scenes/login/login_username.gd" id="4_m2urp"]
 [ext_resource type="AudioStream" uid="uid://ck7nysfydevjl" path="res://audio/music/login.ogg" id="5_ktkbl"]
+[ext_resource type="Script" path="res://src/scenes/login/login_password.gd" id="7_abh4x"]
+[ext_resource type="Script" path="res://src/scenes/login/login_error_text.gd" id="8_84eql"]
 
 [sub_resource type="Theme" id="Theme_1qdqe"]
 default_font = ExtResource("3_v6w8k")
@@ -16,6 +18,10 @@ default_font_size = 50
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g065x"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_63wf8"]
+
+[sub_resource type="Theme" id="Theme_ag47f"]
+default_font = ExtResource("3_v6w8k")
+default_font_size = 35
 
 [node name="Login" type="Control"]
 layout_mode = 3
@@ -37,9 +43,12 @@ texture = ExtResource("1_f447j")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
 layout_mode = 2
-offset_left = 268.825
-offset_right = 715.824
-offset_bottom = 541.0
+anchor_left = 0.28
+anchor_right = 0.745
+anchor_bottom = 1.002
+offset_left = 0.0250244
+offset_right = 0.623901
+offset_bottom = -0.0800781
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -77,12 +86,11 @@ text = "[center]Fiubakka[/center]"
 scroll_active = false
 
 [node name="Username" type="Control" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Username"]
-custom_minimum_size = Vector2(250, 70)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -129,12 +137,11 @@ max_length = 12
 script = ExtResource("4_m2urp")
 
 [node name="Password" type="Control" parent="NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Password"]
-custom_minimum_size = Vector2(250, 70)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -179,77 +186,119 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_63wf8")
 placeholder_text = "PASSWORD_PLACEHOLDER"
 max_length = 12
 secret = true
+script = ExtResource("7_abh4x")
 
-[node name="LoginButtonBorder" type="NinePatchRect" parent="NinePatchRect/VBoxContainer"]
-custom_minimum_size = Vector2(0, 75)
+[node name="LoginButtonContainer" type="Control" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("2_vs65q")
-region_rect = Rect2(1859.13, 3.51087, 72.7058, 42.0013)
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
 
-[node name="LoginText" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/LoginButtonBorder"]
-self_modulate = Color(0.694118, 0.439216, 0.219608, 1)
-clip_contents = false
-custom_minimum_size = Vector2(0, 50)
+[node name="LoginButtonBorder" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/LoginButtonContainer"]
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
+anchors_preset = -1
+anchor_left = 0.500392
+anchor_top = 0.318777
+anchor_right = 0.500392
+anchor_bottom = 0.318777
+offset_left = -100.0
+offset_top = -25.0
+offset_right = 100.0
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-theme = SubResource("Theme_1qdqe")
+texture = ExtResource("2_vs65q")
+region_rect = Rect2(1859.13, 3.51087, 72.7058, 42.0013)
+metadata/_edit_use_anchors_ = true
+
+[node name="LoginTextContainer" type="VBoxContainer" parent="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.321
+anchor_top = 0.24
+anchor_right = 0.675
+anchor_bottom = 0.84
+offset_left = -0.200005
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoginText" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginTextContainer"]
+self_modulate = Color(0.694118, 0.439216, 0.219608, 1)
+clip_contents = false
+custom_minimum_size = Vector2(70, 30)
+layout_mode = 2
+theme = SubResource("Theme_ag47f")
 bbcode_enabled = true
 text = "[center]Login[/center]"
 scroll_active = false
 
-[node name="LoginButton" type="Button" parent="NinePatchRect/VBoxContainer/LoginButtonBorder"]
+[node name="LoginButton" type="Button" parent="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder"]
 modulate = Color(1, 1, 1, 0)
 self_modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 6.0
-offset_top = -1.0
-offset_right = 449.0
-offset_bottom = 78.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.069
+anchor_top = 0.213
+anchor_right = 0.933
+anchor_bottom = 0.833
+offset_left = -4.25
+offset_top = -6.475
+offset_right = 3.75
+offset_bottom = 3.02499
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="LoginErrorText" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/LoginButtonBorder"]
+[node name="LoginErrorText" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/LoginButtonContainer"]
 self_modulate = Color(0.819608, 0, 0.00784314, 1)
 clip_contents = false
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(500, 50)
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 443.0
-offset_top = -42.5
-offset_right = 244.0
-offset_bottom = 35.5
+anchors_preset = -1
+anchor_left = 0.500392
+anchor_top = 0.755459
+anchor_right = 0.500392
+anchor_bottom = 0.755459
+offset_left = -250.0
+offset_top = -25.0
+offset_right = 250.0
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_1qdqe")
+theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
 text = "[center][/center]"
 scroll_active = false
+script = ExtResource("8_84eql")
+metadata/_edit_use_anchors_ = true
 
-[node name="Return" parent="." instance=ExtResource("3_ke864")]
+[node name="Return" parent="NinePatchRect" instance=ExtResource("3_ke864")]
 layout_mode = 2
 anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 73.0
-offset_top = 24.0
-offset_right = 121.0
-offset_bottom = 80.0
+anchor_left = 0.076
+anchor_top = 0.065
+anchor_right = 0.128
+anchor_bottom = 0.148
+offset_left = 0.0399933
+offset_top = -11.1
+offset_right = -1.88
+offset_bottom = 0.0800018
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_ktkbl")
 volume_db = -63.003
 autoplay = true
 
+[connection signal="login_error" from="." to="." method="_on_login_error"]
+[connection signal="login_error" from="." to="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginErrorText" method="_on_login_error"]
+[connection signal="text_changed" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="." method="_on_login_username_text_changed"]
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_text_changed"]
 [connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="." method="_on_login_username_text_submitted"]
+[connection signal="text_changed" from="NinePatchRect/VBoxContainer/Password/LoginPassword" to="." method="_on_login_password_text_changed"]
 [connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Password/LoginPassword" to="." method="_on_login_password_text_submitted"]
-[connection signal="pressed" from="NinePatchRect/VBoxContainer/LoginButtonBorder/LoginButton" to="." method="_on_button_pressed"]
-[connection signal="return_to_menu" from="Return" to="." method="_on_return_return_to_menu"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginButton" to="." method="_on_button_pressed"]
+[connection signal="return_to_menu" from="NinePatchRect/Return" to="." method="_on_return_to_menu"]
+[connection signal="return_to_menu" from="NinePatchRect/Return" to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_return_to_menu"]
+[connection signal="return_to_menu" from="NinePatchRect/Return" to="NinePatchRect/VBoxContainer/Password/LoginPassword" method="_on_return_to_menu"]
+[connection signal="return_to_menu" from="NinePatchRect/Return" to="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginErrorText" method="_on_return_to_menu"]

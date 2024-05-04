@@ -13,7 +13,9 @@ signal truco_play_card(
 	game_over: bool,
 	match_over: bool,
 	first_points: int,
+	first_name: String,
 	second_points: int,
+	second_name: String,
 	is_play_card_available: bool,
 	available_shouts: Array
 )
@@ -23,7 +25,9 @@ signal truco_play_update(
 	game_over: bool,
 	match_over: bool,
 	first_points: int,
+	first_name: String,
 	second_points: int,
+	second_name: String,
 	is_play_card_available: bool,
 	available_shouts: Array
 )
@@ -77,9 +81,7 @@ const PBTrucoPlayTypeEnum = (
 	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoPlayType
 )
 
-const PBTrucoCard = (
-	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoCard
-)
+const PBTrucoCard = preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoCard
 
 const PBTrucoCardSuit = (
 	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoCardSuit
@@ -147,6 +149,7 @@ func _handle_message(message: Object) -> void:
 
 
 func _handle_player_init_failure(msg: PBPlayerInitError) -> void:
+	PlayerInfo.player_name = ""
 	var login := get_tree().current_scene.get_node("Login")
 	if login.visible:
 		login.show_error_message(msg.get_error_code())
@@ -235,8 +238,12 @@ func _handle_truco_allow_play(msg: PBTrucoAllowPlay) -> void:
 
 func _handle_truco_play(msg: PBTrucoPlay) -> void:
 	var play_id := msg.get_playId()
-	var first_points := msg.get_firstPlayerPoints().get_points()
-	var second_points := msg.get_secondPlayerPoints().get_points()
+	var first_player := msg.get_firstPlayerPoints()
+	var first_name := first_player.get_playerName()
+	var first_points := first_player.get_points()
+	var second_player := msg.get_secondPlayerPoints()
+	var second_name := second_player.get_playerName()
+	var second_points := second_player.get_points()
 
 	var truco_manager := get_node("/root/TrucoManager")
 	if play_id == 0 and not truco_manager:
@@ -246,7 +253,7 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 		SceneManager.load_new_scene("res://src/scenes/truco/truco_manager.tscn")
 		SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
 		await SceneManager.transition_finished
-	
+
 	var play_type: PBTrucoPlayTypeEnum = msg.get_playType()
 	
 	var next_play_info: PBTrucoNextPlay = msg.get_nextPlayInfo()
@@ -265,7 +272,7 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			truco_play_card.emit(
 				play_id, suit, rank,
 				player_cards, game_over, match_over,
-				first_points, second_points,
+				first_points, first_name, second_points, second_name,
 				is_play_card_available,
 				available_shouts
 			)
@@ -278,9 +285,10 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			var player_cards := _parse_player_cards(msg)
 			truco_play_update.emit(play_id, player_cards,
 			game_over, match_over,
-			first_points, second_points,
+			first_points, first_name, second_points, second_name,
 			is_play_card_available,
-			available_shouts)
+			available_shouts
+			)
 
 
 func _parse_player_cards(msg: PBTrucoPlay) -> Array[Card]:
@@ -291,7 +299,7 @@ func _parse_player_cards(msg: PBTrucoPlay) -> Array[Card]:
 		var card_id := card.get_cardId()
 		var rank := card.get_number()
 		var suit: PBTrucoCardSuit = card.get_suit()
-		
+
 		var player_card := Card.new()
 		player_card.id = card_id
 		player_card.texture = deck.deck_file

@@ -15,6 +15,7 @@ const PBTrucoShout = (
 const shouts_names = {
 	PBTrucoShout.ENVIDO: "ENVIDO",
 	PBTrucoShout.TRUCO: "TRUCO",
+	PBTrucoShout.MAZO: "MAZO"
 }
 	
 const shouts_aswers_names = {
