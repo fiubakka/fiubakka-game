@@ -13,6 +13,7 @@ var opponent_controller: OpponentController = null
 var opponent_hand: OpponentCards = null
 var is_game_over := false
 var is_match_over := false
+var _last_played_card_id := -1
 
 
 func _ready() -> void:
@@ -87,6 +88,7 @@ func _on_card_get_unselected() -> void:
 func _on_board_player_card_played(card: Card) -> void:
 	card.played = true
 	play_card.emit(current_play_id, card.id)
+	_last_played_card_id = card.id
 	$PlayerIcon.visible = false
 	$OpponentIcon.visible = true
 
@@ -120,70 +122,50 @@ func update_points(
 		$OpponentPoints.set_points(first_points)
 
 
-func _on_truco_play_card(
-	play_id: int,
-	suit: int,
-	rank: int,
-	cards: Array[Card],
-	game_over: bool,
-	match_over: bool,
-	first_points: int,
-	first_name: String,
-	second_points: int,
-	second_name: String
-) -> void:
+func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 	# Always save game/match over flags
-	is_game_over = game_over
-	is_match_over = match_over
+	is_game_over = dto.game_over
+	is_match_over = dto.match_over
 
 	if is_game_over:
 		$RoundOver.visible = true
 
 	# Ignore plays that are previous to the current one
 	# Ignore plays with the same id too, since those are my own
-	if play_id <= current_play_id:
-		play_ack.emit(play_id)
+	if dto.play_id <= current_play_id:
+		play_ack.emit(dto.play_id)
 		return
-	current_play_id = play_id
+	current_play_id = dto.play_id
 
-	update_points(first_points, first_name, second_points, second_name)
-	play_enemy_card(suit, rank)
-	update_hand(cards)
+	update_points(dto.first_points, dto.first_name, dto.second_points, dto.second_name)
+	play_enemy_card(dto.suit, dto.rank)
+	update_hand(dto.player_cards)
 
-	play_ack.emit(play_id)
+	play_ack.emit(dto.play_id)
 
 
-func _on_truco_play_update(
-	play_id: int,
-	cards: Array[Card],
-	game_over: bool,
-	match_over: bool,
-	first_points: int,
-	first_name: String,
-	second_points: int,
-	second_name: String
-) -> void:
+func _on_truco_play_update(dto : TrucoPlayUpdateDto) -> void:
 	# Ignore plays that are previous or the same as the current one
-	if play_id <= current_play_id:
-		play_ack.emit(play_id)
+	if dto.play_id <= current_play_id:
+		play_ack.emit(dto.play_id)
 		return
-	current_play_id = play_id
+	current_play_id = dto.play_id
 
 	if current_play_id == 0:
-		update_opponent_name(first_name, second_name)
+		update_opponent_name(dto.first_name, dto.second_name)
 		clean()
-		create_hand(cards)
-		play_ack.emit(play_id)
+		create_hand(dto.player_cards)
+		play_ack.emit(dto.play_id)
 		return
 
-	update_points(first_points, first_name, second_points, second_name)
+	update_points(dto.first_points, dto.first_name, dto.second_points, dto.second_name)
 
 	# Clear board and update hand when going from game_over to new game
-	if is_game_over and !game_over:
-		is_game_over = game_over
+	if is_game_over and !dto.game_over:
+		is_game_over = dto.game_over
 		var timer := Timer.new()
 		timer.timeout.connect(
-			Callable(self, "_on_game_over_timer_timeout").bind(play_id, cards, timer)
+			Callable(self, "_on_game_over_timer_timeout").bind(dto.play_id, dto.player_cards, timer)
 		)
 		timer.one_shot = true
 		timer.set_wait_time(3.0)
@@ -191,8 +173,8 @@ func _on_truco_play_update(
 		timer.start()
 		return
 
-	update_hand(cards)
-	play_ack.emit(play_id)
+	update_hand(dto.player_cards)
+	play_ack.emit(dto.play_id)
 
 
 func _on_game_over_timer_timeout(play_id: int, cards: Array[Card], timer: Timer) -> void:
@@ -206,8 +188,11 @@ func _on_game_over_timer_timeout(play_id: int, cards: Array[Card], timer: Timer)
 
 func _on_allow_truco_play(play_id: int) -> void:
 	# Ignore plays that are previous or the same as the current one
-	# Should never happen here, but we check just in case
+	# If it happens, send the last TrucoPlay for consistency with server
 	if play_id <= current_play_id:
+		# Resend last TrucoPlay
+		# Case: Card played
+		play_card.emit(current_play_id, _last_played_card_id)
 		return
 	current_play_id = play_id
 	$PlayerIcon.visible = true
