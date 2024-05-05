@@ -22,4 +22,10 @@ func _on_register_button_pressed() -> void:
 
 
 func _on_language_select_go_to_main_menu() -> void:
+	$NinePatchRect/VBoxContainer/Login/NinePatchRect/RichTextLabel.text = Utils.center_text(
+		tr("LOGIN")
+	)
+	$NinePatchRect/VBoxContainer/Register/NinePatchRect/RichTextLabel.text = Utils.center_text(
+		tr("REGISTER")
+	)
 	visible = true

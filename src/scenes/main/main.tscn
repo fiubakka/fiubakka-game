@@ -103,8 +103,6 @@ offset_bottom = 537.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[connection signal="chat_closed" from="." to="GUI/GuiManager/Chatbox" method="_on_main_chat_closed"]
-[connection signal="chat_opened" from="." to="GUI/GuiManager/Chatbox" method="_on_main_chat_opened"]
 [connection signal="login_ready" from="." to="GUI/GuiManager/Chatbox" method="_on_main_login_ready"]
 [connection signal="login_ready" from="." to="GUI/GuiManager/Pause" method="_on_main_login_ready"]
 [connection signal="return_to_menu" from="Login" to="." method="_on_login_return_to_menu"]
