@@ -30,7 +30,8 @@ func _ready() -> void:
 	var consumer := get_node("/root/Main/ServerConnection/ServerConsumer")
 	consumer.truco_play_card.connect(self._on_truco_play_card)
 	#consumer.truco_play_shout.connect(self._on_truco_play_shout)
-	consumer.truco_available_shouts.connect(self._on_consumer_truco_available_shouts)
+	#consumer.truco_available_shouts.connect(self._on_consumer_truco_available_shouts)
+	consumer.truco_shout_played.connect(self._on_consumer_truco_shout_played)
 	consumer.truco_play_update.connect(self._on_truco_play_update)
 	consumer.allow_truco_play.connect(self._on_allow_truco_play)
 
@@ -173,6 +174,27 @@ func _on_truco_play_card(play_id: int, suit: int, rank: int,
 
 	play_ack.emit(play_id)
 
+
+func _on_consumer_truco_shout_played(play_id: int, shout: int,
+	game_over: bool, match_over: bool,
+	is_play_card_available: bool,
+	available_shouts: Array
+) -> void:
+	is_game_over = game_over
+	is_match_over = match_over
+	
+	if is_game_over:
+		$RoundOver.visible = true
+		return
+
+	if play_id <= current_play_id:
+		play_ack.emit(play_id)
+		return
+
+	current_play_id = play_id
+	update_shouts(is_play_card_available, available_shouts)
+	$DialogueBubbleController.show_shout(shout)
+	
 
 func _on_truco_play_update(play_id: int, cards: Array[Card],
 	game_over: bool, match_over: bool,
