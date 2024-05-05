@@ -29,8 +29,6 @@ func _ready() -> void:
 
 	var consumer := get_node("/root/Main/ServerConnection/ServerConsumer")
 	consumer.truco_play_card.connect(self._on_truco_play_card)
-	#consumer.truco_play_shout.connect(self._on_truco_play_shout)
-	#consumer.truco_available_shouts.connect(self._on_consumer_truco_available_shouts)
 	consumer.truco_shout_played.connect(self._on_consumer_truco_shout_played)
 	consumer.truco_play_update.connect(self._on_truco_play_update)
 	consumer.allow_truco_play.connect(self._on_allow_truco_play)
@@ -115,16 +113,16 @@ func play_enemy_card(suit: int, rank: int) -> void:
 			break
 
 
-func _on_consumer_truco_available_shouts(
-	play_id: int, isPlayCardAvailable: bool, shouts: Array) -> void:
-	if (play_id <= current_play_id):
-		play_ack.emit(play_id)
-		return
-	$PlayerIcon.visible = true
-	$OpponentIcon.visible = false
-	current_play_id = play_id
-	options.set_available_shouts(isPlayCardAvailable, shouts)
-	play_ack.emit(play_id)
+#func _on_consumer_truco_available_shouts(
+	#play_id: int, isPlayCardAvailable: bool, shouts: Array) -> void:
+	#if (play_id <= current_play_id):
+		#play_ack.emit(play_id)
+		#return
+	#$PlayerIcon.visible = true
+	#$OpponentIcon.visible = false
+	#current_play_id = play_id
+	#options.set_available_shouts(isPlayCardAvailable, shouts)
+	#play_ack.emit(play_id)
 
 
 func update_opponent_name(first_name: String, second_name: String) -> void:
