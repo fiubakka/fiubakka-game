@@ -16,6 +16,8 @@ OPTION_CONTINUE,Continuar,Continue
 OPTION_QUIT,Salir,Quit
 CHAT_PLACEHOLDER,"Diga algo...","Say something..."
 CHAT_SEND,Enviar,Send
+EQUIP,Equipar,Equip
+UNEQUIP,Desequipar,Unequip
 LOADING_SERVER,"Esperando servidor...","Waiting for server..."
 LOADING_LEVEL,"Cargando nivel...","Loading level..."
 EMPTY_USERNAME, "Ingrese un nombre", "Enter a username"

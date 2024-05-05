@@ -75,3 +75,12 @@ func _on_login_username_text_submitted(_new_text: String) -> void:
 
 func _on_login_password_text_submitted(_new_text: String) -> void:
 	self._on_button_pressed()
+
+
+func _on_language_select_switch_locale() -> void:
+	$NinePatchRect/VBoxContainer/MarginContainer/RichTextLabel.text = Utils.center_text(
+		tr("CHAR_CREATION_TITLE")
+	)
+	$NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect/RichTextLabel.text = (
+		Utils.center_text(tr("REGISTER"))
+	)

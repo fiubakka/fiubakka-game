@@ -1,6 +1,7 @@
 extends Control
 
 signal go_to_main_menu
+signal switch_locale
 
 const button_scene = preload("res://src/scenes/truco/Interface/button.tscn")
 
@@ -25,4 +26,5 @@ func _on_button_pressed(button: Button) -> void:
 	var locale: String = button.text.to_lower()
 	TranslationServer.set_locale(locale)
 	go_to_main_menu.emit()
+	switch_locale.emit()
 	queue_free()
