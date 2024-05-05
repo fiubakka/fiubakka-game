@@ -14,6 +14,7 @@ var opponent_controller: OpponentController = null
 var opponent_hand: OpponentCards = null
 var is_game_over := false
 var is_match_over := false
+var _can_play_cards := false
 @onready var options : Options = $Options
 
 
@@ -95,6 +96,8 @@ func _on_card_get_unselected() -> void:
 
 
 func _on_board_player_card_played(card: Card) -> void:
+	if not _can_play_cards:
+		return
 	card.played = true
 	play_card.emit(current_play_id, card.id)
 	$PlayerIcon.visible = false
@@ -122,6 +125,7 @@ func _on_consumer_truco_available_shouts(
 	$PlayerIcon.visible = true
 	$OpponentIcon.visible = false
 	current_play_id = play_id
+	_can_play_cards = isPlayCardAvailable
 	options.set_available_shouts(isPlayCardAvailable, shouts)
 	play_ack.emit(play_id)
 
@@ -161,6 +165,7 @@ func _on_truco_play_card(play_id: int, suit: int, rank: int,
 		play_ack.emit(play_id)
 		return
 	current_play_id = play_id
+	_can_play_cards = is_play_card_available
 
 	update_shouts(is_play_card_available, available_shouts)
 	update_points(first_points, first_name, second_points, second_name)
@@ -182,6 +187,7 @@ func _on_truco_play_update(play_id: int, cards: Array[Card],
 		play_ack.emit(play_id)
 		return
 	current_play_id = play_id
+	_can_play_cards = is_play_card_available
 	update_shouts(is_play_card_available, available_shouts)
 	
 	if current_play_id == 0:
@@ -228,7 +234,8 @@ func _on_allow_truco_play(play_id: int) -> void:
 	current_play_id = play_id
 	$PlayerIcon.visible = true
 	$OpponentIcon.visible = false
-	board.enable_play_zone()
+	if _can_play_cards:
+		board.enable_play_zone()
 	options.disable_buttons(false)
 
 
@@ -237,3 +244,10 @@ func _on_options_shout_played(shout_id: int) -> void:
 	$OpponentIcon.visible = true
 	shout_played.emit(current_play_id, shout_id)
 	options.disable_buttons(true)
+
+	# Disable playing cards when I make a shout
+	# TODO: handle properly by counting which turn are we in
+	# and then disabling the play_zone of that turn
+	# (to avoid disabling previously played zones)
+	if shout_id == 0 or shout_id == 5:
+		board.disable_play_zone()
