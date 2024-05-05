@@ -1,5 +1,6 @@
 extends Node
 
+signal user_init_error(errorCode: String)
 signal user_init_ready(position: Vector2, equipment: Equipment, mapId: int)
 signal update_content(entityId: String, content: String)
 signal player_changed_map
@@ -133,12 +134,7 @@ func _handle_message(message: Object) -> void:
 
 func _handle_player_init_failure(msg: PBPlayerInitError) -> void:
 	PlayerInfo.player_name = ""
-	var login := get_tree().current_scene.get_node("Login")
-	if login.visible:
-		login.show_error_message(msg.get_error_code())
-	else:
-		var register := get_tree().current_scene.get_node("Register")
-		register.show_error_message(msg.get_error_code())
+	user_init_error.emit(msg.get_error_code())
 
 
 func _handle_player_init_ready(msg: PBPlayerInitSuccess) -> void:

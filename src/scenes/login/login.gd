@@ -58,3 +58,7 @@ func _on_return_to_menu() -> void:
 	if timer:
 		timer.stop()
 	return_to_menu.emit()
+
+
+func _on_user_init_error(errorCode: String) -> void:
+	login_error.emit(errorCode)
