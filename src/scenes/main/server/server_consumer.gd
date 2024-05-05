@@ -16,9 +16,10 @@ signal truco_play_card(
 	first_points: int,
 	first_name: String,
 	second_points: int,
-	second_name: String
+	second_name: String,
+	is_play_card_available: bool,
+	available_shouts: Array
 )
-signal truco_play_shout
 signal truco_play_update(
 	playId: int,
 	cards: Array[Card],
@@ -27,7 +28,17 @@ signal truco_play_update(
 	first_points: int,
 	first_name: String,
 	second_points: int,
-	second_name: String
+	second_name: String,
+	is_play_card_available: bool,
+	available_shouts: Array
+)
+signal truco_shout_played(
+	playId: int,
+	shout: int,
+	game_over: bool,
+	match_over: bool,
+	is_play_card_available: bool,
+	available_shouts: Array
 )
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
@@ -79,6 +90,15 @@ const PBTrucoCard = preload("res://addons/protocol/compiled/server/truco/play.gd
 const PBTrucoCardSuit = (
 	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoCardSuit
 )
+
+const PBTrucoNextPlay = (
+	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoNextPlay
+)
+
+const PBTrucoShout = (
+	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoShout
+)
+
 
 var _thread: Thread
 var _consumer: Consumer
@@ -234,7 +254,11 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 		await SceneManager.transition_finished
 
 	var play_type: PBTrucoPlayTypeEnum = msg.get_playType()
-
+	
+	var next_play_info: PBTrucoNextPlay = msg.get_nextPlayInfo()
+	var is_play_card_available: bool = next_play_info.get_isPlayCardAvailable()
+	var available_shouts: Array = next_play_info.get_availableShouts()
+	
 	match play_type:
 		PBTrucoPlayTypeEnum.CARD:
 			var card := msg.get_card()
@@ -245,35 +269,31 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			var match_over := msg.get_isMatchOver()
 			var player_cards := _parse_player_cards(msg)
 			truco_play_card.emit(
-				play_id,
-				suit,
-				rank,
-				player_cards,
-				game_over,
-				match_over,
-				first_points,
-				first_name,
-				second_points,
-				second_name
+				play_id, suit, rank,
+				player_cards, game_over, match_over,
+				first_points, first_name, second_points, second_name,
+				is_play_card_available,
+				available_shouts
 			)
 		PBTrucoPlayTypeEnum.SHOUT:
-			print("got shout")
-			var player_cards := _parse_player_cards(msg)
-			# do this for now but change signal later
-			truco_play_update.emit(play_id, player_cards)
+			var shout : int = msg.get_shout()
+			var game_over := msg.get_isGameOver()
+			var match_over := msg.get_isMatchOver()
+			truco_shout_played.emit(
+				play_id, shout,
+				game_over, match_over, 
+				is_play_card_available,
+				available_shouts
+			)
 		PBTrucoPlayTypeEnum.UPDATE:
 			var game_over := msg.get_isGameOver()
 			var match_over := msg.get_isMatchOver()
 			var player_cards := _parse_player_cards(msg)
-			truco_play_update.emit(
-				play_id,
-				player_cards,
-				game_over,
-				match_over,
-				first_points,
-				first_name,
-				second_points,
-				second_name
+			truco_play_update.emit(play_id, player_cards,
+			game_over, match_over,
+			first_points, first_name, second_points, second_name,
+			is_play_card_available,
+			available_shouts
 			)
 
 

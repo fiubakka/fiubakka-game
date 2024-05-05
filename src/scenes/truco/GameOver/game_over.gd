@@ -8,13 +8,14 @@ var confetti: Confetti = null
 func _ready() -> void:
 	text = $CenterContainer/NinePatchRect/VBoxContainer/RichTextLabel
 	confetti = $CenterContainer/Panel/Confetti
-	set_victory()
 
 
 func set_victory() -> void:
+	visible = true
 	text.set_text(Utils.center_text("Victory!"))
 	confetti.start()
 
 
 func set_defeat() -> void:
+	visible = true
 	text.set_text(Utils.center_text("Defeat!"))

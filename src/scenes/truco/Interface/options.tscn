@@ -1,39 +1,16 @@
 [gd_scene load_steps=2 format=3 uid="uid://dgbtyukekq1cs"]
 
-[ext_resource type="PackedScene" uid="uid://kpbsuln7x2le" path="res://src/scenes/truco/Interface/button.tscn" id="1_dbp7u"]
+[ext_resource type="Script" path="res://src/scenes/truco/Interface/options.gd" id="1_02oc7"]
 
 [node name="Options" type="VBoxContainer"]
 size_flags_horizontal = 4
 alignment = 2
+script = ExtResource("1_02oc7")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="AvailableShoutAnswers" type="HBoxContainer" parent="."]
 layout_mode = 2
 alignment = 1
 
-[node name="Button" parent="HBoxContainer" instance=ExtResource("1_dbp7u")]
-layout_mode = 2
-text = "Alternative 1"
-
-[node name="Button2" parent="HBoxContainer" instance=ExtResource("1_dbp7u")]
-layout_mode = 2
-text = "Alternative 2"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+[node name="AvailableShouts" type="HBoxContainer" parent="."]
 layout_mode = 2
 alignment = 1
-
-[node name="Button" parent="HBoxContainer2" instance=ExtResource("1_dbp7u")]
-layout_mode = 2
-text = "Truco"
-
-[node name="Button2" parent="HBoxContainer2" instance=ExtResource("1_dbp7u")]
-layout_mode = 2
-text = "Envido"
-
-[node name="Button3" parent="HBoxContainer2" instance=ExtResource("1_dbp7u")]
-layout_mode = 2
-text = "Flor"
-
-[node name="Button4" parent="HBoxContainer2" instance=ExtResource("1_dbp7u")]
-layout_mode = 2
-text = "Envido"
