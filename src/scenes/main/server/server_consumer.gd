@@ -31,8 +31,11 @@ signal truco_play_update(
 	is_play_card_available: bool,
 	available_shouts: Array
 )
-signal truco_available_shouts(
+signal truco_shout_played(
 	playId: int,
+	shout: int,
+	game_over: bool,
+	match_over: bool,
 	is_play_card_available: bool,
 	available_shouts: Array
 )
@@ -277,7 +280,15 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 				available_shouts
 			)
 		PBTrucoPlayTypeEnum.SHOUT:
-			truco_available_shouts.emit(play_id, is_play_card_available, available_shouts)
+			var shout : int = msg.get_shout()
+			var game_over := msg.get_isGameOver()
+			var match_over := msg.get_isMatchOver()
+			truco_shout_played.emit(
+				play_id, shout,
+				game_over, match_over, 
+				is_play_card_available,
+				available_shouts
+			)
 		PBTrucoPlayTypeEnum.UPDATE:
 			var game_over := msg.get_isGameOver()
 			var match_over := msg.get_isMatchOver()
