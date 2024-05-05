@@ -10,3 +10,8 @@ func _on_text_changed(new_text: String) -> void:
 			invalid_char_indexes.append(i)
 	for i in invalid_char_indexes:
 		delete_text(i, i + 1)
+
+
+func _on_return_to_menu() -> void:
+	text = ""
+	text_changed.emit(text)

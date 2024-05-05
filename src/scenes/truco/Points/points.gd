@@ -9,8 +9,6 @@ func _ready() -> void:
 	for child: Panel in $HBoxContainer.get_children():
 		matches_set.append(child.get_children()[0])
 
-	set_points(8)
-
 
 func set_points(n: int) -> void:
 	if n < 0 or n > 30:

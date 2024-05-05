@@ -5,6 +5,7 @@ class_name OpponentCards
 var cards := 3
 
 
+# Resets cards sprites from OpponentHand (shows how many cards the opponent has)
 func clean() -> void:
 	var children := get_children()
 	for child: CenterContainer in children:

@@ -8,10 +8,9 @@ signal get_unselected
 var selected := false
 var played := false
 var current_rest_point: DropZone = null
-
-
-func _ready() -> void:
-	pass
+var id: int = -1
+var rank: int = 1
+var suit: int = 1
 
 
 func set_current_rest_point(dropzone: DropZone) -> void:
@@ -42,7 +41,11 @@ func _input(event: InputEvent) -> void:
 			var next_rest_point: Node2D = current_rest_point
 			var rest_nodes := get_tree().get_nodes_in_group("zone")
 			for child: Node2D in rest_nodes:
-				if !child.has_card and (child.is_in_group("table") or child.is_in_group("hand")):
+				if (
+					!child.has_card
+					and child.is_enabled
+					and (child.is_in_group("table") or child.is_in_group("hand"))
+				):
 					var mouse_position: Vector2 = event.global_position
 					var distance := mouse_position.distance_to(child.global_position)
 					if distance < shortest_dist:
@@ -51,3 +54,7 @@ func _input(event: InputEvent) -> void:
 			current_rest_point.deselect()
 			current_rest_point = next_rest_point
 			current_rest_point.select(self)
+
+
+func equals(other: Card) -> bool:
+	return other.suit == self.suit and other.rank == self.rank

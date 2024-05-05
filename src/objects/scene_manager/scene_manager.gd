@@ -12,6 +12,7 @@ var is_loading_scene := false
 
 # private
 var _content_path: String
+var _truco_opponent_name: String = ""  # TODO: move this to TrucoManager (or save own name in PlayerInfo)
 
 
 # Called when the node enters the scene tree for the first time.
