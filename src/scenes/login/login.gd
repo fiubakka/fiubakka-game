@@ -74,3 +74,7 @@ func _on_language_select_switch_locale() -> void:
 	$NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginTextContainer/LoginText.text = (
 		Utils.center_text(tr("LOGIN"))
 	)
+
+
+func _on_user_init_error(errorCode: String) -> void:
+	login_error.emit(errorCode)

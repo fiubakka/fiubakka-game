@@ -25,6 +25,10 @@ func show_error_message(errorCode: String) -> void:
 	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.visible = true
 
 
+func _on_user_init_error(errorCode: String) -> void:
+	self.show_error_message(errorCode)
+
+
 func _on_button_pressed() -> void:
 	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.visible = false
 	var username: String = $NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername.text
