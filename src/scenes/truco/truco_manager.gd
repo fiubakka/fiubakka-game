@@ -155,6 +155,9 @@ func _on_truco_play_card(play_id: int, suit: int, rank: int,
 	if is_game_over:
 		$RoundOver.visible = true
 	
+	if is_match_over:
+		handle_match_over(first_points > second_points)
+	
 	# Ignore plays that are previous to the current one
 	# Ignore plays with the same id too, since those are my own
 	if play_id <= current_play_id:
@@ -237,3 +240,11 @@ func _on_options_shout_played(shout_id: int) -> void:
 	$OpponentIcon.visible = true
 	shout_played.emit(current_play_id, shout_id)
 	options.disable_buttons(true)
+
+
+func handle_match_over(is_winner: bool) -> void:
+	options.disable_buttons(true)
+	if is_winner:
+		$GameOver.set_victory()
+	else:
+		$GameOver.set_defeat()
