@@ -201,12 +201,12 @@ func _on_truco_play_update(play_id: int, cards: Array[Card],
 		return
 	current_play_id = play_id
 	_can_play_cards = is_play_card_available
-	update_shouts(is_play_card_available, available_shouts)
 	
 	if current_play_id == 0:
 		update_opponent_name(first_name, second_name)
 		clean()
 		create_hand(cards)
+		update_shouts(is_play_card_available, available_shouts)
 		options.disable_buttons(true)
 		play_ack.emit(play_id)
 		return
@@ -218,7 +218,7 @@ func _on_truco_play_update(play_id: int, cards: Array[Card],
 		is_game_over = game_over
 		var timer := Timer.new()
 		timer.timeout.connect(
-			Callable(self, "_on_game_over_timer_timeout").bind(play_id, cards, timer)
+			Callable(self, "_on_game_over_timer_timeout").bind(play_id, cards, is_play_card_available, available_shouts, timer)
 		)
 		timer.one_shot = true
 		timer.set_wait_time(3.0)
@@ -227,13 +227,15 @@ func _on_truco_play_update(play_id: int, cards: Array[Card],
 		return
 
 	update_hand(cards)
+	update_shouts(is_play_card_available, available_shouts)
 	play_ack.emit(play_id)
 
 
-func _on_game_over_timer_timeout(play_id: int, cards: Array[Card], timer: Timer) -> void:
+func _on_game_over_timer_timeout(play_id: int, cards: Array[Card], is_play_card_available: bool, available_shouts: Array, timer: Timer) -> void:
 	$RoundOver.visible = false
 	clean()
 	create_hand(cards)
+	update_shouts(is_play_card_available, available_shouts)
 	play_ack.emit(play_id)
 	timer.queue_free()
 	return
