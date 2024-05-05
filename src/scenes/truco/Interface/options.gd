@@ -25,8 +25,8 @@ const shouts_aswers_names = {
 	PBTrucoShout.ENVIDO_NO_QUIERO: "ENVIDO NO QUIERO",
 	PBTrucoShout.RETRUCO: "RETRUCO",
 	PBTrucoShout.VALE_CUATRO: "VALE CUATRO",
-	PBTrucoShout.TRUCO_QUIERO: "TRUCO QUIERO",
-	PBTrucoShout.TRUCO_NO_QUIERO: "TRUCO NO QUIERO"
+	PBTrucoShout.TRUCO_QUIERO: "TRUCO_QUIERO",
+	PBTrucoShout.TRUCO_NO_QUIERO: "TRUCO_NO_QUIERO"
 }
 
 func _ready() -> void:
@@ -53,7 +53,7 @@ func set_available_shouts(
 			available_answers_shots.append(button)
 			shout_name = shouts_aswers_names[shout]
 			$AvailableShoutAnswers.add_child(button)
-		button.text = shout_name
+		button.text = tr(shout_name)
 		button.pressed.connect(self._on_button_truco_pressed.bind(shout))
 
 
