@@ -175,7 +175,6 @@ func _on_consumer_truco_shout_played(play_id: int, shout: int,
 	
 	if is_game_over:
 		$RoundOver.visible = true
-		return
 
 	if play_id <= current_play_id:
 		play_ack.emit(play_id)
