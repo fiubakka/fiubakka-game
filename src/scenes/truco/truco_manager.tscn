@@ -107,13 +107,12 @@ offset_bottom = 114.0
 scale = Vector2(1.5, 1.5)
 
 [node name="RoundOver" type="RichTextLabel" parent="."]
-visible = false
-offset_left = 14.0
-offset_top = 232.0
-offset_right = 300.0
-offset_bottom = 293.0
+offset_left = 32.0
+offset_top = 238.0
+offset_right = 231.0
+offset_bottom = 282.0
 theme_override_fonts/normal_font = ExtResource("11_g02iv")
-theme_override_font_sizes/normal_font_size = 72
+theme_override_font_sizes/normal_font_size = 42
 text = "Round over!"
 
 [node name="GameOver" parent="." instance=ExtResource("12_pymvi")]
