@@ -32,6 +32,10 @@ func _on_login_password_text_submitted(_password: String) -> void:
 	self._on_button_pressed()
 
 
+func server_login_error(errorCode: String) -> void:
+	login_error.emit(errorCode)
+
+
 func _on_login_error(_errorCode: String) -> void:
 	if timer:
 		timer.stop()

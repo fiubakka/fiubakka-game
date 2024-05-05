@@ -135,7 +135,7 @@ func _handle_player_init_failure(msg: PBPlayerInitError) -> void:
 	PlayerInfo.player_name = ""
 	var login := get_tree().current_scene.get_node("Login")
 	if login.visible:
-		login.show_error_message(msg.get_error_code())
+		login.server_login_error(msg.get_error_code())
 	else:
 		var register := get_tree().current_scene.get_node("Register")
 		register.show_error_message(msg.get_error_code())
