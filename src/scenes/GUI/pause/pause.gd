@@ -4,11 +4,10 @@ signal unpaused
 
 var waiting_for_login: bool = true
 
-
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	$NinePatchRect/NinePatchRect/RichTextLabel.text = Utils.center_text(tr("OPTION_CONTINUE"))
-	$NinePatchRect/NinePatchRect2/RichTextLabel.text = Utils.center_text(tr("OPTION_QUIT"))
+# func _ready() -> void:
+# 	$NinePatchRect/NinePatchRect/RichTextLabel.text = Utils.center_text(tr("OPTION_CONTINUE"))
+# 	$NinePatchRect/NinePatchRect2/RichTextLabel.text = Utils.center_text(tr("OPTION_QUIT"))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,8 +26,3 @@ func _on_continue_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
-
-
-func _on_language_select_switch_locale() -> void:
-	$NinePatchRect/NinePatchRect/RichTextLabel.text = Utils.center_text(tr("OPTION_CONTINUE"))
-	$NinePatchRect/NinePatchRect2/RichTextLabel.text = Utils.center_text(tr("OPTION_QUIT"))
