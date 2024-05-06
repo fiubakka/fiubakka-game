@@ -1,13 +1,51 @@
 extends Node
 
+signal user_init_error(errorCode: String)
 signal user_init_ready(position: Vector2, equipment: Equipment, mapId: int)
 signal update_content(entityId: String, content: String)
 signal player_changed_map
 signal truco_challenge_received(opponentId: String)
 signal allow_truco_play(playId: int, type: PBTrucoPlayTypeEnum)
+
 signal truco_play_card(truco_play_card_dto: TrucoPlayCardDto)
 signal truco_play_shout
 signal truco_play_update(truco_play_update_dto: TrucoPlayUpdateDto)
+
+signal truco_play_card2(
+	play_id: int,
+	suit: int,
+	rank: int,
+	cards: Array[Card],
+	game_over: bool,
+	match_over: bool,
+	first_points: int,
+	first_name: String,
+	second_points: int,
+	second_name: String,
+	is_play_card_available: bool,
+	available_shouts: Array
+)
+signal truco_play_update2(
+	playId: int,
+	cards: Array[Card],
+	game_over: bool,
+	match_over: bool,
+	first_points: int,
+	first_name: String,
+	second_points: int,
+	second_name: String,
+	is_play_card_available: bool,
+	available_shouts: Array
+)
+signal truco_shout_played(
+	playId: int,
+	shout: int,
+	game_over: bool,
+	match_over: bool,
+	is_play_card_available: bool,
+	available_shouts: Array
+)
+
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 
@@ -58,6 +96,15 @@ const PBTrucoCard = preload("res://addons/protocol/compiled/server/truco/play.gd
 const PBTrucoCardSuit = (
 	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoCardSuit
 )
+
+const PBTrucoNextPlay = (
+	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoNextPlay
+)
+
+const PBTrucoShout = (
+	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoShout
+)
+
 
 var _thread: Thread
 var _consumer: Consumer
@@ -113,12 +160,7 @@ func _handle_message(message: Object) -> void:
 
 func _handle_player_init_failure(msg: PBPlayerInitError) -> void:
 	PlayerInfo.player_name = ""
-	var login := get_tree().current_scene.get_node("Login")
-	if login.visible:
-		login.show_error_message(msg.get_error_code())
-	else:
-		var register := get_tree().current_scene.get_node("Register")
-		register.show_error_message(msg.get_error_code())
+	user_init_error.emit(msg.get_error_code())
 
 
 func _handle_player_init_ready(msg: PBPlayerInitSuccess) -> void:
@@ -218,7 +260,11 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 		await SceneManager.transition_finished
 
 	var play_type: PBTrucoPlayTypeEnum = msg.get_playType()
-
+	
+	var next_play_info: PBTrucoNextPlay = msg.get_nextPlayInfo()
+	var is_play_card_available: bool = next_play_info.get_isPlayCardAvailable()
+	var available_shouts: Array = next_play_info.get_availableShouts()
+	
 	match play_type:
 		PBTrucoPlayTypeEnum.CARD:
 			var card := msg.get_card()
@@ -241,17 +287,31 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 				second_points,
 				second_name
 			)
+
+			#truco_play_card.emit(
+			#	play_id, suit, rank,
+			#	player_cards, game_over, match_over,
+			#	first_points, first_name, second_points, second_name,
+			#	is_play_card_available,
+			#	available_shouts
+			#)
 			truco_play_card.emit(truco_play_card_dto)
 		
 		PBTrucoPlayTypeEnum.SHOUT:
-			print("got shout")
-			var player_cards := _parse_player_cards(msg)
-			# do this for now but change signal later
-			truco_play_update.emit(play_id, player_cards)
+			var shout : int = msg.get_shout()
+			var game_over := msg.get_isGameOver()
+			var match_over := msg.get_isMatchOver()
+			truco_shout_played.emit(
+				play_id, shout,
+				game_over, match_over, 
+				is_play_card_available,
+				available_shouts
+			)
 		PBTrucoPlayTypeEnum.UPDATE:
 			var game_over := msg.get_isGameOver()
 			var match_over := msg.get_isMatchOver()
 			var player_cards := _parse_player_cards(msg)
+
 			
 			var truco_play_update_dto: TrucoPlayUpdateDto = TrucoPlayUpdateDto.new(
 				play_id,
@@ -263,6 +323,12 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 				second_points,
 				second_name
 			)
+			#truco_play_update.emit(play_id, player_cards,
+			#game_over, match_over,
+			#first_points, first_name, second_points, second_name,
+			#is_play_card_available,
+			#available_shouts
+			#)
 			truco_play_update.emit(truco_play_update_dto)
 
 

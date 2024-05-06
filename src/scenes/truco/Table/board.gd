@@ -53,4 +53,10 @@ func enable_play_zone() -> void:
 		if not turn.is_play_zone_enabled():
 			turn.enable_play_zone()
 			return
-	
+			
+func disable_play_zone() -> void:
+	for i in range (len(turns) - 1, -1, -1):
+		var turn := turns[i]
+		if turn.is_play_zone_enabled():
+			turn.disable_play_zone()
+			return

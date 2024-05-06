@@ -158,3 +158,11 @@ func _on_truco_manager_play_card(play_id: int, card_id: int) -> void:
 	truco_play.set_playType(PBTrucoPlayTypeEnum.CARD)
 	truco_play.set_card(card_id)
 	_producer.send(truco_play)
+
+
+func _on_truco_manager_shout_played(play_id: int, shout_id: int) -> void:
+	var truco_play := PBTrucoPlay.new()
+	truco_play.set_playId(play_id)
+	truco_play.set_playType(PBTrucoPlayTypeEnum.SHOUT)
+	truco_play.set_shout(shout_id)
+	_producer.send(truco_play)
