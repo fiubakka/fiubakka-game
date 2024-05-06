@@ -10,6 +10,8 @@ var first_points: int
 var first_name: String
 var second_points: int
 var second_name: String
+var is_play_card_available: bool
+var available_shouts: Array[int]
 
 func _init(
 	_play_id: int,
@@ -21,7 +23,9 @@ func _init(
 	_first_points: int,
 	_first_name: String,
 	_second_points: int,
-	_second_name: String
+	_second_name: String,
+	_is_play_card_available: bool,
+	_available_shouts: Array[int]
 ) -> void:
 	play_id = _play_id
 	suit = _suit
@@ -33,4 +37,6 @@ func _init(
 	first_name = _first_name
 	second_points = _second_points
 	second_name = _second_name
+	is_play_card_available = _is_play_card_available
+	available_shouts = _available_shouts
 	

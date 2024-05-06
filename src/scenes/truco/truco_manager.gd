@@ -139,12 +139,6 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 	is_game_over = dto.game_over
 	is_match_over = dto.match_over
 
-#	play_id: int, suit: int, rank: int,
-#	cards: Array[Card], game_over: bool, match_over: bool,
-#	first_points: int, first_name: String, second_points: int, second_name: String,
-#	is_play_card_available: bool,
-#	available_shouts: Array
-
 	if is_game_over:
 		$RoundOver.visible = true
 	
@@ -170,37 +164,27 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 
 
 
-func _on_consumer_truco_shout_played(play_id: int, shout: int,
-	game_over: bool, match_over: bool,
-	is_play_card_available: bool,
-	available_shouts: Array
-) -> void:
-	is_game_over = game_over
-	is_match_over = match_over
+func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
+	is_game_over = dto.game_over
+	is_match_over = dto.match_over
 	
 	if is_game_over:
 		$RoundOver.visible = true
 
-	if play_id <= current_play_id:
-		play_ack.emit(play_id)
+	if dto.play_id <= current_play_id:
+		play_ack.emit(dto.play_id)
 		return
 
-	current_play_id = play_id
+	current_play_id = dto.play_id
 	$PlayerIcon.visible = true
 	$OpponentIcon.visible = false
-	_can_play_cards = is_play_card_available
-	update_shouts(is_play_card_available, available_shouts)
-	$DialogueBubbleController.show_shout(shout)
-	play_ack.emit(play_id)
+	_can_play_cards = dto.is_play_card_available
+	update_shouts(dto.is_play_card_available, dto.available_shouts)
+	$DialogueBubbleController.show_shout(dto.shout)
+	play_ack.emit(dto.play_id)
 	
 
-func _on_truco_play_update(dto : TrucoPlayUpdateDto) -> void:
-	#play_id: int, cards: Array[Card],
-	#game_over: bool, match_over: bool,
-	#first_points: int, first_name: String, second_points: int, second_name: String,
-	#is_play_card_available: bool,
-	#available_shouts: Array
-	
+func _on_truco_play_update(dto : TrucoPlayUpdateDto) -> void:	
 	# Ignore plays that are previous or the same as the current one
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
