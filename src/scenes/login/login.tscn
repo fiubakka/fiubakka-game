@@ -294,6 +294,7 @@ autoplay = true
 
 [connection signal="login_error" from="." to="." method="_on_login_error"]
 [connection signal="login_error" from="." to="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginErrorText" method="_on_login_error"]
+[connection signal="error_clear" from="." to="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginErrorText" method="_on_error_clear"]
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="." method="_on_login_username_text_changed"]
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_text_changed"]
 [connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="." method="_on_login_username_text_submitted"]

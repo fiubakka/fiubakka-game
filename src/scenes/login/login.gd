@@ -5,6 +5,7 @@ var timer: Timer
 signal user_logged_in(username: String, password: String)
 signal return_to_menu
 signal login_error(errorCode: String)
+signal error_clear
 
 var username: String = ""
 var password: String = ""
@@ -42,7 +43,7 @@ func _on_login_error(_errorCode: String) -> void:
 
 
 func _on_button_pressed() -> void:
-	# $NinePatchRect/VBoxContainer/LoginButtonBorder/LoginErrorText.visible = false
+	error_clear.emit()
 	if username.is_empty():
 		login_error.emit("EMPTY_USERNAME")
 		return
