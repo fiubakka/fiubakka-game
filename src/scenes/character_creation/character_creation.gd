@@ -5,6 +5,8 @@ var timer: Timer
 signal save_character
 signal return_to_menu
 signal user_logged_in(username: String, password: String, equipment: Equipment)
+signal register_error(errorCode: String)
+signal error_clear
 
 var username: String = ""
 var password: String = ""
@@ -35,27 +37,18 @@ func _on_login_password_text_changed(_password: String) -> void:
 	password = _password
 
 
-func show_error_message(errorCode: String) -> void:
-	if timer:
-		timer.stop()
-	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.text = Utils.center_text(
-		tr(errorCode)
-	)
-	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.visible = true
-
-
 func _on_user_init_error(errorCode: String) -> void:
-	self.show_error_message(errorCode)
+	register_error.emit(errorCode)
 
 
 func _on_button_pressed() -> void:
-	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.visible = false
+	error_clear.emit()
 	if username.is_empty():
-		self.show_error_message("EMPTY_USERNAME")
+		register_error.emit("EMPTY_USERNAME")
 		return
 
 	if password.is_empty():
-		self.show_error_message("EMPTY_PASSWORD")
+		register_error.emit("EMPTY_PASSWORD")
 		return
 
 	timer = Timer.new()  # Timer to send init message until we get a response
@@ -86,7 +79,6 @@ func _on_return_return_to_menu() -> void:
 	password = ""
 	if timer:
 		timer.stop()
-	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.visible = false
 	return_to_menu.emit()
 
 
