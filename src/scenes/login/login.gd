@@ -11,12 +11,6 @@ var username: String = ""
 var password: String = ""
 
 
-func _ready() -> void:
-	$NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginTextContainer/LoginText.text = (
-		Utils.center_text(tr("LOGIN"))
-	)
-
-
 func _on_login_username_text_changed(_username: String) -> void:
 	username = _username
 
@@ -65,12 +59,6 @@ func _on_return_to_menu() -> void:
 	if timer:
 		timer.stop()
 	return_to_menu.emit()
-
-
-func _on_language_select_switch_locale() -> void:
-	$NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginTextContainer/LoginText.text = (
-		Utils.center_text(tr("LOGIN"))
-	)
 
 
 func _on_user_init_error(errorCode: String) -> void:
