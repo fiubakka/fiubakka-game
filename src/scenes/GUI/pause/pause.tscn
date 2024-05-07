@@ -156,7 +156,7 @@ offset_top = 6.0
 offset_right = 934.0
 offset_bottom = 46.0
 texture = ExtResource("3_qu78l")
-region_rect = Rect2(1920, 774, 47, 42)
+region_rect = Rect2(1920, 768, 48, 48)
 script = ExtResource("5_11d1o")
 
 [node name="Button" type="Button" parent="NinePatchRect/MuteButton"]
