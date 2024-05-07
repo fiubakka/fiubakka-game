@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://bwgonn6l2afs6"]
+[gd_scene load_steps=15 format=3 uid="uid://bwgonn6l2afs6"]
 
 [ext_resource type="Script" path="res://src/scenes/main/main.gd" id="1_kecny"]
 [ext_resource type="PackedScene" uid="uid://b6kg7qutp1h00" path="res://src/scenes/login/login.tscn" id="3_2am71"]
 [ext_resource type="Script" path="res://src/scenes/main/server/server_connection.gd" id="3_ffkqj"]
 [ext_resource type="Script" path="res://src/scenes/main/server/server_consumer.gd" id="4_gxvl4"]
+[ext_resource type="AudioStream" uid="uid://ck7nysfydevjl" path="res://audio/music/login.ogg" id="5_ktkbl"]
 [ext_resource type="Script" path="res://src/scenes/main/server/server_producer.gd" id="5_xlac2"]
 [ext_resource type="PackedScene" uid="uid://oihrx253mx55" path="res://src/scenes/GUI/chatbox/chatbox.tscn" id="6_q0kgv"]
 [ext_resource type="PackedScene" uid="uid://dv7baj7ykjngg" path="res://src/scenes/GUI/pause/pause.tscn" id="7_2ia4i"]
@@ -90,6 +91,12 @@ offset_left = 1.0
 offset_top = -3.0
 offset_right = 959.0
 offset_bottom = 537.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ktkbl")
+volume_db = 1.0
+autoplay = true
+bus = &"MusicMain"
 
 [connection signal="login_ready" from="." to="GUI/GuiManager/Chatbox" method="_on_main_login_ready"]
 [connection signal="login_ready" from="." to="GUI/GuiManager/Pause" method="_on_main_login_ready"]

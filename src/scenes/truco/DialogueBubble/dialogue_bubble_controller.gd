@@ -3,9 +3,7 @@ extends Control
 var dialogue_bubble: NinePatchRect = null
 var db_animation: AnimationPlayer = null
 
-const PBTrucoShout = (
-	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoShout
-)
+const PBTrucoShout = preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoShout
 
 const shouts_names = {
 	PBTrucoShout.ENVIDO: "ENVIDO",
@@ -21,12 +19,14 @@ const shouts_names = {
 	PBTrucoShout.TRUCO_NO_QUIERO: "TRUCO NO QUIERO"
 }
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	dialogue_bubble = $DialogueBubble
 	db_animation = $DialogueBubble/AnimationPlayer
 
 	dialogue_bubble.modulate.a = 0
+
 
 func show_shout(shout_id: int) -> void:
 	if shout_id in shouts_names:

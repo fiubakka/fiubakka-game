@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dl2ppg848l7il" path="res://src/scenes/GUI/return/return.tscn" id="3_ke864"]
 [ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="3_v6w8k"]
 [ext_resource type="Script" path="res://src/scenes/login/login_username.gd" id="4_m2urp"]
-[ext_resource type="AudioStream" uid="uid://ck7nysfydevjl" path="res://audio/music/login.ogg" id="5_ktkbl"]
+; [ext_resource type="AudioStream" uid="uid://ck7nysfydevjl" path="res://audio/music/login.ogg" id="5_ktkbl"]
 [ext_resource type="Script" path="res://src/scenes/login/login_password.gd" id="7_abh4x"]
 [ext_resource type="Script" path="res://src/scenes/login/login_error_text.gd" id="8_84eql"]
 
@@ -285,10 +285,10 @@ offset_top = -11.1
 offset_right = -1.88
 offset_bottom = 0.0800018
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_ktkbl")
-volume_db = -63.003
-autoplay = true
+; [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+; stream = ExtResource("5_ktkbl")
+; volume_db = 1.0
+; autoplay = true
 
 [connection signal="login_error" from="." to="." method="_on_login_error"]
 [connection signal="login_error" from="." to="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginErrorText" method="_on_login_error"]

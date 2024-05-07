@@ -11,11 +11,6 @@ func _ready() -> void:
 	$NinePatchRect/NinePatchRect2/RichTextLabel.text = Utils.center_text(tr("OPTION_QUIT"))
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
-
-
 func _on_main_login_ready() -> void:
 	self.waiting_for_login = false
 
