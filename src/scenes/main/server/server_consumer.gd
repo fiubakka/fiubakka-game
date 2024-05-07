@@ -223,6 +223,7 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			return
 		SceneManager.load_new_scene("res://src/scenes/truco/truco_manager.tscn")
 		SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
+		PlayerInfo.is_playing_truco = true
 		await SceneManager.transition_finished
 
 	var play_type: PBTrucoPlayTypeEnum = msg.get_playType()

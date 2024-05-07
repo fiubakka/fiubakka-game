@@ -184,7 +184,7 @@ func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 	play_ack.emit(dto.play_id)
 	
 
-func _on_truco_play_update(dto : TrucoPlayUpdateDto) -> void:	
+func _on_truco_play_update(dto : TrucoPlayUpdateDto) -> void:
 	# Ignore plays that are previous or the same as the current one
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
