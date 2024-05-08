@@ -5,7 +5,7 @@ var shout: int
 var game_over: bool
 var match_over: bool
 var is_play_card_available: bool
-var available_shouts: Array[int]
+var available_shouts: Array
 
 func _init(
 	_play_id: int,
@@ -13,7 +13,7 @@ func _init(
 	_game_over: bool,
 	_match_over: bool,
 	_is_play_card_available: bool,
-	_available_shouts: Array[int]
+	_available_shouts: Array
 ) -> void:
 	play_id = _play_id
 	shout = _shout

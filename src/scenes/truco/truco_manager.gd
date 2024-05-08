@@ -3,6 +3,7 @@ extends Node2D
 signal play_ack(play_id: int)
 signal play_card(play_id: int, card_id: int)
 signal shout_played(shout_id: int)
+signal player_disconnect
 
 @export var card_scene: PackedScene
 
@@ -43,8 +44,15 @@ func _ready() -> void:
 	var producer_truco_play_handler: Callable = producer._on_truco_manager_play_card
 	if !play_card.is_connected(producer_truco_play_handler):
 		play_card.connect(producer_truco_play_handler)
-	
-	shout_played.connect(producer._on_truco_manager_shout_played)
+
+	var producer_truco_shout_handler: Callable = producer._on_truco_manager_shout_played
+	if !play_card.is_connected(producer_truco_shout_handler):
+		shout_played.connect(producer._on_truco_manager_shout_played)
+
+	var producer_truco_disconnect_handler: Callable = producer._on_truco_manager_disconnect
+	if !player_disconnect.is_connected(producer_truco_disconnect_handler):
+		player_disconnect.connect(producer_truco_disconnect_handler)
+
 
 func create_hand(cards: Array[Card]) -> void:
 	for card in cards:
@@ -266,3 +274,9 @@ func handle_match_over(is_winner: bool) -> void:
 		$GameOver.set_victory()
 	else:
 		$GameOver.set_defeat()
+
+
+func _on_disconnect_pressed() -> void:
+	player_disconnect.emit()
+	SceneManager.load_previous_scene()
+	PlayerInfo.is_playing_truco = false

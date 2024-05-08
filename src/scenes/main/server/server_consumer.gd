@@ -151,6 +151,8 @@ func _handle_player_init_ready(msg: PBPlayerInitSuccess) -> void:
 
 
 func _handle_game_entity_state(msg: PBGameEntityState) -> void:
+	if PlayerInfo.is_playing_truco:
+		return
 	var equipment := Equipment.new()
 	(
 		equipment
