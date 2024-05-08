@@ -264,7 +264,7 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			var shout : int = msg.get_shout()
 			var game_over := msg.get_isGameOver()
 			var match_over := msg.get_isMatchOver()
-			# TODO: create DTO
+			
 			var truco_play_shout_dto := TrucoPlayShoutDto.new(
 				play_id,
 				shout,

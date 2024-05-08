@@ -174,5 +174,5 @@ func _on_truco_manager_shout_played(play_id: int, shout_id: int) -> void:
 
 func _on_truco_manager_disconnect() -> void:
 	var truco_disconnect := PBTrucoDisconnect.new()
-	_producer.send(truco_disconnect) # TODO: add to producer
+	_producer.send(truco_disconnect)
 
