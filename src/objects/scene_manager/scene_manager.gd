@@ -74,6 +74,19 @@ func _on_content_finished_loading(new_scene: Node) -> void:
 	# Level data handoff
 	if current_scene is Level and new_scene is Level:
 		new_scene.data = current_scene.data
+	elif not current_scene is Level:
+		var pc := PlayerInfo.player_customization
+		var equipment := Equipment.new()
+		equipment.set_equipment(
+			pc["hats"],
+			pc["hair"],
+			pc["eyes"],
+			pc["glasses"],
+			pc["facial_hair"],
+			pc["body"],
+			pc["outfit"]
+		)
+		new_scene.data = {"player_equipment": equipment}
 
 	# quickfix for now
 	if current_scene.name != "Main":
