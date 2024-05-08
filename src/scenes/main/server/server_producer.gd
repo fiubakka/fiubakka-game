@@ -50,6 +50,11 @@ const PBTrucoPlayTypeEnum = (
 	preload("res://addons/protocol/compiled/client/truco/play.gd").PBTrucoPlayType
 )
 
+const PBTrucoDisconnect = (
+	preload("res://addons/protocol/compiled/client/truco/disconnect.gd").PBTrucoDisconnect
+)
+
+
 var _producer: Producer
 
 
@@ -166,3 +171,8 @@ func _on_truco_manager_shout_played(play_id: int, shout_id: int) -> void:
 	truco_play.set_playType(PBTrucoPlayTypeEnum.SHOUT)
 	truco_play.set_shout(shout_id)
 	_producer.send(truco_play)
+
+
+func _on_truco_manager_disconnect() -> void:
+	var truco_disconnect := PBTrucoDisconnect.new()
+	_producer.send(truco_disconnect)

@@ -45,6 +45,8 @@ func _ready() -> void:
 	
 	shout_played.connect(producer._on_truco_manager_shout_played)
 
+	$GameOver.exit_truco.connect(self._on_game_over_exit_truco)
+
 func create_hand(cards: Array[Card]) -> void:
 	for card in cards:
 		var new_card := card_scene.instantiate()
@@ -273,3 +275,8 @@ func handle_match_over(is_winner: bool) -> void:
 		$GameOver.set_victory()
 	else:
 		$GameOver.set_defeat()
+
+
+func _on_game_over_exit_truco() -> void:
+	#TODO: use the same logic that _on_disconnect_pressed()
+	print("closing truco...")

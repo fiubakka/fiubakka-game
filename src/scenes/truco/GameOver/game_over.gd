@@ -1,5 +1,7 @@
 extends Control
 
+signal exit_truco
+
 var text: RichTextLabel = null
 var confetti: Confetti = null
 
@@ -19,3 +21,7 @@ func set_victory() -> void:
 func set_defeat() -> void:
 	visible = true
 	text.set_text(Utils.center_text("Defeat!"))
+
+
+func _on_button_pressed() -> void:
+	exit_truco.emit()
