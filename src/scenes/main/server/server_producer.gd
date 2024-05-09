@@ -130,9 +130,7 @@ func _on_player_start_truco(opponent_id: String) -> void:
 
 func _on_modal_match_accepted(opponent_id: String) -> void:
 	_reply_truco_match(opponent_id, PBTrucoMatchChallengeReplyEnum.ACCEPTED)
-	# TODO: temporarily load the truco scene right now
-	# this should be removed when we properly receive the very first TrucoPlay
-	# message after accepting the match
+	# Load the truco scene right now
 	SceneManager.load_new_scene("res://src/scenes/truco/truco_manager.tscn")
 	# TODO: load content only when we get an accepted match confirmation from the server
 	SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")

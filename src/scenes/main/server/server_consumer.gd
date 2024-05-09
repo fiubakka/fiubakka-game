@@ -8,7 +8,6 @@ signal truco_challenge_received(opponentId: String)
 signal allow_truco_play(playId: int, type: PBTrucoPlayTypeEnum)
 
 signal truco_play_card(truco_play_card_dto: TrucoPlayCardDto)
-signal truco_play_shout
 signal truco_play_update(truco_play_update_dto: TrucoPlayUpdateDto)
 signal truco_shout_played(truco_play_shout_dto: TrucoPlayShoutDto)
 
