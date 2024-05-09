@@ -3,6 +3,7 @@ extends Node2D
 signal play_ack(play_id: int)
 signal play_card(play_id: int, card_id: int)
 signal shout_played(shout_id: int)
+signal player_disconnect
 
 @export var card_scene: PackedScene
 
@@ -14,6 +15,7 @@ var opponent_controller: OpponentController = null
 var opponent_hand: OpponentCards = null
 var is_game_over := false
 var is_match_over := false
+var _last_played_card_id := -1
 var _can_play_cards := false
 @onready var options : Options = $Options
 
@@ -42,8 +44,15 @@ func _ready() -> void:
 	var producer_truco_play_handler: Callable = producer._on_truco_manager_play_card
 	if !play_card.is_connected(producer_truco_play_handler):
 		play_card.connect(producer_truco_play_handler)
-	
-	shout_played.connect(producer._on_truco_manager_shout_played)
+
+	var producer_truco_shout_handler: Callable = producer._on_truco_manager_shout_played
+	if !play_card.is_connected(producer_truco_shout_handler):
+		shout_played.connect(producer._on_truco_manager_shout_played)
+
+	var producer_truco_disconnect_handler: Callable = producer._on_truco_manager_disconnect
+	if !player_disconnect.is_connected(producer_truco_disconnect_handler):
+		player_disconnect.connect(producer_truco_disconnect_handler)
+
 
 func create_hand(cards: Array[Card]) -> void:
 	for card in cards:
@@ -99,6 +108,7 @@ func _on_board_player_card_played(card: Card) -> void:
 		return
 	card.played = true
 	play_card.emit(current_play_id, card.id)
+	_last_played_card_id = card.id
 	$PlayerIcon.visible = false
 	$OpponentIcon.visible = true
 
@@ -132,93 +142,87 @@ func update_points(
 		$OpponentPoints.set_points(first_points)
 
 
-func _on_truco_play_card(play_id: int, suit: int, rank: int,
-	cards: Array[Card], game_over: bool, match_over: bool,
-	first_points: int, first_name: String, second_points: int, second_name: String,
-	is_play_card_available: bool,
-	available_shouts: Array
-) -> void:
+func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 	# Always save game/match over flags
-	is_game_over = game_over
-	is_match_over = match_over
-	
+	is_game_over = dto.game_over
+	is_match_over = dto.match_over
+
 	if is_game_over:
 		$RoundOver.visible = true
 	
 	if is_match_over:
-		handle_match_over(first_points > second_points)
+		handle_match_over(dto.first_points > dto.second_points)
 	
 	# Ignore plays that are previous to the current one
 	# Ignore plays with the same id too, since those are my own
-	if play_id <= current_play_id:
-		play_ack.emit(play_id)
+	if dto.play_id <= current_play_id:
+		play_ack.emit(dto.play_id)
 		return
-	current_play_id = play_id
-	_can_play_cards = is_play_card_available
+		
+	print_rich("[rainbow]",PlayerInfo.player_name, "[/rainbow] got card [b]",dto.play_id,"[/b]")
+	
+	current_play_id = dto.play_id
+	_can_play_cards = dto.is_play_card_available
 
-	update_shouts(is_play_card_available, available_shouts)
-	update_points(first_points, first_name, second_points, second_name)
-	play_enemy_card(suit, rank)
-	update_hand(cards)
+	update_shouts(dto.is_play_card_available, dto.available_shouts)
+	update_points(dto.first_points, dto.first_name, dto.second_points, dto.second_name)
+	play_enemy_card(dto.suit, dto.rank)
+	update_hand(dto.player_cards)
 	options.disable_buttons(true)
 
-	play_ack.emit(play_id)
+	play_ack.emit(dto.play_id)
 
 
-func _on_consumer_truco_shout_played(play_id: int, shout: int,
-	game_over: bool, match_over: bool,
-	is_play_card_available: bool,
-	available_shouts: Array
-) -> void:
-	is_game_over = game_over
-	is_match_over = match_over
+
+func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
+	is_game_over = dto.game_over
+	is_match_over = dto.match_over
 	
 	if is_game_over:
 		$RoundOver.visible = true
 
-	if play_id <= current_play_id:
-		play_ack.emit(play_id)
+	if dto.play_id <= current_play_id:
+		play_ack.emit(dto.play_id)
 		return
+		
+	print_rich("[rainbow]",PlayerInfo.player_name, "[/rainbow] got shout [b]",dto.play_id,"[/b]")
 
-	current_play_id = play_id
+	current_play_id = dto.play_id
 	$PlayerIcon.visible = true
 	$OpponentIcon.visible = false
-	_can_play_cards = is_play_card_available
-	update_shouts(is_play_card_available, available_shouts)
-	$DialogueBubbleController.show_shout(shout)
-	play_ack.emit(play_id)
+	_can_play_cards = dto.is_play_card_available
+	update_shouts(dto.is_play_card_available, dto.available_shouts)
+	$DialogueBubbleController.show_shout(dto.shout)
+	play_ack.emit(dto.play_id)
 	
 
-func _on_truco_play_update(play_id: int, cards: Array[Card],
-	game_over: bool, match_over: bool,
-	first_points: int, first_name: String, second_points: int, second_name: String,
-	is_play_card_available: bool,
-	available_shouts: Array
-) -> void:
+func _on_truco_play_update(dto : TrucoPlayUpdateDto) -> void:
 	# Ignore plays that are previous or the same as the current one
-	if play_id <= current_play_id:
-		play_ack.emit(play_id)
+	if dto.play_id <= current_play_id:
+		play_ack.emit(dto.play_id)
 		return
-	current_play_id = play_id
-	_can_play_cards = is_play_card_available
-	
+		
+	print_rich("[rainbow]",PlayerInfo.player_name, "[/rainbow] got update [b]",dto.play_id,"[/b]")
+
+	current_play_id = dto.play_id
+	_can_play_cards = dto.is_play_card_available
 	if current_play_id == 0:
-		update_opponent_name(first_name, second_name)
+		update_opponent_name(dto.first_name, dto.second_name)
 		clean()
-		create_hand(cards)
-		update_shouts(is_play_card_available, available_shouts)
+		create_hand(dto.player_cards)
+		update_shouts(dto.is_play_card_available, dto.available_shouts)
 		options.disable_buttons(true)
-		play_ack.emit(play_id)
+		play_ack.emit(dto.play_id)
 		return
 
-	update_points(first_points, first_name, second_points, second_name)
+	update_points(dto.first_points, dto.first_name, dto.second_points, dto.second_name)
 
 	# Clear board and update hand when going from game_over to new game
-	if is_game_over and !game_over:
-		is_game_over = game_over
+	if is_game_over and !dto.game_over:
+		is_game_over = dto.game_over
 		var timer := Timer.new()
 		timer.timeout.connect(
-			Callable(self, "_on_game_over_timer_timeout").bind(play_id, cards, is_play_card_available, available_shouts, timer)
+			Callable(self, "_on_game_over_timer_timeout").bind(dto.play_id, dto.player_cards, dto.is_play_card_available, dto.available_shouts, timer)
 		)
 		timer.one_shot = true
 		timer.set_wait_time(3.0)
@@ -226,9 +230,9 @@ func _on_truco_play_update(play_id: int, cards: Array[Card],
 		timer.start()
 		return
 
-	update_hand(cards)
-	update_shouts(is_play_card_available, available_shouts)
-	play_ack.emit(play_id)
+	update_hand(dto.player_cards)
+	update_shouts(dto.is_play_card_available, dto.available_shouts)
+	play_ack.emit(dto.play_id)
 
 
 func _on_game_over_timer_timeout(play_id: int, cards: Array[Card], is_play_card_available: bool, available_shouts: Array, timer: Timer) -> void:
@@ -243,9 +247,13 @@ func _on_game_over_timer_timeout(play_id: int, cards: Array[Card], is_play_card_
 
 func _on_allow_truco_play(play_id: int) -> void:
 	# Ignore plays that are previous or the same as the current one
-	# Should never happen here, but we check just in case
+	# If it happens, send the last TrucoPlay for consistency with server
 	if play_id <= current_play_id:
+		# Resend last TrucoPlay
+		# Case: Card played
+		play_card.emit(current_play_id, _last_played_card_id)
 		return
+	print_rich("[rainbow]",PlayerInfo.player_name, "[/rainbow] got allow [b]",play_id,"[/b]")
 	current_play_id = play_id
 	$PlayerIcon.visible = true
 	$OpponentIcon.visible = false
@@ -273,3 +281,9 @@ func handle_match_over(is_winner: bool) -> void:
 		$GameOver.set_victory()
 	else:
 		$GameOver.set_defeat()
+
+
+func _on_disconnect_pressed() -> void:
+	player_disconnect.emit()
+	SceneManager.load_previous_scene()
+	PlayerInfo.is_playing_truco = false

@@ -17,7 +17,6 @@ func _ready() -> void:
 
 
 func start_transition() -> void:
-	# TODO: only has one animation. Add more if necessary
 	starting_animation = "fade_to_black"
 	animation_player.play(starting_animation)
 	spin_logo.emit()
