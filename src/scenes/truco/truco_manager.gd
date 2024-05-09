@@ -158,8 +158,6 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
 		return
-		
-	print_rich("[rainbow]",PlayerInfo.player_name, "[/rainbow] got card [b]",dto.play_id,"[/b]")
 	
 	current_play_id = dto.play_id
 	_can_play_cards = dto.is_play_card_available
