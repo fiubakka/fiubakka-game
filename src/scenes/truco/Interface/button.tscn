@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://kpbsuln7x2le"]
 
-[ext_resource type="FontFile" uid="uid://cv2bywsa6irhc" path="res://fonts/Xolonium-Regular.ttf" id="1_6wxyl"]
+[ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="1_r0ge5"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_dqjeo"]
 [ext_resource type="Script" path="res://src/scenes/truco/Interface/button.gd" id="3_h06nr"]
 [ext_resource type="AudioStream" uid="uid://b7yp7usbygtwd" path="res://audio/sounds/button.ogg" id="4_5mnt2"]
@@ -38,8 +38,8 @@ theme_override_colors/font_color = Color(0.239216, 0.239216, 0.239216, 1)
 theme_override_colors/font_pressed_color = Color(0.239216, 0.239216, 0.239216, 1)
 theme_override_colors/font_hover_color = Color(0.239216, 0.239216, 0.239216, 1)
 theme_override_colors/font_focus_color = Color(0.239216, 0.239216, 0.239216, 1)
-theme_override_fonts/font = ExtResource("1_6wxyl")
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("1_r0ge5")
+theme_override_font_sizes/font_size = 42
 theme_override_styles/normal = SubResource("StyleBoxTexture_g4hy0")
 theme_override_styles/hover = SubResource("StyleBoxTexture_sipvw")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_sipvw")
