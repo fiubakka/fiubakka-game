@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://oihrx253mx55"]
+[gd_scene load_steps=7 format=3 uid="uid://oihrx253mx55"]
 
 [ext_resource type="Script" path="res://src/scenes/GUI/chatbox/chatbox.gd" id="1_i2ex6"]
 [ext_resource type="Script" path="res://src/scenes/GUI/chatbox/LineEdit.gd" id="2_fix1v"]
+[ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="3_0chi6"]
 [ext_resource type="Script" path="res://src/scenes/GUI/chatbox/RichTextLabel.gd" id="3_nta7l"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="4_yt6vq"]
 
@@ -72,6 +73,8 @@ layout_mode = 2
 offset_left = 15.0
 offset_right = 415.0
 offset_bottom = 220.0
+theme_override_fonts/normal_font = ExtResource("3_0chi6")
+theme_override_font_sizes/normal_font_size = 32
 scroll_following = true
 script = ExtResource("3_nta7l")
 
@@ -83,6 +86,8 @@ offset_left = 5.0
 offset_top = 225.0
 offset_right = 374.0
 offset_bottom = 256.0
+theme_override_fonts/font = ExtResource("3_0chi6")
+theme_override_font_sizes/font_size = 32
 theme_override_styles/focus = SubResource("StyleBoxEmpty_2eq1e")
 placeholder_text = "CHAT_PLACEHOLDER"
 flat = true

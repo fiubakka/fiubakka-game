@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cyysqnwra020e"]
+[gd_scene load_steps=13 format=3 uid="uid://cyysqnwra020e"]
 
 [ext_resource type="Script" path="res://src/scenes/entity/entity.gd" id="1_2la61"]
 [ext_resource type="PackedScene" uid="uid://bj12r5t8p4dpp" path="res://src/scenes/character_sprite/character_sprite.tscn" id="2_0mjch"]
 [ext_resource type="PackedScene" uid="uid://b886c3afoscbl" path="res://src/scenes/entity/entity_popup/entity_popup.tscn" id="3_rxs40"]
+[ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="3_vd47o"]
 
 [sub_resource type="Animation" id="Animation_1oepq"]
 length = 0.001
@@ -480,8 +481,12 @@ offset_left = -100.0
 offset_top = -118.0
 offset_right = 100.0
 offset_bottom = -73.0
-theme_override_font_sizes/normal_font_size = 32
-theme_override_font_sizes/bold_font_size = 32
+theme_override_colors/default_color = Color(0.87451, 0.113725, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_vd47o")
+theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/bold_font_size = 50
 bbcode_enabled = true
 text = "[center]Me[/center]"
 fit_content = true
