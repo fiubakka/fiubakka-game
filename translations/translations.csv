@@ -30,3 +30,7 @@ NPC_WELCOME_2,"Podes tomar las escaleras o bajar al comedor","You can go uptairs
 NPC_KIOSK,"Bienvenido al Comedor. ¿En qué te puedo ayudar?","Weclome to the Kiosk. How can I help you?"
 TRUCO_BUTTON,Truco,Truco
 TRUCO_CHALLENGE," te desafió al Truco! ¿Aceptás?"," has challenged you to play Truco! Do you accept?"
+TRUCO_ROUND_OVER,"¡Fin ronda!","Round over!"
+TRUCO_QUIERO,Quiero,Accept
+TRUCO_NO_QUIERO,"No quiero",Reject
+TRUCO_MAZO,Mazo,Fold

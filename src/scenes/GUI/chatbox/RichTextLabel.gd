@@ -4,14 +4,6 @@ var player_colors: Dictionary = {}
 var me: String = tr("OWN_PLAYER_LABEL")
 
 
-func _ready() -> void:
-	pass
-
-
-func _process(_delta: float) -> void:
-	pass
-
-
 func _on_text_edit_send_message(new_message: String) -> void:
 	add_new_message(me, new_message)
 

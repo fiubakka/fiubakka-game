@@ -32,5 +32,9 @@ func enable_play_zone() -> void:
 	$PlayerDropZone.is_enabled = true
 
 
+func disable_play_zone() -> void:
+	$PlayerDropZone.is_enabled = false
+
+
 func is_play_zone_enabled() -> bool:
 	return $PlayerDropZone.is_enabled

@@ -2,7 +2,6 @@ extends Control
 
 var timer: Timer
 
-signal save_character
 signal return_to_menu
 signal user_logged_in(username: String, password: String, equipment: Equipment)
 signal register_error(errorCode: String)
@@ -61,7 +60,6 @@ func _on_timer_timeout() -> void:
 		customization.body,
 		customization.outfit
 	)
-	save_character.emit()
 	user_logged_in.emit(username, password, equipment)
 
 
