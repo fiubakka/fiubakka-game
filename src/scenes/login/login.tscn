@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://src/scenes/login/login_username.gd" id="4_m2urp"]
 [ext_resource type="Script" path="res://src/scenes/login/login_password.gd" id="7_abh4x"]
 [ext_resource type="Script" path="res://src/scenes/login/login_error_text.gd" id="8_84eql"]
+[ext_resource type="AudioStream" uid="uid://ck7nysfydevjl" path="res://audio/music/login.ogg" id="5_ktkbl"]
 
 [sub_resource type="Theme" id="Theme_1qdqe"]
 default_font = ExtResource("3_v6w8k")
@@ -283,6 +284,13 @@ offset_left = 0.0399933
 offset_top = -11.1
 offset_right = -1.88
 offset_bottom = 0.0800018
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ktkbl")
+volume_db = 1.0
+autoplay = true
+bus = &"MusicMain"
+
 
 [connection signal="login_error" from="." to="." method="_on_login_error"]
 [connection signal="login_error" from="." to="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginErrorText" method="_on_login_error"]
