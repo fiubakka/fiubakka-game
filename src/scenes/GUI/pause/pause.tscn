@@ -168,5 +168,5 @@ script = ExtResource("5_x7u4s")
 
 [connection signal="pressed" from="NinePatchRect/NinePatchRect/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="NinePatchRect/NinePatchRect2/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="NinePatchRect/MuteButton/Button" to="NinePatchRect/MuteButton" method="_on_button_pressed"]
+[connection signal="mute_toggled" from="NinePatchRect/MuteButton/Button" to="NinePatchRect/MuteButton" method="_on_mute_toggled"]
 [connection signal="pressed" from="NinePatchRect/MuteButton/Button" to="NinePatchRect/MuteButton/Button" method="_on_pressed"]
