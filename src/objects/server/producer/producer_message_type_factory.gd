@@ -41,6 +41,10 @@ const PBTrucoAckPlay = (
 	preload("res://addons/protocol/compiled/client/truco/ack_play.gd").PBTrucoAckPlay
 )
 
+const PBTrucoDisconnect = (
+	preload("res://addons/protocol/compiled/client/truco/disconnect.gd").PBTrucoDisconnect
+)
+
 
 static func from(message: Object) -> Result:
 	var type: PBClientMessageType = -1
@@ -64,6 +68,8 @@ static func from(message: Object) -> Result:
 		type = PBClientMessageType.PBTrucoPlay
 	elif message is PBTrucoAckPlay:
 		type = PBClientMessageType.PBTrucoPlayAck
+	elif message is PBTrucoDisconnect:
+		type = PBClientMessageType.PBTrucoDisconnect
 
 	if type < 0:
 		printerr("Unknown message type for message class: " + message.get_class())

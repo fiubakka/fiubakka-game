@@ -2,7 +2,6 @@ extends Control
 
 var timer: Timer
 
-signal save_character
 signal return_to_menu
 signal user_logged_in(username: String, password: String, equipment: Equipment)
 
@@ -25,7 +24,7 @@ func show_error_message(errorCode: String) -> void:
 	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.visible = true
 
 
-func _on_button_pressed() -> void:
+func _on_character_sprite_character_saved() -> void:
 	$NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText.visible = false
 	var username: String = $NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername.text
 	if username.is_empty():
@@ -56,7 +55,6 @@ func _on_timer_timeout(username: String, password: String) -> void:
 		customization.body,
 		customization.outfit
 	)
-	save_character.emit()
 	user_logged_in.emit(username, password, equipment)
 
 
@@ -67,11 +65,3 @@ func _on_return_return_to_menu() -> void:
 	$NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername.clear()
 	$NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword.clear()
 	return_to_menu.emit()
-
-
-func _on_login_username_text_submitted(_new_text: String) -> void:
-	self._on_button_pressed()
-
-
-func _on_login_password_text_submitted(_new_text: String) -> void:
-	self._on_button_pressed()

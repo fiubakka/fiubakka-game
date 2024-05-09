@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bhw67fd6dh0n0"]
+[gd_scene load_steps=16 format=3 uid="uid://bhw67fd6dh0n0"]
 
 [ext_resource type="Script" path="res://src/scenes/truco/truco_manager.gd" id="1_rogtf"]
 [ext_resource type="PackedScene" uid="uid://44gpne03ucab" path="res://src/scenes/truco/card.tscn" id="2_p2aov"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c5n5u1w3qh0ct" path="res://src/scenes/truco/Points/points.tscn" id="11_upv27"]
 [ext_resource type="PackedScene" uid="uid://cfu6w2rhghpa5" path="res://src/scenes/truco/GameOver/game_over.tscn" id="12_pymvi"]
 [ext_resource type="Texture2D" uid="uid://b62ay3vshl3yr" path="res://art/cards/hand-icon.jpg" id="13_csl3s"]
+[ext_resource type="PackedScene" uid="uid://kpbsuln7x2le" path="res://src/scenes/truco/Interface/button.tscn" id="14_2wwfu"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yminj"]
 
@@ -107,6 +108,7 @@ offset_bottom = 114.0
 scale = Vector2(1.5, 1.5)
 
 [node name="RoundOver" type="RichTextLabel" parent="."]
+visible = false
 offset_left = 38.0
 offset_top = 247.0
 offset_right = 235.0
@@ -138,5 +140,13 @@ texture = ExtResource("13_csl3s")
 region_enabled = true
 region_rect = Rect2(0, 0, 760, 792)
 
+[node name="Disconnect" parent="." instance=ExtResource("14_2wwfu")]
+offset_left = 767.0
+offset_top = 6.0
+offset_right = 930.0
+offset_bottom = 76.0
+text = "Salir"
+
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
 [connection signal="remove_card_from_hand" from="OpponentController" to="." method="_on_opponent_controller_remove_card_from_hand"]
+[connection signal="pressed" from="Disconnect" to="." method="_on_disconnect_pressed"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://b0ckgcsol4ucx"]
+[gd_scene load_steps=11 format=3 uid="uid://b0ckgcsol4ucx"]
 
 [ext_resource type="Script" path="res://src/scenes/player/player.gd" id="1_j2141"]
 [ext_resource type="PackedScene" uid="uid://bj12r5t8p4dpp" path="res://src/scenes/character_sprite/character_sprite.tscn" id="2_fo7hx"]
+[ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="3_vfxoq"]
 
 [sub_resource type="Animation" id="Animation_1oepq"]
 length = 0.001
@@ -481,8 +482,13 @@ offset_left = -100.0
 offset_top = -126.0
 offset_right = 100.0
 offset_bottom = -81.0
-theme_override_font_sizes/normal_font_size = 32
-theme_override_font_sizes/bold_font_size = 32
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_vfxoq")
+theme_override_fonts/bold_font = ExtResource("3_vfxoq")
+theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/bold_font_size = 50
 bbcode_enabled = true
 text = "[center][b]You[/b][/center]"
 fit_content = true

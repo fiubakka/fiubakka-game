@@ -1,5 +1,7 @@
 extends Node2D
 
+signal character_saved
+
 @onready var body_sprite := $Body
 @onready var hair_sprite := $Hair
 @onready var eyes_sprite := $Eyes
@@ -130,3 +132,8 @@ func _on_save_button_pressed() -> void:
 		"glasses": glasses_idx,
 		"hats": hats_idx
 	}
+	character_saved.emit()
+
+
+func _on_register_text_submitted(_new_text: String) -> void:
+	_on_save_button_pressed()

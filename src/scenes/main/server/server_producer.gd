@@ -50,6 +50,10 @@ const PBTrucoPlayTypeEnum = (
 	preload("res://addons/protocol/compiled/client/truco/play.gd").PBTrucoPlayType
 )
 
+const PBTrucoDisconnect = (
+	preload("res://addons/protocol/compiled/client/truco/disconnect.gd").PBTrucoDisconnect
+)
+
 var _producer: Producer
 
 
@@ -126,13 +130,11 @@ func _on_player_start_truco(opponent_id: String) -> void:
 
 func _on_modal_match_accepted(opponent_id: String) -> void:
 	_reply_truco_match(opponent_id, PBTrucoMatchChallengeReplyEnum.ACCEPTED)
-	# TODO: temporarily load the truco scene right now
-	# this should be removed when we properly receive the very first TrucoPlay
-	# message after accepting the match
+	# Load the truco scene right now
 	SceneManager.load_new_scene("res://src/scenes/truco/truco_manager.tscn")
 	# TODO: load content only when we get an accepted match confirmation from the server
 	SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
-	SceneManager._truco_opponent_name = opponent_id
+	PlayerInfo.is_playing_truco = true
 
 
 func _on_modal_match_rejected(opponent_id: String) -> void:
@@ -166,3 +168,8 @@ func _on_truco_manager_shout_played(play_id: int, shout_id: int) -> void:
 	truco_play.set_playType(PBTrucoPlayTypeEnum.SHOUT)
 	truco_play.set_shout(shout_id)
 	_producer.send(truco_play)
+
+
+func _on_truco_manager_disconnect() -> void:
+	var truco_disconnect := PBTrucoDisconnect.new()
+	_producer.send(truco_disconnect)

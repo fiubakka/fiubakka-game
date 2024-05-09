@@ -6,40 +6,10 @@ signal update_content(entityId: String, content: String)
 signal player_changed_map
 signal truco_challenge_received(opponentId: String)
 signal allow_truco_play(playId: int, type: PBTrucoPlayTypeEnum)
-signal truco_play_card(
-	play_id: int,
-	suit: int,
-	rank: int,
-	cards: Array[Card],
-	game_over: bool,
-	match_over: bool,
-	first_points: int,
-	first_name: String,
-	second_points: int,
-	second_name: String,
-	is_play_card_available: bool,
-	available_shouts: Array
-)
-signal truco_play_update(
-	playId: int,
-	cards: Array[Card],
-	game_over: bool,
-	match_over: bool,
-	first_points: int,
-	first_name: String,
-	second_points: int,
-	second_name: String,
-	is_play_card_available: bool,
-	available_shouts: Array
-)
-signal truco_shout_played(
-	playId: int,
-	shout: int,
-	game_over: bool,
-	match_over: bool,
-	is_play_card_available: bool,
-	available_shouts: Array
-)
+
+signal truco_play_card(truco_play_card_dto: TrucoPlayCardDto)
+signal truco_play_update(truco_play_update_dto: TrucoPlayUpdateDto)
+signal truco_shout_played(truco_play_shout_dto: TrucoPlayShoutDto)
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 
@@ -176,6 +146,8 @@ func _handle_player_init_ready(msg: PBPlayerInitSuccess) -> void:
 
 
 func _handle_game_entity_state(msg: PBGameEntityState) -> void:
+	if PlayerInfo.is_playing_truco:
+		return
 	var equipment := Equipment.new()
 	(
 		equipment
@@ -248,6 +220,7 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			return
 		SceneManager.load_new_scene("res://src/scenes/truco/truco_manager.tscn")
 		SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
+		PlayerInfo.is_playing_truco = true
 		await SceneManager.transition_finished
 
 	var play_type: PBTrucoPlayTypeEnum = msg.get_playType()
@@ -265,7 +238,8 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			var game_over := msg.get_isGameOver()
 			var match_over := msg.get_isMatchOver()
 			var player_cards := _parse_player_cards(msg)
-			truco_play_card.emit(
+
+			var truco_play_card_dto: TrucoPlayCardDto = TrucoPlayCardDto.new(
 				play_id,
 				suit,
 				rank,
@@ -279,18 +253,24 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 				is_play_card_available,
 				available_shouts
 			)
+			truco_play_card.emit(truco_play_card_dto)
+
 		PBTrucoPlayTypeEnum.SHOUT:
 			var shout: int = msg.get_shout()
 			var game_over := msg.get_isGameOver()
 			var match_over := msg.get_isMatchOver()
-			truco_shout_played.emit(
+
+			var truco_play_shout_dto := TrucoPlayShoutDto.new(
 				play_id, shout, game_over, match_over, is_play_card_available, available_shouts
 			)
+			truco_shout_played.emit(truco_play_shout_dto)
+
 		PBTrucoPlayTypeEnum.UPDATE:
 			var game_over := msg.get_isGameOver()
 			var match_over := msg.get_isMatchOver()
 			var player_cards := _parse_player_cards(msg)
-			truco_play_update.emit(
+
+			var truco_play_update_dto: TrucoPlayUpdateDto = TrucoPlayUpdateDto.new(
 				play_id,
 				player_cards,
 				game_over,
@@ -302,6 +282,7 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 				is_play_card_available,
 				available_shouts
 			)
+			truco_play_update.emit(truco_play_update_dto)
 
 
 func _parse_player_cards(msg: PBTrucoPlay) -> Array[Card]:

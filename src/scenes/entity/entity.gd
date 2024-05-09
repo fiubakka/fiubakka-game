@@ -13,7 +13,7 @@ var _movement_update_queue: Array = []
 
 
 func _ready() -> void:
-	$Name.text = Utils.center_text("[color=#ffaaaa]" + player_name + "[/color]")
+	$Name.text = Utils.center_text(player_name)
 
 	# Set idle front animation when spawning player
 	set_idle_region()
