@@ -15,12 +15,12 @@ const shouts_names = {
 }
 
 const shouts_aswers_names = {
-	PBTrucoShout.REAL_ENVIDO: "REAL ENVIDO",
-	PBTrucoShout.FALTA_ENVIDO: "FALTA ENVIDO",
-	PBTrucoShout.ENVIDO_QUIERO: "ENVIDO QUIERO",
-	PBTrucoShout.ENVIDO_NO_QUIERO: "ENVIDO NO QUIERO",
+	PBTrucoShout.REAL_ENVIDO: "REAL_ENVIDO",
+	PBTrucoShout.FALTA_ENVIDO: "FALTA_ENVIDO",
+	PBTrucoShout.ENVIDO_QUIERO: "ENVIDO_QUIERO",
+	PBTrucoShout.ENVIDO_NO_QUIERO: "ENVIDO_NO_QUIERO",
 	PBTrucoShout.RETRUCO: "RETRUCO",
-	PBTrucoShout.VALE_CUATRO: "VALE CUATRO",
+	PBTrucoShout.VALE_CUATRO: "VALE_CUATRO",
 	PBTrucoShout.TRUCO_QUIERO: "TRUCO_QUIERO",
 	PBTrucoShout.TRUCO_NO_QUIERO: "TRUCO_NO_QUIERO"
 }
@@ -47,6 +47,7 @@ func set_available_shouts(_isPlayCardAvailable: bool, _shouts: Array) -> void:
 			available_answers_shots.append(button)
 			shout_name = shouts_aswers_names[shout]
 			$AvailableShoutAnswers.add_child(button)
+		print("SHOUT NAME: ", shout_name)
 		button.text = tr(shout_name)
 		button.pressed.connect(self._on_button_truco_pressed.bind(shout))
 

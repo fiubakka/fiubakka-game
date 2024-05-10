@@ -23,6 +23,7 @@ var _can_play_cards := false
 
 
 func _ready() -> void:
+	$Disconnect.text = tr("OPTION_QUIT")
 	hand = $Hand
 	board = $Board
 	opponent_controller = $OpponentController
