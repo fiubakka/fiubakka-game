@@ -1,8 +1,8 @@
 keys,es,en
 LOGIN,Ingresar,Login
 REGISTER,Registrar,Register
-USER_PLACEHOLDER,"Usuario...","Username..."
-PASSWORD_PLACEHOLDER,"Contraseña...","Password..."
+USER_PLACEHOLDER,Usuario...,Username...
+PASSWORD_PLACEHOLDER,Contraseña...,Password...
 CHAR_CREATION_TITLE,Cree su personaje,Create your character
 HATS,Sombreros,Hats
 HAIR,Cabello,Hair
@@ -14,21 +14,30 @@ OUTFIT,Ropa,Outfit
 OWN_PLAYER_LABEL,Vos,You
 OPTION_CONTINUE,Continuar,Continue
 OPTION_QUIT,Salir,Quit
-CHAT_PLACEHOLDER,"Diga algo...","Say something..."
+CHAT_PLACEHOLDER,Diga algo...,Say something...
 CHAT_SEND,Enviar,Send
-LOADING_SERVER,"Esperando servidor...","Waiting for server..."
-LOADING_LEVEL,"Cargando nivel...","Loading level..."
-EMPTY_USERNAME, "Ingrese un nombre", "Enter a username"
-EMPTY_PASSWORD, "Ingrese una contraseña", "Enter a password"
-UNKNOWN, "Error desconocido", "Unknown Error"
-INVALID_PLAYER_CREDENTIALS, "Credenciales inválidas", "Invalid credentials"
-PLAYER_ALREADY_EXISTS, "Nombre no disponible", "Unavailable Username"
-NPC_WELCOME_1,"¡Bienvenido a Fiubakka!","Welcome to Fiubakka!"
-NPC_WELCOME_2,"Podes tomar las escaleras o bajar al comedor","You can go uptairs or downstairs"
-NPC_KIOSK,"Bienvenido al Comedor. ¿En qué te puedo ayudar?","Weclome to the Kiosk. How can I help you?"
+LOADING_SERVER,Esperando servidor...,Waiting for server...
+LOADING_LEVEL,Cargando nivel...,Loading level...
+EMPTY_USERNAME,Ingrese un nombre,Enter a username
+EMPTY_PASSWORD,Ingrese una contraseña,Enter a password
+UNKNOWN,Error desconocido,Unknown Error
+INVALID_PLAYER_CREDENTIALS,Credenciales inválidas,Invalid credentials
+PLAYER_ALREADY_EXISTS,Nombre no disponible,Unavailable Username
+NPC_WELCOME_1,¡Bienvenido a Fiubakka!,Welcome to Fiubakka!
+NPC_WELCOME_2,Podes tomar las escaleras o bajar al comedor,You can go uptairs or downstairs
+NPC_KIOSK,Bienvenido al Comedor. ¿En qué te puedo ayudar?,Weclome to the Kiosk. How can I help you?
 TRUCO_BUTTON,Truco,Truco
-TRUCO_CHALLENGE," te desafió al Truco! ¿Aceptás?"," has challenged you to play Truco! Do you accept?"
-TRUCO_ROUND_OVER,"¡Fin ronda!","Round over!"
+TRUCO_CHALLENGE, te desafió al Truco! ¿Aceptás?, has challenged you to play Truco! Do you accept?
+TRUCO_ROUND_OVER,¡Fin ronda!,Round over!
 TRUCO_QUIERO,Quiero,Accept
-TRUCO_NO_QUIERO,"No quiero",Reject
+TRUCO_NO_QUIERO,No quiero,Reject
 TRUCO_MAZO,Mazo,Fold
+EQUIP_BUTTON,Equipar,Equip
+COSMETIC_NAME_HAT_1,Sombrero de Entrenador,Trainer Hat
+COSMETIC_NAME_HAT_2,Sombrero de Dinosaurio,Dinasour Hat
+COSMETIC_NAME_HAT_3,Sombrero Negro,Black Hat
+COSMETIC_NAME_HAT_4,Pasamontañas,Ski Mask
+COSMETIC_NAME_HAT_5,Sombrero de Arqueólogo,Archaeologist Hat
+COSMETIC_NAME_HAT_6,Sombrero Ajustado,Beanie
+COSMETIC_NAME_HAT_7,Sombrero de Cocinero,Chef Hat
+COSMETIC_NAME_HAT_8,Sombrero de Cono,Cone Hat

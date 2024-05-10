@@ -54,6 +54,9 @@ func create_new_resource(
 ) -> void:
 	if texture_dic[index]:
 		var new_res := original_res.duplicate(true)
+		if type == "hats":
+			new_res.name = tr("COSMETIC_NAME_HAT_" + str(index))
+		print("type:", type)
 		new_res.texture.set_atlas(texture_dic[index])
 		new_res.id = index
 		items_catalogue[type][index] = new_res
