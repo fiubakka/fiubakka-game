@@ -157,6 +157,9 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 	if is_match_over:
 		handle_match_over(dto.first_points > dto.second_points)
 	
+	if dto.play_id == current_play_id:
+		_last_played_card_id = -1
+	
 	# Ignore plays that are previous to the current one
 	# Ignore plays with the same id too, since those are my own
 	if dto.play_id <= current_play_id:
@@ -184,6 +187,9 @@ func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 		game_over.emit()
 		$RoundOver.visible = true
 
+	if dto.play_id == current_play_id:
+		_last_played_card_id = -1
+
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
 		return
@@ -200,6 +206,9 @@ func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 	
 
 func _on_truco_play_update(dto : TrucoPlayUpdateDto) -> void:
+	if dto.play_id == current_play_id:
+		_last_played_card_id = -1
+	
 	# Ignore plays that are previous or the same as the current one
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
@@ -252,7 +261,7 @@ func _on_game_over_timer_timeout(play_id: int, cards: Array[Card], is_play_card_
 func _on_allow_truco_play(play_id: int) -> void:
 	# Ignore plays that are previous or the same as the current one
 	# If it happens, send the last TrucoPlay for consistency with server
-	if play_id <= current_play_id:
+	if play_id <= current_play_id and _last_played_card_id > -1:
 		# Resend last TrucoPlay
 		# Case: Card played
 		play_card.emit(current_play_id, _last_played_card_id)
