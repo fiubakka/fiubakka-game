@@ -187,8 +187,6 @@ func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 		play_ack.emit(dto.play_id)
 		return
 
-	print_rich("[rainbow]", PlayerInfo.player_name, "[/rainbow] got shout [b]", dto.play_id, "[/b]")
-
 	current_play_id = dto.play_id
 	$PlayerIcon.visible = true
 	$OpponentIcon.visible = false
@@ -203,10 +201,6 @@ func _on_truco_play_update(dto: TrucoPlayUpdateDto) -> void:
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
 		return
-
-	print_rich(
-		"[rainbow]", PlayerInfo.player_name, "[/rainbow] got update [b]", dto.play_id, "[/b]"
-	)
 
 	current_play_id = dto.play_id
 	_can_play_cards = dto.is_play_card_available
@@ -270,7 +264,6 @@ func _on_allow_truco_play(play_id: int) -> void:
 		# Case: Card played
 		play_card.emit(current_play_id, _last_played_card_id)
 		return
-	print_rich("[rainbow]", PlayerInfo.player_name, "[/rainbow] got allow [b]", play_id, "[/b]")
 	current_play_id = play_id
 	$PlayerIcon.visible = true
 	$OpponentIcon.visible = false
