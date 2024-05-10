@@ -32,7 +32,6 @@ func _on_login_error(_errorCode: String) -> void:
 
 
 func _on_button_pressed() -> void:
-	# $NinePatchRect/VBoxContainer/LoginButtonBorder/LoginErrorText.visible = false
 	if username.is_empty():
 		login_error.emit("EMPTY_USERNAME")
 		return
@@ -41,6 +40,7 @@ func _on_button_pressed() -> void:
 		login_error.emit("EMPTY_PASSWORD")
 		return
 
+	_on_timer_timeout()
 	timer = Timer.new()  # Timer to send init message until we get a response
 	timer.timeout.connect(Callable(self, "_on_timer_timeout"))
 	add_child(timer)
@@ -49,6 +49,7 @@ func _on_button_pressed() -> void:
 
 
 func _on_timer_timeout() -> void:
+	print("user logged in emit")
 	user_logged_in.emit(username, password, null)
 
 
@@ -61,4 +62,5 @@ func _on_return_to_menu() -> void:
 
 
 func _on_user_init_error(errorCode: String) -> void:
+	print("user init error")
 	login_error.emit(errorCode)

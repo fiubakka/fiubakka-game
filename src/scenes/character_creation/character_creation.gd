@@ -4,6 +4,7 @@ var timer: Timer
 
 signal return_to_menu
 signal user_logged_in(username: String, password: String, equipment: Equipment)
+signal register_error
 
 
 func _ready() -> void:
@@ -36,6 +37,7 @@ func _on_character_sprite_character_saved() -> void:
 		self.show_error_message("EMPTY_PASSWORD")
 		return
 
+	_on_timer_timeout(username, password)
 	timer = Timer.new()  # Timer to send init message until we get a response
 	timer.timeout.connect(Callable(self, "_on_timer_timeout").bind(username, password))
 	add_child(timer)
@@ -65,3 +67,9 @@ func _on_return_return_to_menu() -> void:
 	$NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername.clear()
 	$NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword.clear()
 	return_to_menu.emit()
+
+
+func _on_user_init_error(_errorCode: String) -> void:
+	if timer:
+		timer.stop()
+	register_error.emit()

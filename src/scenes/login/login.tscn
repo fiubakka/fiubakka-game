@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b6kg7qutp1h00"]
+[gd_scene load_steps=16 format=3 uid="uid://b6kg7qutp1h00"]
 
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_f447j"]
 [ext_resource type="Script" path="res://src/scenes/login/login.gd" id="1_mxn2w"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://src/scenes/login/login_username.gd" id="4_m2urp"]
 [ext_resource type="AudioStream" uid="uid://ck7nysfydevjl" path="res://audio/music/login.ogg" id="5_ktkbl"]
 [ext_resource type="Script" path="res://src/scenes/login/login_password.gd" id="7_abh4x"]
+[ext_resource type="Script" path="res://src/scenes/login/login_button.gd" id="8_3cemf"]
 [ext_resource type="Script" path="res://src/scenes/login/login_error_text.gd" id="8_84eql"]
 
 [sub_resource type="Theme" id="Theme_1qdqe"]
@@ -247,6 +248,7 @@ offset_right = 3.75
 offset_bottom = 3.02499
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("8_3cemf")
 
 [node name="LoginErrorText" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/LoginButtonContainer"]
 self_modulate = Color(0.819608, 0, 0.00784314, 1)
@@ -291,12 +293,19 @@ volume_db = -63.003
 autoplay = true
 
 [connection signal="login_error" from="." to="." method="_on_login_error"]
+[connection signal="login_error" from="." to="NinePatchRect/VBoxContainer/Password/LoginPassword" method="_on_register_error"]
+[connection signal="login_error" from="." to="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginButton" method="_on_login_error"]
 [connection signal="login_error" from="." to="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginErrorText" method="_on_login_error"]
+[connection signal="user_logged_in" from="." to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_user_logged_in"]
+[connection signal="user_logged_in" from="." to="NinePatchRect/VBoxContainer/Password/LoginPassword" method="_on_user_logged_in"]
+[connection signal="user_logged_in" from="." to="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginButton" method="_on_user_logged_in"]
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="." method="_on_login_username_text_changed"]
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_text_changed"]
-[connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="." method="_on_login_username_text_submitted"]
+[connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_text_submitted"]
+[connection signal="username_submitted" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="." method="_on_login_username_text_submitted"]
+[connection signal="password_submitted" from="NinePatchRect/VBoxContainer/Password/LoginPassword" to="." method="_on_login_password_text_submitted"]
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Password/LoginPassword" to="." method="_on_login_password_text_changed"]
-[connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Password/LoginPassword" to="." method="_on_login_password_text_submitted"]
+[connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Password/LoginPassword" to="NinePatchRect/VBoxContainer/Password/LoginPassword" method="_on_text_submitted"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginButton" to="." method="_on_button_pressed"]
 [connection signal="return_to_menu" from="NinePatchRect/Return" to="." method="_on_return_to_menu"]
 [connection signal="return_to_menu" from="NinePatchRect/Return" to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_return_to_menu"]
