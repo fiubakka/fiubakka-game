@@ -258,7 +258,6 @@ func _on_allow_truco_play(play_id: int) -> void:
 		# Case: Card played
 		play_card.emit(current_play_id, _last_played_card_id)
 		return
-	print_rich("[rainbow]", PlayerInfo.player_name, "[/rainbow] got allow [b]", play_id, "[/b]")
 	current_play_id = play_id
 	$PlayerIcon.visible = true
 	$OpponentIcon.visible = false
