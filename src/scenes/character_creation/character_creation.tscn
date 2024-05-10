@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://2focfqtvt576"]
+[gd_scene load_steps=16 format=3 uid="uid://2focfqtvt576"]
 
 [ext_resource type="Script" path="res://src/scenes/character_creation/character_creation.gd" id="1_7ub86"]
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_x5dhn"]
@@ -331,5 +331,6 @@ offset_bottom = -413.0
 [connection signal="next" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/OutfitSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_outfit_select_next"]
 [connection signal="prev" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/OutfitSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_outfit_select_prev"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Randomize/ButtonTexture/Button" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_randomize_button_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect/Button" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_save_button_pressed"]
 [connection signal="return_to_menu" from="NinePatchRect/Return" to="." method="_on_return_return_to_menu"]
