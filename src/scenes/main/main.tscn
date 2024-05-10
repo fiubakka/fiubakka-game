@@ -123,6 +123,8 @@ grow_vertical = 1
 [connection signal="match_accepted" from="GUI/GuiManager/Modal" to="ServerConnection/ServerProducer" method="_on_modal_match_accepted"]
 [connection signal="match_rejected" from="GUI/GuiManager/Modal" to="ServerConnection/ServerProducer" method="_on_modal_match_rejected"]
 [connection signal="go_to_login" from="MainMenu" to="." method="_on_main_menu_go_to_login"]
+[connection signal="go_to_login" from="MainMenu" to="Login/NinePatchRect/VBoxContainer/LoginButtonContainer/LoginErrorText" method="_on_error_clear"]
+[connection signal="go_to_register" from="MainMenu" to="Register/NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText" method="_on_error_clear"]
 [connection signal="go_to_register" from="MainMenu" to="." method="_on_main_menu_go_to_register"]
 [connection signal="go_to_main_menu" from="LanguageSelect" to="MainMenu" method="_on_language_select_go_to_main_menu"]
 [connection signal="switch_locale" from="LanguageSelect" to="Login/NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginTextContainer/LoginText" method="_on_language_select_switch_locale"]
