@@ -4,6 +4,8 @@ signal play_ack(play_id: int)
 signal play_card(play_id: int, card_id: int)
 signal shout_played(shout_id: int)
 signal player_disconnect
+signal turn_over
+signal game_over
 
 @export var card_scene: PackedScene
 
@@ -108,6 +110,7 @@ func _on_board_player_card_played(card: Card) -> void:
 		return
 	card.played = true
 	play_card.emit(current_play_id, card.id)
+	turn_over.emit()
 	_last_played_card_id = card.id
 	$PlayerIcon.visible = false
 	$OpponentIcon.visible = true
@@ -148,6 +151,7 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 	is_match_over = dto.match_over
 
 	if is_game_over:
+		game_over.emit()
 		$RoundOver.visible = true
 
 	if is_match_over:
@@ -176,6 +180,7 @@ func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 	is_match_over = dto.match_over
 
 	if is_game_over:
+		game_over.emit()
 		$RoundOver.visible = true
 
 	if dto.play_id <= current_play_id:
@@ -246,6 +251,7 @@ func _on_game_over_timer_timeout(
 	create_hand(cards)
 	update_shouts(is_play_card_available, available_shouts)
 	play_ack.emit(play_id)
+	game_over.emit()
 	timer.queue_free()
 	return
 
@@ -262,7 +268,7 @@ func _on_allow_truco_play(play_id: int) -> void:
 	$PlayerIcon.visible = true
 	$OpponentIcon.visible = false
 	if _can_play_cards:
-		board.enable_play_zone()
+		board.enable_current_play_zone()
 	options.disable_buttons(false)
 
 
@@ -273,11 +279,7 @@ func _on_options_shout_played(shout_id: int) -> void:
 	options.disable_buttons(true)
 
 	# Disable playing cards when I make a shout
-	# TODO: handle properly by counting which turn are we in
-	# and then disabling the play_zone of that turn
-	# (to avoid disabling previously played zones)
-	if shout_id == 0 or shout_id == 5:
-		board.disable_play_zone()
+	board.disable_current_play_zone()
 
 
 func handle_match_over(is_winner: bool) -> void:
