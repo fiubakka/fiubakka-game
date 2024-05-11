@@ -6,8 +6,8 @@ var waiting_for_login: bool = true
 
 
 func _ready() -> void:
-	$NinePatchRect/NinePatchRect/RichTextLabel.text = Utils.center_text(tr("OPTION_CONTINUE"))
-	$NinePatchRect/NinePatchRect2/RichTextLabel.text = Utils.center_text(tr("OPTION_QUIT"))
+	$NinePatchRect/ContinueButton/ContinueButtonText.text = Utils.center_text(tr("OPTION_CONTINUE"))
+	$NinePatchRect/QuitButton/QuitButtonText.text = Utils.center_text(tr("OPTION_QUIT"))
 
 
 func _on_main_login_ready() -> void:
