@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://ci2j6myp2y3u3" path="res://src/scenes/GUI/dialogue/Dialogue.tscn" id="11_bkedh"]
 [ext_resource type="PackedScene" uid="uid://dj80f5e6d1tsp" path="res://src/scenes/GUI/modal/modal.tscn" id="12_3el8v"]
 [ext_resource type="AudioStream" uid="uid://dwqusao5kn6et" path="res://audio/music/main.ogg" id="14_myg4s"]
+[ext_resource type="PackedScene" uid="uid://btx655wwmsnrl" path="res://src/scenes/language_select/language_select.tscn" id="13_geu0e"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(0, 3)
@@ -87,6 +88,7 @@ visible = false
 layout_mode = 1
 
 [node name="MainMenu" parent="." instance=ExtResource("9_hsq23")]
+visible = false
 offset_left = 1.0
 offset_top = -3.0
 offset_right = 959.0
@@ -97,6 +99,16 @@ stream = ExtResource("14_myg4s")
 volume_db = 1.0
 bus = &"MusicMain"
 
+[node name="LanguageSelect" parent="." instance=ExtResource("13_geu0e")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = -3.0
+offset_right = 960.0
+offset_bottom = 537.0
+grow_horizontal = 1
+grow_vertical = 1
+
 [connection signal="login_ready" from="." to="GUI/GuiManager/Chatbox" method="_on_main_login_ready"]
 [connection signal="login_ready" from="." to="GUI/GuiManager/Pause" method="_on_main_login_ready"]
 [connection signal="return_to_menu" from="Login" to="." method="_on_login_return_to_menu"]
@@ -106,6 +118,7 @@ bus = &"MusicMain"
 [connection signal="truco_challenge_received" from="ServerConnection/ServerConsumer" to="GUI/GuiManager/Modal" method="_on_server_consumer_truco_challenge_received"]
 [connection signal="update_content" from="ServerConnection/ServerConsumer" to="GUI/GuiManager/Chatbox" method="_on_server_consumer_update_content"]
 [connection signal="user_init_error" from="ServerConnection/ServerConsumer" to="Login" method="_on_user_init_error"]
+[connection signal="user_init_error" from="ServerConnection/ServerConsumer" to="Register" method="_on_user_init_error"]
 [connection signal="user_init_ready" from="ServerConnection/ServerConsumer" to="." method="_on_server_consumer_user_init_ready"]
 [connection signal="user_init_ready" from="ServerConnection/ServerConsumer" to="GUI/GuiManager/GameMenu/HBoxContainer/NinePatchRect/CenterContainer/Panel/Inventory" method="_on_server_consumer_user_init_ready"]
 [connection signal="ui_opened" from="GUI/GuiManager" to="." method="_on_gui_manager_ui_opened"]
@@ -116,6 +129,21 @@ bus = &"MusicMain"
 [connection signal="match_accepted" from="GUI/GuiManager/Modal" to="ServerConnection/ServerProducer" method="_on_modal_match_accepted"]
 [connection signal="match_rejected" from="GUI/GuiManager/Modal" to="ServerConnection/ServerProducer" method="_on_modal_match_rejected"]
 [connection signal="go_to_login" from="MainMenu" to="." method="_on_main_menu_go_to_login"]
+[connection signal="go_to_login" from="MainMenu" to="Login/NinePatchRect/VBoxContainer/LoginButtonContainer/LoginErrorText" method="_on_error_clear"]
+[connection signal="go_to_register" from="MainMenu" to="Register/NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText" method="_on_error_clear"]
 [connection signal="go_to_register" from="MainMenu" to="." method="_on_main_menu_go_to_register"]
+[connection signal="go_to_main_menu" from="LanguageSelect" to="MainMenu" method="_on_language_select_go_to_main_menu"]
+[connection signal="switch_locale" from="LanguageSelect" to="Login/NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginTextContainer/LoginText" method="_on_language_select_switch_locale"]
+[connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/MarginContainer/RegisterTitleText" method="_on_language_select_switch_locale"]
+[connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect/RegisterButtonText" method="_on_language_select_switch_locale"]
+[connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HatsSelect" method="_on_language_select_switch_locale"]
+[connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HairSelect" method="_on_language_select_switch_locale"]
+[connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/EyesSelect" method="_on_language_select_switch_locale"]
+[connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/GlassesSelect" method="_on_language_select_switch_locale"]
+[connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/FacialHairSelect" method="_on_language_select_switch_locale"]
+[connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/BodySelect" method="_on_language_select_switch_locale"]
+[connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/OutfitSelect" method="_on_language_select_switch_locale"]
+[connection signal="switch_locale" from="LanguageSelect" to="GUI/GuiManager/Pause/NinePatchRect/ContinueButton/ContinueButtonText" method="_on_language_select_switch_locale"]
+[connection signal="switch_locale" from="LanguageSelect" to="GUI/GuiManager/Pause/NinePatchRect/QuitButton/QuitButtonText" method="_on_language_select_switch_locale"]
 
 [editable path="GUI/GuiManager/GameMenu"]

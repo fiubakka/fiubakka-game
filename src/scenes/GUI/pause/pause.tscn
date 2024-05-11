@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="2_dxbm7"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="3_qu78l"]
 [ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="4_osv2q"]
+[ext_resource type="Script" path="res://src/scenes/GUI/pause/continue_button_text.gd" id="5_k6puj"]
+[ext_resource type="Script" path="res://src/scenes/GUI/pause/quit_button_text.gd" id="6_iyem1"]
 [ext_resource type="Script" path="res://src/scenes/GUI/pause/mute_button_texture.gd" id="5_11d1o"]
 [ext_resource type="Script" path="res://src/scenes/GUI/pause/mute_button.gd" id="5_x7u4s"]
 
@@ -43,7 +45,7 @@ offset_right = 957.0
 offset_bottom = 544.0
 texture = ExtResource("2_dxbm7")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect"]
+[node name="ContinueButton" type="NinePatchRect" parent="NinePatchRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -59,7 +61,7 @@ grow_vertical = 2
 texture = ExtResource("3_qu78l")
 region_rect = Rect2(36.8972, 1104.05, 71.3756, 47.5839)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/NinePatchRect"]
+[node name="ContinueButtonText" type="RichTextLabel" parent="NinePatchRect/ContinueButton"]
 self_modulate = Color(0.694118, 0.439216, 0.219608, 1)
 clip_contents = false
 custom_minimum_size = Vector2(0, 50)
@@ -78,8 +80,9 @@ size_flags_horizontal = 3
 theme = SubResource("Theme_j8n4e")
 bbcode_enabled = true
 scroll_active = false
+script = ExtResource("5_k6puj")
 
-[node name="Continue" type="Button" parent="NinePatchRect/NinePatchRect"]
+[node name="Continue" type="Button" parent="NinePatchRect/ContinueButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -96,7 +99,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_tba4p")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_60pdv")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_djk7j")
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="NinePatchRect"]
+[node name="QuitButton" type="NinePatchRect" parent="NinePatchRect"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -112,7 +115,7 @@ grow_vertical = 0
 texture = ExtResource("3_qu78l")
 region_rect = Rect2(36.8972, 1104.05, 71.3756, 47.5839)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/NinePatchRect2"]
+[node name="QuitButtonText" type="RichTextLabel" parent="NinePatchRect/QuitButton"]
 self_modulate = Color(0.694118, 0.439216, 0.219608, 1)
 clip_contents = false
 custom_minimum_size = Vector2(0, 50)
@@ -131,8 +134,9 @@ size_flags_horizontal = 3
 theme = SubResource("Theme_j8n4e")
 bbcode_enabled = true
 scroll_active = false
+script = ExtResource("6_iyem1")
 
-[node name="Quit" type="Button" parent="NinePatchRect/NinePatchRect2"]
+[node name="Quit" type="Button" parent="NinePatchRect/QuitButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -170,3 +174,5 @@ script = ExtResource("5_x7u4s")
 [connection signal="pressed" from="NinePatchRect/NinePatchRect2/Quit" to="." method="_on_quit_pressed"]
 [connection signal="mute_toggled" from="NinePatchRect/MuteButton/Button" to="NinePatchRect/MuteButton" method="_on_mute_toggled"]
 [connection signal="pressed" from="NinePatchRect/MuteButton/Button" to="NinePatchRect/MuteButton/Button" method="_on_pressed"]
+[connection signal="pressed" from="NinePatchRect/ContinueButton/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="NinePatchRect/QuitButton/Quit" to="." method="_on_quit_pressed"]

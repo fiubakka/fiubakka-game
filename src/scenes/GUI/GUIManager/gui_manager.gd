@@ -19,7 +19,7 @@ func _ready() -> void:
 	npc_tip = $NpcTip
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("close_chat"):
 		handle_chat_open()
 	if Input.is_action_just_pressed("inventory"):

@@ -213,7 +213,7 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 	var second_name := second_player.get_playerName()
 	var second_points := second_player.get_points()
 
-	var truco_manager := get_node("/root/TrucoManager")
+	var truco_manager := get_node_or_null("/root/TrucoManager")
 	if play_id == 0 and not truco_manager:
 		# If we are already loading the Truco scene, ignore new play_id 0 messages
 		if SceneManager.is_loading_scene:
