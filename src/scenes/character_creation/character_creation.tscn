@@ -1,14 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://2focfqtvt576"]
+[gd_scene load_steps=17 format=3 uid="uid://2focfqtvt576"]
 
 [ext_resource type="Script" path="res://src/scenes/character_creation/character_creation.gd" id="1_7ub86"]
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_x5dhn"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_nt0o2"]
 [ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="3_61440"]
 [ext_resource type="PackedScene" uid="uid://bj12r5t8p4dpp" path="res://src/scenes/character_sprite/character_sprite.tscn" id="5_4ix6j"]
+[ext_resource type="Script" path="res://src/scenes/character_creation/register_title_text.gd" id="5_laylv"]
 [ext_resource type="PackedScene" uid="uid://cgqjqesphj8ha" path="res://src/scenes/GUI/selector/selector.tscn" id="6_rgcdb"]
 [ext_resource type="Script" path="res://src/scenes/character_creation/character_sprite.gd" id="6_sxde8"]
 [ext_resource type="Script" path="res://src/scenes/login/login_username.gd" id="7_b50nj"]
+[ext_resource type="Script" path="res://src/scenes/login/login_error_text.gd" id="8_3mglr"]
 [ext_resource type="PackedScene" uid="uid://dl2ppg848l7il" path="res://src/scenes/GUI/return/return.tscn" id="8_4gecp"]
+[ext_resource type="Script" path="res://src/scenes/login/login_password.gd" id="9_fqeby"]
+[ext_resource type="Script" path="res://src/scenes/character_creation/register_button_text.gd" id="11_3gi6d"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_isp5o"]
 
@@ -55,7 +59,7 @@ metadata/_edit_group_ = true
 [node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/MarginContainer"]
+[node name="RegisterTitleText" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/MarginContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_colors/default_color = Color(0.694118, 0.439216, 0.219608, 1)
@@ -63,6 +67,7 @@ theme_override_fonts/normal_font = ExtResource("3_61440")
 theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
 text = "[center]Cree su personaje[/center]"
+script = ExtResource("5_laylv")
 
 [node name="Character" type="HSplitContainer" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
@@ -178,6 +183,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_fvq1j")
 placeholder_text = "PASSWORD_PLACEHOLDER"
 max_length = 12
 secret = true
+script = ExtResource("9_fqeby")
 
 [node name="RegisterErrorText" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/Character/Left/Username"]
 self_modulate = Color(0.819608, 0, 0.00784314, 1)
@@ -199,6 +205,7 @@ theme = SubResource("Theme_o337u")
 bbcode_enabled = true
 text = "[center][/center]"
 scroll_active = false
+script = ExtResource("8_3mglr")
 
 [node name="VSplitContainer" type="VSplitContainer" parent="NinePatchRect/VBoxContainer/Character"]
 layout_mode = 2
@@ -276,7 +283,7 @@ layout_mode = 2
 texture = ExtResource("2_nt0o2")
 region_rect = Rect2(184, 1104, 64, 48)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect"]
+[node name="RegisterButtonText" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect"]
 layout_mode = 0
 offset_left = 30.0
 offset_top = 9.0
@@ -287,6 +294,7 @@ theme_override_fonts/normal_font = ExtResource("3_61440")
 theme_override_font_sizes/normal_font_size = 37
 bbcode_enabled = true
 text = "[center]Register[/center]"
+script = ExtResource("11_3gi6d")
 
 [node name="Button" type="Button" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect"]
 modulate = Color(1, 1, 1, 0)
@@ -302,10 +310,14 @@ offset_top = 127.0
 offset_right = -803.0
 offset_bottom = -413.0
 
-[connection signal="character_saved" from="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" to="." method="_on_character_sprite_character_saved"]
+[connection signal="error_clear" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText" method="_on_error_clear"]
+[connection signal="register_error" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText" method="_on_login_error"]
+[connection signal="return_to_menu" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText" method="_on_return_to_menu"]
+[connection signal="text_changed" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" to="." method="_on_login_username_text_changed"]
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" method="_on_text_changed"]
-[connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_register_text_submitted"]
-[connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_register_text_submitted"]
+[connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" to="." method="_on_login_username_text_submitted"]
+[connection signal="text_changed" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword" to="." method="_on_login_password_text_changed"]
+[connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword" to="." method="_on_login_password_text_submitted"]
 [connection signal="next" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HatsSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hats_select_next"]
 [connection signal="prev" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HatsSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hats_select_prev"]
 [connection signal="next" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HairSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hair_select_next"]
@@ -321,5 +333,8 @@ offset_bottom = -413.0
 [connection signal="next" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/OutfitSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_outfit_select_next"]
 [connection signal="prev" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/OutfitSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_outfit_select_prev"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Randomize/ButtonTexture/Button" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_randomize_button_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect/Button" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_save_button_pressed"]
 [connection signal="return_to_menu" from="NinePatchRect/Return" to="." method="_on_return_return_to_menu"]
+[connection signal="return_to_menu" from="NinePatchRect/Return" to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" method="_on_return_to_menu"]
+[connection signal="return_to_menu" from="NinePatchRect/Return" to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword" method="_on_return_to_menu"]

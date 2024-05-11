@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b6kg7qutp1h00"]
+[gd_scene load_steps=16 format=3 uid="uid://b6kg7qutp1h00"]
 
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_f447j"]
 [ext_resource type="Script" path="res://src/scenes/login/login.gd" id="1_mxn2w"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://src/scenes/login/login_username.gd" id="4_m2urp"]
 [ext_resource type="AudioStream" uid="uid://ck7nysfydevjl" path="res://audio/music/login.ogg" id="5_ktkbl"]
 [ext_resource type="Script" path="res://src/scenes/login/login_password.gd" id="7_abh4x"]
+[ext_resource type="Script" path="res://src/scenes/login/login_button_text.gd" id="8_7e6gq"]
 [ext_resource type="Script" path="res://src/scenes/login/login_error_text.gd" id="8_84eql"]
 
 [sub_resource type="Theme" id="Theme_1qdqe"]
@@ -217,8 +218,10 @@ anchor_left = 0.321
 anchor_top = 0.24
 anchor_right = 0.675
 anchor_bottom = 0.84
-offset_left = -0.200005
-offset_bottom = 2.0
+offset_left = -44.2
+offset_top = -4.0
+offset_right = 45.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -231,6 +234,7 @@ theme = SubResource("Theme_ag47f")
 bbcode_enabled = true
 text = "[center]Login[/center]"
 scroll_active = false
+script = ExtResource("8_7e6gq")
 
 [node name="LoginButton" type="Button" parent="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder"]
 modulate = Color(1, 1, 1, 0)

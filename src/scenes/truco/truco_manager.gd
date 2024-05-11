@@ -19,17 +19,18 @@ var is_game_over := false
 var is_match_over := false
 var _last_played_card_id := -1
 var _can_play_cards := false
-@onready var options : Options = $Options
+@onready var options: Options = $Options
 
 
 func _ready() -> void:
+	$Disconnect.text = tr("OPTION_QUIT")
 	hand = $Hand
 	board = $Board
 	opponent_controller = $OpponentController
 	opponent_hand = $OpponentHand
 
 	options.shout_played.connect(self._on_options_shout_played)
-	
+
 	$PlayerName.text = Utils.center_text(PlayerInfo.player_name)
 
 	var consumer := get_node("/root/Main/ServerConnection/ServerConsumer")
@@ -153,19 +154,19 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 	if is_game_over:
 		game_over.emit()
 		$RoundOver.visible = true
-	
+
 	if is_match_over:
 		handle_match_over(dto.first_points > dto.second_points)
-	
+
 	if dto.play_id == current_play_id:
 		_last_played_card_id = -1
-	
+  
 	# Ignore plays that are previous to the current one
 	# Ignore plays with the same id too, since those are my own
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
 		return
-	
+
 	current_play_id = dto.play_id
 	_can_play_cards = dto.is_play_card_available
 
@@ -178,11 +179,10 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 	play_ack.emit(dto.play_id)
 
 
-
 func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 	is_game_over = dto.game_over
 	is_match_over = dto.match_over
-	
+
 	if is_game_over:
 		game_over.emit()
 		$RoundOver.visible = true
@@ -193,8 +193,6 @@ func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
 		return
-		
-	print_rich("[rainbow]",PlayerInfo.player_name, "[/rainbow] got shout [b]",dto.play_id,"[/b]")
 
 	current_play_id = dto.play_id
 	$PlayerIcon.visible = true
@@ -203,18 +201,15 @@ func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 	update_shouts(dto.is_play_card_available, dto.available_shouts)
 	$DialogueBubbleController.show_shout(dto.shout)
 	play_ack.emit(dto.play_id)
-	
 
-func _on_truco_play_update(dto : TrucoPlayUpdateDto) -> void:
+func _on_truco_play_update(dto: TrucoPlayUpdateDto) -> void:
 	if dto.play_id == current_play_id:
 		_last_played_card_id = -1
-	
+
 	# Ignore plays that are previous or the same as the current one
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
 		return
-		
-	print_rich("[rainbow]",PlayerInfo.player_name, "[/rainbow] got update [b]",dto.play_id,"[/b]")
 
 	current_play_id = dto.play_id
 	_can_play_cards = dto.is_play_card_available
@@ -234,7 +229,13 @@ func _on_truco_play_update(dto : TrucoPlayUpdateDto) -> void:
 		is_game_over = dto.game_over
 		var timer := Timer.new()
 		timer.timeout.connect(
-			Callable(self, "_on_game_over_timer_timeout").bind(dto.play_id, dto.player_cards, dto.is_play_card_available, dto.available_shouts, timer)
+			Callable(self, "_on_game_over_timer_timeout").bind(
+				dto.play_id,
+				dto.player_cards,
+				dto.is_play_card_available,
+				dto.available_shouts,
+				timer
+			)
 		)
 		timer.one_shot = true
 		timer.set_wait_time(3.0)
@@ -247,7 +248,13 @@ func _on_truco_play_update(dto : TrucoPlayUpdateDto) -> void:
 	play_ack.emit(dto.play_id)
 
 
-func _on_game_over_timer_timeout(play_id: int, cards: Array[Card], is_play_card_available: bool, available_shouts: Array, timer: Timer) -> void:
+func _on_game_over_timer_timeout(
+	play_id: int,
+	cards: Array[Card],
+	is_play_card_available: bool,
+	available_shouts: Array,
+	timer: Timer
+) -> void:
 	$RoundOver.visible = false
 	clean()
 	create_hand(cards)
@@ -266,7 +273,6 @@ func _on_allow_truco_play(play_id: int) -> void:
 		# Case: Card played
 		play_card.emit(current_play_id, _last_played_card_id)
 		return
-	print_rich("[rainbow]",PlayerInfo.player_name, "[/rainbow] got allow [b]",play_id,"[/b]")
 	current_play_id = play_id
 	$PlayerIcon.visible = true
 	$OpponentIcon.visible = false
@@ -283,6 +289,7 @@ func _on_options_shout_played(shout_id: int) -> void:
 
 	# Disable playing cards when I make a shout
 	board.disable_current_play_zone()
+
 
 func handle_match_over(is_winner: bool) -> void:
 	options.disable_buttons(true)

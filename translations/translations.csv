@@ -16,6 +16,8 @@ OPTION_CONTINUE,Continuar,Continue
 OPTION_QUIT,Salir,Quit
 CHAT_PLACEHOLDER,"Diga algo...","Say something..."
 CHAT_SEND,Enviar,Send
+EQUIP,Equipar,Equip
+UNEQUIP,Desequipar,Unequip
 LOADING_SERVER,"Esperando servidor...","Waiting for server..."
 LOADING_LEVEL,"Cargando nivel...","Loading level..."
 EMPTY_USERNAME, "Ingrese un nombre", "Enter a username"
@@ -26,9 +28,16 @@ PLAYER_ALREADY_EXISTS, "Nombre no disponible", "Unavailable Username"
 NPC_WELCOME_1,"¡Bienvenido a Fiubakka!","Welcome to Fiubakka!"
 NPC_WELCOME_2,"Podes tomar las escaleras o bajar al comedor","You can go uptairs or downstairs"
 NPC_KIOSK,"Bienvenido al Comedor. ¿En qué te puedo ayudar?","Weclome to the Kiosk. How can I help you?"
-TRUCO_BUTTON,Truco,Truco
+TRUCO,Truco,Truco
 TRUCO_CHALLENGE," te desafió al Truco! ¿Aceptás?"," has challenged you to play Truco! Do you accept?"
 TRUCO_ROUND_OVER,"¡Fin ronda!","Round over!"
 TRUCO_QUIERO,Quiero,Accept
 TRUCO_NO_QUIERO,"No quiero",Reject
-TRUCO_MAZO,Mazo,Fold
+MAZO,Mazo,Fold
+ENVIDO, Envido, Envido
+REAL_ENVIDO, Real Envido, Royal Envido
+FALTA_ENVIDO, Falta Envido, Falta Envido
+ENVIDO_QUIERO, Quiero, Accept
+ENVIDO_NO_QUIERO, "No quiero", Reject
+RETRUCO, Retruco, Retruco
+VALE_CUATRO, "Vale cuatro", "Counts four"

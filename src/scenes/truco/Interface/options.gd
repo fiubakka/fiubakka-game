@@ -8,37 +8,31 @@ var available_shots := []
 var available_answers_shots := []
 
 const TrucoButtonScn := preload("res://src/scenes/truco/Interface/button.tscn")
-const PBTrucoShout = (
-	preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoShout
-)
+const PBTrucoShout = preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoShout
 
 const shouts_names = {
-	PBTrucoShout.ENVIDO: "ENVIDO",
-	PBTrucoShout.TRUCO: "TRUCO",
-	PBTrucoShout.MAZO: "MAZO"
+	PBTrucoShout.ENVIDO: "ENVIDO", PBTrucoShout.TRUCO: "TRUCO", PBTrucoShout.MAZO: "MAZO"
 }
-	
+
 const shouts_aswers_names = {
-	PBTrucoShout.REAL_ENVIDO: "REAL ENVIDO",
-	PBTrucoShout.FALTA_ENVIDO: "FALTA ENVIDO",
-	PBTrucoShout.ENVIDO_QUIERO: "ENVIDO QUIERO",
-	PBTrucoShout.ENVIDO_NO_QUIERO: "ENVIDO NO QUIERO",
+	PBTrucoShout.REAL_ENVIDO: "REAL_ENVIDO",
+	PBTrucoShout.FALTA_ENVIDO: "FALTA_ENVIDO",
+	PBTrucoShout.ENVIDO_QUIERO: "ENVIDO_QUIERO",
+	PBTrucoShout.ENVIDO_NO_QUIERO: "ENVIDO_NO_QUIERO",
 	PBTrucoShout.RETRUCO: "RETRUCO",
-	PBTrucoShout.VALE_CUATRO: "VALE CUATRO",
+	PBTrucoShout.VALE_CUATRO: "VALE_CUATRO",
 	PBTrucoShout.TRUCO_QUIERO: "TRUCO_QUIERO",
 	PBTrucoShout.TRUCO_NO_QUIERO: "TRUCO_NO_QUIERO"
 }
+
 
 func _ready() -> void:
 	pass
 
 
-func set_available_shouts(
-	_isPlayCardAvailable: bool,
-	_shouts: Array
-) -> void:
+func set_available_shouts(_isPlayCardAvailable: bool, _shouts: Array) -> void:
 	clean()
-	
+
 	for shout: int in _shouts:
 		if shout not in shouts_names and shout not in shouts_aswers_names:
 			continue
@@ -53,6 +47,7 @@ func set_available_shouts(
 			available_answers_shots.append(button)
 			shout_name = shouts_aswers_names[shout]
 			$AvailableShoutAnswers.add_child(button)
+		print("SHOUT NAME: ", shout_name)
 		button.text = tr(shout_name)
 		button.pressed.connect(self._on_button_truco_pressed.bind(shout))
 
@@ -65,7 +60,7 @@ func clean() -> void:
 	for button: TrucoButton in available_shots:
 		button.queue_free()
 	available_shots = []
-	
+
 	for button: TrucoButton in available_answers_shots:
 		button.queue_free()
 	available_answers_shots = []
@@ -74,6 +69,6 @@ func clean() -> void:
 func disable_buttons(is_disable: bool) -> void:
 	for button: TrucoButton in available_shots:
 		button.disabled = is_disable
-	
+
 	for button: TrucoButton in available_answers_shots:
 		button.disabled = is_disable
