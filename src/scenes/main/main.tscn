@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://nqpqnx1lgim3" path="res://src/scenes/game_menu/GameMenu.tscn" id="10_8b4g2"]
 [ext_resource type="PackedScene" uid="uid://ci2j6myp2y3u3" path="res://src/scenes/GUI/dialogue/Dialogue.tscn" id="11_bkedh"]
 [ext_resource type="PackedScene" uid="uid://dj80f5e6d1tsp" path="res://src/scenes/GUI/modal/modal.tscn" id="12_3el8v"]
+[ext_resource type="AudioStream" uid="uid://dwqusao5kn6et" path="res://audio/music/main.ogg" id="14_myg4s"]
 [ext_resource type="PackedScene" uid="uid://btx655wwmsnrl" path="res://src/scenes/language_select/language_select.tscn" id="13_geu0e"]
 
 [node name="Main" type="Node2D"]
@@ -92,6 +93,11 @@ offset_left = 1.0
 offset_top = -3.0
 offset_right = 959.0
 offset_bottom = 537.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_myg4s")
+volume_db = 1.0
+bus = &"MusicMain"
 
 [node name="LanguageSelect" parent="." instance=ExtResource("13_geu0e")]
 anchors_preset = 0

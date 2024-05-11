@@ -5,9 +5,9 @@ signal unpaused
 var waiting_for_login: bool = true
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
+func _ready() -> void:
+	$NinePatchRect/ContinueButton/ContinueButtonText.text = Utils.center_text(tr("OPTION_CONTINUE"))
+	$NinePatchRect/QuitButton/QuitButtonText.text = Utils.center_text(tr("OPTION_QUIT"))
 
 
 func _on_main_login_ready() -> void:

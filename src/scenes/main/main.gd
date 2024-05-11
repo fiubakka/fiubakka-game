@@ -42,6 +42,9 @@ func _on_server_consumer_user_init_ready(
 	$Login.queue_free()
 	$Register.queue_free()
 
+	var audio_player := $AudioStreamPlayer
+	audio_player.play()
+
 	$GUI/GuiManager.set_process(true)
 	ui_opened.connect(player._on_main_ui_opened)
 
