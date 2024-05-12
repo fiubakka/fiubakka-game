@@ -148,25 +148,23 @@ func update_points(
 
 
 func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
-	# Always save game/match over flags
-	is_game_over = dto.game_over
-	is_match_over = dto.match_over
-
-	if is_game_over:
-		game_over.emit()
-		$RoundOver.visible = true
-
-	if is_match_over:
-		handle_match_over(dto.first_name, dto.first_points > dto.second_points)
-
 	if dto.play_id == current_play_id:
 		_last_played_card_id = -1
+		check_over_states(dto.game_over, dto.match_over)
+
+		if is_match_over:
+			handle_match_over(dto.first_name, dto.first_points > dto.second_points)
   
 	# Ignore plays that are previous to the current one
 	# Ignore plays with the same id too, since those are my own
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
 		return
+	
+	check_over_states(dto.game_over, dto.match_over)
+
+	if is_match_over:
+		handle_match_over(dto.first_name, dto.first_points > dto.second_points)
 
 	current_play_id = dto.play_id
 	_can_play_cards = dto.is_play_card_available
@@ -181,19 +179,15 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 
 
 func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
-	is_game_over = dto.game_over
-	is_match_over = dto.match_over
-
-	if is_game_over:
-		game_over.emit()
-		$RoundOver.visible = true
-
 	if dto.play_id == current_play_id:
 		_last_played_card_id = -1
+		check_over_states(dto.game_over, dto.match_over)
 
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
 		return
+	
+	check_over_states(dto.game_over, dto.match_over)
 
 	current_play_id = dto.play_id
 	$PlayerIcon.visible = true
@@ -304,3 +298,12 @@ func _on_disconnect_pressed() -> void:
 	player_disconnect.emit()
 	SceneManager.load_previous_scene()
 	PlayerInfo.is_playing_truco = false
+	
+func check_over_states(new_game_over: bool, new_match_over: bool) -> void:
+	# Always save game/match over flags
+	is_game_over = new_game_over
+	is_match_over = new_match_over
+
+	if is_game_over:
+		game_over.emit()
+		$RoundOver.visible = true
