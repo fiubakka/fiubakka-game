@@ -157,7 +157,7 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 		$RoundOver.visible = true
 
 	if is_match_over:
-		handle_match_over(dto.first_points > dto.second_points)
+		handle_match_over(dto.first_name, dto.first_points > dto.second_points)
 
 	if dto.play_id == current_play_id:
 		_last_played_card_id = -1
@@ -291,9 +291,10 @@ func _on_options_shout_played(shout_id: int) -> void:
 	board.disable_current_play_zone()
 
 
-func handle_match_over(is_winner: bool) -> void:
+func handle_match_over(first_name: String, first_is_winner: bool) -> void:
 	options.disable_buttons(true)
-	if is_winner:
+	var i_am_first := PlayerInfo.player_name == first_name
+	if i_am_first and first_is_winner:
 		$GameOver.set_victory()
 	else:
 		$GameOver.set_defeat()
