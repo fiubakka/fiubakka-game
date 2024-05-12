@@ -76,8 +76,8 @@ func update_hand(cards: Array[Card]) -> void:
 		hand.update_card_id(card)
 
 
-func update_shouts(is_play_card_available: bool, available_shouts: Array) -> void:
-	options.set_available_shouts(is_play_card_available, available_shouts)
+func update_shouts(available_shouts: Array) -> void:
+	options.set_available_shouts(available_shouts)
 
 
 func clean() -> void:
@@ -110,6 +110,7 @@ func _on_board_player_card_played(card: Card) -> void:
 	if not _can_play_cards:
 		return
 	card.played = true
+	options.disable_buttons(true)
 	play_card.emit(current_play_id, card.id)
 	turn_over.emit()
 	_last_played_card_id = card.id
@@ -170,7 +171,7 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 	current_play_id = dto.play_id
 	_can_play_cards = dto.is_play_card_available
 
-	update_shouts(dto.is_play_card_available, dto.available_shouts)
+	update_shouts(dto.available_shouts)
 	update_points(dto.first_points, dto.first_name, dto.second_points, dto.second_name)
 	play_enemy_card(dto.suit, dto.rank)
 	update_hand(dto.player_cards)
@@ -198,7 +199,7 @@ func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 	$PlayerIcon.visible = true
 	$OpponentIcon.visible = false
 	_can_play_cards = dto.is_play_card_available
-	update_shouts(dto.is_play_card_available, dto.available_shouts)
+	update_shouts(dto.available_shouts)
 	$DialogueBubbleController.show_shout(dto.shout)
 	play_ack.emit(dto.play_id)
 
@@ -217,8 +218,7 @@ func _on_truco_play_update(dto: TrucoPlayUpdateDto) -> void:
 		update_opponent_name(dto.first_name, dto.second_name)
 		clean()
 		create_hand(dto.player_cards)
-		update_shouts(dto.is_play_card_available, dto.available_shouts)
-		options.disable_buttons(true)
+		update_shouts(dto.available_shouts)
 		play_ack.emit(dto.play_id)
 		return
 
@@ -244,7 +244,7 @@ func _on_truco_play_update(dto: TrucoPlayUpdateDto) -> void:
 		return
 
 	update_hand(dto.player_cards)
-	update_shouts(dto.is_play_card_available, dto.available_shouts)
+	update_shouts(dto.available_shouts)
 	play_ack.emit(dto.play_id)
 
 
@@ -258,7 +258,7 @@ func _on_game_over_timer_timeout(
 	$RoundOver.visible = false
 	clean()
 	create_hand(cards)
-	update_shouts(is_play_card_available, available_shouts)
+	update_shouts(available_shouts)
 	play_ack.emit(play_id)
 	game_over.emit()
 	timer.queue_free()

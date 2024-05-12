@@ -30,24 +30,23 @@ func _ready() -> void:
 	pass
 
 
-func set_available_shouts(_isPlayCardAvailable: bool, _shouts: Array) -> void:
+func set_available_shouts(shouts: Array) -> void:
 	clean()
 
-	for shout: int in _shouts:
+	for shout: int in shouts:
 		if shout not in shouts_names and shout not in shouts_aswers_names:
 			continue
 		var shout_name := ""
 		var button: TrucoButton = TrucoButtonScn.instantiate()
+		button.disabled = true
 		if shout in shouts_names:
 			available_shots.append(button)
-			shout_name = shouts_names[shout]
-			button.disabled = !_isPlayCardAvailable
+			shout_name = shouts_names[shout]			
 			$AvailableShouts.add_child(button)
 		else:
 			available_answers_shots.append(button)
 			shout_name = shouts_aswers_names[shout]
 			$AvailableShoutAnswers.add_child(button)
-		print("SHOUT NAME: ", shout_name)
 		button.text = tr(shout_name)
 		button.pressed.connect(self._on_button_truco_pressed.bind(shout))
 

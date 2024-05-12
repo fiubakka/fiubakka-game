@@ -64,7 +64,8 @@ func disable_current_play_zone() -> void:
 
 
 func _on_truco_manager_turn_over() -> void:
-	current_turn += 1
+	if current_turn < 2:
+		current_turn += 1
 
 
 func _on_truco_manager_game_over() -> void:
