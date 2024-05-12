@@ -294,7 +294,7 @@ func _on_options_shout_played(shout_id: int) -> void:
 func handle_match_over(first_name: String, first_is_winner: bool) -> void:
 	options.disable_buttons(true)
 	var i_am_first := PlayerInfo.player_name == first_name
-	if i_am_first and first_is_winner:
+	if (i_am_first and first_is_winner) or (not i_am_first and not first_is_winner):
 		$GameOver.set_victory()
 	else:
 		$GameOver.set_defeat()
