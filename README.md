@@ -1,6 +1,40 @@
 # Fiubakka Game
 Trabajo profesional: Juego distribuido en Akka (Client)
 
+## Game installation
+
+Welcome to Fiubakka! If you'd like to play the game, simply follow the steps for your OS:
+
+#### Windows
+- Download and install [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-local-tunnel/#1-download-and-install-cloudflared):
+```powershell
+winget install --id Cloudflare.cloudflared
+```
+- Download Fiubakka
+- Before running the game, start the cloudflared tunnel:
+```powershell
+cloudflared access tcp --hostname fiubakka.marcosrolando.uk --url 127.0.0.1:2020
+```
+
+#### Linux
+- Download and install [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-local-tunnel/#1-download-and-install-cloudflared):
+```bash
+# Add cloudflare gpg key
+sudo mkdir -p --mode=0755 /usr/share/keyrings
+curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null
+
+# Add this repo to your apt repositories
+echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
+
+# install cloudflared
+sudo apt-get update && sudo apt-get install cloudflared
+```
+- Download Fiubakka
+- Before running the game, start the cloudflared tunnel:
+```powershell
+cloudflared access tcp --hostname fiubakka.marcosrolando.uk --url 127.0.0.1:2020
+```
+
 ## Dependencies
 
 * [godot](https://godotengine.org/download/archive/4.1.3-stable/)
