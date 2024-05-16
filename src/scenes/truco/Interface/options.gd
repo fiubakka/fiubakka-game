@@ -41,7 +41,7 @@ func set_available_shouts(shouts: Array) -> void:
 		button.disabled = true
 		if shout in shouts_names:
 			available_shots.append(button)
-			shout_name = shouts_names[shout]			
+			shout_name = shouts_names[shout]
 			$AvailableShouts.add_child(button)
 		else:
 			available_answers_shots.append(button)
