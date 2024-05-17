@@ -33,21 +33,32 @@ TRUCO_QUIERO,Quiero,Accept
 TRUCO_NO_QUIERO,No quiero,Reject
 TRUCO_MAZO,Mazo,Fold
 EQUIP_BUTTON,Equipar,Equip
-COSMETIC_NAME_HAT_1,Sombrero de Entrenador,Trainer Hat
-COSMETIC_NAME_HAT_2,Sombrero de Dinosaurio,Dinasour Hat
-COSMETIC_NAME_HAT_3,Sombrero Negro,Black Hat
-COSMETIC_NAME_HAT_4,Pasamontañas,Ski Mask
-COSMETIC_NAME_HAT_5,Sombrero de Arqueólogo,Archaeologist Hat
-COSMETIC_NAME_HAT_6,Sombrero Ajustado,Beanie
-COSMETIC_NAME_HAT_7,Sombrero de Cocinero,Chef Hat
-COSMETIC_NAME_HAT_8,Sombrero de Cono,Cone Hat
-COSMETIC_NAME_OUTFIT_1,Remera Violeta,Purple Shirt
-COSMETIC_NAME_OUTFIT_2,Remera Blanca,White Shirt
-COSMETIC_NAME_OUTFIT_3,Remera Beige,Beige Shirt
-COSMETIC_NAME_OUTFIT_4,Remera Roja,Red Shirt
-COSMETIC_NAME_FACIAL_HAIR_1,Bigote Castaño,Brown Mustache
-COSMETIC_NAME_FACIAL_HAIR_2,Bigote Pelirrojo,Red Mustache
-COSMETIC_NAME_FACIAL_HAIR_3,Bigote Rubio,Blond Mustache
-COSMETIC_NAME_FACIAL_HAIR_4,Barba Castaña,Brown Beard
-COSMETIC_NAME_FACIAL_HAIR_5,Barba Pelirroja,Red Beard
-COSMETIC_NAME_FACIAL_HAIR_6,Barba Rubia,Blond Beard
+COSMETIC_NAME_HATS_1,Sombrero de Entrenador,Trainer hat
+COSMETIC_NAME_HATS_2,Sombrero de Dinosaurio,Dinasour hat
+COSMETIC_NAME_HATS_3,Sombrero Negro,Black hat
+COSMETIC_NAME_HATS_4,Pasamontañas,Ski mask
+COSMETIC_NAME_HATS_5,Sombrero de Arqueólogo,Archaeologist hat
+COSMETIC_NAME_HATS_6,Sombrero Ajustado,Beanie
+COSMETIC_NAME_HATS_7,Sombrero de Cocinero,Chef hat
+COSMETIC_NAME_HATS_8,Sombrero de Cono,Cone hat
+COSMETIC_NAME_OUTFITS_1,Remera Violeta,Purple shirt
+COSMETIC_NAME_OUTFITS_2,Remera Blanca,White shirt
+COSMETIC_NAME_OUTFITS_3,Remera Beige,Beige shirt
+COSMETIC_NAME_OUTFITS_4,Remera Roja,Red shirt
+COSMETIC_NAME_FACIAL HAIR_1,Bigote Castaño,Brown mustache
+COSMETIC_NAME_FACIAL HAIR_2,Bigote Pelirrojo,Red mustache
+COSMETIC_NAME_FACIAL HAIR_3,Bigote Rubio,Blond mustache
+COSMETIC_NAME_FACIAL HAIR_4,Barba Castaña,Brown beard
+COSMETIC_NAME_FACIAL HAIR_5,Barba Pelirroja,Red beard
+COSMETIC_NAME_FACIAL HAIR_6,Barba Rubia,Blond beard
+COSMETIC_NAME_GLASSES_1,Anteojos gris,Gray glasses
+COSMETIC_NAME_GLASSES_2,Anteojos rojos,Red glasses
+COSMETIC_NAME_GLASSES_3,Anteojos rosas,Pink glasses
+COSMETIC_NAME_GLASSES_4,Anteojos celeste,Sky-blue glasses
+COSMETIC_NAME_GLASSES_5,Anteojos verdes,Green glasses
+COSMETIC_NAME_GLASSES_6,Anteojos negros,Black glasses
+COSMETIC_NAME_HAIRS_1,Pelo rubio,Blond hair
+COSMETIC_NAME_HAIRS_2,Pelo castaño claro,Light brown hair
+COSMETIC_NAME_HAIRS_3,Pelo rubio con flequillo,Blonde hair with bangs
+COSMETIC_NAME_HAIRS_4,Pelo castaño claro con flequillo,Light brown hair with bangs
+COSMETIC_DESCRIPTION,"No dará ninguna mejora en el desempeño, pero luce bien","It won't enhance your performance, but it looks great"
