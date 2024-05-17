@@ -69,10 +69,10 @@ func handle_equip_button_text() -> void:
 
 func change_equip_button_text(piece: Node2D, selected_item_texture: Texture) -> void:
 	if selected_item_texture.get_atlas() == piece.texture:
-		$HBoxContainer/VBoxContainer/Panel/EquipButton.set_text("Unequip")
+		$HBoxContainer/VBoxContainer/Panel/EquipButton.set_text(tr("UNEQUIP"))
 		can_equip = false
 	else:
-		$HBoxContainer/VBoxContainer/Panel/EquipButton.set_text("Equip")
+		$HBoxContainer/VBoxContainer/Panel/EquipButton.set_text(tr("EQUIP"))
 		can_equip = true
 
 

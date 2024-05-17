@@ -20,6 +20,7 @@ PlayerInfo="*res://src/objects/player_info/player_info.gd"
 CompositeSprites="*res://src/objects/composite_sprites/composite_sprites.gd"
 SceneManager="*res://src/objects/scene_manager/scene_manager.gd"
 EntityManager="*res://src/objects/entity_manager/entity_manager.gd"
+SoundManager="*res://src/objects/sound_manager/sound_manager.gd"
 ItemsCatalogue="*res://src/scenes/game_menu/inventory_screen/items/items_catalogue.gd"
 Utils="*res://src/objects/utils/utils.gd"
 MapsDictionary="*res://src/objects/maps_dictionary/maps_dictionary.gd"
@@ -122,7 +123,7 @@ talk_to_npc={
 [internationalization]
 
 locale/translations=PackedStringArray("res://translations/translations.en.translation", "res://translations/translations.es.translation")
-locale/test="es"
+locale/fallback="es"
 
 [rendering]
 

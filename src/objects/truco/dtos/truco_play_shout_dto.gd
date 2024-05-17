@@ -7,6 +7,7 @@ var match_over: bool
 var is_play_card_available: bool
 var available_shouts: Array
 
+
 func _init(
 	_play_id: int,
 	_shout: int,
@@ -21,4 +22,3 @@ func _init(
 	match_over = _match_over
 	is_play_card_available = _is_play_card_available
 	available_shouts = _available_shouts
-	

@@ -6,5 +6,9 @@ func _on_login_error(errorCode: String) -> void:
 	visible = true
 
 
+func _on_error_clear() -> void:
+	visible = false
+
+
 func _on_return_to_menu() -> void:
 	visible = false
