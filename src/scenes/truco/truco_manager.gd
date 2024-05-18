@@ -190,8 +190,6 @@ func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 	check_over_states(dto.game_over, dto.match_over)
 
 	current_play_id = dto.play_id
-	$PlayerIcon.visible = true
-	$OpponentIcon.visible = false
 	_can_play_cards = dto.is_play_card_available
 	update_shouts(dto.available_shouts)
 	$DialogueBubbleController.show_shout(dto.shout)
