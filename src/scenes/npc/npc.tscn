@@ -513,6 +513,7 @@ position = Vector2(0, 37.6)
 shape = SubResource("CircleShape2D_cp046")
 
 [node name="Icon" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, -130)
 scale = Vector2(0.74, 0.74)
 texture = ExtResource("3_6vjvj")
