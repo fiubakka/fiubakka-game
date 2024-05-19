@@ -231,6 +231,7 @@ layer_0/tile_data = PackedInt32Array(-131073, 1179654, 19, -196608, 1179654, 19,
 [node name="NPC" parent="." instance=ExtResource("5_0nskk")]
 position = Vector2(109, 602)
 scale = Vector2(0.5, 0.5)
+npc_name = "Juan Carlos"
 message = "NPC_KIOSK"
 facing = 3
 hair = 2
