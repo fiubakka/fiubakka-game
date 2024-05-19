@@ -81,7 +81,7 @@ func _on_user_logged_in(username: String, password: String, equipment: Equipment
 	if equipment:
 		var player_register := PBPlayerRegister.new()
 		player_register.set_username(username)
-		player_register.set_password("password")
+		player_register.set_password(password)
 		var player_equipment := player_register.new_equipment()
 		player_equipment.set_hat(equipment.hat)
 		player_equipment.set_hair(equipment.hair)
