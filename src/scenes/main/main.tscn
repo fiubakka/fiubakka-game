@@ -145,7 +145,6 @@ grow_vertical = 1
 [connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/FacialHairSelect" method="_on_language_select_switch_locale"]
 [connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/BodySelect" method="_on_language_select_switch_locale"]
 [connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/OutfitSelect" method="_on_language_select_switch_locale"]
-[connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect/RegisterButtonText" method="_on_language_select_switch_locale"]
 [connection signal="switch_locale" from="LanguageSelect" to="GUI/GuiManager/Pause/NinePatchRect/ContinueButton/ContinueButtonText" method="_on_language_select_switch_locale"]
 [connection signal="switch_locale" from="LanguageSelect" to="GUI/GuiManager/Pause/NinePatchRect/QuitButton/QuitButtonText" method="_on_language_select_switch_locale"]
 

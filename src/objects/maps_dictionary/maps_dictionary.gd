@@ -7,6 +7,10 @@ const MAPS_LIST := [
 	"res://src/scenes/maps/comedor/comedor.tscn"
 ]
 
+const MAP_LIMITS := [
+	{"w": 2208, "h": 876}, {"w": 672, "h": 768}, {"w": 1920, "h": 1872}, {"w": 768, "h": 672}
+]
+
 
 func id_to_content_path(new_level_id: int) -> String:
 	return MAPS_LIST[new_level_id]
