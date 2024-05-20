@@ -55,7 +55,9 @@ func _ready() -> void:
 	var producer_truco_disconnect_handler: Callable = producer._on_truco_manager_disconnect
 	if !player_disconnect.is_connected(producer_truco_disconnect_handler):
 		player_disconnect.connect(producer_truco_disconnect_handler)
-
+	
+	$PlayerIcon.visible = false
+	$OpponentIcon.visible = true
 
 func create_hand(cards: Array[Card]) -> void:
 	for card in cards:
