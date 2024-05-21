@@ -192,8 +192,12 @@ position = Vector2(1130, 755)
 [node name="ToRoom200" parent="." instance=ExtResource("4_wkeiq")]
 position = Vector2(1126, 841)
 scale = Vector2(16.8, 2.5)
+entry_direction = "up"
+entry_door_name = "ToMainHall"
 
 [node name="Downstairs" parent="." instance=ExtResource("4_wkeiq")]
-position = Vector2(2093, 89)
+position = Vector2(2096, 70)
 scale = Vector2(7, 3)
+entry_direction = "down"
 path_to_new_scene = "res://src/scenes/maps/central_hall/central_hall.tscn"
+entry_door_name = "Upstairs2"

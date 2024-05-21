@@ -308,11 +308,15 @@ facial_hair = 2
 glasses = 2
 
 [node name="Upstairs2" parent="." instance=ExtResource("4_wkeiq")]
-position = Vector2(1728, 17)
-scale = Vector2(9, 9)
+position = Vector2(1728, 58)
+scale = Vector2(9, 3)
+entry_direction = "down"
 path_to_new_scene = "res://src/scenes/maps/main_hall/main_hall.tscn"
+entry_door_name = "Downstairs"
 
 [node name="Comedor" parent="." instance=ExtResource("4_wkeiq")]
-position = Vector2(1960, 320)
-scale = Vector2(9, 9)
+position = Vector2(1911, 333)
+scale = Vector2(3, 9)
+entry_direction = "left"
 path_to_new_scene = "res://src/scenes/maps/comedor/comedor.tscn"
+entry_door_name = "CentralHall"
