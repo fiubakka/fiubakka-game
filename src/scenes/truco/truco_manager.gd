@@ -158,7 +158,7 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 
 		if is_match_over:
 			handle_match_over(dto.first_name, dto.first_points > dto.second_points)
-  
+
 	# Ignore plays that are previous to the current one
 	# Ignore plays with the same id too, since those are my own
 	if dto.play_id <= current_play_id:
@@ -198,6 +198,7 @@ func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 	update_shouts(dto.available_shouts)
 	$DialogueBubbleController.show_shout(dto.shout)
 	play_ack.emit(dto.play_id)
+
 
 func _on_truco_play_update(dto: TrucoPlayUpdateDto) -> void:
 	if dto.play_id == current_play_id:

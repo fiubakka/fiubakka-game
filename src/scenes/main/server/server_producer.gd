@@ -1,5 +1,7 @@
 extends Node
 
+signal pause_main_music
+
 const Producer = preload("res://src/objects/server/producer/producer.gd")
 
 const PBPlayerLogin = (
@@ -81,7 +83,7 @@ func _on_user_logged_in(username: String, password: String, equipment: Equipment
 	if equipment:
 		var player_register := PBPlayerRegister.new()
 		player_register.set_username(username)
-		player_register.set_password("password")
+		player_register.set_password(password)
 		var player_equipment := player_register.new_equipment()
 		player_equipment.set_hat(equipment.hat)
 		player_equipment.set_hair(equipment.hair)
@@ -135,6 +137,7 @@ func _on_modal_match_accepted(opponent_id: String) -> void:
 	# TODO: load content only when we get an accepted match confirmation from the server
 	SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
 	PlayerInfo.is_playing_truco = true
+	pause_main_music.emit()
 
 
 func _on_modal_match_rejected(opponent_id: String) -> void:

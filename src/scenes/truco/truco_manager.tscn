@@ -25,6 +25,7 @@ card_scene = ExtResource("2_p2aov")
 stream = ExtResource("3_tuu7r")
 volume_db = 1.0
 autoplay = true
+bus = &"MusicMain"
 
 [node name="Background" type="NinePatchRect" parent="."]
 modulate = Color(0.101961, 0.360784, 0.27451, 1)

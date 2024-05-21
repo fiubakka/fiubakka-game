@@ -75,3 +75,8 @@ func _on_register_return_to_menu() -> void:
 
 func _on_gui_manager_ui_opened(open: bool) -> void:
 	ui_opened.emit(open)
+
+
+func _on_pause_main_music() -> void:
+	var audio_player := $AudioStreamPlayer
+	audio_player.stop()
