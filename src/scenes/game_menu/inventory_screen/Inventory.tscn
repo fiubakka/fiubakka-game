@@ -75,20 +75,21 @@ patch_margin_bottom = 4
 layout_mode = 0
 offset_left = 8.0
 offset_top = 6.0
-offset_right = 172.0
-offset_bottom = 100.0
-theme_override_constants/separation = -5
+offset_right = 196.0
+offset_bottom = 141.0
 
 [node name="Name" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/Description/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 2
 theme_override_fonts/normal_font = ExtResource("4_45so7")
 theme_override_font_sizes/normal_font_size = 20
+fit_content = true
+scroll_active = false
 
 [node name="Description" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/Description/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
+size_flags_stretch_ratio = 4.0
 theme_override_fonts/normal_font = ExtResource("4_45so7")
 theme_override_font_sizes/normal_font_size = 15
 
