@@ -12,11 +12,11 @@ func _ready() -> void:
 	confetti = $CenterContainer/Panel/Confetti
 
 
-func set_match_result(first_points: int, second_points: int) -> void:
+func set_match_result(my_points: int, opponent_points: int) -> void:
 	visible = true
-	if first_points == second_points:
+	if my_points == opponent_points:
 		set_tie()
-	elif first_points > second_points:
+	elif my_points > opponent_points:
 		set_victory()
 	else:
 		set_defeat()

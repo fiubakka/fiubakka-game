@@ -73,9 +73,11 @@ position = Vector2(408, 419.75)
 shape = SubResource("RectangleShape2D_icdkw")
 
 [node name="CentralHall" parent="." instance=ExtResource("4_pvp43")]
-position = Vector2(8, 472)
+position = Vector2(12, 448)
 scale = Vector2(3.45267, 7.46071)
+entry_direction = "right"
 path_to_new_scene = "res://src/scenes/maps/central_hall/central_hall.tscn"
+entry_door_name = "Comedor"
 
 [node name="Player" parent="." instance=ExtResource("3_jvm7e")]
 position = Vector2(80, 448)
@@ -231,6 +233,7 @@ layer_0/tile_data = PackedInt32Array(-131073, 1179654, 19, -196608, 1179654, 19,
 [node name="NPC" parent="." instance=ExtResource("5_0nskk")]
 position = Vector2(109, 602)
 scale = Vector2(0.5, 0.5)
+npc_name = "Juan Carlos"
 message = "NPC_KIOSK"
 facing = 3
 hair = 2

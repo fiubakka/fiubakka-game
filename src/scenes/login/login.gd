@@ -42,6 +42,7 @@ func _on_button_pressed() -> void:
 		login_error.emit("EMPTY_PASSWORD")
 		return
 
+	_on_timer_timeout()
 	timer = Timer.new()  # Timer to send init message until we get a response
 	timer.timeout.connect(Callable(self, "_on_timer_timeout"))
 	add_child(timer)

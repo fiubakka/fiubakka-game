@@ -78,10 +78,8 @@ offset_bottom = 37.0
 [node name="NpcTip" parent="GUI/GuiManager" instance=ExtResource("11_bkedh")]
 visible = false
 layout_mode = 1
-offset_left = 1.0
-offset_top = 446.0
-offset_right = 1.0
-offset_bottom = 446.0
+offset_top = 400.0
+offset_bottom = 400.0
 
 [node name="Modal" parent="GUI/GuiManager" instance=ExtResource("12_3el8v")]
 visible = false
@@ -137,7 +135,6 @@ grow_vertical = 1
 [connection signal="go_to_main_menu" from="LanguageSelect" to="MainMenu" method="_on_language_select_go_to_main_menu"]
 [connection signal="switch_locale" from="LanguageSelect" to="Login/NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginTextContainer/LoginText" method="_on_language_select_switch_locale"]
 [connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/MarginContainer/RegisterTitleText" method="_on_language_select_switch_locale"]
-[connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect/RegisterButtonText" method="_on_language_select_switch_locale"]
 [connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HatsSelect" method="_on_language_select_switch_locale"]
 [connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HairSelect" method="_on_language_select_switch_locale"]
 [connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/EyesSelect" method="_on_language_select_switch_locale"]
