@@ -49,7 +49,6 @@ func _on_button_pressed() -> void:
 
 
 func _on_timer_timeout() -> void:
-	print("user logged in emit")
 	user_logged_in.emit(username, password, null)
 
 
@@ -62,5 +61,4 @@ func _on_return_to_menu() -> void:
 
 
 func _on_user_init_error(errorCode: String) -> void:
-	print("user init error")
 	login_error.emit(errorCode)
