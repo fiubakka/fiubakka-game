@@ -1,7 +1,7 @@
 extends Button
 
 
-func _on_character_creation_register_error() -> void:
+func _on_character_creation_register_error(_error_code: String) -> void:
 	disabled = false
 
 

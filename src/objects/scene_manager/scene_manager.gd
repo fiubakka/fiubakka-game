@@ -14,6 +14,7 @@ var is_loading_scene := false
 var _content_path: String
 @onready var _previous_content_path: String = ""
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	content_finished_loading.connect(_on_content_finished_loading)
@@ -35,7 +36,7 @@ func _load_content(content_path: String) -> void:
 	if not ResourceLoader.exists(content_path) or loader == null:
 		push_error("Error loading scene %s" % content_path)
 		return
-	
+
 	_previous_content_path = _content_path
 	_content_path = content_path
 	load_progress_timer = Timer.new()
@@ -110,7 +111,8 @@ func _on_content_finished_loading(new_scene: Node) -> void:
 func player_change_map_ready(new_map_id: int) -> void:
 	var map_content_path := MapsDictionary.id_to_content_path(new_map_id)
 	_load_content(map_content_path)
-	
+
+
 func load_previous_scene() -> void:
 	load_new_scene(_previous_content_path)
 	_load_content(_previous_content_path)

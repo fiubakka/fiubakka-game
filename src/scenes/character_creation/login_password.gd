@@ -11,7 +11,7 @@ func _on_user_logged_in(
 ) -> void:
 	_enabled = false
 
-func _on_register_error() -> void:
+func _on_register_error(_error_code: String) -> void:
 	_enabled = true
 	
 func _on_text_submitted(new_text: String) -> void:

@@ -10,10 +10,11 @@ var can_equip := false
 
 signal update_equipment(equipment: Equipment)
 
+@onready var equip_button := $HBoxContainer/VBoxContainer/Panel/EquipButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$HBoxContainer/VBoxContainer/Panel/EquipButton.visible = false
+	equip_button.visible = false
 	get_inventory()
 	sprite = $HBoxContainer/VBoxContainer/CenterContainer/Panel/CharacterSprite
 	var slots := $HBoxContainer/ScrollContainer/GridContainer
@@ -22,6 +23,8 @@ func _ready() -> void:
 		slot.update(Inventory[i])
 		slot.pressed.connect(self._on_Slot_Pressed.bind(slot, Inventory[i]))
 		slots.add_child(slot)
+	
+	equip_button.text = tr("EQUIP_BUTTON")
 
 
 func get_inventory() -> void:
@@ -45,7 +48,7 @@ func get_inventory() -> void:
 
 func handle_equip_button_availability() -> void:
 	if selected_slot:
-		$HBoxContainer/VBoxContainer/Panel/EquipButton.visible = selected_slot.item.equippable
+		equip_button.visible = selected_slot.item.equippable
 
 
 func handle_equip_button_text() -> void:
@@ -66,10 +69,10 @@ func handle_equip_button_text() -> void:
 
 func change_equip_button_text(piece: Node2D, selected_item_texture: Texture) -> void:
 	if selected_item_texture.get_atlas() == piece.texture:
-		$HBoxContainer/VBoxContainer/Panel/EquipButton.set_text("Unequip")
+		equip_button.set_text(tr("UNEQUIP_BUTTON"))
 		can_equip = false
 	else:
-		$HBoxContainer/VBoxContainer/Panel/EquipButton.set_text("Equip")
+		equip_button.set_text(tr("EQUIP_BUTTON"))
 		can_equip = true
 
 

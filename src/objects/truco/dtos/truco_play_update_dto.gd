@@ -11,6 +11,7 @@ var second_name: String
 var is_play_card_available: bool
 var available_shouts: Array
 
+
 func _init(
 	_play_id: int,
 	_player_cards: Array[Card],

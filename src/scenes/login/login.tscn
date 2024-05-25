@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://ck7nysfydevjl" path="res://audio/music/login.ogg" id="5_ktkbl"]
 [ext_resource type="Script" path="res://src/scenes/login/login_password.gd" id="7_abh4x"]
 [ext_resource type="Script" path="res://src/scenes/login/login_button.gd" id="8_3cemf"]
+[ext_resource type="Script" path="res://src/scenes/login/login_button_text.gd" id="8_7e6gq"]
 [ext_resource type="Script" path="res://src/scenes/login/login_error_text.gd" id="8_84eql"]
 
 [sub_resource type="Theme" id="Theme_1qdqe"]
@@ -218,8 +219,10 @@ anchor_left = 0.321
 anchor_top = 0.24
 anchor_right = 0.675
 anchor_bottom = 0.84
-offset_left = -0.200005
-offset_bottom = 2.0
+offset_left = -44.2
+offset_top = -4.0
+offset_right = 45.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -232,6 +235,7 @@ theme = SubResource("Theme_ag47f")
 bbcode_enabled = true
 text = "[center]Login[/center]"
 scroll_active = false
+script = ExtResource("8_7e6gq")
 
 [node name="LoginButton" type="Button" parent="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder"]
 modulate = Color(1, 1, 1, 0)
@@ -289,8 +293,9 @@ offset_bottom = 0.0800018
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_ktkbl")
-volume_db = -63.003
+volume_db = 1.0
 autoplay = true
+bus = &"MusicMain"
 
 [connection signal="login_error" from="." to="." method="_on_login_error"]
 [connection signal="login_error" from="." to="NinePatchRect/VBoxContainer/Password/LoginPassword" method="_on_register_error"]

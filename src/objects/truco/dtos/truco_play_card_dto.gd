@@ -13,6 +13,7 @@ var second_name: String
 var is_play_card_available: bool
 var available_shouts: Array
 
+
 func _init(
 	_play_id: int,
 	_suit: int,
@@ -39,4 +40,3 @@ func _init(
 	second_name = _second_name
 	is_play_card_available = _is_play_card_available
 	available_shouts = _available_shouts
-	

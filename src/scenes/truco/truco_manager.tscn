@@ -23,8 +23,9 @@ card_scene = ExtResource("2_p2aov")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_tuu7r")
-volume_db = -54.66
+volume_db = 1.0
 autoplay = true
+bus = &"MusicMain"
 
 [node name="Background" type="NinePatchRect" parent="."]
 modulate = Color(0.101961, 0.360784, 0.27451, 1)
@@ -147,6 +148,8 @@ offset_right = 930.0
 offset_bottom = 76.0
 text = "Salir"
 
+[connection signal="game_over" from="." to="Board" method="_on_truco_manager_game_over"]
+[connection signal="turn_over" from="." to="Board" method="_on_truco_manager_turn_over"]
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
 [connection signal="remove_card_from_hand" from="OpponentController" to="." method="_on_opponent_controller_remove_card_from_hand"]
 [connection signal="pressed" from="Disconnect" to="." method="_on_disconnect_pressed"]
