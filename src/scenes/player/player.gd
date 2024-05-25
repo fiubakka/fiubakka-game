@@ -147,3 +147,4 @@ func disable() -> void:
 func enable() -> void:
 	idle = false
 	visible = true
+	update_movement.emit(Vector2.ZERO, self.position)
