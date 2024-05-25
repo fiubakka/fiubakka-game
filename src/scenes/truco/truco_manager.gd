@@ -186,7 +186,6 @@ func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
 		return
-
 	check_over_states(dto.game_over, dto.match_over)
 
 	current_play_id = dto.play_id
@@ -206,7 +205,7 @@ func _on_truco_play_update(dto: TrucoPlayUpdateDto) -> void:
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
 		return
-
+	
 	current_play_id = dto.play_id
 	_can_play_cards = dto.is_play_card_available
 	if current_play_id == 0:
@@ -268,6 +267,7 @@ func _on_allow_truco_play(play_id: int) -> void:
 		# Case: Card played
 		play_card.emit(current_play_id, _last_played_card_id)
 		return
+	
 	current_play_id = play_id
 	$PlayerIcon.visible = true
 	$OpponentIcon.visible = false
