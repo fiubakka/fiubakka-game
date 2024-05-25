@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and selected and not played:
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 			get_unselected.emit()
-			var shortest_dist := 300
+			var shortest_dist := 50
 			var next_rest_point: Node2D = current_rest_point
 			var rest_nodes := get_tree().get_nodes_in_group("zone")
 			for child: Node2D in rest_nodes:
@@ -46,7 +46,7 @@ func _input(event: InputEvent) -> void:
 					and child.is_enabled
 					and (child.is_in_group("table") or child.is_in_group("hand"))
 				):
-					var mouse_position: Vector2 = event.global_position
+					var mouse_position: Vector2 = get_global_mouse_position()
 					var distance := mouse_position.distance_to(child.global_position)
 					if distance < shortest_dist:
 						next_rest_point = child
