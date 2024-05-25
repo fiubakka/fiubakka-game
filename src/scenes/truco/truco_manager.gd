@@ -179,13 +179,13 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 	if dto.play_id == current_play_id:
 		_last_played_card_id = -1
-		check_over_states(dto.game_over, dto.match_over, dto.first_name, -1, -1)
+		check_over_states(dto.game_over, dto.match_over, dto.first_name, dto.first_points, dto.second_points)
 
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
 		return
 	
-	check_over_states(dto.game_over, dto.match_over, dto.first_name, -1, -1)
+	check_over_states(dto.game_over, dto.match_over, dto.first_name, dto.first_points, dto.second_points)
 
 	current_play_id = dto.play_id
 	_can_play_cards = dto.is_play_card_available
@@ -303,10 +303,13 @@ func check_over_states(
 	var my_points := first_points if i_am_first else second_points
 	var opponent_points := second_points if i_am_first else first_points
 
+	if is_match_over:
+		options.disable_buttons(true)
+		$GameOver.set_match_result(my_points, opponent_points)
+		return
+	
 	if is_game_over:
 		game_over.emit()
 		$RoundOver.visible = true
 	
-	if is_match_over:
-		options.disable_buttons(true)
-		$GameOver.set_match_result(my_points, opponent_points)
+	
