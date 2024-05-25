@@ -52,5 +52,5 @@ func _on_chatbox_is_focused(focus: bool) -> void:
 	chat_focus = focus
 
 
-func _on_npc_tip(message: String) -> void:
-	npc_tip.show_tip(message)
+func _on_npc_tip(name: String, message: String, equipment: Equipment) -> void:
+	npc_tip.show_tip(name, message, equipment)
