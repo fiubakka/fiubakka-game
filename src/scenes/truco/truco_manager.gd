@@ -141,7 +141,7 @@ func update_opponent_name(first_name: String, second_name: String) -> void:
 
 
 func update_points(
-	first_points: int, first_name: String, second_points: int, second_name: String
+	first_points: int, first_name: String, second_points: int
 ) -> void:
 	if PlayerInfo.player_name == first_name:
 		$Points.set_points(first_points)
@@ -155,6 +155,7 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 	if dto.play_id == current_play_id:
 		_last_played_card_id = -1
 		check_over_states(dto.game_over, dto.match_over, dto.first_name, dto.first_points, dto.second_points)
+		update_shouts(dto.available_shouts)
 
 	# Ignore plays that are previous to the current one
 	# Ignore plays with the same id too, since those are my own
@@ -168,7 +169,7 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 	_can_play_cards = dto.is_play_card_available
 
 	update_shouts(dto.available_shouts)
-	update_points(dto.first_points, dto.first_name, dto.second_points, dto.second_name)
+	update_points(dto.first_points, dto.first_name, dto.second_points)
 	play_enemy_card(dto.suit, dto.rank)
 	update_hand(dto.player_cards)
 	options.disable_buttons(true)
@@ -190,6 +191,7 @@ func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 	current_play_id = dto.play_id
 	_can_play_cards = dto.is_play_card_available
 	update_shouts(dto.available_shouts)
+	update_points(dto.first_points, dto.first_name, dto.second_points)
 	$DialogueBubbleController.show_shout(dto.shout)
 	play_ack.emit(dto.play_id)
 
@@ -213,7 +215,7 @@ func _on_truco_play_update(dto: TrucoPlayUpdateDto) -> void:
 		play_ack.emit(dto.play_id)
 		return
 
-	update_points(dto.first_points, dto.first_name, dto.second_points, dto.second_name)
+	update_points(dto.first_points, dto.first_name, dto.second_points)
 
 	# Clear board and update hand when going from game_over to new game
 	if is_game_over and !dto.game_over:
