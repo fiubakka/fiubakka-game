@@ -55,7 +55,11 @@ func _ready() -> void:
 	var producer_truco_disconnect_handler: Callable = producer._on_truco_manager_disconnect
 	if !player_disconnect.is_connected(producer_truco_disconnect_handler):
 		player_disconnect.connect(producer_truco_disconnect_handler)
-
+	
+	$GameOver.exit_button_pressed.connect(_on_disconnect_pressed)
+	
+	$PlayerIcon.visible = false
+	$OpponentIcon.visible = true
 
 func create_hand(cards: Array[Card]) -> void:
 	for card in cards:
@@ -150,21 +154,15 @@ func update_points(
 func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 	if dto.play_id == current_play_id:
 		_last_played_card_id = -1
-		check_over_states(dto.game_over, dto.match_over)
-
-		if is_match_over:
-			handle_match_over(dto.first_name, dto.first_points > dto.second_points)
+		check_over_states(dto.game_over, dto.match_over, dto.first_name, dto.first_points, dto.second_points)
 
 	# Ignore plays that are previous to the current one
 	# Ignore plays with the same id too, since those are my own
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
 		return
-
-	check_over_states(dto.game_over, dto.match_over)
-
-	if is_match_over:
-		handle_match_over(dto.first_name, dto.first_points > dto.second_points)
+	
+	check_over_states(dto.game_over, dto.match_over, dto.first_name, dto.first_points, dto.second_points)
 
 	current_play_id = dto.play_id
 	_can_play_cards = dto.is_play_card_available
@@ -181,16 +179,15 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 	if dto.play_id == current_play_id:
 		_last_played_card_id = -1
-		check_over_states(dto.game_over, dto.match_over)
+		check_over_states(dto.game_over, dto.match_over, dto.first_name, -1, -1)
 
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
 		return
-	check_over_states(dto.game_over, dto.match_over)
+	
+	check_over_states(dto.game_over, dto.match_over, dto.first_name, -1, -1)
 
 	current_play_id = dto.play_id
-	$PlayerIcon.visible = true
-	$OpponentIcon.visible = false
 	_can_play_cards = dto.is_play_card_available
 	update_shouts(dto.available_shouts)
 	$DialogueBubbleController.show_shout(dto.shout)
@@ -286,26 +283,30 @@ func _on_options_shout_played(shout_id: int) -> void:
 	board.disable_current_play_zone()
 
 
-func handle_match_over(first_name: String, first_is_winner: bool) -> void:
-	options.disable_buttons(true)
-	var i_am_first := PlayerInfo.player_name == first_name
-	if (i_am_first and first_is_winner) or (not i_am_first and not first_is_winner):
-		$GameOver.set_victory()
-	else:
-		$GameOver.set_defeat()
-
-
 func _on_disconnect_pressed() -> void:
 	player_disconnect.emit()
 	SceneManager.load_previous_scene()
 	PlayerInfo.is_playing_truco = false
-
-
-func check_over_states(new_game_over: bool, new_match_over: bool) -> void:
+	
+	
+func check_over_states(
+	new_game_over: bool,
+	new_match_over: bool,
+	first_name: String,
+	first_points: int,
+	second_points: int) -> void:
 	# Always save game/match over flags
 	is_game_over = new_game_over
 	is_match_over = new_match_over
+	
+	var i_am_first := PlayerInfo.player_name == first_name
+	var my_points := first_points if i_am_first else second_points
+	var opponent_points := second_points if i_am_first else first_points
 
 	if is_game_over:
 		game_over.emit()
 		$RoundOver.visible = true
+	
+	if is_match_over:
+		options.disable_buttons(true)
+		$GameOver.set_match_result(my_points, opponent_points)
