@@ -28,10 +28,3 @@ func clean() -> void:
 		remove_child(card)
 		card.queue_free()
 	hand = []
-
-
-func update_card_id(new_card: Card) -> void:
-	for card: Card in hand:
-		if card.equals(new_card):
-			card.id = new_card.id
-			break

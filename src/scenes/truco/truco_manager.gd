@@ -75,11 +75,6 @@ func create_hand(cards: Array[Card]) -> void:
 	opponent_controller.next_turn()
 
 
-func update_hand(cards: Array[Card]) -> void:
-	for card in cards:
-		hand.update_card_id(card)
-
-
 func update_shouts(available_shouts: Array) -> void:
 	options.set_available_shouts(available_shouts)
 
@@ -156,6 +151,7 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 		_last_played_card_id = -1
 		check_over_states(dto.game_over, dto.match_over, dto.first_name, dto.first_points, dto.second_points)
 		update_shouts(dto.available_shouts)
+		update_points(dto.first_points, dto.first_name, dto.second_points)
 
 	# Ignore plays that are previous to the current one
 	# Ignore plays with the same id too, since those are my own
@@ -171,7 +167,6 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 	update_shouts(dto.available_shouts)
 	update_points(dto.first_points, dto.first_name, dto.second_points)
 	play_enemy_card(dto.suit, dto.rank)
-	update_hand(dto.player_cards)
 	options.disable_buttons(true)
 
 	play_ack.emit(dto.play_id)
@@ -181,6 +176,8 @@ func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 	if dto.play_id == current_play_id:
 		_last_played_card_id = -1
 		check_over_states(dto.game_over, dto.match_over, dto.first_name, dto.first_points, dto.second_points)
+		update_shouts(dto.available_shouts)
+		update_points(dto.first_points, dto.first_name, dto.second_points)
 
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
@@ -236,7 +233,6 @@ func _on_truco_play_update(dto: TrucoPlayUpdateDto) -> void:
 		timer.start()
 		return
 
-	update_hand(dto.player_cards)
 	update_shouts(dto.available_shouts)
 	play_ack.emit(dto.play_id)
 

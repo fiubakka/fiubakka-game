@@ -54,7 +54,3 @@ func _input(event: InputEvent) -> void:
 			current_rest_point.deselect()
 			current_rest_point = next_rest_point
 			current_rest_point.select(self)
-
-
-func equals(other: Card) -> bool:
-	return other.suit == self.suit and other.rank == self.rank
