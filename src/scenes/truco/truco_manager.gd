@@ -38,6 +38,7 @@ func _ready() -> void:
 	consumer.truco_shout_played.connect(self._on_consumer_truco_shout_played)
 	consumer.truco_play_update.connect(self._on_truco_play_update)
 	consumer.allow_truco_play.connect(self._on_allow_truco_play)
+	consumer.truco_opponent_disconnected.connect(self._on_opponent_disconnected)
 
 	var producer := get_node("/root/Main/ServerConnection/ServerProducer")
 	var producer_truco_ack_handler: Callable = producer._on_truco_manager_ack
@@ -285,6 +286,10 @@ func _on_disconnect_pressed() -> void:
 	player_disconnect.emit()
 	SceneManager.load_previous_scene()
 	PlayerInfo.is_playing_truco = false
+	
+	
+func _on_opponent_disconnected() -> void:
+	$GameOver.set_victory()
 	
 	
 func check_over_states(

@@ -22,16 +22,16 @@ func set_match_result(my_points: int, opponent_points: int) -> void:
 		set_defeat()
 
 func set_tie() -> void:
-	text.set_text(Utils.center_text("Tie!"))
+	text.set_text(Utils.center_text("TRUCO_TIE"))
 	
 
 func set_victory() -> void:
-	text.set_text(Utils.center_text("Victory!"))
+	text.set_text(Utils.center_text("TRUCO_VICTORY"))
 	confetti.start()
 
 
 func set_defeat() -> void:
-	text.set_text(Utils.center_text("Defeat!"))
+	text.set_text(Utils.center_text("TRUCO_DEFEAT"))
 
 
 func _on_button_pressed() -> void:

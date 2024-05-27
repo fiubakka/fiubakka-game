@@ -35,6 +35,9 @@ TRUCO_QUIERO,Quiero,Accept
 TRUCO_NO_QUIERO,No quiero,Reject
 TRUCO_MAZO,Mazo,Fold
 TRUCO_NO_QUIERO,"No quiero",Reject
+TRUCO_VICTORY,Victoria!,Victory!
+TRUCO_DEFEAT,Derrota...,Defeat...
+TRUCO_TIE,Empate!,Tie!
 MAZO,Mazo,Fold
 ENVIDO, Envido, Envido
 REAL_ENVIDO, Real Envido, Royal Envido
