@@ -21,9 +21,10 @@ func set_match_result(my_points: int, opponent_points: int) -> void:
 	else:
 		set_defeat()
 
+
 func set_tie() -> void:
 	text.set_text(Utils.center_text("TRUCO_TIE"))
-	
+
 
 func set_victory() -> void:
 	text.set_text(Utils.center_text("TRUCO_VICTORY"))

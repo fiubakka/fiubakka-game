@@ -58,6 +58,8 @@ y_sort_enabled = true
 script = ExtResource("1_lqlib")
 player = NodePath("Player")
 doors = [NodePath("ToRoom200"), NodePath("Downstairs")]
+limit_bottom = 876
+limit_rigth = 2208
 
 [node name="Base" type="TileMap" parent="."]
 tile_set = ExtResource("2_k64kb")

@@ -58,7 +58,7 @@ static var _MESSAGE_MAP := {
 	PBServerMessageType.PBTrucoMatchChallengeDenied: PBTrucoMatchChallengeDenied,
 	PBServerMessageType.PBTrucoAllowPlay: PBTrucoAllowPlay,
 	PBServerMessageType.PBTrucoPlay: PBTrucoPlay,
-	PBClientMessageType.PBTrucoDisconnect: PBTrucoDisconnect # TODO: replace for server disconnect message
+	PBClientMessageType.PBTrucoDisconnect: PBTrucoDisconnect  # TODO: replace for server disconnect message
 }
 
 

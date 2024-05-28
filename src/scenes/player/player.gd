@@ -145,8 +145,6 @@ func disable() -> void:
 
 
 func enable() -> void:
-	#TODO: Aca podemos hacer un update_movement con la posicion de spawn del nuevo mapa
-	#Para arreglar el bug de que al cambiar de mapa quedas en la ultima pos del mapa anterior hasta que te moves
 	idle = false
 	visible = true
 	update_movement.emit(Vector2.ZERO, self.position)

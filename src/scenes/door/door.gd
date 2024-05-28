@@ -3,7 +3,7 @@ class_name Door extends Area2D
 signal player_entered_door
 signal player_changes_level(level: int)
 
-@export_enum("up","right","down","left") var entry_direction: String
+@export_enum("up", "right", "down", "left") var entry_direction: String
 @export var push_distance: int = 100
 @export var path_to_new_scene: String
 @export var entry_door_name: String
@@ -48,14 +48,14 @@ func _on_timer_timeout(level_id: int) -> void:
 
 func _on_player_change_map_ready() -> void:
 	queue_free()
-	
-	
+
+
 func get_player_entry_position() -> Vector2:
-	var vector:Vector2 = Vector2.LEFT
+	var vector: Vector2 = Vector2.LEFT
 	match entry_direction:
 		"up":
 			vector = Vector2.UP
-		"right": 
+		"right":
 			vector = Vector2.RIGHT
 		"down":
 			vector = Vector2.DOWN

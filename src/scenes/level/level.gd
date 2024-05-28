@@ -2,6 +2,10 @@ class_name Level extends Node
 
 @export var player: Player
 @export var doors: Array[Door]
+@export var limit_bottom: int
+@export var limit_rigth: int
+@export var zoom: float = 1
+
 var data := {}
 
 
@@ -32,15 +36,10 @@ func enter_level() -> void:
 	)
 	if !player.show_tip.is_connected(gui_show_npc_tip_signal_handler):
 		player.show_tip.connect(gui_show_npc_tip_signal_handler)
-	$Player/Camera2D.limit_right = MapsDictionary.MAP_LIMITS[PlayerInfo.current_map].w
-	$Player/Camera2D.limit_bottom = MapsDictionary.MAP_LIMITS[PlayerInfo.current_map].h
-	#TODO: El zoom tarda en hacerse, ver como arreglarlo
-	if PlayerInfo.current_map == 1 || PlayerInfo.current_map == 3:
-		#This is because the camera size is bigger than the maps comedor and room200
-		#so it makes a strange movement when going to the edges
-		#We increase the zoom because it is the only way to "shrink" the camera and avoid that strange movement
-		$Player/Camera2D.zoom.x = 1.5
-		$Player/Camera2D.zoom.y = 1.5
+	$Player/Camera2D.limit_right = limit_rigth
+	$Player/Camera2D.limit_bottom = limit_bottom
+	$Player/Camera2D.zoom.x = zoom
+	$Player/Camera2D.zoom.y = zoom
 	player.enable()
 	connect_doors()
 
@@ -50,13 +49,11 @@ func _init_player_location(entry_door_name: String) -> void:
 		if door.name == entry_door_name:
 			player.position = door.get_player_entry_position()
 
+
 func _on_player_entered_door(door: Door, equipment: Equipment) -> void:
 	disconnect_doors()
 	player.disable()
-	data = {
-		"player_equipment": equipment,
-		"entry_door_name": door.entry_door_name
-		}
+	data = {"player_equipment": equipment, "entry_door_name": door.entry_door_name}
 	set_process(false)
 
 
