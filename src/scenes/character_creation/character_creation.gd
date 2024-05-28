@@ -11,14 +11,6 @@ var username: String = ""
 var password: String = ""
 
 
-func _on_login_username_text_submitted(_new_text: String) -> void:
-	self._on_button_pressed()
-
-
-func _on_login_password_text_submitted(_new_text: String) -> void:
-	self._on_button_pressed()
-
-
 func _on_login_username_text_changed(_username: String) -> void:
 	username = _username
 
@@ -33,7 +25,7 @@ func _on_user_init_error(errorCode: String) -> void:
 	register_error.emit(errorCode)
 
 
-func _on_button_pressed() -> void:
+func _on_character_sprite_character_saved() -> void:
 	error_clear.emit()
 	if username.is_empty():
 		register_error.emit("EMPTY_USERNAME")
