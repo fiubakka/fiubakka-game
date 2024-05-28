@@ -1,6 +1,40 @@
 # Fiubakka Game
 Trabajo profesional: Juego distribuido en Akka (Client)
 
+## Game installation
+
+Welcome to Fiubakka! If you'd like to play the game, simply follow the steps for your OS:
+
+#### Windows
+- Download and install [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-local-tunnel/#1-download-and-install-cloudflared):
+```powershell
+winget install --id Cloudflare.cloudflared
+```
+- Download Fiubakka
+- Before running the game, start the cloudflared tunnel:
+```powershell
+cloudflared access tcp --hostname fiubakka.marcosrolando.uk --url 127.0.0.1:2020
+```
+
+#### Linux
+- Download and install [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-local-tunnel/#1-download-and-install-cloudflared):
+```bash
+# Add cloudflare gpg key
+sudo mkdir -p --mode=0755 /usr/share/keyrings
+curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null
+
+# Add this repo to your apt repositories
+echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
+
+# install cloudflared
+sudo apt-get update && sudo apt-get install cloudflared
+```
+- Download Fiubakka
+- Before running the game, start the cloudflared tunnel:
+```powershell
+cloudflared access tcp --hostname fiubakka.marcosrolando.uk --url 127.0.0.1:2020
+```
+
 ## Dependencies
 
 * [godot](https://godotengine.org/download/archive/4.1.3-stable/)
@@ -46,6 +80,17 @@ Finally, choose a destination directory (for example `/exported`), name your exe
 
 **Note** the `Export with Debug` checkbox. When checked, the project will be exported with an output console which helps with debugging. In most cases, it should be unchecked
 
+
+### CLI
+You can also export the project if you previously setup both the Godot CLI and the export presets. Simply run the `build.sh` bash script from your terminal like so:
+```bash
+$ build.sh <preset> <exported_name> <version>
+```
+`preset` is the name of your installed export presets, and should be either "Linux/X11" or "Windows"
+
+`exported_name` is an optional argument which defined the executable file name. If not provided, it will be exported as `fiubakka`
+
+`version` is an optional value which will be appended to the executable file name. For example if you run `build.sh Linux/X11 fiubakka 3` you will generate the executable `exported/fiubakka-3`
 
 ## Localization
 

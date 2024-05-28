@@ -10,6 +10,7 @@ signal allow_truco_play(playId: int, type: PBTrucoPlayTypeEnum)
 signal truco_play_card(truco_play_card_dto: TrucoPlayCardDto)
 signal truco_play_update(truco_play_update_dto: TrucoPlayUpdateDto)
 signal truco_shout_played(truco_play_shout_dto: TrucoPlayShoutDto)
+signal truco_opponent_disconnected
 
 signal pause_main_music
 
@@ -69,6 +70,11 @@ const PBTrucoNextPlay = (
 
 const PBTrucoShout = preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoShout
 
+# TODO: replace for server message
+const PBTrucoDisconnect = (
+	preload("res://addons/protocol/compiled/client/truco/disconnect.gd").PBTrucoDisconnect
+)
+
 var _thread: Thread
 var _consumer: Consumer
 var _keep_running := true
@@ -117,6 +123,8 @@ func _handle_message(message: Object) -> void:
 		handler = "_handle_truco_allow_play"
 	elif message is PBTrucoPlay:
 		handler = "_handle_truco_play"
+	elif message is PBTrucoDisconnect: # TODO: replace for server message
+		handler = "_handle_truco_disconnect"
 
 	call_deferred(handler, message)
 
@@ -264,7 +272,8 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 			var match_over := msg.get_isMatchOver()
 
 			var truco_play_shout_dto := TrucoPlayShoutDto.new(
-				play_id, shout, game_over, match_over, is_play_card_available, available_shouts
+				play_id, shout, game_over, match_over, is_play_card_available, available_shouts,
+				first_name, first_points, second_points
 			)
 			truco_shout_played.emit(truco_play_shout_dto)
 
@@ -306,3 +315,6 @@ func _parse_player_cards(msg: PBTrucoPlay) -> Array[Card]:
 		player_card.rank = rank
 		player_cards.append(player_card)
 	return player_cards
+	
+func _handle_truco_disconnect(msg: PBTrucoDisconnect) -> void:
+	truco_opponent_disconnected.emit()

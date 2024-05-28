@@ -20,6 +20,8 @@ func _ready() -> void:
 func enter_level() -> void:
 	if data.has("player_equipment"):
 		$Player.set_equipment(data["player_equipment"])
+	if data.has("entry_door_name"):
+		_init_player_location(data["entry_door_name"])
 	var producer_movement_signal_handler: Callable = (
 		get_node("/root/Main/ServerConnection/ServerProducer")._on_player_movement
 	)
@@ -43,10 +45,18 @@ func enter_level() -> void:
 	connect_doors()
 
 
-func _on_player_entered_door(player_from_prev_level: Player) -> void:
+func _init_player_location(entry_door_name: String) -> void:
+	for door in doors:
+		if door.name == entry_door_name:
+			player.position = door.get_player_entry_position()
+
+func _on_player_entered_door(door: Door, equipment: Equipment) -> void:
 	disconnect_doors()
 	player.disable()
-	data = {"player_equipment": player_from_prev_level.equipment}
+	data = {
+		"player_equipment": equipment,
+		"entry_door_name": door.entry_door_name
+		}
 	set_process(false)
 
 

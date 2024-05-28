@@ -28,6 +28,8 @@ func _on_login_password_text_changed(_password: String) -> void:
 
 
 func _on_user_init_error(errorCode: String) -> void:
+	if timer:
+		timer.stop()
 	register_error.emit(errorCode)
 
 
@@ -41,6 +43,7 @@ func _on_button_pressed() -> void:
 		register_error.emit("EMPTY_PASSWORD")
 		return
 
+	_on_timer_timeout()
 	timer = Timer.new()  # Timer to send init message until we get a response
 	timer.timeout.connect(Callable(self, "_on_timer_timeout"))
 	add_child(timer)
@@ -69,3 +72,4 @@ func _on_return_return_to_menu() -> void:
 	if timer:
 		timer.stop()
 	return_to_menu.emit()
+

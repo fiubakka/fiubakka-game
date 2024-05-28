@@ -1,17 +1,15 @@
 extends Control
 
-@onready var label := $RichTextLabel
+signal show_npc_tip(name: String, message: String, equipment: Equipment)
+
 @onready var timer := $Timer
-@onready var tween: Tween
 
 
-func show_tip(message: String) -> void:
-	tween = create_tween()
-	label.text = message
+func show_tip(name: String, message: String, equipment: Equipment) -> void:
+	show_npc_tip.emit(name, message, equipment)
 	visible = true
-	tween.tween_property(label, "visible_ratio", 1.0, 1.0).from(0.0)
 	timer.start()
-
+	
 
 func _on_timer_timeout() -> void:
 	visible = false

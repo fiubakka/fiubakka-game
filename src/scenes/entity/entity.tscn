@@ -458,7 +458,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_81q6c"]
-size = Vector2(44, 14.5)
+size = Vector2(52, 20)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xq0wm"]
 radius = 30.0
@@ -494,7 +494,7 @@ fit_content = true
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 38)
+position = Vector2(0, 34)
 shape = SubResource("RectangleShape2D_81q6c")
 
 [node name="InteractArea" type="Area2D" parent="."]

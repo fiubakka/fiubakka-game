@@ -1,7 +1,7 @@
 class_name Player extends CharacterBody2D
 
 signal update_movement(velocity: Vector2, position: Vector2)
-signal show_tip(message: String)
+signal show_tip(name: String, message: String, equipment: Equipment)
 signal start_truco(id: String)
 
 @export var idle: bool = false
@@ -84,7 +84,7 @@ func _physics_process(_delta: float) -> void:
 		prev_vel = velocity
 
 	if Input.is_action_just_pressed("talk_to_npc") and npc:
-		show_tip.emit(npc.message)
+		show_tip.emit(npc.npc_name, npc.message, npc.get_equipment())
 
 
 func play_move_animation() -> void:
@@ -149,3 +149,4 @@ func enable() -> void:
 	#Para arreglar el bug de que al cambiar de mapa quedas en la ultima pos del mapa anterior hasta que te moves
 	idle = false
 	visible = true
+	update_movement.emit(Vector2.ZERO, self.position)

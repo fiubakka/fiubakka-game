@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://2focfqtvt576"]
+[gd_scene load_steps=18 format=3 uid="uid://2focfqtvt576"]
 
 [ext_resource type="Script" path="res://src/scenes/character_creation/character_creation.gd" id="1_7ub86"]
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_x5dhn"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://src/scenes/login/login_error_text.gd" id="8_3mglr"]
 [ext_resource type="PackedScene" uid="uid://dl2ppg848l7il" path="res://src/scenes/GUI/return/return.tscn" id="8_4gecp"]
 [ext_resource type="Script" path="res://src/scenes/login/login_password.gd" id="9_fqeby"]
+[ext_resource type="Script" path="res://src/scenes/character_creation/register_button.gd" id="9_nfp0v"]
 [ext_resource type="Script" path="res://src/scenes/character_creation/register_button_text.gd" id="11_3gi6d"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_isp5o"]
@@ -302,6 +303,7 @@ self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 212.0
 offset_bottom = 50.0
+script = ExtResource("9_nfp0v")
 
 [node name="Return" parent="NinePatchRect" instance=ExtResource("8_4gecp")]
 layout_mode = 1
@@ -311,13 +313,26 @@ offset_right = -803.0
 offset_bottom = -413.0
 
 [connection signal="error_clear" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText" method="_on_error_clear"]
+[connection signal="register_error" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" method="_on_register_error"]
+[connection signal="register_error" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword" method="_on_register_error"]
 [connection signal="register_error" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText" method="_on_login_error"]
+[connection signal="register_error" from="." to="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect/Button" method="_on_character_creation_register_error"]
 [connection signal="return_to_menu" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText" method="_on_return_to_menu"]
+[connection signal="user_logged_in" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" method="_on_user_logged_in"]
+[connection signal="user_logged_in" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword" method="_on_user_logged_in"]
+[connection signal="user_logged_in" from="." to="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect/Button" method="_on_character_creation_user_logged_in"]
+[connection signal="character_saved" from="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" to="." method="_on_character_sprite_character_saved"]
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" to="." method="_on_login_username_text_changed"]
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" method="_on_text_changed"]
 [connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" to="." method="_on_login_username_text_submitted"]
+[connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_register_text_submitted"]
+[connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" method="_on_text_submitted"]
+[connection signal="username_submitted" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_register_text_submitted"]
+[connection signal="password_submitted" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_register_text_submitted"]
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword" to="." method="_on_login_password_text_changed"]
 [connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword" to="." method="_on_login_password_text_submitted"]
+[connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_register_text_submitted"]
+[connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword" to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword" method="_on_text_submitted"]
 [connection signal="next" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HatsSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hats_select_next"]
 [connection signal="prev" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HatsSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hats_select_prev"]
 [connection signal="next" from="NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HairSelect" to="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" method="_on_hair_select_next"]

@@ -3,6 +3,8 @@ extends Control
 var text: RichTextLabel = null
 var confetti: Confetti = null
 
+signal exit_button_pressed
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,12 +12,27 @@ func _ready() -> void:
 	confetti = $CenterContainer/Panel/Confetti
 
 
-func set_victory() -> void:
+func set_match_result(my_points: int, opponent_points: int) -> void:
 	visible = true
-	text.set_text(Utils.center_text("Victory!"))
+	if my_points == opponent_points:
+		set_tie()
+	elif my_points > opponent_points:
+		set_victory()
+	else:
+		set_defeat()
+
+func set_tie() -> void:
+	text.set_text(Utils.center_text("TRUCO_TIE"))
+	
+
+func set_victory() -> void:
+	text.set_text(Utils.center_text("TRUCO_VICTORY"))
 	confetti.start()
 
 
 func set_defeat() -> void:
-	visible = true
-	text.set_text(Utils.center_text("Defeat!"))
+	text.set_text(Utils.center_text("TRUCO_DEFEAT"))
+
+
+func _on_button_pressed() -> void:
+	exit_button_pressed.emit()

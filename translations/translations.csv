@@ -1,8 +1,8 @@
 keys,es,en
 LOGIN,Ingresar,Login
 REGISTER,Registrar,Register
-USER_PLACEHOLDER,"Usuario...","Username..."
-PASSWORD_PLACEHOLDER,"Contraseña...","Password..."
+USER_PLACEHOLDER,Usuario...,Username...
+PASSWORD_PLACEHOLDER,Contraseña...,Password...
 CHAR_CREATION_TITLE,Cree su personaje,Create your character
 HATS,Sombreros,Hats
 HAIR,Cabello,Hair
@@ -14,26 +14,30 @@ OUTFIT,Ropa,Outfit
 OWN_PLAYER_LABEL,Vos,You
 OPTION_CONTINUE,Continuar,Continue
 OPTION_QUIT,Salir,Quit
-CHAT_PLACEHOLDER,"Diga algo...","Say something..."
+CHAT_PLACEHOLDER,Diga algo...,Say something...
 CHAT_SEND,Enviar,Send
-EQUIP,Equipar,Equip
-UNEQUIP,Desequipar,Unequip
-LOADING_SERVER,"Esperando servidor...","Waiting for server..."
-LOADING_LEVEL,"Cargando nivel...","Loading level..."
-EMPTY_USERNAME, "Ingrese un nombre", "Enter a username"
-EMPTY_PASSWORD, "Ingrese una contraseña", "Enter a password"
-UNKNOWN, "Error desconocido", "Unknown Error"
-INVALID_PLAYER_CREDENTIALS, "Credenciales inválidas", "Invalid credentials"
-PLAYER_ALREADY_EXISTS, "Nombre no disponible", "Unavailable Username"
-NPC_WELCOME_1,"¡Bienvenido a Fiubakka!","Welcome to Fiubakka!"
-NPC_WELCOME_2,"Podes tomar las escaleras o bajar al comedor","You can go uptairs or downstairs"
-NPC_KIOSK,"Bienvenido al Comedor. ¿En qué te puedo ayudar?","Weclome to the Kiosk. How can I help you?"
-TRUCO,Truco,Truco
+LOADING_SERVER,Esperando servidor...,Waiting for server...
+LOADING_LEVEL,Cargando nivel...,Loading level...
+EMPTY_USERNAME,Ingrese un nombre,Enter a username
+EMPTY_PASSWORD,Ingrese una contraseña,Enter a password
+UNKNOWN,Error desconocido,Unknown Error
+INVALID_PLAYER_CREDENTIALS,Credenciales inválidas,Invalid credentials
+PLAYER_ALREADY_EXISTS,Nombre no disponible,Unavailable Username
+NPC_WELCOME_1,¡Bienvenido a Fiubakka!,Welcome to Fiubakka!
+NPC_WELCOME_2,Podes tomar las escaleras o bajar al comedor,You can go uptairs or downstairs
+NPC_KIOSK,Bienvenido al Comedor. ¿En qué te puedo ayudar?,Weclome to the Kiosk. How can I help you?
+EQUIP_BUTTON,Equipar,Equip
+UNEQUIP_BUTTON,Desequipar,Unequip
 TRUCO_BUTTON,Truco,Truco
-TRUCO_CHALLENGE," te desafió al Truco! ¿Aceptás?"," has challenged you to play Truco! Do you accept?"
-TRUCO_ROUND_OVER,"¡Fin ronda!","Round over!"
+TRUCO_CHALLENGE, te desafió al Truco! ¿Aceptás?, has challenged you to play Truco! Do you accept?
+TRUCO_ROUND_OVER,¡Fin ronda!,Round over!
 TRUCO_QUIERO,Quiero,Accept
+TRUCO_NO_QUIERO,No quiero,Reject
+TRUCO_MAZO,Mazo,Fold
 TRUCO_NO_QUIERO,"No quiero",Reject
+TRUCO_VICTORY,Victoria!,Victory!
+TRUCO_DEFEAT,Derrota...,Defeat...
+TRUCO_TIE,Empate!,Tie!
 MAZO,Mazo,Fold
 ENVIDO, Envido, Envido
 REAL_ENVIDO, Real Envido, Royal Envido
@@ -42,3 +46,32 @@ ENVIDO_QUIERO, Quiero, Accept
 ENVIDO_NO_QUIERO, "No quiero", Reject
 RETRUCO, Retruco, Retruco
 VALE_CUATRO, "Vale cuatro", "Counts four"
+COSMETIC_NAME_HATS_1,Sombrero de Entrenador,Trainer hat
+COSMETIC_NAME_HATS_2,Sombrero de Dinosaurio,Dinasour hat
+COSMETIC_NAME_HATS_3,Sombrero Negro,Black hat
+COSMETIC_NAME_HATS_4,Pasamontañas,Ski mask
+COSMETIC_NAME_HATS_5,Sombrero de Arqueólogo,Archaeologist hat
+COSMETIC_NAME_HATS_6,Sombrero Ajustado,Beanie
+COSMETIC_NAME_HATS_7,Sombrero de Cocinero,Chef hat
+COSMETIC_NAME_HATS_8,Sombrero de Cono,Cone hat
+COSMETIC_NAME_OUTFITS_1,Remera Violeta,Purple shirt
+COSMETIC_NAME_OUTFITS_2,Remera Blanca,White shirt
+COSMETIC_NAME_OUTFITS_3,Remera Beige,Beige shirt
+COSMETIC_NAME_OUTFITS_4,Remera Roja,Red shirt
+COSMETIC_NAME_FACIAL HAIR_1,Bigote Castaño,Brown mustache
+COSMETIC_NAME_FACIAL HAIR_2,Bigote Pelirrojo,Red mustache
+COSMETIC_NAME_FACIAL HAIR_3,Bigote Rubio,Blond mustache
+COSMETIC_NAME_FACIAL HAIR_4,Barba Castaña,Brown beard
+COSMETIC_NAME_FACIAL HAIR_5,Barba Pelirroja,Red beard
+COSMETIC_NAME_FACIAL HAIR_6,Barba Rubia,Blond beard
+COSMETIC_NAME_GLASSES_1,Anteojos gris,Gray glasses
+COSMETIC_NAME_GLASSES_2,Anteojos rojos,Red glasses
+COSMETIC_NAME_GLASSES_3,Anteojos rosas,Pink glasses
+COSMETIC_NAME_GLASSES_4,Anteojos celeste,Sky-blue glasses
+COSMETIC_NAME_GLASSES_5,Anteojos verdes,Green glasses
+COSMETIC_NAME_GLASSES_6,Anteojos negros,Black glasses
+COSMETIC_NAME_HAIRS_1,Pelo rubio,Blond hair
+COSMETIC_NAME_HAIRS_2,Pelo castaño claro,Light brown hair
+COSMETIC_NAME_HAIRS_3,Pelo rubio con flequillo,Blonde hair with bangs
+COSMETIC_NAME_HAIRS_4,Pelo castaño claro con flequillo,Light brown hair with bangs
+COSMETIC_DESCRIPTION,"No dará ninguna mejora en el desempeño, pero luce bien","It won't enhance your performance, but it looks great"

@@ -2,6 +2,7 @@ class_name NPC extends Node2D
 
 enum Facing { FRONT, LEFT, RIGHT, BACK }
 
+@export var npc_name: String
 @export var actionable: bool = false
 @export var message: String
 @export var facing: Facing = Facing.FRONT
@@ -27,6 +28,7 @@ func _ready() -> void:
 	$NpcSprite/Outfit.texture = _cs.outfit_spritesheet[outfit]
 	$NpcSprite/FacialHair.texture = _cs.facial_hair_spritesheet[facial_hair]
 	$NpcSprite/Glasses.texture = _cs.glasses_spritesheet[glasses]
+	$Name.text = Utils.center_text(npc_name)
 
 
 func _physics_process(delta: float) -> void:
@@ -55,3 +57,10 @@ func _on_area_2d_body_exited(player: Node2D) -> void:
 	actionable = false
 	if player.npc == self:
 		player.npc = null
+		
+func get_equipment() -> Equipment:
+	var equipment := Equipment.new()
+	equipment.set_equipment(
+		hat, hair, eyes, glasses, facial_hair, body, outfit
+	)
+	return equipment
