@@ -289,7 +289,7 @@ position = Vector2(288, 1618)
 position = Vector2(1394, 1618)
 
 [node name="Player" parent="." instance=ExtResource("1_qea2s")]
-position = Vector2(1497, 1356)
+position = Vector2(845, 1730)
 
 [node name="NPC" parent="." instance=ExtResource("5_l1hrv")]
 position = Vector2(651, 367)
