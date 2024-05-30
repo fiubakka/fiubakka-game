@@ -13,7 +13,11 @@ func _ready() -> void:
 	for locale in locales:
 		var button := _create_lang_button(locale)
 		lang_container.add_child(button)
-
+	
+	var ic := ItemsCatalogue
+	var ic_switch_locale_handler: Callable = ic._on_switch_locale
+	if !switch_locale.is_connected(ic_switch_locale_handler):
+		switch_locale.connect(ic_switch_locale_handler)
 
 func _create_lang_button(locale: String) -> Button:
 	var button := button_scene.instantiate()

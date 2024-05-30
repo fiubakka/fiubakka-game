@@ -31,10 +31,8 @@ var glasses: InventoryItemData = preload(
 )
 
 
-func _ready() -> void:
-	# miscellaneous
+func _on_switch_locale() -> void:
 	items_catalogue["miscellaneous"][0] = dni
-
 	create_resources("hats", hat, cs.hats_spritesheet)
 	create_resources("outfits", outfit, cs.outfit_spritesheet)
 	create_resources("hairs", hair, cs.hair_spritesheet)

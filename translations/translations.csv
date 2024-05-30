@@ -25,7 +25,7 @@ INVALID_PLAYER_CREDENTIALS,Credenciales inválidas,Invalid credentials
 PLAYER_ALREADY_EXISTS,Nombre no disponible,Unavailable Username
 NPC_WELCOME_1,¡Bienvenido a Fiubakka!,Welcome to Fiubakka!
 NPC_WELCOME_2,Podes tomar las escaleras o bajar al comedor,You can go uptairs or downstairs
-NPC_KIOSK,Bienvenido al Comedor. ¿En qué te puedo ayudar?,Weclome to the Kiosk. How can I help you?
+NPC_KIOSK,Bienvenido al Comedor. ¿En qué te puedo ayudar?,Welcome to the Kiosk. How can I help you?
 EQUIP_BUTTON,Equipar,Equip
 UNEQUIP_BUTTON,Desequipar,Unequip
 TRUCO_BUTTON,Truco,Truco
@@ -34,18 +34,18 @@ TRUCO_ROUND_OVER,¡Fin ronda!,Round over!
 TRUCO_QUIERO,Quiero,Accept
 TRUCO_NO_QUIERO,No quiero,Reject
 TRUCO_MAZO,Mazo,Fold
-TRUCO_NO_QUIERO,"No quiero",Reject
+TRUCO_NO_QUIERO,No quiero,Reject
 TRUCO_VICTORY,Victoria!,Victory!
 TRUCO_DEFEAT,Derrota...,Defeat...
 TRUCO_TIE,Empate!,Tie!
 MAZO,Mazo,Fold
-ENVIDO, Envido, Envido
-REAL_ENVIDO, Real Envido, Royal Envido
-FALTA_ENVIDO, Falta Envido, Falta Envido
-ENVIDO_QUIERO, Quiero, Accept
-ENVIDO_NO_QUIERO, "No quiero", Reject
-RETRUCO, Retruco, Retruco
-VALE_CUATRO, "Vale cuatro", "Counts four"
+ENVIDO,Envido,Envido
+REAL_ENVIDO,Real Envido, Royal Envido
+FALTA_ENVIDO,Falta Envido, Falta Envido
+ENVIDO_QUIERO,Quiero, Accept
+ENVIDO_NO_QUIERO,No quiero, Reject
+RETRUCO, Retruco,Retruco
+VALE_CUATRO,Vale cuatro,Counts four
 COSMETIC_NAME_HATS_1,Sombrero de Entrenador,Trainer hat
 COSMETIC_NAME_HATS_2,Sombrero de Dinosaurio,Dinasour hat
 COSMETIC_NAME_HATS_3,Sombrero Negro,Black hat
