@@ -3,7 +3,7 @@ class_name Level extends Node
 @export var player: Player
 @export var doors: Array[Door]
 @export var limit_bottom: int
-@export var limit_rigth: int
+@export var limit_right: int
 @export var zoom: float = 1
 
 var data := {}
@@ -36,7 +36,7 @@ func enter_level() -> void:
 	)
 	if !player.show_tip.is_connected(gui_show_npc_tip_signal_handler):
 		player.show_tip.connect(gui_show_npc_tip_signal_handler)
-	$Player/Camera2D.limit_right = limit_rigth
+	$Player/Camera2D.limit_right = limit_right
 	$Player/Camera2D.limit_bottom = limit_bottom
 	$Player/Camera2D.zoom.x = zoom
 	$Player/Camera2D.zoom.y = zoom
