@@ -35,6 +35,9 @@ y_sort_enabled = true
 script = ExtResource("1_cla88")
 player = NodePath("Player")
 doors = [NodePath("CentralHall")]
+limit_bottom = 672
+limit_right = 768
+zoom = 1.5
 
 [node name="Base" type="TileMap" parent="."]
 tile_set = ExtResource("2_y0scn")

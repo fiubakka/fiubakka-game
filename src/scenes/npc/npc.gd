@@ -57,10 +57,9 @@ func _on_area_2d_body_exited(player: Node2D) -> void:
 	actionable = false
 	if player.npc == self:
 		player.npc = null
-		
+
+
 func get_equipment() -> Equipment:
 	var equipment := Equipment.new()
-	equipment.set_equipment(
-		hat, hair, eyes, glasses, facial_hair, body, outfit
-	)
+	equipment.set_equipment(hat, hair, eyes, glasses, facial_hair, body, outfit)
 	return equipment

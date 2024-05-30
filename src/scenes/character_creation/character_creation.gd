@@ -64,4 +64,3 @@ func _on_return_return_to_menu() -> void:
 	if timer:
 		timer.stop()
 	return_to_menu.emit()
-

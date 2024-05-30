@@ -4,6 +4,7 @@ signal username_submitted(new_text: String)
 
 @onready var _enabled := true
 
+
 func _on_text_changed(new_text: String) -> void:
 	const invalid_characters: Array[String] = [" "]
 
@@ -20,18 +21,14 @@ func _on_return_to_menu() -> void:
 	text_changed.emit(text)
 
 
-func _on_user_logged_in(
-	_username: String,
-	_password: String,
-	_equipment: Equipment
-) -> void:
+func _on_user_logged_in(_username: String, _password: String, _equipment: Equipment) -> void:
 	_enabled = false
+
 
 func _on_register_error(_error_code: String) -> void:
 	_enabled = true
-	
-	
+
+
 func _on_text_submitted(new_text: String) -> void:
 	if _enabled:
 		username_submitted.emit(new_text)
-

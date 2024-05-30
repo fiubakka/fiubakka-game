@@ -12,6 +12,7 @@ signal update_equipment(equipment: Equipment)
 
 @onready var equip_button := $HBoxContainer/VBoxContainer/Panel/EquipButton
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	equip_button.visible = false
@@ -23,7 +24,7 @@ func _ready() -> void:
 		slot.update(Inventory[i])
 		slot.pressed.connect(self._on_Slot_Pressed.bind(slot, Inventory[i]))
 		slots.add_child(slot)
-	
+
 	equip_button.text = tr("EQUIP_BUTTON")
 
 

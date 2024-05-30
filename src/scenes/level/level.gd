@@ -2,6 +2,10 @@ class_name Level extends Node
 
 @export var player: Player
 @export var doors: Array[Door]
+@export var limit_bottom: int
+@export var limit_right: int
+@export var zoom: float = 1
+
 var data := {}
 
 
@@ -32,9 +36,10 @@ func enter_level() -> void:
 	)
 	if !player.show_tip.is_connected(gui_show_npc_tip_signal_handler):
 		player.show_tip.connect(gui_show_npc_tip_signal_handler)
-	$Player/Camera2D.limit_right = 2200  #TODO: Setear limites en base al nivel
-	$Player/Camera2D.limit_bottom = 1880  #TODO: Setear limites en base al nivel
-	#TODO: Setear posicion del player dependiendo desde que puerta esta entrando al mapa
+	$Player/Camera2D.limit_right = limit_right
+	$Player/Camera2D.limit_bottom = limit_bottom
+	$Player/Camera2D.zoom.x = zoom
+	$Player/Camera2D.zoom.y = zoom
 	player.enable()
 	connect_doors()
 
@@ -44,13 +49,11 @@ func _init_player_location(entry_door_name: String) -> void:
 		if door.name == entry_door_name:
 			player.position = door.get_player_entry_position()
 
+
 func _on_player_entered_door(door: Door, equipment: Equipment) -> void:
 	disconnect_doors()
 	player.disable()
-	data = {
-		"player_equipment": equipment,
-		"entry_door_name": door.entry_door_name
-		}
+	data = {"player_equipment": equipment, "entry_door_name": door.entry_door_name}
 	set_process(false)
 
 

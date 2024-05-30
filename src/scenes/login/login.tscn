@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b6kg7qutp1h00"]
+[gd_scene load_steps=17 format=3 uid="uid://b6kg7qutp1h00"]
 
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_f447j"]
 [ext_resource type="Script" path="res://src/scenes/login/login.gd" id="1_mxn2w"]
