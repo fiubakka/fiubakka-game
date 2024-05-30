@@ -12,20 +12,24 @@ signal update_equipment(equipment: Equipment)
 
 @onready var equip_button := $HBoxContainer/VBoxContainer/Panel/EquipButton
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	equip_button.visible = false
-	get_inventory()
+	equip_button.text = tr("EQUIP_BUTTON")
 	sprite = $HBoxContainer/VBoxContainer/CenterContainer/Panel/CharacterSprite
+	
+	ItemsCatalogue.catalogue_ready.connect(self._on_items_catalogue_catalogue_ready)
+	
+	
+func _on_items_catalogue_catalogue_ready() -> void:
+	get_inventory()
 	var slots := $HBoxContainer/ScrollContainer/GridContainer
 	for i in range(0, len(Inventory)):
 		var slot := inventory_slot_scene.instantiate()
 		slot.update(Inventory[i])
 		slot.pressed.connect(self._on_Slot_Pressed.bind(slot, Inventory[i]))
 		slots.add_child(slot)
-	
-	equip_button.text = tr("EQUIP_BUTTON")
-
 
 func get_inventory() -> void:
 	# TODO: the server should tell this info and everytime you open the inventory

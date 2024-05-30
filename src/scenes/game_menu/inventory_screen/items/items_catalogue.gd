@@ -1,5 +1,7 @@
 extends Node
 
+signal catalogue_ready
+
 var cs := CompositeSprites
 
 var items_catalogue := {
@@ -38,6 +40,7 @@ func _on_switch_locale() -> void:
 	create_resources("hairs", hair, cs.hair_spritesheet)
 	create_resources("facial hair", facial_hair, cs.facial_hair_spritesheet)
 	create_resources("glasses", glasses, cs.glasses_spritesheet)
+	catalogue_ready.emit()
 
 
 func create_resources(
