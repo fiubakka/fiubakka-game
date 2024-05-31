@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://src/scenes/level/level.gd" id="1_lqlib"]
 [ext_resource type="PackedScene" uid="uid://b0ckgcsol4ucx" path="res://src/scenes/player/player.tscn" id="1_qea2s"]
 [ext_resource type="TileSet" uid="uid://bl3doteiujli4" path="res://tilesets/classroom.tres" id="2_fbur0"]
-[ext_resource type="PackedScene" path="res://src/scenes/maps/central_hall/railings.tscn" id="3_aefde"]
-[ext_resource type="PackedScene" path="res://src/scenes/maps/central_hall/bicicletero.tscn" id="3_bvufc"]
+[ext_resource type="PackedScene" uid="uid://duca83vgkgi61" path="res://src/scenes/maps/central_hall/railings.tscn" id="3_aefde"]
+[ext_resource type="PackedScene" uid="uid://bkr6lq4yo0vgk" path="res://src/scenes/maps/central_hall/bicicletero.tscn" id="3_bvufc"]
 [ext_resource type="PackedScene" uid="uid://dwpwkdnm1106l" path="res://src/scenes/door/door.tscn" id="4_wkeiq"]
 [ext_resource type="PackedScene" uid="uid://u4867656s0ug" path="res://src/scenes/npc/npc.tscn" id="5_l1hrv"]
 
@@ -294,13 +294,13 @@ position = Vector2(1394, 1618)
 position = Vector2(845, 1730)
 
 [node name="NPC" parent="." instance=ExtResource("5_l1hrv")]
-position = Vector2(651, 367)
+position = Vector2(847, 1623)
 scale = Vector2(0.5, 0.5)
 npc_name = "Lucas"
 message = "NPC_WELCOME_1"
 
 [node name="NPC2" parent="." instance=ExtResource("5_l1hrv")]
-position = Vector2(785, 364)
+position = Vector2(1376, 268)
 scale = Vector2(0.5, 0.5)
 npc_name = "Roberto"
 message = "NPC_WELCOME_2"
@@ -310,6 +310,16 @@ eyes = 2
 outfit = 2
 facial_hair = 2
 glasses = 2
+
+[node name="NPC3" parent="." instance=ExtResource("5_l1hrv")]
+position = Vector2(475, 1044)
+scale = Vector2(0.5, 0.5)
+npc_name = "Carlos"
+message = "En la librera podés comprar útiles, pero todavia no está abierta"
+hair = 3
+eyes = 3
+outfit = 2
+facial_hair = 3
 
 [node name="Upstairs2" parent="." instance=ExtResource("4_wkeiq")]
 position = Vector2(1728, 58)
@@ -324,3 +334,43 @@ scale = Vector2(3, 9)
 entry_direction = "left"
 path_to_new_scene = "res://src/scenes/maps/comedor/comedor.tscn"
 entry_door_name = "CentralHall"
+
+[node name="NPC4" parent="." instance=ExtResource("5_l1hrv")]
+position = Vector2(1173, 662)
+scale = Vector2(0.5, 0.5)
+npc_name = "Juan"
+message = "El ascensor no viene más"
+facing = 2
+body = 3
+hat = 4
+eyes = 4
+outfit = 3
+
+[node name="NPC5" parent="." instance=ExtResource("5_l1hrv")]
+position = Vector2(1120, 665)
+scale = Vector2(0.5, 0.5)
+npc_name = "Mario"
+message = "Voy a llegar tarde a clase..."
+facing = 2
+body = 3
+hair = 3
+hat = 3
+outfit = 3
+glasses = 3
+
+[node name="NPC6" parent="." instance=ExtResource("5_l1hrv")]
+position = Vector2(1064, 665)
+scale = Vector2(0.5, 0.5)
+npc_name = "Pedro"
+message = "Estoy llegando tarde al parcial..."
+facing = 2
+hair = 2
+hat = 2
+eyes = 2
+outfit = 2
+
+[node name="NPC7" parent="." instance=ExtResource("5_l1hrv")]
+position = Vector2(943, 1008)
+scale = Vector2(0.5, 0.5)
+npc_name = "Iván"
+message = "Los ascensores no funcionan, pero podés tomar las escaleras"
