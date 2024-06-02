@@ -23,9 +23,16 @@ EMPTY_PASSWORD,Ingrese una contraseña,Enter a password
 UNKNOWN,Error desconocido,Unknown Error
 INVALID_PLAYER_CREDENTIALS,Credenciales inválidas,Invalid credentials
 PLAYER_ALREADY_EXISTS,Nombre no disponible,Unavailable Username
-NPC_WELCOME_1,¡Bienvenido a Fiubakka!,Welcome to Fiubakka!
-NPC_WELCOME_2,Podes tomar las escaleras o bajar al comedor,You can go uptairs or downstairs
+NPC_CENTRAL_HALL_1,¡Bienvenido a Fiubakka!,Welcome to Fiubakka!
+NPC_CENTRAL_HALL_2,Podes tomar las escaleras o bajar al comedor.,You can go uptairs or go to the kiosk downstairs.
+NPC_CENTRAL_HALL_3,"En la librera podés comprar útiles, pero no abrió todavía.","You can buy supplies in the book store, though it's closed right now."
+NPC_CENTRAL_HALL_4,"Los ascensores no funcionan, pero podés tomar las escaleras.","The elevators are not working right now, but you can take the stairs."
+NPC_CENTRAL_HALL_5,"Estoy llegando tarde al parcial...","I'm late for the exam..."
+NPC_CENTRAL_HALL_6,"Voy a llegar tarde a clase...","I'm late for class..."
+NPC_CENTRAL_HALL_7,"El ascensor no viene más","The elevator is taking a lot."
 NPC_KIOSK,Bienvenido al Comedor. ¿En qué te puedo ayudar?,Weclome to the Kiosk. How can I help you?
+NPC_KIOSK_2,Prefiero estudiar en el comedor en vez de la biblioteca,"I'd rather study at the kiosk instead of the library."
+NPC_KIOSK_3,¿Café o un sanguche?,Coffe or a sandwich?
 EQUIP_BUTTON,Equipar,Equip
 UNEQUIP_BUTTON,Desequipar,Unequip
 TRUCO_BUTTON,Truco,Truco
