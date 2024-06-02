@@ -33,6 +33,13 @@ NPC_CENTRAL_HALL_7,"El ascensor no viene más","The elevator is taking a lot."
 NPC_KIOSK,Bienvenido al Comedor. ¿En qué te puedo ayudar?,Weclome to the Kiosk. How can I help you?
 NPC_KIOSK_2,Prefiero estudiar en el comedor en vez de la biblioteca,"I'd rather study at the kiosk instead of the library."
 NPC_KIOSK_3,¿Café o un sanguche?,Coffe or a sandwich?
+NPC_MAIN_HALL,"El aula 200 está más adelante, están dando clase.","Room 200 is right ahead, they are having a lecture there."
+NPC_MAIN_HALL_2,¿Sabés dónde está la biblioteca?,Do you know where the library is?
+NPC_ROOM_200,Presten atención que esto entra en el final,"Pay attention, this will be in the final exam"
+NPC_ROOM_200_2,Se me está terminando el cuaderno.,My notebook is running out of pages.
+NPC_ROOM_200_3,El profe explica muy rápido y no llego a anotar todo.,The professor is going too fast so I can't take notes very well.
+NPC_ROOM_200_4,¡Truco!,Truco!
+NPC_ROOM_200_5,No grites que nos puede escuchar el profe...,Don't be so loud or the professor could hear us...
 EQUIP_BUTTON,Equipar,Equip
 UNEQUIP_BUTTON,Desequipar,Unequip
 TRUCO_BUTTON,Truco,Truco

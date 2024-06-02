@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://dhrlrip83sqyk"]
+[gd_scene load_steps=16 format=3 uid="uid://dhrlrip83sqyk"]
 
 [ext_resource type="Script" path="res://src/scenes/level/level.gd" id="1_b5d7a"]
 [ext_resource type="TileSet" uid="uid://bl3doteiujli4" path="res://tilesets/classroom.tres" id="1_mj6gk"]
 [ext_resource type="PackedScene" uid="uid://b0ckgcsol4ucx" path="res://src/scenes/player/player.tscn" id="2_yjgvj"]
 [ext_resource type="PackedScene" uid="uid://dwpwkdnm1106l" path="res://src/scenes/door/door.tscn" id="4_oa3ae"]
+[ext_resource type="PackedScene" uid="uid://u4867656s0ug" path="res://src/scenes/npc/npc.tscn" id="5_6t674"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f1h53"]
 size = Vector2(165, 42)
@@ -144,3 +145,54 @@ scale = Vector2(5, 5)
 entry_direction = "right"
 path_to_new_scene = "res://src/scenes/maps/main_hall/main_hall.tscn"
 entry_door_name = "ToRoom200"
+
+[node name="NPC" parent="." instance=ExtResource("5_6t674")]
+position = Vector2(350, 123)
+scale = Vector2(0.5, 0.5)
+npc_name = "Alberto"
+message = "NPC_ROOM_200"
+
+[node name="NPC2" parent="." instance=ExtResource("5_6t674")]
+position = Vector2(241, 342)
+scale = Vector2(0.5, 0.5)
+npc_name = "Nicole"
+message = "NPC_ROOM_200_2"
+facing = 3
+hair = 21
+hat = 0
+outfit = 5
+facial_hair = 0
+
+[node name="NPC3" parent="." instance=ExtResource("5_6t674")]
+position = Vector2(426, 309)
+scale = Vector2(0.5, 0.5)
+npc_name = "Claudio"
+message = "NPC_ROOM_200_3"
+facing = 3
+
+[node name="NPC4" parent="." instance=ExtResource("5_6t674")]
+position = Vector2(219, 635)
+scale = Vector2(0.5, 0.5)
+npc_name = "Gonzalo"
+message = "NPC_ROOM_200_4"
+facing = 2
+body = 6
+hair = 5
+hat = 3
+eyes = 3
+facial_hair = 4
+glasses = 5
+
+[node name="NPC5" parent="." instance=ExtResource("5_6t674")]
+position = Vector2(268, 634)
+scale = Vector2(0.5, 0.5)
+npc_name = "Pablo"
+message = "NPC_ROOM_200_5"
+facing = 1
+body = 4
+hair = 3
+hat = 0
+eyes = 6
+outfit = 8
+facial_hair = 0
+glasses = 0

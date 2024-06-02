@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://dh5kwcipvs4wg"]
+[gd_scene load_steps=22 format=3 uid="uid://dh5kwcipvs4wg"]
 
 [ext_resource type="Script" path="res://src/scenes/level/level.gd" id="1_lqlib"]
 [ext_resource type="PackedScene" uid="uid://b0ckgcsol4ucx" path="res://src/scenes/player/player.tscn" id="1_qea2s"]
 [ext_resource type="TileSet" uid="uid://bl3doteiujli4" path="res://tilesets/classroom.tres" id="2_k64kb"]
 [ext_resource type="PackedScene" uid="uid://dwpwkdnm1106l" path="res://src/scenes/door/door.tscn" id="4_wkeiq"]
+[ext_resource type="PackedScene" uid="uid://u4867656s0ug" path="res://src/scenes/npc/npc.tscn" id="5_bh6x0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wdqbm"]
 size = Vector2(37, 397.75)
@@ -203,3 +204,22 @@ scale = Vector2(7, 3)
 entry_direction = "down"
 path_to_new_scene = "res://src/scenes/maps/central_hall/central_hall.tscn"
 entry_door_name = "Upstairs2"
+
+[node name="NPC" parent="." instance=ExtResource("5_bh6x0")]
+position = Vector2(1982, 161)
+scale = Vector2(0.5, 0.5)
+npc_name = "Marcos"
+message = "NPC_MAIN_HALL"
+facing = 1
+
+[node name="NPC2" parent="." instance=ExtResource("5_bh6x0")]
+position = Vector2(830, 517)
+scale = Vector2(0.5, 0.5)
+npc_name = "Franco"
+message = "NPC_MAIN_HALL_2"
+body = 5
+hat = 8
+eyes = 2
+outfit = 2
+facial_hair = 3
+glasses = 2
