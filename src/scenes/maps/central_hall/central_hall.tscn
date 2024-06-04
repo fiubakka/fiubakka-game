@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dh5kwcipvs4wg"]
+[gd_scene load_steps=30 format=3 uid="uid://dh5kwcipvs4wg"]
 
 [ext_resource type="Script" path="res://src/scenes/level/level.gd" id="1_lqlib"]
 [ext_resource type="PackedScene" uid="uid://b0ckgcsol4ucx" path="res://src/scenes/player/player.tscn" id="1_qea2s"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bkr6lq4yo0vgk" path="res://src/scenes/maps/central_hall/bicicletero.tscn" id="3_bvufc"]
 [ext_resource type="PackedScene" uid="uid://dwpwkdnm1106l" path="res://src/scenes/door/door.tscn" id="4_wkeiq"]
 [ext_resource type="PackedScene" uid="uid://u4867656s0ug" path="res://src/scenes/npc/npc.tscn" id="5_l1hrv"]
+[ext_resource type="Script" path="res://src/scenes/entity_container/entity_container.gd" id="5_p6rc4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_slcuv"]
 size = Vector2(38, 253)
@@ -289,6 +290,9 @@ position = Vector2(288, 1618)
 
 [node name="Railings2" parent="Ladders" instance=ExtResource("3_aefde")]
 position = Vector2(1394, 1618)
+
+[node name="EntityContainer" type="Node2D" parent="."]
+script = ExtResource("5_p6rc4")
 
 [node name="Player" parent="." instance=ExtResource("1_qea2s")]
 position = Vector2(845, 1730)

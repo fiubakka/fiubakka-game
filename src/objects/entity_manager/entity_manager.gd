@@ -1,5 +1,7 @@
 extends Node
 
+signal add_entity(entity: Entity)
+
 const EntityScene = preload("res://src/scenes/entity/entity.tscn")
 const MILISECONDS_UNTIL_DISCONNECT = 15000
 
@@ -47,7 +49,8 @@ func update_entity_state(
 		entity.player_name = entityId
 		entity.set_equipment(equipment)
 		entities[entityId] = entity
-		get_tree().current_scene.add_child(entity)
+		add_entity.emit(entity)
+		
 
 
 func empty_entities() -> void:

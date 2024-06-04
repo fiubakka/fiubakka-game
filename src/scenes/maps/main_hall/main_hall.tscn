@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://dh5kwcipvs4wg"]
+[gd_scene load_steps=23 format=3 uid="uid://dh5kwcipvs4wg"]
 
 [ext_resource type="Script" path="res://src/scenes/level/level.gd" id="1_lqlib"]
 [ext_resource type="PackedScene" uid="uid://b0ckgcsol4ucx" path="res://src/scenes/player/player.tscn" id="1_qea2s"]
 [ext_resource type="TileSet" uid="uid://bl3doteiujli4" path="res://tilesets/classroom.tres" id="2_k64kb"]
+[ext_resource type="Script" path="res://src/scenes/entity_container/entity_container.gd" id="3_dugx4"]
 [ext_resource type="PackedScene" uid="uid://dwpwkdnm1106l" path="res://src/scenes/door/door.tscn" id="4_wkeiq"]
 [ext_resource type="PackedScene" uid="uid://u4867656s0ug" path="res://src/scenes/npc/npc.tscn" id="5_bh6x0"]
 
@@ -188,6 +189,9 @@ shape = SubResource("RectangleShape2D_1lyps")
 [node name="Table" type="CollisionShape2D" parent="WalledProps"]
 position = Vector2(1784, 430)
 shape = SubResource("RectangleShape2D_3shjr")
+
+[node name="EntityContainer" type="Node2D" parent="."]
+script = ExtResource("3_dugx4")
 
 [node name="Player" parent="." instance=ExtResource("1_qea2s")]
 position = Vector2(1130, 755)

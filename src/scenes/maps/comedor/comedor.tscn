@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbuu8vw25y34b"]
+[gd_scene load_steps=15 format=3 uid="uid://dbuu8vw25y34b"]
 
 [ext_resource type="Script" path="res://src/scenes/level/level.gd" id="1_cla88"]
 [ext_resource type="TileSet" uid="uid://bl3doteiujli4" path="res://tilesets/classroom.tres" id="2_y0scn"]
 [ext_resource type="PackedScene" uid="uid://b0ckgcsol4ucx" path="res://src/scenes/player/player.tscn" id="3_jvm7e"]
+[ext_resource type="Script" path="res://src/scenes/entity_container/entity_container.gd" id="4_0xfp5"]
 [ext_resource type="PackedScene" uid="uid://dwpwkdnm1106l" path="res://src/scenes/door/door.tscn" id="4_pvp43"]
 [ext_resource type="PackedScene" uid="uid://u4867656s0ug" path="res://src/scenes/npc/npc.tscn" id="5_0nskk"]
 
@@ -81,6 +82,9 @@ scale = Vector2(3.45267, 7.46071)
 entry_direction = "right"
 path_to_new_scene = "res://src/scenes/maps/central_hall/central_hall.tscn"
 entry_door_name = "Comedor"
+
+[node name="EntityContainer" type="Node2D" parent="."]
+script = ExtResource("4_0xfp5")
 
 [node name="Player" parent="." instance=ExtResource("3_jvm7e")]
 position = Vector2(80, 448)
