@@ -37,3 +37,4 @@ func set_defeat() -> void:
 
 func _on_button_pressed() -> void:
 	exit_button_pressed.emit()
+	# TODO: Add signal to change music here

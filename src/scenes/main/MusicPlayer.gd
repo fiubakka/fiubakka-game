@@ -20,6 +20,6 @@ func _on_main_login_ready() -> void:
 	play()
 
 
-func _on_pause_main_music() -> void:
+func _on_start_truco_music() -> void:
 	stream = truco_music
 	play()

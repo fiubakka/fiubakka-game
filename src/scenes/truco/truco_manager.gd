@@ -293,10 +293,12 @@ func _on_disconnect_pressed() -> void:
 	player_disconnect.emit()
 	SceneManager.load_previous_scene()
 	PlayerInfo.is_playing_truco = false
+	# TODO: Add signal to change music here
 
 
 func _on_opponent_disconnected() -> void:
 	$GameOver.set_victory()
+	# TODO: Add signal to change music here?
 
 
 func check_over_states(
@@ -321,4 +323,5 @@ func check_over_states(
 
 	if is_game_over:
 		game_over.emit()
+		# TODO: Add signal to change music here?
 		$RoundOver.visible = true
