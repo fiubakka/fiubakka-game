@@ -6,6 +6,7 @@ signal shout_played(shout_id: int)
 signal player_disconnect
 signal turn_over
 signal game_over
+signal opponent_abandoned
 
 @export var card_scene: PackedScene
 
@@ -13,6 +14,7 @@ var hand: Hand = null
 var board: Board = null
 var selected_card: Card = null
 var current_play_id := -1
+var opponent_name: String
 var opponent_controller: OpponentController = null
 var opponent_hand: OpponentCards = null
 var is_game_over := false
@@ -133,7 +135,7 @@ func play_enemy_card(suit: int, rank: int) -> void:
 
 
 func update_opponent_name(first_name: String, second_name: String) -> void:
-	var opponent_name := second_name if PlayerInfo.player_name == first_name else first_name
+	opponent_name = second_name if PlayerInfo.player_name == first_name else first_name
 	$OpponentName.text = Utils.center_text(opponent_name)
 
 
@@ -295,8 +297,9 @@ func _on_disconnect_pressed() -> void:
 	PlayerInfo.is_playing_truco = false
 
 
-func _on_opponent_disconnected() -> void:
-	$GameOver.set_victory()
+func _on_opponent_disconnected(disconnected_user_name: String) -> void:
+	if opponent_name == disconnected_user_name:
+		opponent_abandoned.emit()
 
 
 func check_over_states(

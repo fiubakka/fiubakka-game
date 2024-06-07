@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfu6w2rhghpa5"]
+[gd_scene load_steps=8 format=3 uid="uid://cfu6w2rhghpa5"]
 
 [ext_resource type="Script" path="res://src/scenes/truco/GameOver/game_over.gd" id="1_twgal"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="1_x7o6k"]
 [ext_resource type="PackedScene" uid="uid://beaduwccf1n4o" path="res://src/scenes/truco/GameOver/confetti.tscn" id="2_bbb55"]
 [ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="4_v1ksv"]
+[ext_resource type="Script" path="res://src/scenes/truco/GameOver/description.gd" id="5_dybjn"]
 [ext_resource type="PackedScene" uid="uid://kpbsuln7x2le" path="res://src/scenes/truco/Interface/button.tscn" id="6_myyix"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_akxnd"]
@@ -52,10 +53,10 @@ offset_right = -19.0
 offset_bottom = -21.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 25
+theme_override_constants/separation = 10
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/NinePatchRect/VBoxContainer"]
-custom_minimum_size = Vector2(0, 80)
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_colors/default_color = Color(0.239216, 0.239216, 0.239216, 1)
 theme_override_fonts/normal_font = ExtResource("4_v1ksv")
@@ -63,9 +64,19 @@ theme_override_font_sizes/normal_font_size = 72
 bbcode_enabled = true
 text = "TRUCO_TIE"
 
+[node name="Description" type="RichTextLabel" parent="CenterContainer/NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_fonts/normal_font = ExtResource("4_v1ksv")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+script = ExtResource("5_dybjn")
+
 [node name="Button" parent="CenterContainer/NinePatchRect/VBoxContainer" instance=ExtResource("6_myyix")]
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 text = "OPTION_CONTINUE"
 
+[connection signal="opponent_abandoned" from="." to="CenterContainer/NinePatchRect/VBoxContainer/Description" method="_on_game_over_opponent_abandoned"]
 [connection signal="pressed" from="CenterContainer/NinePatchRect/VBoxContainer/Button" to="." method="_on_button_pressed"]

@@ -39,12 +39,8 @@ const PBTrucoAllowPlay = (
 
 const PBTrucoPlay = preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoPlay
 
-# TODO: replace for disconnect message from server (not client)
-const PBClientMessageType = (
-	preload("res://addons/protocol/compiled/client/metadata.gd").PBClientMessageType
-)
-const PBTrucoDisconnect = (
-	preload("res://addons/protocol/compiled/client/truco/disconnect.gd").PBTrucoDisconnect
+const PBTrucoPlayerDisconnected = (
+	preload("res://addons/protocol/compiled/server/truco/player_disconnected.gd").PBTrucoPlayerDisconnected
 )
 
 static var _MESSAGE_MAP := {
@@ -58,7 +54,7 @@ static var _MESSAGE_MAP := {
 	PBServerMessageType.PBTrucoMatchChallengeDenied: PBTrucoMatchChallengeDenied,
 	PBServerMessageType.PBTrucoAllowPlay: PBTrucoAllowPlay,
 	PBServerMessageType.PBTrucoPlay: PBTrucoPlay,
-	PBClientMessageType.PBTrucoDisconnect: PBTrucoDisconnect  # TODO: replace for server disconnect message
+	PBServerMessageType.PBTrucoPlayerDisconnected: PBTrucoPlayerDisconnected
 }
 
 
