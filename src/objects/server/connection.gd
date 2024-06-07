@@ -3,8 +3,8 @@ extends Object
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 const Producer = preload("res://src/objects/server/producer/producer.gd")
 
-const HOST = "0.tcp.sa.ngrok.io" #"127.0.0.1"
-const PORT = 14478 #2020
+const HOST = "127.0.0.1"
+const PORT = 2020
 
 var _conn: StreamPeerTCP
 var consumer: Consumer
