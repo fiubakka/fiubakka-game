@@ -6,6 +6,10 @@ Trabajo profesional: Juego distribuido en Akka (Client)
 Welcome to Fiubakka! If you'd like to play the game, simply follow the steps for your OS:
 
 #### Windows
+#### Quick start
+- Install Cloudflare Daemon by running `setup.bat` once
+- Play the game by running `play.bat`
+#### Manual installation
 - Download and install [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-local-tunnel/#1-download-and-install-cloudflared):
 ```powershell
 winget install --id Cloudflare.cloudflared
@@ -15,8 +19,16 @@ winget install --id Cloudflare.cloudflared
 ```powershell
 cloudflared access tcp --hostname fiubakka.marcosrolando.uk --url 127.0.0.1:2020
 ```
+- Play the game by running `fiubakka.exe`
 
 #### Linux
+#### Quick start
+- For installation, run `setup.sh` once. This will download and install the Cloudflare Daemon (`cloudflared`) on your system
+- Run `play.sh` and start playing!
+
+#### Manual installation
+Alternatively, you can run the steps manually
+
 - Download and install [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/get-started/create-local-tunnel/#1-download-and-install-cloudflared):
 ```bash
 # Add cloudflare gpg key
@@ -31,8 +43,12 @@ sudo apt-get update && sudo apt-get install cloudflared
 ```
 - Download Fiubakka
 - Before running the game, start the cloudflared tunnel:
-```powershell
+```bash
 cloudflared access tcp --hostname fiubakka.marcosrolando.uk --url 127.0.0.1:2020
+```
+- Run the game on another terminal:
+```bash
+./fiubakka
 ```
 
 ## Dependencies
