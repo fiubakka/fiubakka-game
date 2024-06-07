@@ -186,6 +186,7 @@ func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 		)
 		update_shouts(dto.available_shouts)
 		update_points(dto.first_points, dto.first_name, dto.second_points)
+		_can_play_cards = dto.is_play_card_available
 
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
