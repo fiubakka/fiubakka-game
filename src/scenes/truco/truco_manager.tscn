@@ -55,7 +55,7 @@ size_flags_vertical = 4
 [node name="Options" parent="." instance=ExtResource("5_wx3mx")]
 offset_top = 388.0
 offset_right = 960.0
-offset_bottom = 539.0
+offset_bottom = 531.0
 
 [node name="PlayerName" type="RichTextLabel" parent="."]
 offset_left = 35.0
