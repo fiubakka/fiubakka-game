@@ -59,9 +59,9 @@ offset_bottom = 531.0
 
 [node name="PlayerName" type="RichTextLabel" parent="."]
 offset_left = 35.0
-offset_top = 340.0
+offset_top = 310.0
 offset_right = 255.0
-offset_bottom = 390.0
+offset_bottom = 360.0
 theme_override_fonts/normal_font = ExtResource("11_g02iv")
 theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
@@ -94,10 +94,10 @@ offset_bottom = 34.0
 position = Vector2(487, -79)
 
 [node name="Points" parent="." instance=ExtResource("11_upv27")]
-offset_left = 36.0
-offset_top = 391.0
-offset_right = 36.0
-offset_bottom = 391.0
+offset_left = 35.0
+offset_top = 355.0
+offset_right = 35.0
+offset_bottom = 355.0
 scale = Vector2(1.5, 1.5)
 
 [node name="OpponentPoints" parent="." instance=ExtResource("11_upv27")]
