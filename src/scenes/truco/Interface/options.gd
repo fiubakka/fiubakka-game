@@ -66,6 +66,7 @@ func clean() -> void:
 
 
 func disable_buttons(is_disable: bool) -> void:
+	visible = !is_disable
 	for button: TrucoButton in available_shots:
 		button.disabled = is_disable
 

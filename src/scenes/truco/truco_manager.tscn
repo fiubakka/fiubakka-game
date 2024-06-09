@@ -53,6 +53,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Options" parent="." instance=ExtResource("5_wx3mx")]
+visible = false
 offset_left = 190.0
 offset_top = 388.0
 offset_right = 802.0
@@ -152,5 +153,6 @@ text = "Salir"
 [connection signal="opponent_abandoned" from="." to="GameOver" method="_on_truco_manager_opponent_abandoned"]
 [connection signal="turn_over" from="." to="Board" method="_on_truco_manager_turn_over"]
 [connection signal="player_card_played" from="Board" to="." method="_on_board_player_card_played"]
+[connection signal="shout_played" from="Options" to="." method="_on_options_shout_played"]
 [connection signal="remove_card_from_hand" from="OpponentController" to="." method="_on_opponent_controller_remove_card_from_hand"]
 [connection signal="pressed" from="Disconnect" to="." method="_on_disconnect_pressed"]

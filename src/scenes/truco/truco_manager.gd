@@ -31,8 +31,6 @@ func _ready() -> void:
 	opponent_controller = $OpponentController
 	opponent_hand = $OpponentHand
 
-	options.shout_played.connect(self._on_options_shout_played)
-
 	$PlayerName.text = Utils.center_text(PlayerInfo.player_name)
 
 	var consumer := get_node("/root/Main/ServerConnection/ServerConsumer")
