@@ -53,6 +53,7 @@ func set_available_shouts(shouts: Array) -> void:
 
 func _on_button_truco_pressed(shout_id: int) -> void:
 	shout_played.emit(shout_id)
+	visible = false
 
 
 func clean() -> void:

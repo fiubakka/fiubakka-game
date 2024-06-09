@@ -149,6 +149,10 @@ offset_right = 930.0
 offset_bottom = 76.0
 text = "Salir"
 
+[node name="GameOverTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="game_over" from="." to="Board" method="_on_truco_manager_game_over"]
 [connection signal="opponent_abandoned" from="." to="GameOver" method="_on_truco_manager_opponent_abandoned"]
 [connection signal="turn_over" from="." to="Board" method="_on_truco_manager_turn_over"]
