@@ -19,7 +19,7 @@ var opponent_controller: OpponentController = null
 var opponent_hand: OpponentCards = null
 var is_game_over := false
 var is_match_over := false
-var _last_played_card_id := -1
+var _last_play: TrucoLastPlayDto = null
 var _can_play_cards := false
 @onready var options: Options = $Options
 @onready var game_over_timer: Timer = $GameOverTimer
@@ -115,7 +115,7 @@ func _on_board_player_card_played(card: Card) -> void:
 	options.disable_buttons(true)
 	play_card.emit(current_play_id, card.id)
 	turn_over.emit()
-	_last_played_card_id = card.id
+	_last_play = TrucoLastPlayDto.new(TrucoLastPlayDto.TYPES.CARD, card.id, -1)
 	$PlayerIcon.visible = false
 	$OpponentIcon.visible = true
 
@@ -149,7 +149,7 @@ func update_points(first_points: int, first_name: String, second_points: int) ->
 
 func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 	if dto.play_id == current_play_id:
-		_last_played_card_id = -1
+		_last_play = null
 		check_over_states(
 			dto.game_over, dto.match_over, dto.first_name, dto.first_points, dto.second_points
 		)
@@ -179,7 +179,7 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 
 func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 	if dto.play_id == current_play_id:
-		_last_played_card_id = -1
+		_last_play = null
 		check_over_states(
 			dto.game_over, dto.match_over, dto.first_name, dto.first_points, dto.second_points
 		)
@@ -205,7 +205,7 @@ func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 
 func _on_truco_play_update(dto: TrucoPlayUpdateDto) -> void:
 	if dto.play_id == current_play_id:
-		_last_played_card_id = -1
+		_last_play = null
 
 	# Ignore plays that are previous or the same as the current one
 	if dto.play_id <= current_play_id:
@@ -260,10 +260,12 @@ func _on_game_over_timer_timeout(
 func _on_allow_truco_play(play_id: int) -> void:
 	# Ignore plays that are previous or the same as the current one
 	# If it happens, send the last TrucoPlay for consistency with server
-	if play_id <= current_play_id and _last_played_card_id > -1:
-		# Resend last TrucoPlay
-		# Case: Card played
-		play_card.emit(current_play_id, _last_played_card_id)
+	if play_id <= current_play_id and _last_play:
+		match _last_play.type:
+			TrucoLastPlayDto.TYPES.CARD:
+				play_card.emit(current_play_id, _last_play.card_id)
+			TrucoLastPlayDto.TYPES.SHOUT:
+				shout_played.emit(current_play_id, _last_play.shout_id)
 		return
 
 	current_play_id = play_id
@@ -281,6 +283,7 @@ func _on_options_shout_played(shout_id: int) -> void:
 	$PlayerIcon.visible = false
 	$OpponentIcon.visible = true
 	shout_played.emit(current_play_id, shout_id)
+	_last_play = TrucoLastPlayDto.new(TrucoLastPlayDto.TYPES.SHOUT, -1, shout_id)
 	options.disable_buttons(true)
 
 	# Disable playing cards when I make a shout
