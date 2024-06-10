@@ -58,6 +58,11 @@ func _ready() -> void:
 	if !player_disconnect.is_connected(producer_truco_disconnect_handler):
 		player_disconnect.connect(producer_truco_disconnect_handler)
 
+	var musicPlayer := get_node("/root/Main/MusicPlayer")
+	var music_player_truco_disconnect_handler: Callable = musicPlayer._on_truco_manager_disconnect
+	if !player_disconnect.is_connected(music_player_truco_disconnect_handler):
+		player_disconnect.connect(music_player_truco_disconnect_handler)
+
 	$GameOver.exit_button_pressed.connect(_on_disconnect_pressed)
 
 	$PlayerIcon.visible = false
@@ -288,7 +293,6 @@ func _on_disconnect_pressed() -> void:
 	player_disconnect.emit()
 	SceneManager.load_previous_scene()
 	PlayerInfo.is_playing_truco = false
-	# TODO: Add signal to change music here
 
 
 func _on_opponent_disconnected(disconnected_user_name: String) -> void:
@@ -318,5 +322,4 @@ func check_over_states(
 
 	if is_game_over:
 		game_over.emit()
-		# TODO: Add signal to change music here?
 		$RoundOver.visible = true

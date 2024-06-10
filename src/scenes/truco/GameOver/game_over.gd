@@ -38,7 +38,6 @@ func set_defeat() -> void:
 
 func _on_button_pressed() -> void:
 	exit_button_pressed.emit()
-	# TODO: Add signal to change music here
 
 
 func _on_truco_manager_opponent_abandoned() -> void:

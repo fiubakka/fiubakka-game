@@ -23,3 +23,8 @@ func _on_main_login_ready() -> void:
 func _on_start_truco_music() -> void:
 	stream = truco_music
 	play()
+
+
+func _on_truco_manager_disconnect() -> void:
+	stream = main_music
+	play()
