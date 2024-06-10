@@ -55,6 +55,7 @@ func set_available_shouts(shouts: Array) -> void:
 
 func _on_button_truco_pressed(shout_id: int) -> void:
 	shout_played.emit(shout_id)
+	visible = false
 
 
 func clean() -> void:
@@ -68,6 +69,7 @@ func clean() -> void:
 
 
 func disable_buttons(is_disable: bool) -> void:
+	visible = !is_disable
 	for button: TrucoButton in available_shots:
 		button.disabled = is_disable
 
