@@ -70,9 +70,9 @@ const PBTrucoNextPlay = (
 
 const PBTrucoShout = preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoShout
 
-# TODO: replace for server message
-const PBTrucoDisconnect = (
-	preload("res://addons/protocol/compiled/client/truco/disconnect.gd").PBTrucoDisconnect
+const PBTrucoPlayerDisconnected = (
+	preload("res://addons/protocol/compiled/server/truco/player_disconnected.gd")
+	. PBTrucoPlayerDisconnected
 )
 
 var _thread: Thread
@@ -123,7 +123,7 @@ func _handle_message(message: Object) -> void:
 		handler = "_handle_truco_allow_play"
 	elif message is PBTrucoPlay:
 		handler = "_handle_truco_play"
-	elif message is PBTrucoDisconnect:  # TODO: replace for server message
+	elif message is PBTrucoPlayerDisconnected:
 		handler = "_handle_truco_disconnect"
 
 	call_deferred(handler, message)
@@ -324,5 +324,5 @@ func _parse_player_cards(msg: PBTrucoPlay) -> Array[Card]:
 	return player_cards
 
 
-func _handle_truco_disconnect(msg: PBTrucoDisconnect) -> void:
-	truco_opponent_disconnected.emit()
+func _handle_truco_disconnect(msg: PBTrucoPlayerDisconnected) -> void:
+	truco_opponent_disconnected.emit(msg.get_opponent_username())

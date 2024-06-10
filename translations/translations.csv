@@ -52,6 +52,7 @@ TRUCO_NO_QUIERO,"No quiero",Reject
 TRUCO_VICTORY,Victoria!,Victory!
 TRUCO_DEFEAT,Derrota...,Defeat...
 TRUCO_TIE,Empate!,Tie!
+TRUCO_OPPONENT_ABANDONED,El oponente abandonó la partida,The opponent has abandoned the game
 MAZO,Mazo,Fold
 ENVIDO, Envido, Envido
 REAL_ENVIDO, Real Envido, Royal Envido

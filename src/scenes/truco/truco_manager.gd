@@ -6,6 +6,7 @@ signal shout_played(shout_id: int)
 signal player_disconnect
 signal turn_over
 signal game_over
+signal opponent_abandoned
 
 @export var card_scene: PackedScene
 
@@ -13,13 +14,15 @@ var hand: Hand = null
 var board: Board = null
 var selected_card: Card = null
 var current_play_id := -1
+var opponent_name: String
 var opponent_controller: OpponentController = null
 var opponent_hand: OpponentCards = null
 var is_game_over := false
 var is_match_over := false
-var _last_played_card_id := -1
+var _last_play: TrucoLastPlayDto = null
 var _can_play_cards := false
 @onready var options: Options = $Options
+@onready var game_over_timer: Timer = $GameOverTimer
 
 
 func _ready() -> void:
@@ -28,8 +31,6 @@ func _ready() -> void:
 	board = $Board
 	opponent_controller = $OpponentController
 	opponent_hand = $OpponentHand
-
-	options.shout_played.connect(self._on_options_shout_played)
 
 	$PlayerName.text = Utils.center_text(PlayerInfo.player_name)
 
@@ -114,7 +115,7 @@ func _on_board_player_card_played(card: Card) -> void:
 	options.disable_buttons(true)
 	play_card.emit(current_play_id, card.id)
 	turn_over.emit()
-	_last_played_card_id = card.id
+	_last_play = TrucoLastPlayDto.new(TrucoLastPlayDto.TYPES.CARD, card.id, -1)
 	$PlayerIcon.visible = false
 	$OpponentIcon.visible = true
 
@@ -133,7 +134,7 @@ func play_enemy_card(suit: int, rank: int) -> void:
 
 
 func update_opponent_name(first_name: String, second_name: String) -> void:
-	var opponent_name := second_name if PlayerInfo.player_name == first_name else first_name
+	opponent_name = second_name if PlayerInfo.player_name == first_name else first_name
 	$OpponentName.text = Utils.center_text(opponent_name)
 
 
@@ -148,7 +149,7 @@ func update_points(first_points: int, first_name: String, second_points: int) ->
 
 func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 	if dto.play_id == current_play_id:
-		_last_played_card_id = -1
+		_last_play = null
 		check_over_states(
 			dto.game_over, dto.match_over, dto.first_name, dto.first_points, dto.second_points
 		)
@@ -178,12 +179,13 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 
 func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 	if dto.play_id == current_play_id:
-		_last_played_card_id = -1
+		_last_play = null
 		check_over_states(
 			dto.game_over, dto.match_over, dto.first_name, dto.first_points, dto.second_points
 		)
 		update_shouts(dto.available_shouts)
 		update_points(dto.first_points, dto.first_name, dto.second_points)
+		_can_play_cards = dto.is_play_card_available
 
 	if dto.play_id <= current_play_id:
 		play_ack.emit(dto.play_id)
@@ -203,7 +205,7 @@ func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
 
 func _on_truco_play_update(dto: TrucoPlayUpdateDto) -> void:
 	if dto.play_id == current_play_id:
-		_last_played_card_id = -1
+		_last_play = null
 
 	# Ignore plays that are previous or the same as the current one
 	if dto.play_id <= current_play_id:
@@ -225,20 +227,12 @@ func _on_truco_play_update(dto: TrucoPlayUpdateDto) -> void:
 	# Clear board and update hand when going from game_over to new game
 	if is_game_over and !dto.game_over:
 		is_game_over = dto.game_over
-		var timer := Timer.new()
-		timer.timeout.connect(
+		game_over_timer.timeout.connect(
 			Callable(self, "_on_game_over_timer_timeout").bind(
-				dto.play_id,
-				dto.player_cards,
-				dto.is_play_card_available,
-				dto.available_shouts,
-				timer
+				dto.play_id, dto.player_cards, dto.is_play_card_available, dto.available_shouts
 			)
 		)
-		timer.one_shot = true
-		timer.set_wait_time(3.0)
-		add_child(timer)
-		timer.start()
+		game_over_timer.start()
 		return
 
 	update_shouts(dto.available_shouts)
@@ -246,11 +240,7 @@ func _on_truco_play_update(dto: TrucoPlayUpdateDto) -> void:
 
 
 func _on_game_over_timer_timeout(
-	play_id: int,
-	cards: Array[Card],
-	is_play_card_available: bool,
-	available_shouts: Array,
-	timer: Timer
+	play_id: int, cards: Array[Card], is_play_card_available: bool, available_shouts: Array
 ) -> void:
 	$RoundOver.visible = false
 	clean()
@@ -258,17 +248,18 @@ func _on_game_over_timer_timeout(
 	update_shouts(available_shouts)
 	play_ack.emit(play_id)
 	game_over.emit()
-	timer.queue_free()
-	return
+	game_over_timer.disconnect("timeout", self._on_game_over_timer_timeout)
 
 
 func _on_allow_truco_play(play_id: int) -> void:
 	# Ignore plays that are previous or the same as the current one
 	# If it happens, send the last TrucoPlay for consistency with server
-	if play_id <= current_play_id and _last_played_card_id > -1:
-		# Resend last TrucoPlay
-		# Case: Card played
-		play_card.emit(current_play_id, _last_played_card_id)
+	if play_id <= current_play_id and _last_play:
+		match _last_play.type:
+			TrucoLastPlayDto.TYPES.CARD:
+				play_card.emit(current_play_id, _last_play.card_id)
+			TrucoLastPlayDto.TYPES.SHOUT:
+				shout_played.emit(current_play_id, _last_play.shout_id)
 		return
 
 	current_play_id = play_id
@@ -276,6 +267,9 @@ func _on_allow_truco_play(play_id: int) -> void:
 	$OpponentIcon.visible = false
 	if _can_play_cards:
 		board.enable_current_play_zone()
+
+	if game_over_timer and !game_over_timer.is_stopped():
+		await game_over_timer.timeout
 	options.disable_buttons(false)
 
 
@@ -283,6 +277,7 @@ func _on_options_shout_played(shout_id: int) -> void:
 	$PlayerIcon.visible = false
 	$OpponentIcon.visible = true
 	shout_played.emit(current_play_id, shout_id)
+	_last_play = TrucoLastPlayDto.new(TrucoLastPlayDto.TYPES.SHOUT, -1, shout_id)
 	options.disable_buttons(true)
 
 	# Disable playing cards when I make a shout
@@ -296,9 +291,9 @@ func _on_disconnect_pressed() -> void:
 	# TODO: Add signal to change music here
 
 
-func _on_opponent_disconnected() -> void:
-	$GameOver.set_victory()
-	# TODO: Add signal to change music here?
+func _on_opponent_disconnected(disconnected_user_name: String) -> void:
+	if opponent_name == disconnected_user_name:
+		opponent_abandoned.emit()
 
 
 func check_over_states(
