@@ -127,10 +127,16 @@ func _on_opponent_controller_remove_card_from_hand() -> void:
 func play_enemy_card(suit: int, rank: int) -> void:
 	opponent_controller.set_hand(rank, suit)
 	var drop_zones := get_tree().get_nodes_in_group("opponent_table")
+	var idx := 0
 	for drop_zone: DropZone in drop_zones:
 		if !drop_zone.has_card:
+			# Ask the board if another card was played this turn
+			var is_turn_last_card := board.is_turn_last_card(idx)
 			opponent_controller.play_card(drop_zone)
+			if is_turn_last_card:
+				drop_zone.change_card_index(2)
 			break
+		idx += 1
 
 
 func update_opponent_name(first_name: String, second_name: String) -> void:

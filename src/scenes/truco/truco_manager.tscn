@@ -120,6 +120,7 @@ text = "TRUCO_ROUND_OVER"
 
 [node name="GameOver" parent="." instance=ExtResource("12_pymvi")]
 visible = false
+z_index = 3
 offset_left = 484.0
 offset_top = 257.0
 offset_right = 484.0
