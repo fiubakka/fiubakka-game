@@ -38,6 +38,8 @@ func set_available_shouts(shouts: Array) -> void:
 			continue
 		var shout_name := ""
 		var button: TrucoButton = TrucoButtonScn.instantiate()
+		button.custom_minimum_size = Vector2(50, 50)
+		button.scale = Vector2(0.8, 0.8)
 		button.disabled = true
 		if shout in shouts_names:
 			available_shots.append(button)
