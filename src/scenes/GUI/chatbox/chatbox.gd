@@ -8,7 +8,6 @@ var waiting_for_login: bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#TODO: How can we instantiate this scene AFTER login is succesful?
 	pass  # Replace with function body.
 
 
@@ -28,7 +27,6 @@ func _process(_delta: float) -> void:
 
 
 func focus_chat() -> void:
-	#TODO: A pesar de estar focuseado el player se mueve al tocar wasd
 	$LineEdit.grab_focus()
 
 

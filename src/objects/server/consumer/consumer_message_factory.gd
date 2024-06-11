@@ -40,7 +40,8 @@ const PBTrucoAllowPlay = (
 const PBTrucoPlay = preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoPlay
 
 const PBTrucoPlayerDisconnected = (
-	preload("res://addons/protocol/compiled/server/truco/player_disconnected.gd").PBTrucoPlayerDisconnected
+	preload("res://addons/protocol/compiled/server/truco/player_disconnected.gd")
+	. PBTrucoPlayerDisconnected
 )
 
 static var _MESSAGE_MAP := {

@@ -71,7 +71,8 @@ const PBTrucoNextPlay = (
 const PBTrucoShout = preload("res://addons/protocol/compiled/server/truco/play.gd").PBTrucoShout
 
 const PBTrucoPlayerDisconnected = (
-	preload("res://addons/protocol/compiled/server/truco/player_disconnected.gd").PBTrucoPlayerDisconnected
+	preload("res://addons/protocol/compiled/server/truco/player_disconnected.gd")
+	. PBTrucoPlayerDisconnected
 )
 
 var _thread: Thread

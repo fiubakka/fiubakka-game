@@ -229,24 +229,18 @@ func _on_truco_play_update(dto: TrucoPlayUpdateDto) -> void:
 		is_game_over = dto.game_over
 		game_over_timer.timeout.connect(
 			Callable(self, "_on_game_over_timer_timeout").bind(
-				dto.play_id,
-				dto.player_cards,
-				dto.is_play_card_available,
-				dto.available_shouts
+				dto.play_id, dto.player_cards, dto.is_play_card_available, dto.available_shouts
 			)
 		)
 		game_over_timer.start()
 		return
-	
+
 	update_shouts(dto.available_shouts)
 	play_ack.emit(dto.play_id)
 
 
 func _on_game_over_timer_timeout(
-	play_id: int,
-	cards: Array[Card],
-	is_play_card_available: bool,
-	available_shouts: Array
+	play_id: int, cards: Array[Card], is_play_card_available: bool, available_shouts: Array
 ) -> void:
 	$RoundOver.visible = false
 	clean()
@@ -254,7 +248,7 @@ func _on_game_over_timer_timeout(
 	update_shouts(available_shouts)
 	play_ack.emit(play_id)
 	game_over.emit()
-	game_over_timer.disconnect('timeout', self._on_game_over_timer_timeout)
+	game_over_timer.disconnect("timeout", self._on_game_over_timer_timeout)
 
 
 func _on_allow_truco_play(play_id: int) -> void:
@@ -273,7 +267,7 @@ func _on_allow_truco_play(play_id: int) -> void:
 	$OpponentIcon.visible = false
 	if _can_play_cards:
 		board.enable_current_play_zone()
-	
+
 	if game_over_timer and !game_over_timer.is_stopped():
 		await game_over_timer.timeout
 	options.disable_buttons(false)

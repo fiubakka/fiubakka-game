@@ -9,7 +9,6 @@ func _on_text_edit_send_message(new_message: String) -> void:
 
 
 func add_new_message(username: String, new_message: String) -> void:
-	# TODO: format other player messages with other colors
 	var user := "[" + username + "]"
 	if username != me:
 		user = "[color=#ffaaaa]" + user + "[/color]"

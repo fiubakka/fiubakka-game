@@ -23,8 +23,6 @@ func _on_server_consumer_user_init_ready(
 	var map_content_path := MapsDictionary.id_to_content_path(mapId)
 	SceneManager.load_new_scene(map_content_path)
 	SceneManager._load_content(map_content_path)
-	#TODO: Is it okay to change the initial position of the player like this or should we use something else
-	# like signals for example?
 	await SceneManager.transition_finished
 	var player: Player = get_tree().current_scene.get_node("Player")
 	var producer_movement_signal_handler: Callable = (
@@ -46,7 +44,6 @@ func _on_server_consumer_user_init_ready(
 	audio_player.play()
 
 	$GUI/GuiManager.set_process(true)
-	ui_opened.connect(player._on_main_ui_opened)
 
 
 func _on_pause_unpaused() -> void:
@@ -74,7 +71,11 @@ func _on_register_return_to_menu() -> void:
 
 
 func _on_gui_manager_ui_opened(open: bool) -> void:
-	ui_opened.emit(open)
+	var player: Player = get_tree().current_scene.get_node("Player")
+	if open:
+		player.disable()
+	else:
+		player.enable()
 
 
 func _on_pause_main_music() -> void:
