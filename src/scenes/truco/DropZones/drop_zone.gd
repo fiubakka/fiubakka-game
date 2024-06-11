@@ -6,14 +6,14 @@ var has_card := false
 var card: Card = null
 var is_enabled := false
 
-signal player_card_played(card: Card)
+signal player_card_played(card: Card, drop_zone: DropZone)
 
 
 func select(_card: Card) -> void:
 	has_card = true
 	card = _card
 	if self in get_tree().get_nodes_in_group("table"):
-		player_card_played.emit(_card)
+		player_card_played.emit(_card, self)
 
 
 func deselect() -> void:

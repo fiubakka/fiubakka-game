@@ -129,7 +129,11 @@ func play_enemy_card(suit: int, rank: int) -> void:
 	var drop_zones := get_tree().get_nodes_in_group("opponent_table")
 	for drop_zone: DropZone in drop_zones:
 		if !drop_zone.has_card:
+			# Ask the board if another card was played this turn
+			var is_turn_last_card := board.is_turn_last_card()
 			opponent_controller.play_card(drop_zone)
+			if is_turn_last_card:
+				drop_zone.change_card_index(2)
 			break
 
 
