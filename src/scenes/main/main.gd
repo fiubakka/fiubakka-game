@@ -10,7 +10,6 @@ const MILISECONDS_UNTIL_DISCONNECT = 15000
 var is_game_paused: bool = false
 
 signal login_ready
-signal ui_opened(open: bool)
 
 
 func _process(_delta: float) -> void:
