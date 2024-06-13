@@ -100,8 +100,7 @@ func _on_content_finished_loading(new_scene: Node) -> void:
 	get_tree().root.call("add_child", new_scene)
 	get_tree().set("current_scene", new_scene)
 	EntityManager.empty_entities()
-	
-	#await new_scene.ready
+
 	if new_scene is Level:
 		new_scene.enter_level()
 		
