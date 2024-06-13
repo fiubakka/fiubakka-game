@@ -71,10 +71,14 @@ func _check_load_status() -> void:
 
 func _on_content_finished_loading(new_scene: Node) -> void:
 	var current_scene := get_tree().current_scene
+	var transition_from_main := current_scene.name == "Main"
 
 	# Level data handoff
+	# When transitioning from different Levels, transfer all data
 	if current_scene is Level and new_scene is Level:
 		new_scene.data = current_scene.data
+	# When transitioning from MainMenu or from TrucoManager
+	# fetch player equipment from fallback (PlayerInfo)
 	elif not current_scene is Level:
 		var pc := PlayerInfo.player_customization
 		var equipment := Equipment.new()
@@ -90,23 +94,31 @@ func _on_content_finished_loading(new_scene: Node) -> void:
 		new_scene.data = {"player_equipment": equipment}
 
 	# quickfix for now
-	if current_scene.name != "Main":
+	if not transition_from_main:
 		current_scene.queue_free()
 
-	get_tree().root.call_deferred("add_child", new_scene)
-	get_tree().set_deferred("current_scene", new_scene)
+	get_tree().root.call("add_child", new_scene)
+	get_tree().set("current_scene", new_scene)
 	EntityManager.empty_entities()
-
+	
+	#await new_scene.ready
+	if new_scene is Level:
+		new_scene.enter_level()
+		
+	if transition_from_main:
+		transition_finished.emit()
+		return
+	
+	remove_loading_screen()
+	
+	transition_finished.emit()
+	
+func remove_loading_screen() -> void:
 	if loading_screen != null:
 		loading_screen.finish_transition()
 		await loading_screen.animation_player.animation_finished
 		loading_screen = null
-		if new_scene is Level:
-			new_scene.enter_level()
-
 	is_loading_scene = false
-	transition_finished.emit()
-
 
 func player_change_map_ready(new_map_id: int) -> void:
 	var map_content_path := MapsDictionary.id_to_content_path(new_map_id)
