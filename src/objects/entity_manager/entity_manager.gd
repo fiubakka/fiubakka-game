@@ -50,7 +50,6 @@ func update_entity_state(
 		entity.set_equipment(equipment)
 		entities[entityId] = entity
 		add_entity.emit(entity)
-		
 
 
 func empty_entities() -> void:
