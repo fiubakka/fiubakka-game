@@ -63,6 +63,11 @@ func disable_current_play_zone() -> void:
 	turn.disable_play_zone()
 
 
+func is_turn_last_card(idx: int) -> bool:
+	var turn := turns[idx]
+	return turn.has_card_in_play()
+
+
 func _on_truco_manager_turn_over() -> void:
 	if current_turn < 2:
 		current_turn += 1

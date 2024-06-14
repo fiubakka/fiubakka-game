@@ -57,5 +57,6 @@ func empty_entities() -> void:
 
 
 func remove_entity(other_player_id: String) -> void:
-	entities[other_player_id].queue_free()
+	if entities.has(other_player_id):
+		entities[other_player_id].queue_free()
 	entities.erase(other_player_id)

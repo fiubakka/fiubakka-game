@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and selected and not played:
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 			get_unselected.emit()
-			var shortest_dist := 50
+			var shortest_dist := 75
 			var next_rest_point: Node2D = current_rest_point
 			var rest_nodes := get_tree().get_nodes_in_group("zone")
 			for child: Node2D in rest_nodes:

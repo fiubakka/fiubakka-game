@@ -29,7 +29,6 @@ func _ready() -> void:
 
 
 func get_inventory() -> void:
-	# TODO: the server should tell this info and everytime you open the inventory
 	var ic := ItemsCatalogue
 	Inventory.append(ic.items_catalogue["miscellaneous"][0])
 	Inventory.append(ic.items_catalogue["hats"][1])
