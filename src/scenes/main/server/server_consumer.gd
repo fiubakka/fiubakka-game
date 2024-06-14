@@ -12,7 +12,7 @@ signal truco_play_update(truco_play_update_dto: TrucoPlayUpdateDto)
 signal truco_shout_played(truco_play_shout_dto: TrucoPlayShoutDto)
 signal truco_opponent_disconnected
 
-signal pause_main_music
+signal start_truco_music
 
 const Consumer = preload("res://src/objects/server/consumer/consumer.gd")
 
@@ -232,7 +232,7 @@ func _handle_truco_play(msg: PBTrucoPlay) -> void:
 		SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
 		PlayerInfo.is_playing_truco = true
 		await SceneManager.transition_finished
-		pause_main_music.emit()
+		start_truco_music.emit()
 
 	var play_type: PBTrucoPlayTypeEnum = msg.get_playType()
 

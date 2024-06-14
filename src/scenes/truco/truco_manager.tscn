@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://bhw67fd6dh0n0"]
+[gd_scene load_steps=15 format=3 uid="uid://bhw67fd6dh0n0"]
 
 [ext_resource type="Script" path="res://src/scenes/truco/truco_manager.gd" id="1_rogtf"]
 [ext_resource type="PackedScene" uid="uid://44gpne03ucab" path="res://src/scenes/truco/card.tscn" id="2_p2aov"]
 [ext_resource type="PackedScene" uid="uid://ck13xfuh3kxji" path="res://src/scenes/truco/Table/board.tscn" id="3_elw7y"]
-[ext_resource type="AudioStream" uid="uid://lye8lkc05pn7" path="res://audio/music/truco.ogg" id="3_tuu7r"]
 [ext_resource type="PackedScene" uid="uid://b8ea56gusfb6g" path="res://src/scenes/truco/hand.tscn" id="4_ri81m"]
 [ext_resource type="PackedScene" uid="uid://dgbtyukekq1cs" path="res://src/scenes/truco/Interface/options.tscn" id="5_wx3mx"]
 [ext_resource type="PackedScene" uid="uid://d1osyi5ag2uxg" path="res://src/scenes/truco/Interface/opponent_cards.tscn" id="6_x3d1k"]
@@ -20,12 +19,6 @@
 [node name="TrucoManager" type="Node2D"]
 script = ExtResource("1_rogtf")
 card_scene = ExtResource("2_p2aov")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_tuu7r")
-volume_db = 1.0
-autoplay = true
-bus = &"MusicMain"
 
 [node name="Background" type="NinePatchRect" parent="."]
 modulate = Color(0.101961, 0.360784, 0.27451, 1)

@@ -1,6 +1,6 @@
 extends Node
 
-signal pause_main_music
+signal start_truco_music
 
 const Producer = preload("res://src/objects/server/producer/producer.gd")
 
@@ -137,7 +137,7 @@ func _on_modal_match_accepted(opponent_id: String) -> void:
 	# TODO: load content only when we get an accepted match confirmation from the server
 	SceneManager._load_content("res://src/scenes/truco/truco_manager.tscn")
 	PlayerInfo.is_playing_truco = true
-	pause_main_music.emit()
+	start_truco_music.emit()
 
 
 func _on_modal_match_rejected(opponent_id: String) -> void:

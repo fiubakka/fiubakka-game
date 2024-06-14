@@ -39,9 +39,6 @@ func _on_server_consumer_user_init_ready(
 	$Login.queue_free()
 	$Register.queue_free()
 
-	var audio_player := $AudioStreamPlayer
-	audio_player.play()
-
 	$GUI/GuiManager.set_process(true)
 
 
@@ -75,8 +72,3 @@ func _on_gui_manager_ui_opened(open: bool) -> void:
 		player.disable()
 	else:
 		player.enable()
-
-
-func _on_pause_main_music() -> void:
-	var audio_player := $AudioStreamPlayer
-	audio_player.stop()

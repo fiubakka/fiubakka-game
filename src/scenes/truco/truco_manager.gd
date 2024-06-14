@@ -58,6 +58,11 @@ func _ready() -> void:
 	if !player_disconnect.is_connected(producer_truco_disconnect_handler):
 		player_disconnect.connect(producer_truco_disconnect_handler)
 
+	var musicPlayer := get_node("/root/Main/MusicPlayer")
+	var music_player_truco_disconnect_handler: Callable = musicPlayer._on_truco_manager_disconnect
+	if !player_disconnect.is_connected(music_player_truco_disconnect_handler):
+		player_disconnect.connect(music_player_truco_disconnect_handler)
+
 	$GameOver.exit_button_pressed.connect(_on_disconnect_pressed)
 
 	$PlayerIcon.visible = false
