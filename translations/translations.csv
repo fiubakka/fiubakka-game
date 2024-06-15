@@ -29,7 +29,8 @@ NPC_CENTRAL_HALL_3,"En la librera podés comprar útiles, pero no abrió todaví
 NPC_CENTRAL_HALL_4,"Los ascensores no funcionan, pero podés tomar las escaleras.","The elevators are not working right now, but you can take the stairs."
 NPC_CENTRAL_HALL_5,"Estoy llegando tarde al parcial...","I'm late for the exam..."
 NPC_CENTRAL_HALL_6,"Voy a llegar tarde a clase...","I'm late for class..."
-NPC_CENTRAL_HALL_7,"El ascensor no viene más","The elevator is taking a lot."
+NPC_CENTRAL_HALL_7,"El ascensor no viene más.","The elevator is taking a lot."
+NPC_CENTRAL_HALL_8,"El patio está cerrado por el momento.","The court is closed for the moment."
 NPC_KIOSK,Bienvenido al Comedor. ¿En qué te puedo ayudar?,Weclome to the Kiosk. How can I help you?
 NPC_KIOSK_2,Prefiero estudiar en el comedor en vez de la biblioteca,"I'd rather study at the kiosk instead of the library."
 NPC_KIOSK_3,¿Café o un sanguche?,Coffe or a sandwich?
