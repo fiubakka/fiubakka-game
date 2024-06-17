@@ -239,7 +239,7 @@ hair = 2
 hat = 2
 eyes = 2
 outfit = 2
-facial_hair = 12
+facial_hair = 2
 glasses = 2
 
 [node name="NPC4" parent="." instance=ExtResource("5_bh6x0")]
