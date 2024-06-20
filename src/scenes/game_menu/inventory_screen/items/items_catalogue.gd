@@ -31,8 +31,7 @@ var glasses: InventoryItemData = preload(
 )
 
 
-func _ready() -> void:
-	# miscellaneous
+func setup() -> void:
 	items_catalogue["miscellaneous"][0] = dni
 
 	create_resources("hats", hat, cs.hats_spritesheet)

@@ -16,20 +16,12 @@ signal update_equipment(equipment: Equipment)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	equip_button.visible = false
-	get_inventory()
-	sprite = $HBoxContainer/VBoxContainer/CenterContainer/Panel/CharacterSprite
-	var slots := $HBoxContainer/ScrollContainer/GridContainer
-	for i in range(0, len(Inventory)):
-		var slot := inventory_slot_scene.instantiate()
-		slot.update(Inventory[i])
-		slot.pressed.connect(self._on_Slot_Pressed.bind(slot, Inventory[i]))
-		slots.add_child(slot)
-
 	equip_button.text = tr("EQUIP_BUTTON")
 
 
-func get_inventory() -> void:
+func set_inventory() -> void:
 	var ic := ItemsCatalogue
+	ic.setup()
 	Inventory.append(ic.items_catalogue["miscellaneous"][0])
 	Inventory.append(ic.items_catalogue["hats"][1])
 	Inventory.append(ic.items_catalogue["hats"][2])
@@ -145,6 +137,15 @@ func change_equipment(body_part: Node2D, selected_item_texture: Texture) -> void
 func _on_server_consumer_user_init_ready(
 	_position: Vector2, equipment: Equipment, mapId: int
 ) -> void:
+	set_inventory()
+	sprite = $HBoxContainer/VBoxContainer/CenterContainer/Panel/CharacterSprite
+	var slots := $HBoxContainer/ScrollContainer/GridContainer
+	for i in range(0, len(Inventory)):
+		var slot := inventory_slot_scene.instantiate()
+		slot.update(Inventory[i])
+		slot.pressed.connect(self._on_Slot_Pressed.bind(slot, Inventory[i]))
+		slots.add_child(slot)
+
 	var cs := CompositeSprites
 	can_equip = true
 	sprite.get_node("Hair").texture = cs.hair_spritesheet[equipment.hair]
