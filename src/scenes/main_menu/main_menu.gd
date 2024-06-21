@@ -3,6 +3,7 @@ extends Control
 signal go_to_login
 signal go_to_register
 
+@onready var audio_player := $AudioStreamPlayer
 
 func _ready() -> void:
 	$NinePatchRect/VBoxContainer/Login/NinePatchRect/RichTextLabel.text = Utils.center_text(
@@ -14,10 +15,12 @@ func _ready() -> void:
 
 
 func _on_login_button_pressed() -> void:
+	audio_player.play()
 	go_to_login.emit()
 
 
 func _on_register_button_pressed() -> void:
+	audio_player.play()
 	go_to_register.emit()
 
 
