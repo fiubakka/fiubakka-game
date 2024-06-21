@@ -23,6 +23,7 @@ var _last_play: TrucoLastPlayDto = null
 var _can_play_cards := false
 @onready var options: Options = $Options
 @onready var game_over_timer: Timer = $GameOverTimer
+@onready var waiting_dialogue := $WaitingDialogue
 
 
 func _ready() -> void:
@@ -33,6 +34,7 @@ func _ready() -> void:
 	opponent_hand = $OpponentHand
 
 	$PlayerName.text = Utils.center_text(PlayerInfo.player_name)
+	#waiting_dialogue.activate(true)
 
 	var consumer := get_node("/root/Main/ServerConnection/ServerConsumer")
 	consumer.truco_play_card.connect(self._on_truco_play_card)
@@ -113,11 +115,13 @@ func _on_board_player_card_played(card: Card) -> void:
 		return
 	card.played = true
 	options.disable_buttons(true)
+	#waiting_dialogue.activate(true)
 	play_card.emit(current_play_id, card.id)
 	turn_over.emit()
 	_last_play = TrucoLastPlayDto.new(TrucoLastPlayDto.TYPES.CARD, card.id, -1)
 	$PlayerIcon.visible = false
 	$OpponentIcon.visible = true
+	waiting_dialogue.activate(true)
 
 
 func _on_opponent_controller_remove_card_from_hand() -> void:
@@ -173,11 +177,13 @@ func _on_truco_play_card(dto: TrucoPlayCardDto) -> void:
 	update_points(dto.first_points, dto.first_name, dto.second_points)
 	play_enemy_card(dto.suit, dto.rank)
 	options.disable_buttons(true)
+	#waiting_dialogue.activate(true)
 
 	play_ack.emit(dto.play_id)
 
 
 func _on_consumer_truco_shout_played(dto: TrucoPlayShoutDto) -> void:
+	
 	if dto.play_id == current_play_id:
 		_last_play = null
 		check_over_states(
@@ -252,6 +258,7 @@ func _on_game_over_timer_timeout(
 	clean()
 	create_hand(cards)
 	update_shouts(available_shouts)
+	waiting_dialogue.activate(true)
 	play_ack.emit(play_id)
 	game_over.emit()
 	game_over_timer.disconnect('timeout', self._on_game_over_timer_timeout)
@@ -276,6 +283,7 @@ func _on_allow_truco_play(play_id: int) -> void:
 	
 	if game_over_timer and !game_over_timer.is_stopped():
 		await game_over_timer.timeout
+	waiting_dialogue.activate(false)
 	options.disable_buttons(false)
 
 
@@ -285,6 +293,7 @@ func _on_options_shout_played(shout_id: int) -> void:
 	shout_played.emit(current_play_id, shout_id)
 	_last_play = TrucoLastPlayDto.new(TrucoLastPlayDto.TYPES.SHOUT, -1, shout_id)
 	options.disable_buttons(true)
+	waiting_dialogue.activate(true)
 
 	# Disable playing cards when I make a shout
 	board.disable_current_play_zone()
@@ -319,8 +328,10 @@ func check_over_states(
 	if is_match_over:
 		options.disable_buttons(true)
 		$GameOver.set_match_result(my_points, opponent_points)
+		waiting_dialogue.activate(false)
 		return
 
 	if is_game_over:
 		game_over.emit()
 		$RoundOver.visible = true
+		waiting_dialogue.activate(false)

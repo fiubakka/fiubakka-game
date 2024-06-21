@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://wb1t8vti7nup"]
+
+[ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="1_gs838"]
+[ext_resource type="Script" path="res://src/scenes/truco/WaitingTurn/waiting_dialogue.gd" id="1_o7i7i"]
+[ext_resource type="PackedScene" uid="uid://b3sbkml1acsi3" path="res://src/scenes/truco/WaitingTurn/waiting_text.tscn" id="2_p1b72"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksino"]
+atlas = ExtResource("1_gs838")
+region = Rect2(32, 896, 80, 80)
+
+[node name="WaitingDialogue" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_o7i7i")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 350.0
+offset_bottom = 90.0
+texture = SubResource("AtlasTexture_ksino")
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+
+[node name="WaitingText" parent="NinePatchRect" instance=ExtResource("2_p1b72")]
+layout_mode = 1

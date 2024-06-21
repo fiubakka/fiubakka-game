@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3sbkml1acsi3"]
+
+[ext_resource type="Script" path="res://src/scenes/truco/WaitingTurn/waiting_text.gd" id="1_f4pl7"]
+[ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="2_7w1ag"]
+
+[node name="WaitingText" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_f4pl7")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -177.5
+offset_top = -16.5
+offset_right = 177.5
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_fonts/normal_font = ExtResource("2_7w1ag")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "[center]Waiting for opponent's turn...[/center]"
+autowrap_mode = 0
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
