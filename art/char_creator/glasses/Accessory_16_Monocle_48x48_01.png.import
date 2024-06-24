@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ba5s3x4dy16lr"
-path="res://.godot/imported/Accessory_16_Monocle_48x48_01.png-dc6abe6e3a999b3221bfd4af13856477.ctex"
+path.s3tc="res://.godot/imported/Accessory_16_Monocle_48x48_01.png-dc6abe6e3a999b3221bfd4af13856477.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://art/char_creator/glasses/Accessory_16_Monocle_48x48_01.png"
-dest_files=["res://.godot/imported/Accessory_16_Monocle_48x48_01.png-dc6abe6e3a999b3221bfd4af13856477.ctex"]
+dest_files=["res://.godot/imported/Accessory_16_Monocle_48x48_01.png-dc6abe6e3a999b3221bfd4af13856477.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
