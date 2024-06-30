@@ -65,34 +65,41 @@ ENVIDO_QUIERO, Quiero, Accept
 ENVIDO_NO_QUIERO, "No quiero", Reject
 RETRUCO, Retruco, Retruco
 VALE_CUATRO, "Vale cuatro", "Counts four"
+
 COSMETIC_NAME_HATS_1,Sombrero de Entrenador,Trainer hat
-COSMETIC_NAME_HATS_2,Sombrero de Dinosaurio,Dinasour hat
-COSMETIC_NAME_HATS_3,Sombrero Negro,Black hat
-COSMETIC_NAME_HATS_4,Pasamontañas,Ski mask
-COSMETIC_NAME_HATS_5,Sombrero de Arqueólogo,Archaeologist hat
-COSMETIC_NAME_HATS_6,Sombrero Ajustado,Beanie
-COSMETIC_NAME_HATS_7,Sombrero de Cocinero,Chef hat
-COSMETIC_NAME_HATS_8,Sombrero de Cono,Cone hat
-COSMETIC_NAME_OUTFITS_1,Remera Violeta,Purple shirt
-COSMETIC_NAME_OUTFITS_2,Remera Blanca,White shirt
-COSMETIC_NAME_OUTFITS_3,Remera Beige,Beige shirt
-COSMETIC_NAME_OUTFITS_4,Remera Roja,Red shirt
+COSMETIC_NAME_HATS_7,Sombrero de Dinosaurio,Dinasour hat
+COSMETIC_NAME_HATS_10,Sombrero Negro,Black hat
+COSMETIC_NAME_HATS_11,Pasamontañas,Ski mask
+COSMETIC_NAME_HATS_12,Sombrero de Arqueólogo,Archaeologist hat
+COSMETIC_NAME_HATS_16,Sombrero Ajustado,Beanie
+COSMETIC_NAME_HATS_20,Sombrero de Cocinero,Chef hat
+COSMETIC_NAME_HATS_21,Sombrero de Cono,Cone hat
+
+COSMETIC_NAME_OUTFITS_6,Remera Violeta,Purple shirt
+COSMETIC_NAME_OUTFITS_8,Remera Blanca,White shirt
+COSMETIC_NAME_OUTFITS_2,Remera Beige,Beige shirt
+COSMETIC_NAME_OUTFITS_3,Remera Roja,Red shirt
+
 COSMETIC_NAME_FACIAL HAIR_1,Bigote Castaño,Brown mustache
-COSMETIC_NAME_FACIAL HAIR_2,Bigote Pelirrojo,Red mustache
+COSMETIC_NAME_FACIAL HAIR_2,Bigote Pelirrojo,Redhead mustache
 COSMETIC_NAME_FACIAL HAIR_3,Bigote Rubio,Blond mustache
 COSMETIC_NAME_FACIAL HAIR_4,Barba Castaña,Brown beard
-COSMETIC_NAME_FACIAL HAIR_5,Barba Pelirroja,Red beard
+COSMETIC_NAME_FACIAL HAIR_5,Barba Pelirroja,Redhead beard
 COSMETIC_NAME_FACIAL HAIR_6,Barba Rubia,Blond beard
+
 COSMETIC_NAME_GLASSES_1,Anteojos gris,Gray glasses
 COSMETIC_NAME_GLASSES_2,Anteojos rojos,Red glasses
 COSMETIC_NAME_GLASSES_3,Anteojos rosas,Pink glasses
 COSMETIC_NAME_GLASSES_4,Anteojos celeste,Sky-blue glasses
 COSMETIC_NAME_GLASSES_5,Anteojos verdes,Green glasses
 COSMETIC_NAME_GLASSES_6,Anteojos negros,Black glasses
+COSMETIC_NAME_GLASSES_7,Monoculos,Monocles
+
 COSMETIC_NAME_HAIRS_1,Pelo rubio,Blond hair
 COSMETIC_NAME_HAIRS_2,Pelo castaño claro,Light brown hair
-COSMETIC_NAME_HAIRS_3,Pelo rubio con flequillo,Blonde hair with bangs
-COSMETIC_NAME_HAIRS_4,Pelo castaño claro con flequillo,Light brown hair with bangs
+COSMETIC_NAME_HAIRS_15,Pelo rubio con flequillo,Blonde hair with bangs
+COSMETIC_NAME_HAIRS_16,Pelo castaño claro con flequillo,Light brown hair with bangs
+
 COSMETIC_DESCRIPTION_0,"No dará ninguna mejora en el desempeño, pero luce bien","It won't enhance your performance, but it looks great"
 COSMETIC_DESCRIPTION_1,"Imprescindible para el estudiante a la moda","A must-have for the fashion-forward student"
 COSMETIC_DESCRIPTION_2,"Destaca en el aula con esta pieza","Stand out in the clasroom with this piece"

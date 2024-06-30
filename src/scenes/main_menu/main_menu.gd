@@ -5,6 +5,7 @@ signal go_to_register
 
 @onready var audio_player := $AudioStreamPlayer
 
+
 func _ready() -> void:
 	$NinePatchRect/VBoxContainer/Login/NinePatchRect/RichTextLabel.text = Utils.center_text(
 		tr("LOGIN")

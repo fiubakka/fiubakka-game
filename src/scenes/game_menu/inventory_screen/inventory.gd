@@ -25,34 +25,39 @@ func set_inventory() -> void:
 
 	Inventory.append(ic.items_catalogue["miscellaneous"][0])
 
-	for i in range(1, 22):
-		Inventory.append(ic.items_catalogue["hats"][i])
+	Inventory.append(ic.items_catalogue["hats"][1])
+	Inventory.append(ic.items_catalogue["hats"][7])
+	Inventory.append(ic.items_catalogue["hats"][10])
+	Inventory.append(ic.items_catalogue["hats"][11])
+	Inventory.append(ic.items_catalogue["hats"][12])
+	Inventory.append(ic.items_catalogue["hats"][16])
+	Inventory.append(ic.items_catalogue["hats"][20])
+	Inventory.append(ic.items_catalogue["hats"][21])
 
-	for i in range(1, 16):
-		Inventory.append(ic.items_catalogue["outfits"][i])
+	Inventory.append(ic.items_catalogue["outfits"][2])
+	Inventory.append(ic.items_catalogue["outfits"][3])
+	Inventory.append(ic.items_catalogue["outfits"][6])
+	Inventory.append(ic.items_catalogue["outfits"][8])
 
-	for i in range(1, 49):
-		Inventory.append(ic.items_catalogue["hairs"][i])
+	Inventory.append(ic.items_catalogue["hairs"][1])
+	Inventory.append(ic.items_catalogue["hairs"][2])
+	Inventory.append(ic.items_catalogue["hairs"][15])
+	Inventory.append(ic.items_catalogue["hairs"][16])
 
-	for i in range(1, 7):
-		Inventory.append(ic.items_catalogue["facial hair"][i])
+	Inventory.append(ic.items_catalogue["glasses"][1])
+	Inventory.append(ic.items_catalogue["glasses"][2])
+	Inventory.append(ic.items_catalogue["glasses"][3])
+	Inventory.append(ic.items_catalogue["glasses"][4])
+	Inventory.append(ic.items_catalogue["glasses"][5])
+	Inventory.append(ic.items_catalogue["glasses"][6])
+	Inventory.append(ic.items_catalogue["glasses"][7])
 
-	for i in range(1, 10):
-		Inventory.append(ic.items_catalogue["glasses"][i])
-
-	# Inventory.append(ic.items_catalogue["hats"][1])
-	# Inventory.append(ic.items_catalogue["hats"][2])
-	# Inventory.append(ic.items_catalogue["hats"][7])
-	# Inventory.append(ic.items_catalogue["hats"][3])
-	# Inventory.append(ic.items_catalogue["outfits"][2])
-	# Inventory.append(ic.items_catalogue["outfits"][3])
-	# Inventory.append(ic.items_catalogue["hairs"][1])
-	# Inventory.append(ic.items_catalogue["hairs"][2])
-	# Inventory.append(ic.items_catalogue["glasses"][3])
-	# Inventory.append(ic.items_catalogue["glasses"][2])
-	# Inventory.append(ic.items_catalogue["glasses"][2])
-	# Inventory.append(ic.items_catalogue["facial hair"][2])
-	# Inventory.append(ic.items_catalogue["facial hair"][4])
+	Inventory.append(ic.items_catalogue["facial hair"][1])
+	Inventory.append(ic.items_catalogue["facial hair"][2])
+	Inventory.append(ic.items_catalogue["facial hair"][3])
+	Inventory.append(ic.items_catalogue["facial hair"][4])
+	Inventory.append(ic.items_catalogue["facial hair"][5])
+	Inventory.append(ic.items_catalogue["facial hair"][6])
 
 
 func handle_equip_button_availability() -> void:
