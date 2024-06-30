@@ -27,7 +27,7 @@ const shouts_aswers_names = {
 
 
 func _ready() -> void:
-	set_available_shouts([0, 1, 2, 3,4])
+	pass
 
 
 func set_available_shouts(shouts: Array) -> void:
@@ -40,6 +40,7 @@ func set_available_shouts(shouts: Array) -> void:
 		var button: TrucoButton = TrucoButtonScn.instantiate()
 		button.custom_minimum_size = Vector2(50, 50)
 		button.scale = Vector2(0.8, 0.8)
+		button.disabled = true
 		if shout in shouts_names:
 			available_shots.append(button)
 			shout_name = shouts_names[shout]
