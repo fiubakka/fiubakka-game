@@ -38,6 +38,7 @@ func _on_server_consumer_user_init_ready(
 	login_ready.emit()
 	$Login.queue_free()
 	$Register.queue_free()
+	SceneManager.remove_loading_screen()
 
 	$GUI/GuiManager.set_process(true)
 

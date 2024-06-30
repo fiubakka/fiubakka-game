@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vk4vaf0wdfog"
-path="res://.godot/imported/Accessory_13_Beard_48x48_01.png-4cb068754bf6b1f9a3eac0483b32b981.ctex"
+uid="uid://cx3cw4588lifs"
+path.s3tc="res://.godot/imported/Accessory_13_Beard_48x48_01.png-4cb068754bf6b1f9a3eac0483b32b981.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://art/char_creator/facial_hair/Accessory_13_Beard_48x48_01.png"
-dest_files=["res://.godot/imported/Accessory_13_Beard_48x48_01.png-4cb068754bf6b1f9a3eac0483b32b981.ctex"]
+dest_files=["res://.godot/imported/Accessory_13_Beard_48x48_01.png-4cb068754bf6b1f9a3eac0483b32b981.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

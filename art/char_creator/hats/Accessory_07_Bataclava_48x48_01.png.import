@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oycdssit638n"
-path="res://.godot/imported/Accessory_07_Bataclava_48x48_01.png-35b0c64c7c1038cc8884db652bea5f0f.ctex"
+uid="uid://cdrwkyp8too2f"
+path.s3tc="res://.godot/imported/Accessory_07_Bataclava_48x48_01.png-35b0c64c7c1038cc8884db652bea5f0f.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://art/char_creator/hats/Accessory_07_Bataclava_48x48_01.png"
-dest_files=["res://.godot/imported/Accessory_07_Bataclava_48x48_01.png-35b0c64c7c1038cc8884db652bea5f0f.ctex"]
+dest_files=["res://.godot/imported/Accessory_07_Bataclava_48x48_01.png-35b0c64c7c1038cc8884db652bea5f0f.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

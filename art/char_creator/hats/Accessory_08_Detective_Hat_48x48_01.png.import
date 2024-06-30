@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cx028de3klvjs"
-path="res://.godot/imported/Accessory_08_Detective_Hat_48x48_01.png-54850f3a00a2edb9f425e4a8f949eb66.ctex"
+uid="uid://cjvcqdtth7dyc"
+path.s3tc="res://.godot/imported/Accessory_08_Detective_Hat_48x48_01.png-54850f3a00a2edb9f425e4a8f949eb66.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://art/char_creator/hats/Accessory_08_Detective_Hat_48x48_01.png"
-dest_files=["res://.godot/imported/Accessory_08_Detective_Hat_48x48_01.png-54850f3a00a2edb9f425e4a8f949eb66.ctex"]
+dest_files=["res://.godot/imported/Accessory_08_Detective_Hat_48x48_01.png-54850f3a00a2edb9f425e4a8f949eb66.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

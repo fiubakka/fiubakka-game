@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6lgaiuf6hyvk"
-path="res://.godot/imported/Accessory_11_Beanie_48x48_04.png-719232c8d9ce56fa5cf1225d75582174.ctex"
+uid="uid://be812gq4r1wm4"
+path.s3tc="res://.godot/imported/Accessory_11_Beanie_48x48_04.png-719232c8d9ce56fa5cf1225d75582174.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://art/char_creator/hats/Accessory_11_Beanie_48x48_04.png"
-dest_files=["res://.godot/imported/Accessory_11_Beanie_48x48_04.png-719232c8d9ce56fa5cf1225d75582174.ctex"]
+dest_files=["res://.godot/imported/Accessory_11_Beanie_48x48_04.png-719232c8d9ce56fa5cf1225d75582174.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

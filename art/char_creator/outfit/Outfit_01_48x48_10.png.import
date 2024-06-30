@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m67v6tg181f1"
-path="res://.godot/imported/Outfit_01_48x48_10.png-def8f404cc27e331b12a3bb47c501b15.ctex"
+uid="uid://yefxyywwqj37"
+path.s3tc="res://.godot/imported/Outfit_01_48x48_10.png-def8f404cc27e331b12a3bb47c501b15.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://art/char_creator/outfit/Outfit_01_48x48_10.png"
-dest_files=["res://.godot/imported/Outfit_01_48x48_10.png-def8f404cc27e331b12a3bb47c501b15.ctex"]
+dest_files=["res://.godot/imported/Outfit_01_48x48_10.png-def8f404cc27e331b12a3bb47c501b15.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

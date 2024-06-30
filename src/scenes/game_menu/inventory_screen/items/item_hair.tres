@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="InventoryItemData" load_steps=4 format=3 uid="uid://cnp7ognijydmn"]
 
 [ext_resource type="Script" path="res://src/scenes/game_menu/inventory_screen/inventory_item_data.gd" id="1_duoif"]
-[ext_resource type="Texture2D" uid="uid://bdq1202q101ai" path="res://art/char_creator/hairstyle/Hairstyle_01_48x48_01.png" id="2_cihlm"]
+[ext_resource type="Texture2D" uid="uid://bsiutytl5yjxs" path="res://art/char_creator/hairstyle/Hairstyle_01_48x48_01.png" id="2_cihlm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4251o"]
 atlas = ExtResource("2_cihlm")

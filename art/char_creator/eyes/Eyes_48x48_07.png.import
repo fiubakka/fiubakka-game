@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o7e105gbdsl"
-path="res://.godot/imported/Eyes_48x48_07.png-436f5ff64969e842ad2dc40524fb4e92.ctex"
+uid="uid://dcttbriaj5f3c"
+path.s3tc="res://.godot/imported/Eyes_48x48_07.png-436f5ff64969e842ad2dc40524fb4e92.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://art/char_creator/eyes/Eyes_48x48_07.png"
-dest_files=["res://.godot/imported/Eyes_48x48_07.png-436f5ff64969e842ad2dc40524fb4e92.ctex"]
+dest_files=["res://.godot/imported/Eyes_48x48_07.png-436f5ff64969e842ad2dc40524fb4e92.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

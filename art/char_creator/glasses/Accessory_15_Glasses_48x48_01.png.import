@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dptdxji4an7mg"
-path="res://.godot/imported/Accessory_15_Glasses_48x48_01.png-b4d39faa90daad9b1ce66b8022568d70.ctex"
+uid="uid://cj7bpkejovtig"
+path.s3tc="res://.godot/imported/Accessory_15_Glasses_48x48_01.png-b4d39faa90daad9b1ce66b8022568d70.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://art/char_creator/glasses/Accessory_15_Glasses_48x48_01.png"
-dest_files=["res://.godot/imported/Accessory_15_Glasses_48x48_01.png-b4d39faa90daad9b1ce66b8022568d70.ctex"]
+dest_files=["res://.godot/imported/Accessory_15_Glasses_48x48_01.png-b4d39faa90daad9b1ce66b8022568d70.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

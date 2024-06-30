@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bm2bq0kf3vooc"
-path="res://.godot/imported/Body_48x48_09.png-51d89d1ed2f704c84b122d1dfc33d812.ctex"
+uid="uid://b0fxd01yy7db"
+path.s3tc="res://.godot/imported/Body_48x48_09.png-51d89d1ed2f704c84b122d1dfc33d812.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://art/char_creator/body/Body_48x48_09.png"
-dest_files=["res://.godot/imported/Body_48x48_09.png-51d89d1ed2f704c84b122d1dfc33d812.ctex"]
+dest_files=["res://.godot/imported/Body_48x48_09.png-51d89d1ed2f704c84b122d1dfc33d812.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

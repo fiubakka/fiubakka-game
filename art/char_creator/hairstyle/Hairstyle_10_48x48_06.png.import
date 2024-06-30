@@ -2,20 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7nf8pgd0n56a"
-path="res://.godot/imported/Hairstyle_10_48x48_06.png-009f4c094598178f330fed358420a304.ctex"
+uid="uid://b14cr57u8qlo4"
+path.s3tc="res://.godot/imported/Hairstyle_10_48x48_06.png-009f4c094598178f330fed358420a304.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://art/char_creator/hairstyle/Hairstyle_10_48x48_06.png"
-dest_files=["res://.godot/imported/Hairstyle_10_48x48_06.png-009f4c094598178f330fed358420a304.ctex"]
+dest_files=["res://.godot/imported/Hairstyle_10_48x48_06.png-009f4c094598178f330fed358420a304.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
