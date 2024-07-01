@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cswpkq3rymi6"]
+[gd_scene load_steps=11 format=3 uid="uid://cswpkq3rymi6"]
 
 [ext_resource type="PackedScene" uid="uid://csa1aukvil678" path="res://src/scenes/game_menu/inventory_screen/InventoryItem.tscn" id="1_pexyc"]
 [ext_resource type="Script" path="res://src/scenes/game_menu/inventory_screen/inventory.gd" id="1_qi08f"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_y7p64"]
 [ext_resource type="FontFile" uid="uid://cv2bywsa6irhc" path="res://fonts/Xolonium-Regular.ttf" id="4_45so7"]
 [ext_resource type="PackedScene" uid="uid://bj12r5t8p4dpp" path="res://src/scenes/character_sprite/character_sprite.tscn" id="5_ep1qx"]
+[ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="5_vwfr3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3k5bc"]
 atlas = ExtResource("2_y7p64")
@@ -81,8 +82,8 @@ offset_bottom = 141.0
 [node name="Name" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/Description/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 2
-theme_override_fonts/normal_font = ExtResource("4_45so7")
-theme_override_font_sizes/normal_font_size = 20
+theme_override_fonts/normal_font = ExtResource("5_vwfr3")
+theme_override_font_sizes/normal_font_size = 30
 fit_content = true
 scroll_active = false
 
@@ -90,8 +91,8 @@ scroll_active = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 4.0
-theme_override_fonts/normal_font = ExtResource("4_45so7")
-theme_override_font_sizes/normal_font_size = 15
+theme_override_fonts/normal_font = ExtResource("5_vwfr3")
+theme_override_font_sizes/normal_font_size = 30
 
 [node name="Panel" type="Panel" parent="HBoxContainer/VBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
