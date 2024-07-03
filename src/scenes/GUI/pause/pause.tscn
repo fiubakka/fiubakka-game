@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dv7baj7ykjngg"]
+[gd_scene load_steps=19 format=3 uid="uid://dv7baj7ykjngg"]
 
 [ext_resource type="Script" path="res://src/scenes/GUI/pause/pause.gd" id="1_8f46u"]
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="2_dxbm7"]
@@ -8,22 +8,63 @@
 [ext_resource type="Script" path="res://src/scenes/GUI/pause/continue_button_text.gd" id="5_k6puj"]
 [ext_resource type="Script" path="res://src/scenes/GUI/pause/mute_button.gd" id="5_x7u4s"]
 [ext_resource type="Script" path="res://src/scenes/GUI/pause/quit_button_text.gd" id="6_iyem1"]
+[ext_resource type="Texture2D" uid="uid://dx1hbmd7w4g4k" path="res://art/ui/modern_ui.tres" id="6_jno6s"]
 
 [sub_resource type="Theme" id="Theme_j8n4e"]
 default_font = ExtResource("4_osv2q")
 default_font_size = 50
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tba4p"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cxp3p"]
+texture = ExtResource("6_jno6s")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(1920, 1872, 48, 48)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_60pdv"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t0rud"]
+texture = ExtResource("6_jno6s")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(1968, 1872, 48, 48)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_djk7j"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5wjrf"]
+texture = ExtResource("6_jno6s")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(2016, 1872, 48, 48)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b4l5r"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o67uq"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_407f1"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jo7ei"]
+texture = ExtResource("6_jno6s")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(1920, 1872, 48, 48)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ittwg"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3wj02"]
+texture = ExtResource("6_jno6s")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(1968, 1872, 48, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0tec3"]
+texture = ExtResource("6_jno6s")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(2016, 1872, 48, 48)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3r2mk"]
 
 [node name="Pause" type="Control"]
 layout_mode = 3
@@ -58,10 +99,10 @@ offset_right = 115.0
 offset_bottom = -78.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_qu78l")
 region_rect = Rect2(36.8972, 1104.05, 71.3756, 47.5839)
 
 [node name="ContinueButtonText" type="RichTextLabel" parent="NinePatchRect/ContinueButton"]
+visible = false
 self_modulate = Color(0.694118, 0.439216, 0.219608, 1)
 clip_contents = false
 custom_minimum_size = Vector2(0, 50)
@@ -89,15 +130,22 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -107.0
+offset_left = -120.0
 offset_top = -37.5
-offset_right = 108.0
+offset_right = 118.0
 offset_bottom = 41.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_tba4p")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_60pdv")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_djk7j")
+theme_override_colors/font_color = Color(0.419608, 0.313726, 0.321569, 1)
+theme_override_colors/font_pressed_color = Color(0.419608, 0.313726, 0.321569, 1)
+theme_override_colors/font_hover_color = Color(0.419608, 0.313726, 0.321569, 1)
+theme_override_fonts/font = ExtResource("4_osv2q")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxTexture_cxp3p")
+theme_override_styles/hover = SubResource("StyleBoxTexture_t0rud")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_5wjrf")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_o67uq")
+text = "OPTION_CONTINUE"
 
 [node name="QuitButton" type="NinePatchRect" parent="NinePatchRect"]
 layout_mode = 1
@@ -112,10 +160,10 @@ offset_right = 86.0
 offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("3_qu78l")
 region_rect = Rect2(36.8972, 1104.05, 71.3756, 47.5839)
 
 [node name="QuitButtonText" type="RichTextLabel" parent="NinePatchRect/QuitButton"]
+visible = false
 self_modulate = Color(0.694118, 0.439216, 0.219608, 1)
 clip_contents = false
 custom_minimum_size = Vector2(0, 50)
@@ -149,9 +197,16 @@ offset_right = 79.0
 offset_bottom = 27.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_b4l5r")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_407f1")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_ittwg")
+theme_override_colors/font_color = Color(0.419608, 0.313726, 0.321569, 1)
+theme_override_colors/font_pressed_color = Color(0.419608, 0.313726, 0.321569, 1)
+theme_override_colors/font_hover_color = Color(0.419608, 0.313726, 0.321569, 1)
+theme_override_fonts/font = ExtResource("4_osv2q")
+theme_override_font_sizes/font_size = 34
+theme_override_styles/normal = SubResource("StyleBoxTexture_jo7ei")
+theme_override_styles/hover = SubResource("StyleBoxTexture_3wj02")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_0tec3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3r2mk")
+text = "OPTION_QUIT"
 
 [node name="MuteButton" type="NinePatchRect" parent="NinePatchRect"]
 layout_mode = 0

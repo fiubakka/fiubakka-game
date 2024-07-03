@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dj80f5e6d1tsp"]
+[gd_scene load_steps=16 format=3 uid="uid://dj80f5e6d1tsp"]
 
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="1_4w5g8"]
 [ext_resource type="Script" path="res://src/scenes/GUI/modal/modal.gd" id="1_pkbvg"]
@@ -17,6 +17,8 @@ region_rect = Rect2(2208, 1000, 48, 56)
 texture = ExtResource("1_4w5g8")
 region_rect = Rect2(2256, 1000, 48, 56)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jqsvi"]
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g4nt5"]
 texture = ExtResource("1_4w5g8")
 region_rect = Rect2(2304, 1000, 48, 56)
@@ -28,6 +30,8 @@ region_rect = Rect2(2352, 1000, 48, 56)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_564xb"]
 texture = ExtResource("1_4w5g8")
 region_rect = Rect2(2400, 1000, 48, 56)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_shxjv"]
 
 [sub_resource type="Animation" id="Animation_ycwbg"]
 length = 0.001
@@ -72,8 +76,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -200.0
-offset_right = 5760.0
-offset_bottom = 3040.0
+offset_right = 6720.0
+offset_bottom = 3580.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pkbvg")
@@ -136,6 +140,7 @@ theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 0)
 theme_override_styles/normal = SubResource("StyleBoxTexture_cutft")
 theme_override_styles/hover = SubResource("StyleBoxTexture_xdism")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_gyfvr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_jqsvi")
 
 [node name="Reject" type="Button" parent="VBoxContainer/ButtonsContainer"]
 custom_minimum_size = Vector2(48, 48)
@@ -143,6 +148,7 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_g4nt5")
 theme_override_styles/hover = SubResource("StyleBoxTexture_8nv0l")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_564xb")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_shxjv")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_3vrc3")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpkjmhxodrn0l"]
+[gd_scene load_steps=9 format=3 uid="uid://dpkjmhxodrn0l"]
 
 [ext_resource type="Script" path="res://src/scenes/main_menu/main_menu.gd" id="1_ab4io"]
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_wggl5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="3_0e5pr"]
 [ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="4_xgi56"]
 [ext_resource type="AudioStream" uid="uid://b7yp7usbygtwd" path="res://audio/sounds/button.ogg" id="6_5j5kj"]
+[ext_resource type="PackedScene" uid="uid://kpbsuln7x2le" path="res://src/scenes/truco/Interface/button.tscn" id="7_dlbl6"]
 
 [sub_resource type="Theme" id="Theme_myfhy"]
 default_font = ExtResource("4_xgi56")
@@ -77,93 +78,29 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Login"]
-custom_minimum_size = Vector2(250, 70)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -35.0
-offset_right = 125.0
-offset_bottom = 35.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(125, 35)
-size_flags_horizontal = 4
-size_flags_vertical = 6
-size_flags_stretch_ratio = 5.0
-texture = ExtResource("3_0e5pr")
-region_rect = Rect2(184, 1104, 64, 48)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/Login/NinePatchRect"]
+[node name="LoginButton" parent="NinePatchRect/VBoxContainer/Login" instance=ExtResource("7_dlbl6")]
 layout_mode = 0
-offset_left = 13.4999
-offset_top = 16.5003
-offset_right = 233.5
-offset_bottom = 51.5003
-theme_override_colors/default_color = Color(0.709804, 0.458824, 0.301961, 1)
-theme_override_fonts/normal_font = ExtResource("4_xgi56")
-theme_override_font_sizes/normal_font_size = 40
-bbcode_enabled = true
-
-[node name="LoginButton" type="Button" parent="NinePatchRect/VBoxContainer/Login/NinePatchRect"]
-modulate = Color(1, 1, 1, 0)
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_right = 247.0
-offset_bottom = 67.0
+offset_left = 122.5
+offset_top = 71.5
+offset_right = 356.5
+offset_bottom = 141.5
+text = "LOGIN"
 
 [node name="Register" type="Control" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Register"]
-custom_minimum_size = Vector2(250, 70)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -35.0
-offset_right = 125.0
-offset_bottom = 35.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(125, 35)
-size_flags_horizontal = 4
-size_flags_vertical = 6
-size_flags_stretch_ratio = 5.0
-texture = ExtResource("3_0e5pr")
-region_rect = Rect2(184, 1104, 64, 48)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/Register/NinePatchRect"]
+[node name="RegisterButton" parent="NinePatchRect/VBoxContainer/Register" instance=ExtResource("7_dlbl6")]
 layout_mode = 0
-offset_left = 16.4999
-offset_top = 16.5003
-offset_right = 236.5
-offset_bottom = 51.5003
-theme_override_colors/default_color = Color(0.709804, 0.458824, 0.301961, 1)
-theme_override_fonts/normal_font = ExtResource("4_xgi56")
-theme_override_font_sizes/normal_font_size = 40
-bbcode_enabled = true
-
-[node name="RegisterButton" type="Button" parent="NinePatchRect/VBoxContainer/Register/NinePatchRect"]
-modulate = Color(1, 1, 1, 0)
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = -1.0
-offset_top = 3.0
-offset_right = 250.0
-offset_bottom = 69.0
+offset_left = 120.0
+offset_top = 70.0
+offset_right = 358.0
+offset_bottom = 140.0
+text = "REGISTER"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_5j5kj")
 
-[connection signal="pressed" from="NinePatchRect/VBoxContainer/Login/NinePatchRect/LoginButton" to="." method="_on_login_button_pressed"]
-[connection signal="pressed" from="NinePatchRect/VBoxContainer/Register/NinePatchRect/RegisterButton" to="." method="_on_register_button_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Login/LoginButton" to="." method="_on_login_button_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Register/RegisterButton" to="." method="_on_register_button_pressed"]

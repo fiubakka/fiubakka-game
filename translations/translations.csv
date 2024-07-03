@@ -58,14 +58,14 @@ TRUCO_DEFEAT,Derrota...,Defeat...
 TRUCO_TIE,Empate!,Tie!
 TRUCO_OPPONENT_ABANDONED,El oponente abandonó la partida,The opponent has abandoned the game
 MAZO,Mazo,Fold
-ENVIDO, Envido, Envido
-REAL_ENVIDO, Real Envido, Royal Envido
-FALTA_ENVIDO, Falta Envido, Falta Envido
-ENVIDO_QUIERO, Quiero, Accept
-ENVIDO_NO_QUIERO, "No quiero", Reject
-RETRUCO, Retruco, Retruco
-VALE_CUATRO, "Vale cuatro", "Counts four"
-
+ENVIDO,Envido,Envido
+REAL_ENVIDO,Real Envido,Royal Envido
+FALTA_ENVIDO,Falta Envido,Falta Envido
+ENVIDO_QUIERO,Quiero,Accept
+ENVIDO_NO_QUIERO,"No quiero",Reject
+TRUCO,Truco,Truco
+RETRUCO,Retruco,Retruco
+VALE_CUATRO,"Vale cuatro","Counts four"
 COSMETIC_NAME_HATS_1,Sombrero de Entrenador,Trainer hat
 COSMETIC_NAME_HATS_7,Sombrero de Dinosaurio,Dinasour hat
 COSMETIC_NAME_HATS_10,Sombrero Negro,Black hat

@@ -507,10 +507,10 @@ shape = SubResource("CapsuleShape2D_xq0wm")
 
 [node name="EntityPopup" parent="." instance=ExtResource("3_rxs40")]
 visible = false
-offset_left = 36.0
-offset_top = -76.0
-offset_right = 192.0
-offset_bottom = 12.0
+offset_left = 34.0
+offset_top = -48.0
+offset_right = 232.0
+offset_bottom = 62.0
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
 [connection signal="input_event" from="InteractArea" to="." method="_on_interact_area_input_event"]
