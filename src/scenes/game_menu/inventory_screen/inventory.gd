@@ -11,6 +11,7 @@ var can_equip := false
 signal update_equipment(equipment: Equipment)
 
 @onready var equip_button := $HBoxContainer/VBoxContainer/Panel/EquipButton
+@onready var player_name := $HBoxContainer/VBoxContainer/CenterContainer/Panel/RichTextLabel
 
 
 # Called when the node enters the scene tree for the first time.
@@ -137,6 +138,7 @@ func change_equipment(body_part: Node2D, selected_item_texture: Texture) -> void
 func _on_server_consumer_user_init_ready(
 	_position: Vector2, equipment: Equipment, mapId: int
 ) -> void:
+	player_name.text = Utils.center_text(PlayerInfo.player_name)
 	set_inventory()
 	sprite = $HBoxContainer/VBoxContainer/CenterContainer/Panel/CharacterSprite
 	var slots := $HBoxContainer/ScrollContainer/GridContainer

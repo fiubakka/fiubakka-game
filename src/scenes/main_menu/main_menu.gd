@@ -5,14 +5,6 @@ signal go_to_register
 
 @onready var audio_player := $AudioStreamPlayer
 
-func _ready() -> void:
-	$NinePatchRect/VBoxContainer/Login/NinePatchRect/RichTextLabel.text = Utils.center_text(
-		tr("LOGIN")
-	)
-	$NinePatchRect/VBoxContainer/Register/NinePatchRect/RichTextLabel.text = Utils.center_text(
-		tr("REGISTER")
-	)
-
 
 func _on_login_button_pressed() -> void:
 	audio_player.play()
@@ -25,10 +17,6 @@ func _on_register_button_pressed() -> void:
 
 
 func _on_language_select_go_to_main_menu() -> void:
-	$NinePatchRect/VBoxContainer/Login/NinePatchRect/RichTextLabel.text = Utils.center_text(
-		tr("LOGIN")
-	)
-	$NinePatchRect/VBoxContainer/Register/NinePatchRect/RichTextLabel.text = Utils.center_text(
-		tr("REGISTER")
-	)
+	$NinePatchRect/VBoxContainer/Login/LoginButton.text = tr("LOGIN")
+	$NinePatchRect/VBoxContainer/Register/RegisterButton.text = tr("REGISTER")
 	visible = true

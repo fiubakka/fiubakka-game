@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b6kg7qutp1h00"]
+[gd_scene load_steps=16 format=3 uid="uid://b6kg7qutp1h00"]
 
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_f447j"]
 [ext_resource type="Script" path="res://src/scenes/login/login.gd" id="1_mxn2w"]
@@ -7,23 +7,32 @@
 [ext_resource type="PackedScene" uid="uid://dl2ppg848l7il" path="res://src/scenes/GUI/return/return.tscn" id="3_ke864"]
 [ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="3_v6w8k"]
 [ext_resource type="Script" path="res://src/scenes/login/login_username.gd" id="4_m2urp"]
+[ext_resource type="Texture2D" uid="uid://dx1hbmd7w4g4k" path="res://art/ui/modern_ui.tres" id="6_eyce0"]
 [ext_resource type="Script" path="res://src/scenes/login/login_password.gd" id="7_abh4x"]
-[ext_resource type="Script" path="res://src/scenes/login/login_button.gd" id="8_3cemf"]
-[ext_resource type="Script" path="res://src/scenes/login/login_button_text.gd" id="8_7e6gq"]
 [ext_resource type="Script" path="res://src/scenes/login/login_error_text.gd" id="8_84eql"]
-[ext_resource type="AudioStream" uid="uid://b7yp7usbygtwd" path="res://audio/sounds/button.ogg" id="10_q161f"]
+[ext_resource type="PackedScene" uid="uid://kpbsuln7x2le" path="res://src/scenes/truco/Interface/button.tscn" id="11_44pg8"]
 
 [sub_resource type="Theme" id="Theme_1qdqe"]
 default_font = ExtResource("3_v6w8k")
 default_font_size = 50
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g065x"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6tr5k"]
+texture = ExtResource("6_eyce0")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+region_rect = Rect2(800, 1160, 80, 40)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_63wf8"]
 
-[sub_resource type="Theme" id="Theme_ag47f"]
-default_font = ExtResource("3_v6w8k")
-default_font_size = 35
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_31k6a"]
+texture = ExtResource("6_eyce0")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+region_rect = Rect2(800, 1160, 80, 40)
 
 [node name="Login" type="Control"]
 layout_mode = 3
@@ -92,30 +101,8 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_stretch_ratio = 5.0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Username"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -35.0
-offset_right = 125.0
-offset_bottom = 35.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -3.14159
-pivot_offset = Vector2(125, 35)
-size_flags_horizontal = 4
-size_flags_vertical = 6
-size_flags_stretch_ratio = 5.0
-texture = ExtResource("2_vs65q")
-region_rect = Rect2(800, 1152, 80, 48)
-patch_margin_left = 5
-
 [node name="LoginUsername" type="LineEdit" parent="NinePatchRect/VBoxContainer/Username"]
-custom_minimum_size = Vector2(180, 0)
+custom_minimum_size = Vector2(250, 70)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -132,7 +119,7 @@ theme_override_colors/font_color = Color(0.694118, 0.439216, 0.219608, 1)
 theme_override_colors/font_placeholder_color = Color(0.796078, 0.517647, 0.282353, 0.231373)
 theme_override_fonts/font = ExtResource("3_v6w8k")
 theme_override_font_sizes/font_size = 35
-theme_override_styles/normal = SubResource("StyleBoxEmpty_g065x")
+theme_override_styles/normal = SubResource("StyleBoxTexture_6tr5k")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_63wf8")
 placeholder_text = "USER_PLACEHOLDER"
 max_length = 12
@@ -143,30 +130,8 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_stretch_ratio = 5.0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/Password"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -35.0
-offset_right = 125.0
-offset_bottom = 35.0
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -3.14159
-pivot_offset = Vector2(125, 35)
-size_flags_horizontal = 4
-size_flags_vertical = 6
-size_flags_stretch_ratio = 5.0
-texture = ExtResource("2_vs65q")
-region_rect = Rect2(800, 1152, 80, 48)
-patch_margin_left = 5
-
 [node name="LoginPassword" type="LineEdit" parent="NinePatchRect/VBoxContainer/Password"]
-custom_minimum_size = Vector2(180, 0)
+custom_minimum_size = Vector2(250, 70)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -183,11 +148,12 @@ theme_override_colors/font_color = Color(0.694118, 0.439216, 0.219608, 1)
 theme_override_colors/font_placeholder_color = Color(0.796078, 0.517647, 0.282353, 0.231373)
 theme_override_fonts/font = ExtResource("3_v6w8k")
 theme_override_font_sizes/font_size = 35
-theme_override_styles/normal = SubResource("StyleBoxEmpty_g065x")
+theme_override_styles/normal = SubResource("StyleBoxTexture_31k6a")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_63wf8")
 placeholder_text = "PASSWORD_PLACEHOLDER"
 max_length = 12
 secret = true
+secret_character = "*"
 script = ExtResource("7_abh4x")
 
 [node name="LoginButtonContainer" type="Control" parent="NinePatchRect/VBoxContainer"]
@@ -195,67 +161,13 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 
-[node name="LoginButtonBorder" type="NinePatchRect" parent="NinePatchRect/VBoxContainer/LoginButtonContainer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.500392
-anchor_top = 0.318777
-anchor_right = 0.500392
-anchor_bottom = 0.318777
-offset_left = -100.0
-offset_top = -25.0
-offset_right = 100.0
-offset_bottom = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_vs65q")
-region_rect = Rect2(1859.13, 3.51087, 72.7058, 42.0013)
-metadata/_edit_use_anchors_ = true
-
-[node name="LoginTextContainer" type="VBoxContainer" parent="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.321
-anchor_top = 0.24
-anchor_right = 0.675
-anchor_bottom = 0.84
-offset_left = -44.2
-offset_top = -4.0
-offset_right = 45.0
-offset_bottom = -2.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="LoginText" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginTextContainer"]
-self_modulate = Color(0.694118, 0.439216, 0.219608, 1)
-clip_contents = false
-custom_minimum_size = Vector2(70, 30)
-layout_mode = 2
-theme = SubResource("Theme_ag47f")
-bbcode_enabled = true
-text = "[center]Login[/center]"
-scroll_active = false
-script = ExtResource("8_7e6gq")
-
-[node name="LoginButton" type="Button" parent="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder"]
-modulate = Color(1, 1, 1, 0)
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.069
-anchor_top = 0.213
-anchor_right = 0.933
-anchor_bottom = 0.833
-offset_left = -4.25
-offset_top = -6.475
-offset_right = 3.75
-offset_bottom = 3.02499
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("8_3cemf")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginButton"]
-stream = ExtResource("10_q161f")
+[node name="LoginButton" parent="NinePatchRect/VBoxContainer/LoginButtonContainer" instance=ExtResource("11_44pg8")]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 40.0
+offset_right = 334.0
+offset_bottom = 110.0
+text = "LOGIN"
 
 [node name="LoginErrorText" type="RichTextLabel" parent="NinePatchRect/VBoxContainer/LoginButtonContainer"]
 self_modulate = Color(0.819608, 0, 0.00784314, 1)
@@ -294,16 +206,11 @@ offset_top = -11.1
 offset_right = -1.88
 offset_bottom = 0.0800018
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="NinePatchRect/Return"]
-stream = ExtResource("10_q161f")
-
 [connection signal="login_error" from="." to="." method="_on_login_error"]
 [connection signal="login_error" from="." to="NinePatchRect/VBoxContainer/Password/LoginPassword" method="_on_register_error"]
-[connection signal="login_error" from="." to="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginButton" method="_on_login_error"]
 [connection signal="login_error" from="." to="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginErrorText" method="_on_login_error"]
 [connection signal="user_logged_in" from="." to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_user_logged_in"]
 [connection signal="user_logged_in" from="." to="NinePatchRect/VBoxContainer/Password/LoginPassword" method="_on_user_logged_in"]
-[connection signal="user_logged_in" from="." to="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginButton" method="_on_user_logged_in"]
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="." method="_on_login_username_text_changed"]
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_text_changed"]
 [connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_text_submitted"]
@@ -311,8 +218,7 @@ stream = ExtResource("10_q161f")
 [connection signal="password_submitted" from="NinePatchRect/VBoxContainer/Password/LoginPassword" to="." method="_on_login_password_text_submitted"]
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Password/LoginPassword" to="." method="_on_login_password_text_changed"]
 [connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Password/LoginPassword" to="NinePatchRect/VBoxContainer/Password/LoginPassword" method="_on_text_submitted"]
-[connection signal="pressed" from="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginButton" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginButton" to="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginButton" method="_on_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButton" to="." method="_on_button_pressed"]
 [connection signal="return_to_menu" from="NinePatchRect/Return" to="." method="_on_return_to_menu"]
 [connection signal="return_to_menu" from="NinePatchRect/Return" to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_return_to_menu"]
 [connection signal="return_to_menu" from="NinePatchRect/Return" to="NinePatchRect/VBoxContainer/Password/LoginPassword" method="_on_return_to_menu"]

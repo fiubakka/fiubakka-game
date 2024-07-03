@@ -1,60 +1,80 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgqjqesphj8ha"]
+[gd_scene load_steps=14 format=3 uid="uid://cgqjqesphj8ha"]
 
 [ext_resource type="Script" path="res://src/scenes/GUI/selector/selector.gd" id="1_5baaw"]
-[ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="1_jginc"]
+[ext_resource type="Texture2D" uid="uid://dx1hbmd7w4g4k" path="res://art/ui/modern_ui.tres" id="2_3vp6t"]
 [ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="2_mlqde"]
+[ext_resource type="AudioStream" uid="uid://b7yp7usbygtwd" path="res://audio/sounds/button.ogg" id="4_g4ayf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xwgko"]
+texture = ExtResource("2_3vp6t")
+region_rect = Rect2(2304, 1480, 48, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_getf5"]
+texture = ExtResource("2_3vp6t")
+region_rect = Rect2(2352, 1480, 48, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mm6nu"]
+texture = ExtResource("2_3vp6t")
+region_rect = Rect2(2400, 1480, 48, 56)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6df6e"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qw7sh"]
+texture = ExtResource("2_3vp6t")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(184, 1104, 64, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1dasi"]
+texture = ExtResource("2_3vp6t")
+region_rect = Rect2(2160, 1480, 48, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8ikik"]
+texture = ExtResource("2_3vp6t")
+region_rect = Rect2(2208, 1480, 48, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d7mn3"]
+texture = ExtResource("2_3vp6t")
+region_rect = Rect2(2256, 1480, 48, 56)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g7sjv"]
 
 [node name="HBoxContainer2" type="HBoxContainer"]
-offset_right = 256.0
-offset_bottom = 24.0
+offset_right = 304.0
+offset_bottom = 48.0
 alignment = 1
 script = ExtResource("1_5baaw")
 
-[node name="Prev" type="NinePatchRect" parent="."]
-custom_minimum_size = Vector2(36, 36)
-layout_mode = 2
-texture = ExtResource("1_jginc")
-region_rect = Rect2(1872, 144, 48, 48)
-
-[node name="PrevButton" type="Button" parent="Prev"]
-modulate = Color(1, 1, 1, 0)
-self_modulate = Color(1, 1, 1, 0)
+[node name="PrevButton" type="Button" parent="."]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
-offset_right = 48.0
-offset_bottom = 48.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_xwgko")
+theme_override_styles/hover = SubResource("StyleBoxTexture_getf5")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_mm6nu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6df6e")
 
-[node name="Label" type="NinePatchRect" parent="."]
-custom_minimum_size = Vector2(200, 36)
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
-texture = ExtResource("1_jginc")
-region_rect = Rect2(40, 1104, 64, 48)
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Label"]
-modulate = Color(0.694118, 0.439216, 0.219608, 1)
-layout_mode = 0
-offset_left = 17.0
-offset_top = 4.0
-offset_right = 183.0
-offset_bottom = 30.0
+theme_override_colors/default_color = Color(0.694118, 0.439216, 0.219608, 1)
 theme_override_fonts/normal_font = ExtResource("2_mlqde")
 theme_override_font_sizes/normal_font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxTexture_qw7sh")
 bbcode_enabled = true
 scroll_active = false
 
-[node name="Next" type="NinePatchRect" parent="."]
-custom_minimum_size = Vector2(36, 36)
-layout_mode = 2
-texture = ExtResource("1_jginc")
-region_rect = Rect2(1824, 144, 48, 48)
-
-[node name="NextButton" type="Button" parent="Next"]
-modulate = Color(1, 1, 1, 0)
-self_modulate = Color(1, 1, 1, 0)
+[node name="NextButton" type="Button" parent="."]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
-offset_right = 48.0
-offset_bottom = 48.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_1dasi")
+theme_override_styles/hover = SubResource("StyleBoxTexture_8ikik")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_d7mn3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_g7sjv")
 
-[connection signal="pressed" from="Prev/PrevButton" to="." method="_on_prev_button_pressed"]
-[connection signal="pressed" from="Next/NextButton" to="." method="_on_next_button_pressed"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_g4ayf")
+
+[connection signal="pressed" from="PrevButton" to="." method="_on_prev_button_pressed"]
+[connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]

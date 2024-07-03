@@ -1,28 +1,39 @@
-[gd_scene load_steps=11 format=3 uid="uid://cswpkq3rymi6"]
+[gd_scene load_steps=12 format=3 uid="uid://cswpkq3rymi6"]
 
 [ext_resource type="PackedScene" uid="uid://csa1aukvil678" path="res://src/scenes/game_menu/inventory_screen/InventoryItem.tscn" id="1_pexyc"]
 [ext_resource type="Script" path="res://src/scenes/game_menu/inventory_screen/inventory.gd" id="1_qi08f"]
 [ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="2_y7p64"]
-[ext_resource type="FontFile" uid="uid://cv2bywsa6irhc" path="res://fonts/Xolonium-Regular.ttf" id="4_45so7"]
 [ext_resource type="PackedScene" uid="uid://bj12r5t8p4dpp" path="res://src/scenes/character_sprite/character_sprite.tscn" id="5_ep1qx"]
 [ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="5_vwfr3"]
+[ext_resource type="Texture2D" uid="uid://dx1hbmd7w4g4k" path="res://art/ui/modern_ui.tres" id="6_u2qpi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3k5bc"]
 atlas = ExtResource("2_y7p64")
 region = Rect2(152, 240, 128, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5jgxe"]
-atlas = ExtResource("2_y7p64")
-region = Rect2(32, 1104, 80, 48)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g4hy0"]
-texture = SubResource("AtlasTexture_5jgxe")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_otsdt"]
+texture = ExtResource("6_u2qpi")
 texture_margin_left = 20.0
 texture_margin_top = 10.0
 texture_margin_right = 20.0
 texture_margin_bottom = 10.0
-expand_margin_left = 10.0
-expand_margin_right = 10.0
+region_rect = Rect2(1920, 1872, 48, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s3xbl"]
+texture = ExtResource("6_u2qpi")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(1968, 1872, 48, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cyaj0"]
+texture = ExtResource("6_u2qpi")
+texture_margin_left = 20.0
+texture_margin_top = 10.0
+texture_margin_right = 20.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(2016, 1872, 48, 48)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uui05"]
 
@@ -61,6 +72,20 @@ size_flags_vertical = 3
 layout_mode = 2
 
 [node name="CharacterSprite" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel" instance=ExtResource("5_ep1qx")]
+position = Vector2(0, 26)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/VBoxContainer/CenterContainer/Panel"]
+layout_mode = 0
+offset_left = -90.0
+offset_top = -68.0
+offset_right = 92.0
+offset_bottom = -40.0
+theme_override_colors/default_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_colors/font_selected_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_colors/selection_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_fonts/normal_font = ExtResource("5_vwfr3")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
 
 [node name="Description" type="NinePatchRect" parent="HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
@@ -115,12 +140,14 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.239216, 0.239216, 0.239216, 1)
-theme_override_colors/font_pressed_color = Color(0.690196, 0.690196, 0.690196, 1)
-theme_override_fonts/font = ExtResource("4_45so7")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxTexture_g4hy0")
-theme_override_styles/hover = SubResource("StyleBoxTexture_g4hy0")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_g4hy0")
+theme_override_colors/font_pressed_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_colors/font_hover_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_colors/font_focus_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_fonts/font = ExtResource("5_vwfr3")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxTexture_otsdt")
+theme_override_styles/hover = SubResource("StyleBoxTexture_s3xbl")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_cyaj0")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_uui05")
 text = "Equip"
 

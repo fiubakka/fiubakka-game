@@ -133,7 +133,6 @@ script = ExtResource("16_u85st")
 [connection signal="go_to_register" from="MainMenu" to="." method="_on_main_menu_go_to_register"]
 [connection signal="go_to_register" from="MainMenu" to="Register/NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText" method="_on_error_clear"]
 [connection signal="go_to_main_menu" from="LanguageSelect" to="MainMenu" method="_on_language_select_go_to_main_menu"]
-[connection signal="switch_locale" from="LanguageSelect" to="Login/NinePatchRect/VBoxContainer/LoginButtonContainer/LoginButtonBorder/LoginTextContainer/LoginText" method="_on_language_select_switch_locale"]
 [connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/MarginContainer/RegisterTitleText" method="_on_language_select_switch_locale"]
 [connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HatsSelect" method="_on_language_select_switch_locale"]
 [connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/HairSelect" method="_on_language_select_switch_locale"]
@@ -142,7 +141,6 @@ script = ExtResource("16_u85st")
 [connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/FacialHairSelect" method="_on_language_select_switch_locale"]
 [connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/BodySelect" method="_on_language_select_switch_locale"]
 [connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/Selectors/OutfitSelect" method="_on_language_select_switch_locale"]
-[connection signal="switch_locale" from="LanguageSelect" to="Register/NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/NinePatchRect/RegisterButtonText" method="_on_language_select_switch_locale"]
 [connection signal="switch_locale" from="LanguageSelect" to="GUI/GuiManager/Pause/NinePatchRect/ContinueButton/ContinueButtonText" method="_on_language_select_switch_locale"]
 [connection signal="switch_locale" from="LanguageSelect" to="GUI/GuiManager/Pause/NinePatchRect/QuitButton/QuitButtonText" method="_on_language_select_switch_locale"]
 

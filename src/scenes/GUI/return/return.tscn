@@ -1,9 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://dl2ppg848l7il"]
+[gd_scene load_steps=8 format=3 uid="uid://dl2ppg848l7il"]
 
-[ext_resource type="Texture2D" uid="uid://dxbtxsrxf4j1f" path="res://art/ui/Modern_UI_Style_1_48x48.png" id="1_cg5dy"]
+[ext_resource type="Texture2D" uid="uid://dx1hbmd7w4g4k" path="res://art/ui/modern_ui.tres" id="1_8e0ob"]
 [ext_resource type="Script" path="res://src/scenes/GUI/return/return.gd" id="2_gw136"]
+[ext_resource type="AudioStream" uid="uid://b7yp7usbygtwd" path="res://audio/sounds/button.ogg" id="3_tmdax"]
 
-[node name="Return" type="NinePatchRect"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0451j"]
+texture = ExtResource("1_8e0ob")
+region_rect = Rect2(2304, 1480, 48, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y1wtl"]
+texture = ExtResource("1_8e0ob")
+region_rect = Rect2(2352, 1480, 48, 56)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vkm6n"]
+texture = ExtResource("1_8e0ob")
+region_rect = Rect2(2400, 1480, 48, 56)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dameo"]
+
+[node name="Return" type="Button"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -11,15 +26,13 @@ offset_right = -912.0
 offset_bottom = -484.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_cg5dy")
-region_rect = Rect2(2304, 1480, 48, 56)
+theme_override_styles/normal = SubResource("StyleBoxTexture_0451j")
+theme_override_styles/hover = SubResource("StyleBoxTexture_y1wtl")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_vkm6n")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dameo")
 script = ExtResource("2_gw136")
 
-[node name="Button" type="Button" parent="."]
-modulate = Color(1, 1, 1, 0)
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_right = 50.0
-offset_bottom = 59.0
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_tmdax")
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]
