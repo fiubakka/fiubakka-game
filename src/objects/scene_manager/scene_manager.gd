@@ -103,21 +103,23 @@ func _on_content_finished_loading(new_scene: Node) -> void:
 
 	if new_scene is Level:
 		new_scene.enter_level()
-		
+
 	if transition_from_main:
 		transition_finished.emit()
 		return
-	
+
 	remove_loading_screen()
-	
+
 	transition_finished.emit()
-	
+
+
 func remove_loading_screen() -> void:
 	if loading_screen != null:
 		loading_screen.finish_transition()
 		await loading_screen.animation_player.animation_finished
 		loading_screen = null
 	is_loading_scene = false
+
 
 func player_change_map_ready(new_map_id: int) -> void:
 	var map_content_path := MapsDictionary.id_to_content_path(new_map_id)

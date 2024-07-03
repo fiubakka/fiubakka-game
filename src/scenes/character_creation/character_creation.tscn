@@ -113,21 +113,24 @@ texture = ExtResource("1_x5dhn")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 0
-offset_left = -31.0
-offset_top = -44.0
-offset_right = 993.0
-offset_bottom = 556.0
+offset_left = 42.0
+offset_top = 2.0
+offset_right = 922.0
+offset_bottom = 587.0
 texture = ExtResource("2_nt0o2")
-region_rect = Rect2(32, 746, 80, 72)
+region_rect = Rect2(32, 752, 80, 80)
+patch_margin_left = 10
 patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
 modulate = Color(1, 1, 1, 0.921569)
 layout_mode = 0
-offset_left = 175.0
-offset_top = 76.0
-offset_right = 860.0
-offset_bottom = 556.0
+offset_left = 56.0
+offset_top = 9.0
+offset_right = 824.0
+offset_bottom = 539.0
 metadata/_edit_group_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/VBoxContainer"]
@@ -151,12 +154,12 @@ dragger_visibility = 1
 layout_mode = 2
 
 [node name="Control" type="Control" parent="NinePatchRect/VBoxContainer/Character/Left"]
-custom_minimum_size = Vector2(300, 170)
+custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="CharacterSprite" parent="NinePatchRect/VBoxContainer/Character/Left/Control" instance=ExtResource("5_4ix6j")]
-position = Vector2(150, 141)
+position = Vector2(152, 136)
 scale = Vector2(2.5, 2.5)
 script = ExtResource("6_sxde8")
 
@@ -224,10 +227,10 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 413.0
-offset_top = 71.0
-offset_right = 424.0
-offset_bottom = 150.0
+offset_left = -38.0
+offset_top = 121.0
+offset_right = 42.0
+offset_bottom = 202.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -322,10 +325,10 @@ stream = ExtResource("14_2oidj")
 [node name="Return" parent="NinePatchRect" instance=ExtResource("8_4gecp")]
 custom_minimum_size = Vector2(48, 56)
 layout_mode = 1
-offset_left = 174.0
-offset_top = 68.0
-offset_right = -802.0
-offset_bottom = -476.0
+offset_left = 56.0
+offset_top = 6.0
+offset_right = -776.0
+offset_bottom = -523.0
 
 [connection signal="error_clear" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText" method="_on_error_clear"]
 [connection signal="register_error" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" method="_on_register_error"]

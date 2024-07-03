@@ -57,5 +57,6 @@ func create_new_resource(
 		new_res.name = tr(name_key)
 		new_res.texture.set_atlas(texture_dic[index])
 		new_res.id = index
-		new_res.description = tr("COSMETIC_DESCRIPTION")
+		var description_key := "COSMETIC_DESCRIPTION" + "_" + str(index % 4)
+		new_res.description = tr(description_key)
 		items_catalogue[type][index] = new_res
