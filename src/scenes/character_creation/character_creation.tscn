@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://2focfqtvt576"]
+[gd_scene load_steps=29 format=3 uid="uid://2focfqtvt576"]
 
 [ext_resource type="Script" path="res://src/scenes/character_creation/character_creation.gd" id="1_7ub86"]
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_x5dhn"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://src/scenes/character_creation/register_button.gd" id="9_nfp0v"]
 [ext_resource type="Texture2D" uid="uid://dx1hbmd7w4g4k" path="res://art/ui/modern_ui.tres" id="13_8he8o"]
 [ext_resource type="AudioStream" uid="uid://b7yp7usbygtwd" path="res://audio/sounds/button.ogg" id="14_2oidj"]
+[ext_resource type="PackedScene" uid="uid://butuww8tvrhq6" path="res://src/scenes/GUI/spinner/spinner.tscn" id="15_xt1sq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rslpf"]
 texture = ExtResource("13_8he8o")
@@ -300,10 +301,11 @@ layout_mode = 2
 texture = ExtResource("2_nt0o2")
 region_rect = Rect2(392, 0, 32, 48)
 
-[node name="Register" type="MarginContainer" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer"]
+[node name="Register" type="CenterContainer" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer"]
 layout_mode = 2
 
 [node name="Button" type="Button" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register"]
+custom_minimum_size = Vector2(200, 64)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.584314, 0.419608, 0.4, 1)
 theme_override_colors/font_pressed_color = Color(0.584314, 0.419608, 0.4, 1)
@@ -322,6 +324,10 @@ script = ExtResource("9_nfp0v")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/Button"]
 stream = ExtResource("14_2oidj")
 
+[node name="Spinner" parent="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register" instance=ExtResource("15_xt1sq")]
+visible = false
+layout_mode = 2
+
 [node name="Return" parent="NinePatchRect" instance=ExtResource("8_4gecp")]
 custom_minimum_size = Vector2(48, 56)
 layout_mode = 1
@@ -334,9 +340,13 @@ offset_bottom = -523.0
 [connection signal="register_error" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" method="_on_register_error"]
 [connection signal="register_error" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword" method="_on_register_error"]
 [connection signal="register_error" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText" method="_on_login_error"]
+[connection signal="register_error" from="." to="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/Button" method="_on_character_creation_register_error"]
+[connection signal="register_error" from="." to="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/Spinner" method="_on_character_creation_register_error"]
 [connection signal="return_to_menu" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/RegisterErrorText" method="_on_return_to_menu"]
 [connection signal="user_logged_in" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" method="_on_user_logged_in"]
 [connection signal="user_logged_in" from="." to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginPassword" method="_on_user_logged_in"]
+[connection signal="user_logged_in" from="." to="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/Button" method="_on_character_creation_user_logged_in"]
+[connection signal="user_logged_in" from="." to="NinePatchRect/VBoxContainer/Character/VSplitContainer/HSplitContainer/Register/Spinner" method="_on_character_creation_user_logged_in"]
 [connection signal="character_saved" from="NinePatchRect/VBoxContainer/Character/Left/Control/CharacterSprite" to="." method="_on_character_sprite_character_saved"]
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" to="." method="_on_login_username_text_changed"]
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Character/Left/Username/LoginUsername" method="_on_text_changed"]

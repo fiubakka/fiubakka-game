@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b6kg7qutp1h00"]
+[gd_scene load_steps=18 format=3 uid="uid://b6kg7qutp1h00"]
 
 [ext_resource type="Texture2D" uid="uid://dx87mu15e2lwf" path="res://art/login/fiuba-front-pixelicious.png" id="1_f447j"]
 [ext_resource type="Script" path="res://src/scenes/login/login.gd" id="1_mxn2w"]
@@ -10,7 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://dx1hbmd7w4g4k" path="res://art/ui/modern_ui.tres" id="6_eyce0"]
 [ext_resource type="Script" path="res://src/scenes/login/login_password.gd" id="7_abh4x"]
 [ext_resource type="Script" path="res://src/scenes/login/login_error_text.gd" id="8_84eql"]
+[ext_resource type="Script" path="res://src/scenes/login/LoginButtonContainer.gd" id="9_tfg48"]
 [ext_resource type="PackedScene" uid="uid://kpbsuln7x2le" path="res://src/scenes/truco/Interface/button.tscn" id="11_44pg8"]
+[ext_resource type="PackedScene" uid="uid://butuww8tvrhq6" path="res://src/scenes/GUI/spinner/spinner.tscn" id="12_ku532"]
 
 [sub_resource type="Theme" id="Theme_1qdqe"]
 default_font = ExtResource("3_v6w8k")
@@ -160,6 +162,7 @@ script = ExtResource("7_abh4x")
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
+script = ExtResource("9_tfg48")
 
 [node name="LoginButton" parent="NinePatchRect/VBoxContainer/LoginButtonContainer" instance=ExtResource("11_44pg8")]
 layout_mode = 0
@@ -194,6 +197,14 @@ scroll_active = false
 script = ExtResource("8_84eql")
 metadata/_edit_use_anchors_ = true
 
+[node name="Spinner" parent="NinePatchRect/VBoxContainer/LoginButtonContainer" instance=ExtResource("12_ku532")]
+visible = false
+layout_mode = 1
+offset_left = 195.175
+offset_top = 43.0
+offset_right = -186.825
+offset_bottom = -121.0
+
 [node name="Return" parent="NinePatchRect" instance=ExtResource("3_ke864")]
 layout_mode = 2
 anchors_preset = 0
@@ -208,9 +219,11 @@ offset_bottom = 0.0800018
 
 [connection signal="login_error" from="." to="." method="_on_login_error"]
 [connection signal="login_error" from="." to="NinePatchRect/VBoxContainer/Password/LoginPassword" method="_on_register_error"]
+[connection signal="login_error" from="." to="NinePatchRect/VBoxContainer/LoginButtonContainer" method="_on_login_login_error"]
 [connection signal="login_error" from="." to="NinePatchRect/VBoxContainer/LoginButtonContainer/LoginErrorText" method="_on_login_error"]
 [connection signal="user_logged_in" from="." to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_user_logged_in"]
 [connection signal="user_logged_in" from="." to="NinePatchRect/VBoxContainer/Password/LoginPassword" method="_on_user_logged_in"]
+[connection signal="user_logged_in" from="." to="NinePatchRect/VBoxContainer/LoginButtonContainer" method="_on_login_user_logged_in"]
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="." method="_on_login_username_text_changed"]
 [connection signal="text_changed" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_text_changed"]
 [connection signal="text_submitted" from="NinePatchRect/VBoxContainer/Username/LoginUsername" to="NinePatchRect/VBoxContainer/Username/LoginUsername" method="_on_text_submitted"]

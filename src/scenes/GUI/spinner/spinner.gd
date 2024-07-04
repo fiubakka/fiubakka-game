@@ -1,0 +1,17 @@
+extends TextureProgressBar
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	var tween := get_tree().create_tween().set_loops()
+	tween.tween_property(self, "radial_initial_angle", 360.0, 1.5).as_relative()
+
+
+func _on_character_creation_user_logged_in(
+	_username: String, _password: String, _equipment: Equipment
+	) -> void:
+	visible = true
+
+
+func _on_character_creation_register_error(_errorCode: String) -> void:
+	visible = false

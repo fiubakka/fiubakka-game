@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://butuww8tvrhq6"]
+
+[ext_resource type="Texture2D" uid="uid://d2ai1bv0sgmdb" path="res://art/ui/spinner.png" id="1_gjcgr"]
+[ext_resource type="Script" path="res://src/scenes/GUI/spinner/spinner.gd" id="2_wjl7t"]
+
+[node name="Spinner" type="TextureProgressBar"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -896.0
+offset_bottom = -476.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+fill_mode = 4
+texture_progress = ExtResource("1_gjcgr")
+radial_fill_degrees = 60.0
+script = ExtResource("2_wjl7t")
