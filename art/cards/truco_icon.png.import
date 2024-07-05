@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b62ay3vshl3yr"
-path="res://.godot/imported/hand-icon.jpg-9b95dc3200d690d943cd3cf925634a65.ctex"
+uid="uid://lp81srxcga85"
+path="res://.godot/imported/truco_icon.png-0459c7d6d8b45bbbd8f344e07f8d3f19.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/cards/hand-icon.jpg"
-dest_files=["res://.godot/imported/hand-icon.jpg-9b95dc3200d690d943cd3cf925634a65.ctex"]
+source_file="res://art/cards/truco_icon.png"
+dest_files=["res://.godot/imported/truco_icon.png-0459c7d6d8b45bbbd8f344e07f8d3f19.ctex"]
 
 [params]
 

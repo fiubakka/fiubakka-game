@@ -10,8 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://cr4msasw6v4l2" path="res://src/scenes/truco/OpponentController/opponent_controller.tscn" id="9_0spk6"]
 [ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="11_g02iv"]
 [ext_resource type="PackedScene" uid="uid://c5n5u1w3qh0ct" path="res://src/scenes/truco/Points/points.tscn" id="11_upv27"]
+[ext_resource type="Texture2D" uid="uid://lp81srxcga85" path="res://art/cards/truco_icon.png" id="12_poson"]
 [ext_resource type="PackedScene" uid="uid://cfu6w2rhghpa5" path="res://src/scenes/truco/GameOver/game_over.tscn" id="12_pymvi"]
-[ext_resource type="Texture2D" uid="uid://b62ay3vshl3yr" path="res://art/cards/hand-icon.jpg" id="13_csl3s"]
 [ext_resource type="PackedScene" uid="uid://kpbsuln7x2le" path="res://src/scenes/truco/Interface/button.tscn" id="14_2wwfu"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_yminj"]
@@ -121,18 +121,15 @@ offset_bottom = 257.0
 
 [node name="OpponentIcon" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(18, 29)
-scale = Vector2(0.04, 0.04)
-texture = ExtResource("13_csl3s")
-region_enabled = true
-region_rect = Rect2(0, 0, 760, 792)
+position = Vector2(17, 30)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("12_poson")
 
 [node name="PlayerIcon" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(18, 358)
-scale = Vector2(0.04, 0.04)
-texture = ExtResource("13_csl3s")
-region_enabled = true
+position = Vector2(17, 330)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("12_poson")
 region_rect = Rect2(0, 0, 760, 792)
 
 [node name="Disconnect" parent="." instance=ExtResource("14_2wwfu")]

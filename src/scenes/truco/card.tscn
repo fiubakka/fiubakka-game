@@ -20,5 +20,6 @@ script = ExtResource("2_k7j1e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["card"]]
 shape = SubResource("RectangleShape2D_eoujh")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
