@@ -44,6 +44,11 @@ const PBTrucoPlayerDisconnected = (
 	. PBTrucoPlayerDisconnected
 )
 
+const PBTrucoDisconnectAck = (
+	preload("res://addons/protocol/compiled/server/truco/disconnect_ack.gd")
+	. PBTrucoDisconnectAck
+)
+
 static var _MESSAGE_MAP := {
 	PBServerMessageType.PBGameEntityState: PBGameEntityState,
 	PBServerMessageType.PBPlayerMessage: PBPlayerMessage,
@@ -55,7 +60,8 @@ static var _MESSAGE_MAP := {
 	PBServerMessageType.PBTrucoMatchChallengeDenied: PBTrucoMatchChallengeDenied,
 	PBServerMessageType.PBTrucoAllowPlay: PBTrucoAllowPlay,
 	PBServerMessageType.PBTrucoPlay: PBTrucoPlay,
-	PBServerMessageType.PBTrucoPlayerDisconnected: PBTrucoPlayerDisconnected
+	PBServerMessageType.PBTrucoPlayerDisconnected: PBTrucoPlayerDisconnected,
+	PBServerMessageType.PBTrucoDisconnectAck: PBTrucoDisconnectAck
 }
 
 

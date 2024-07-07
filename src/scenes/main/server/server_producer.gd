@@ -2,6 +2,8 @@ extends Node
 
 signal start_truco_music
 
+var timer: Timer
+
 const Producer = preload("res://src/objects/server/producer/producer.gd")
 
 const PBPlayerLogin = (
@@ -174,5 +176,19 @@ func _on_truco_manager_shout_played(play_id: int, shout_id: int) -> void:
 
 
 func _on_truco_manager_disconnect() -> void:
+	self._on_timer_timeout
+	timer = Timer.new()
+	timer.timeout.connect(self._on_timer_timeout)
+	timer.set_wait_time(1.0)
+	add_child(timer)
+	timer.start()
+	
+	
+func _on_timer_timeout() -> void:
 	var truco_disconnect := PBTrucoDisconnect.new()
 	_producer.send(truco_disconnect)
+	
+func _on_server_consumer_truco_disconnect_ack() -> void:
+	if timer:
+		timer.stop()
+		remove_child(timer)

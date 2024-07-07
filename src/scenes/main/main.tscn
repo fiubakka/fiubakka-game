@@ -115,6 +115,7 @@ script = ExtResource("16_u85st")
 [connection signal="user_logged_in" from="Register" to="ServerConnection/ServerProducer" method="_on_user_logged_in"]
 [connection signal="start_truco_music" from="ServerConnection/ServerConsumer" to="MusicPlayer" method="_on_start_truco_music"]
 [connection signal="truco_challenge_received" from="ServerConnection/ServerConsumer" to="GUI/GuiManager/Modal" method="_on_server_consumer_truco_challenge_received"]
+[connection signal="truco_disconnect_ack" from="ServerConnection/ServerConsumer" to="ServerConnection/ServerProducer" method="_on_server_consumer_truco_disconnect_ack"]
 [connection signal="update_content" from="ServerConnection/ServerConsumer" to="GUI/GuiManager/Chatbox" method="_on_server_consumer_update_content"]
 [connection signal="user_init_error" from="ServerConnection/ServerConsumer" to="Login" method="_on_user_init_error"]
 [connection signal="user_init_error" from="ServerConnection/ServerConsumer" to="Register" method="_on_user_init_error"]

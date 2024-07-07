@@ -11,6 +11,7 @@ signal truco_play_card(truco_play_card_dto: TrucoPlayCardDto)
 signal truco_play_update(truco_play_update_dto: TrucoPlayUpdateDto)
 signal truco_shout_played(truco_play_shout_dto: TrucoPlayShoutDto)
 signal truco_opponent_disconnected
+signal truco_disconnect_ack
 
 signal start_truco_music
 
@@ -75,6 +76,11 @@ const PBTrucoPlayerDisconnected = (
 	. PBTrucoPlayerDisconnected
 )
 
+const PBTrucoDisconnectAck = (
+	preload("res://addons/protocol/compiled/server/truco/disconnect_ack.gd")
+	. PBTrucoDisconnectAck
+)
+
 var _thread: Thread
 var _consumer: Consumer
 var _keep_running := true
@@ -125,6 +131,8 @@ func _handle_message(message: Object) -> void:
 		handler = "_handle_truco_play"
 	elif message is PBTrucoPlayerDisconnected:
 		handler = "_handle_truco_disconnect"
+	elif message is PBTrucoDisconnectAck:
+		handler = "_handle_truco_disconnect_ack"
 
 	call_deferred(handler, message)
 
@@ -326,3 +334,6 @@ func _parse_player_cards(msg: PBTrucoPlay) -> Array[Card]:
 
 func _handle_truco_disconnect(msg: PBTrucoPlayerDisconnected) -> void:
 	truco_opponent_disconnected.emit(msg.get_opponent_username())
+	
+func _handle_truco_disconnect_ack(_msg: PBTrucoDisconnectAck) -> void:
+	truco_disconnect_ack.emit()

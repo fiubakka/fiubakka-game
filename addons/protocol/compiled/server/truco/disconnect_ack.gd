@@ -661,39 +661,11 @@ class PBPacker:
 ############### USER DATA BEGIN ################
 
 
-class PBServerMetadata:
+class PBTrucoDisconnectAck:
 	func _init():
 		var service
 		
-		_length = PBField.new("length", PB_DATA_TYPE.UINT32, PB_RULE.REQUIRED, 1, false, DEFAULT_VALUES_2[PB_DATA_TYPE.UINT32])
-		service = PBServiceField.new()
-		service.field = _length
-		data[_length.tag] = service
-		
-		_type = PBField.new("type", PB_DATA_TYPE.ENUM, PB_RULE.REQUIRED, 2, false, DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM])
-		service = PBServiceField.new()
-		service.field = _type
-		data[_type.tag] = service
-		
 	var data = {}
-	
-	var _length: PBField
-	func get_length() -> int:
-		return _length.value
-	func clear_length() -> void:
-		data[1].state = PB_SERVICE_STATE.UNFILLED
-		_length.value = DEFAULT_VALUES_2[PB_DATA_TYPE.UINT32]
-	func set_length(value : int) -> void:
-		_length.value = value
-	
-	var _type: PBField
-	func get_type():
-		return _type.value
-	func clear_type() -> void:
-		data[2].state = PB_SERVICE_STATE.UNFILLED
-		_type.value = DEFAULT_VALUES_2[PB_DATA_TYPE.ENUM]
-	func set_type(value) -> void:
-		_type.value = value
 	
 	func _to_string() -> String:
 		return PBPacker.message_to_string(data)
@@ -716,19 +688,4 @@ class PBServerMetadata:
 			return PB_ERR.PARSE_INCOMPLETE
 		return result
 	
-enum PBServerMessageType {
-	PBGameEntityState = 0,
-	PBPlayerMessage = 1,
-	PBPlayerInitError = 2,
-	PBPlayerInitSuccess = 3,
-	PBPlayerChangeMapReady = 4,
-	PBGameEntityDisconnect = 5,
-	PBTrucoMatchChallengeRequest = 6,
-	PBTrucoMatchChallengeDenied = 7,
-	PBTrucoPlay = 8,
-	PBTrucoAllowPlay = 9,
-	PBTrucoPlayerDisconnected = 10,
-	PBTrucoDisconnectAck = 11
-}
-
 ################ USER DATA END #################
