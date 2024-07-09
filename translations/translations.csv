@@ -20,6 +20,7 @@ LOADING_SERVER,Esperando servidor...,Waiting for server...
 LOADING_LEVEL,Cargando nivel...,Loading level...
 EMPTY_USERNAME,Ingrese un nombre,Enter a username
 EMPTY_PASSWORD,Ingrese una contraseña,Enter a password
+TIMEOUT,Timeout del Servidor,Server timeout
 UNKNOWN,Error desconocido,Unknown Error
 INVALID_PLAYER_CREDENTIALS,Credenciales inválidas,Invalid credentials
 PLAYER_ALREADY_EXISTS,Nombre no disponible,Unavailable Username

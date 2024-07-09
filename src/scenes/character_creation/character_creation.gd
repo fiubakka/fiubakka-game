@@ -35,15 +35,20 @@ func _on_character_sprite_character_saved() -> void:
 		register_error.emit("EMPTY_PASSWORD")
 		return
 
-	_on_timer_timeout()
+	_send_register_request()
 	timer = Timer.new()  # Timer to send init message until we get a response
 	timer.timeout.connect(Callable(self, "_on_timer_timeout"))
 	add_child(timer)
-	timer.set_wait_time(2.0)
+	timer.set_wait_time(10.0)
 	timer.start()
-
-
+	
 func _on_timer_timeout() -> void:
+	if timer:
+		timer.stop()
+	register_error.emit("TIMEOUT")
+
+
+func _send_register_request() -> void:
 	var customization := PlayerInfo.player_customization
 	var equipment := Equipment.new()
 	equipment.set_equipment(
