@@ -18,11 +18,11 @@ func _ready() -> void:
 	set_idle_region()
 	$AnimationPlayer.play("front")
 
-	var producer_start_truco_handler: Callable = (
-		get_node("/root/Main/ServerConnection/ServerProducer")._on_player_start_truco
-	)
-	if !start_truco.is_connected(producer_start_truco_handler):
-		start_truco.connect(producer_start_truco_handler)
+	#var producer_start_truco_handler: Callable = (
+	#	get_node("/root/Main/ServerConnection/ServerProducer")._on_player_start_truco
+	#)
+	#if !start_truco.is_connected(producer_start_truco_handler):
+	#	start_truco.connect(producer_start_truco_handler)
 
 
 func set_equipment(_equipment: Equipment) -> void:

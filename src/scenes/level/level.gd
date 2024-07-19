@@ -15,8 +15,8 @@ var data := {}
 # - Disconecing level doors when exiting this Level
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	player.disable()
-	player.visible = false
+	#player.disable()
+	#player.visible = false
 	if data.is_empty():
 		enter_level()
 
@@ -26,21 +26,21 @@ func enter_level() -> void:
 		$Player.set_equipment(data["player_equipment"])
 	if data.has("entry_door_name"):
 		_init_player_location(data["entry_door_name"])
-	var producer_movement_signal_handler: Callable = (
-		get_node("/root/Main/ServerConnection/ServerProducer")._on_player_movement
-	)
-	if !player.update_movement.is_connected(producer_movement_signal_handler):
-		player.update_movement.connect(producer_movement_signal_handler)
-	var gui_show_npc_tip_signal_handler: Callable = (
-		get_node("/root/Main/GUI/GuiManager")._on_npc_tip
-	)
-	if !player.show_tip.is_connected(gui_show_npc_tip_signal_handler):
-		player.show_tip.connect(gui_show_npc_tip_signal_handler)
-	$Player/Camera2D.limit_right = limit_right
-	$Player/Camera2D.limit_bottom = limit_bottom
-	$Player/Camera2D.zoom.x = zoom
-	$Player/Camera2D.zoom.y = zoom
-	player.enable()
+	#var producer_movement_signal_handler: Callable = (
+	#	get_node("/root/Main/ServerConnection/ServerProducer")._on_player_movement
+	#)
+	#if !player.update_movement.is_connected(producer_movement_signal_handler):
+	#	player.update_movement.connect(producer_movement_signal_handler)
+	#var gui_show_npc_tip_signal_handler: Callable = (
+	#	get_node("/root/Main/GUI/GuiManager")._on_npc_tip
+	#)
+	#if !player.show_tip.is_connected(gui_show_npc_tip_signal_handler):
+	#	player.show_tip.connect(gui_show_npc_tip_signal_handler)
+	#$Player/Camera2D.limit_right = limit_right
+	#$Player/Camera2D.limit_bottom = limit_bottom
+	#$Player/Camera2D.zoom.x = zoom
+	#$Player/Camera2D.zoom.y = zoom
+	#player.enable()
 	connect_doors()
 
 

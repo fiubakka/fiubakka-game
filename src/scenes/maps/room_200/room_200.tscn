@@ -1,11 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://dhrlrip83sqyk"]
+[gd_scene load_steps=18 format=3 uid="uid://dhrlrip83sqyk"]
 
 [ext_resource type="Script" path="res://src/scenes/level/level.gd" id="1_b5d7a"]
 [ext_resource type="TileSet" uid="uid://bl3doteiujli4" path="res://tilesets/classroom.tres" id="1_mj6gk"]
-[ext_resource type="PackedScene" uid="uid://b0ckgcsol4ucx" path="res://src/scenes/player/player.tscn" id="2_yjgvj"]
 [ext_resource type="Script" path="res://src/scenes/entity_container/entity_container.gd" id="3_wla03"]
 [ext_resource type="PackedScene" uid="uid://dwpwkdnm1106l" path="res://src/scenes/door/door.tscn" id="4_oa3ae"]
 [ext_resource type="PackedScene" uid="uid://u4867656s0ug" path="res://src/scenes/npc/npc.tscn" id="5_6t674"]
+[ext_resource type="PackedScene" uid="uid://ci2j6myp2y3u3" path="res://src/scenes/GUI/dialogue/Dialogue.tscn" id="6_kdg0r"]
+[ext_resource type="FontFile" uid="uid://ckgt31l0cbk63" path="res://fonts/m5x7.ttf" id="7_76wjy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f1h53"]
 size = Vector2(165, 42)
@@ -37,10 +38,9 @@ size = Vector2(16, 417)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wfoqx"]
 size = Vector2(341, 48)
 
-[node name="Room200" type="Node2D" node_paths=PackedStringArray("player", "doors")]
+[node name="Room200" type="Node2D" node_paths=PackedStringArray("doors")]
 y_sort_enabled = true
 script = ExtResource("1_b5d7a")
-player = NodePath("Player")
 doors = [NodePath("ToMainHall")]
 limit_bottom = 768
 limit_right = 672
@@ -96,9 +96,6 @@ layer_0/tile_data = PackedInt32Array(-458741, 2031622, 536871075, -393205, 20316
 [node name="EntityContainer" type="Node2D" parent="."]
 script = ExtResource("3_wla03")
 
-[node name="Player" parent="." instance=ExtResource("2_yjgvj")]
-position = Vector2(61, 570)
-
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="Walls" type="StaticBody2D" parent="Objects"]
@@ -150,43 +147,6 @@ entry_direction = "right"
 path_to_new_scene = "res://src/scenes/maps/main_hall/main_hall.tscn"
 entry_door_name = "ToRoom200"
 
-[node name="NPC" parent="." instance=ExtResource("5_6t674")]
-position = Vector2(350, 123)
-scale = Vector2(0.5, 0.5)
-npc_name = "Alberto"
-message = "NPC_ROOM_200"
-
-[node name="NPC2" parent="." instance=ExtResource("5_6t674")]
-position = Vector2(241, 342)
-scale = Vector2(0.5, 0.5)
-npc_name = "Nicole"
-message = "NPC_ROOM_200_2"
-facing = 3
-hair = 21
-hat = 0
-outfit = 5
-facial_hair = 0
-
-[node name="NPC3" parent="." instance=ExtResource("5_6t674")]
-position = Vector2(426, 309)
-scale = Vector2(0.5, 0.5)
-npc_name = "Claudio"
-message = "NPC_ROOM_200_3"
-facing = 3
-
-[node name="NPC4" parent="." instance=ExtResource("5_6t674")]
-position = Vector2(219, 635)
-scale = Vector2(0.5, 0.5)
-npc_name = "Gonzalo"
-message = "NPC_ROOM_200_4"
-facing = 2
-body = 6
-hair = 5
-hat = 3
-eyes = 3
-facial_hair = 4
-glasses = 5
-
 [node name="NPC5" parent="." instance=ExtResource("5_6t674")]
 position = Vector2(268, 634)
 scale = Vector2(0.5, 0.5)
@@ -200,3 +160,69 @@ eyes = 6
 outfit = 8
 facial_hair = 0
 glasses = 0
+
+[node name="Grupo" type="Node2D" parent="."]
+
+[node name="Marcos" parent="Grupo" instance=ExtResource("5_6t674")]
+position = Vector2(315, 120)
+scale = Vector2(0.5, 0.5)
+npc_name = "Marcos"
+message = "NPC_ROOM_200_4"
+hair = 14
+hat = 0
+eyes = 3
+outfit = 2
+facial_hair = 4
+glasses = 0
+
+[node name="Nicole" parent="Grupo" instance=ExtResource("5_6t674")]
+position = Vector2(250, 120)
+scale = Vector2(0.5, 0.5)
+npc_name = "Nicole"
+message = "NPC_ROOM_200_2"
+hair = 21
+hat = 0
+outfit = 5
+facial_hair = 0
+
+[node name="Ivan" parent="Grupo" instance=ExtResource("5_6t674")]
+position = Vector2(375, 120)
+scale = Vector2(0.5, 0.5)
+npc_name = " Iván"
+message = "NPC_ROOM_200_3"
+hair = 11
+hat = 0
+outfit = 3
+glasses = 0
+
+[node name="Franco" parent="Grupo" instance=ExtResource("5_6t674")]
+position = Vector2(440, 120)
+scale = Vector2(0.5, 0.5)
+npc_name = "Franco"
+message = "NPC_ROOM_200"
+hair = 4
+hat = 0
+glasses = 0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(345, 101)
+zoom = Vector2(3.58, 3.58)
+
+[node name="Dialogue" parent="." instance=ExtResource("6_kdg0r")]
+visible = false
+z_index = 3
+offset_left = 181.0
+offset_top = 149.0
+offset_right = 181.0
+offset_bottom = 149.0
+scale = Vector2(0.355, 0.355)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 242.0
+offset_top = 27.0
+offset_right = 451.0
+offset_bottom = 67.0
+theme_override_fonts/normal_font = ExtResource("7_76wjy")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center]¡Gracias![/center]"

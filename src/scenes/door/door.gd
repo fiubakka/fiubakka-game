@@ -11,9 +11,9 @@ var timer: Timer
 
 
 func _ready() -> void:
-	get_node("/root/Main/ServerConnection/ServerConsumer").player_changed_map.connect(
-		self._on_player_change_map_ready
-	)
+	#get_node("/root/Main/ServerConnection/ServerConsumer").player_changed_map.connect(
+	#	self._on_player_change_map_ready
+	#)
 	pass
 
 
