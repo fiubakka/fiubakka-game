@@ -10,8 +10,6 @@ var delete_entities_timer: Timer
 # private
 var entities: Dictionary = {}
 
-var _mutex: Mutex = Mutex.new()
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,7 +21,6 @@ func _ready() -> void:
 
 
 func _delete_entities() -> void:
-	_mutex.lock()
 	var curr_time := Time.get_ticks_msec()
 	for entityId: String in entities.keys():
 		#If we dont get an update in 15s we consider that player disconnected and delete it
@@ -33,16 +30,14 @@ func _delete_entities() -> void:
 		):
 			entities[entityId].queue_free()
 			entities.erase(entityId)
-	_mutex.unlock()
 
 
 func update_entity_state(
 	entityId: String, entityPosition: Vector2, entityVelocity: Vector2, equipment: Equipment
 ) -> void:
-	_mutex.lock()
 	if SceneManager.is_loading_scene:
 		await SceneManager.transition_finished
-	if entities.has(entityId):
+	if entities.get(entityId, null) != null:
 		var entity: Node = entities[entityId]
 		entity.last_update = Time.get_ticks_msec()
 		entity.add_movement_update(entityPosition, entityVelocity)
@@ -58,18 +53,13 @@ func update_entity_state(
 		entity.set_equipment(equipment)
 		entities[entityId] = entity
 		add_entity.emit(entity)
-	_mutex.unlock()
 
 
 func empty_entities() -> void:
-	_mutex.lock()
 	entities.clear()
-	_mutex.unlock()
 
 
 func remove_entity(other_player_id: String) -> void:
-	_mutex.lock()
 	if entities.has(other_player_id):
 		entities[other_player_id].queue_free()
 	entities.erase(other_player_id)
-	_mutex.unlock()
