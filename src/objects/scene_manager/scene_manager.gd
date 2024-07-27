@@ -31,6 +31,7 @@ func _load_content(content_path: String) -> void:
 	# This lets us place a loading screen, a progress bar
 	# and even handle data sent and received from the Server
 	is_loading_scene = true
+	
 	loading_screen.loading_level_message()
 	var loader := ResourceLoader.load_threaded_request(content_path)
 	if not ResourceLoader.exists(content_path) or loader == null:
@@ -117,7 +118,6 @@ func remove_loading_screen() -> void:
 	if loading_screen != null:
 		loading_screen.finish_transition()
 		await loading_screen.animation_player.animation_finished
-		loading_screen = null
 	is_loading_scene = false
 
 
