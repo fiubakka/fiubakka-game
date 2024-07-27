@@ -7,4 +7,5 @@ func _ready() -> void:
 
 
 func _on_entity_manager_add_entity(new_entity: Entity) -> void:
-	add_child(new_entity)
+	if new_entity.get_parent() == null:
+		add_child(new_entity)
