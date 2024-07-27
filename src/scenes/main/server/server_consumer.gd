@@ -77,8 +77,7 @@ const PBTrucoPlayerDisconnected = (
 )
 
 const PBTrucoDisconnectAck = (
-	preload("res://addons/protocol/compiled/server/truco/disconnect_ack.gd")
-	. PBTrucoDisconnectAck
+	preload("res://addons/protocol/compiled/server/truco/disconnect_ack.gd").PBTrucoDisconnectAck
 )
 
 var _thread: Thread
@@ -334,6 +333,7 @@ func _parse_player_cards(msg: PBTrucoPlay) -> Array[Card]:
 
 func _handle_truco_disconnect(msg: PBTrucoPlayerDisconnected) -> void:
 	truco_opponent_disconnected.emit(msg.get_opponent_username())
-	
+
+
 func _handle_truco_disconnect_ack(_msg: PBTrucoDisconnectAck) -> void:
 	truco_disconnect_ack.emit()

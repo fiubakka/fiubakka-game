@@ -8,6 +8,7 @@ var is_enabled := false
 
 signal player_card_played(card: Card, drop_zone: DropZone)
 
+
 func _draw() -> void:
 	if name == "PlayerDropZone":
 		draw_rect(Rect2(-44, -70, 88, 140), Color.DARK_SEA_GREEN)

@@ -45,8 +45,7 @@ const PBTrucoPlayerDisconnected = (
 )
 
 const PBTrucoDisconnectAck = (
-	preload("res://addons/protocol/compiled/server/truco/disconnect_ack.gd")
-	. PBTrucoDisconnectAck
+	preload("res://addons/protocol/compiled/server/truco/disconnect_ack.gd").PBTrucoDisconnectAck
 )
 
 static var _MESSAGE_MAP := {

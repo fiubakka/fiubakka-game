@@ -27,7 +27,10 @@ func _delete_entities() -> void:
 	var curr_time := Time.get_ticks_msec()
 	for entityId: String in entities.keys():
 		#If we dont get an update in 15s we consider that player disconnected and delete it
-		if entities.get(entityId, null) != null and curr_time - entities[entityId].last_update > MILISECONDS_UNTIL_DISCONNECT:
+		if (
+			entities.get(entityId, null) != null
+			and curr_time - entities[entityId].last_update > MILISECONDS_UNTIL_DISCONNECT
+		):
 			entities[entityId].queue_free()
 			entities.erase(entityId)
 	_mutex.unlock()
